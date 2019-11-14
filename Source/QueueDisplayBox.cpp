@@ -12,11 +12,10 @@
 #include "QueueDisplayBox.h"
 
 //==============================================================================
-QueueDisplayBox::QueueDisplayBox() : mainDisplay(0, 0, 500, 300), item(1)
+QueueDisplayBox::QueueDisplayBox() : mainDisplay(0, 0, 500, 300)
 {
     setSize(500, 300);
     
-    addAndMakeVisible(item);
 }
 
 QueueDisplayBox::~QueueDisplayBox()
@@ -30,5 +29,21 @@ void QueueDisplayBox::paint (Graphics& g)
 
 void QueueDisplayBox::resized()
 {
-    item.setBounds(0, 0, 500, 30);
+    
+}
+
+void QueueDisplayBox::addNewItem(File* file)
+{
+    int nextID = items.size() + 1;
+    
+    QueueItem newItem(nextID, file);
+    
+    items.add(&newItem);
+    
+    DBG(items[nextID-1]->getFileName());
+    
+    addAndMakeVisible(items[nextID-1]);
+    items[nextID-1]->setBounds(0, 0, 500, 30);
+    
+    
 }

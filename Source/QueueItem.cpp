@@ -12,11 +12,10 @@
 #include "QueueItem.h"
 
 //==============================================================================
-QueueItem::QueueItem(int index/*, File file*/)
+QueueItem::QueueItem(int idNum, File* file) : itemIndex(idNum)
 {
-    itemIndex = index;
     setSize(500, 30);
-    
+    currentFile = File(*file);
 }
 
 QueueItem::~QueueItem()
@@ -50,4 +49,9 @@ void QueueItem::paint (Graphics& g)
 void QueueItem::resized()
 {
     
+}
+
+String QueueItem::getFileName()
+{
+    return currentFile.getFileName();
 }

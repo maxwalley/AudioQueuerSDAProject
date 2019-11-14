@@ -69,10 +69,6 @@
 			isa = PBXBuildFile;
 			fileRef = 906E260511411CC9E25B0AF0;
 		};
-		A7ED68300024645F57784216 = {
-			isa = PBXBuildFile;
-			fileRef = 11C6BDB7ED6ECE5BFCB75120;
-		};
 		06587ECA6131E92B0B978EC7 = {
 			isa = PBXBuildFile;
 			fileRef = E71549F276D3E21C924F2069;
@@ -178,13 +174,6 @@
 			path = "/Users/maxwalley/Documents/C++ Libs and Frameworks/juce-5.4.3-osx (1)/JUCE/modules/juce_audio_formats";
 			sourceTree = "<absolute>";
 		};
-		11C6BDB7ED6ECE5BFCB75120 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = AudioPlayer.cpp;
-			path = ../../Source/AudioPlayer.cpp;
-			sourceTree = "SOURCE_ROOT";
-		};
 		14641D6F485D7A2C7A6FA5F5 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
@@ -197,13 +186,6 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = QueueItem.cpp;
 			path = ../../Source/QueueItem.cpp;
-			sourceTree = "SOURCE_ROOT";
-		};
-		1E861DD4C09B960E8A528AF4 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = AudioPlayer.h;
-			path = ../../Source/AudioPlayer.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		2A2A8226136363D5F90ED749 = {
@@ -626,8 +608,6 @@
 			children = (
 				906E260511411CC9E25B0AF0,
 				EA32FA9412852778543F66AB,
-				1E861DD4C09B960E8A528AF4,
-				11C6BDB7ED6ECE5BFCB75120,
 				4C649AE7CB38A81F88A957A1,
 				E71549F276D3E21C924F2069,
 				5374FC206B5F736EA6CA208F,
@@ -979,7 +959,6 @@
 			files = (
 				9F8AD2A16E2CE519AFF1EF3D,
 				C821630C5FB8D6B313F0EFA8,
-				A7ED68300024645F57784216,
 				06587ECA6131E92B0B978EC7,
 				4B7F8A475EE796F75316D8C8,
 				A95EC111D6473DAAB0F36B8F,

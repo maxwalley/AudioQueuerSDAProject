@@ -12,8 +12,6 @@
               file="Source/AudioPlayerGUI.cpp"/>
         <FILE id="tlN0B1" name="AudioPlayerGUI.h" compile="0" resource="0"
               file="Source/AudioPlayerGUI.h"/>
-        <FILE id="TbVogq" name="AudioPlayer.h" compile="0" resource="0" file="Source/AudioPlayer.h"/>
-        <FILE id="opkHQ0" name="AudioPlayer.cpp" compile="1" resource="0" file="Source/AudioPlayer.cpp"/>
         <FILE id="taGVW4" name="AudioWaveform.h" compile="0" resource="0" file="Source/AudioWaveform.h"/>
         <FILE id="sueaiz" name="AudioWaveform.cpp" compile="1" resource="0"
               file="Source/AudioWaveform.cpp"/>

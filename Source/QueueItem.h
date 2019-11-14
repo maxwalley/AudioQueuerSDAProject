@@ -18,7 +18,7 @@
 class QueueItem : public Component
 {
 public:
-    QueueItem(int index/*, File file*/);
+    QueueItem(int idNum, File* file);
     ~QueueItem();
 
     void paint (Graphics&) override;
@@ -28,6 +28,8 @@ public:
     int getItemIndex();
     
     void setFile(File* file);
+    
+    String getFileName();
 
 private:
     int itemIndex;

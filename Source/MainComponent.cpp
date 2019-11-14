@@ -9,7 +9,7 @@
 #include "MainComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), playButton("Play"), pauseButton("Pause"), stopButton("Stop"), openFileButton("Open File"), timerCount(1), waveform(audioFormatManager)
+MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), timerCount(1), waveform(audioFormatManager)
 {
     setSize (1100, 800);
 
@@ -27,34 +27,15 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     }
     audioFormatManager.registerBasicFormats();
        
-    addAndMakeVisible(gainSlider);
-    gainSlider.setSliderStyle(Slider::SliderStyle::LinearVertical);
-    gainSlider.setRange(0, 1);
-    gainSlider.setValue(0.5);
-    gainSlider.addListener(this);
-    audioTransportSource.setGain(gainSlider.getValue());
-       
-    addAndMakeVisible(playButton);
-    playButton.addListener(this);
-    playButton.setClickingTogglesState(true);
-    playButton.setToggleState(false, dontSendNotification);
-       
-    addAndMakeVisible(pauseButton);
-    pauseButton.addListener(this);
-    pauseButton.setClickingTogglesState(true);
-    pauseButton.setToggleState(false, dontSendNotification);
-       
-    addAndMakeVisible(stopButton);
-    stopButton.addListener(this);
-    stopButton.setClickingTogglesState(true);
-    stopButton.setToggleState(true, dontSendNotification);
-       
-    addAndMakeVisible(openFileButton);
-    openFileButton.addListener(this);
-
-    addAndMakeVisible(timeLabel);
-    timeLabel.setText("0", dontSendNotification);
+    audioTransportSource.setGain(playerGUI.gainSlider.getValue());
     
+    playerGUI.gainSlider.addListener(this);
+    playerGUI.playButton.addListener(this);
+    playerGUI.pauseButton.addListener(this);
+    playerGUI.stopButton.addListener(this);
+    playerGUI.openFileButton.addListener(this);
+    
+    addAndMakeVisible(playerGUI);
     addAndMakeVisible(waveform);
     
     transportState = stopped;
@@ -103,9 +84,7 @@ void MainComponent::releaseResources()
 //==============================================================================
 void MainComponent::paint (Graphics& g)
 {
-    playButton.setColour(TextButton::ColourIds::buttonOnColourId, Colours::darkred);
-    pauseButton.setColour(TextButton::ColourIds::buttonOnColourId, Colours::darkred);
-    stopButton.setColour(TextButton::ColourIds::buttonOnColourId, Colours::darkred);
+    
 }
 
 void MainComponent::paintOverChildren(Graphics& g)
@@ -118,12 +97,7 @@ void MainComponent::paintOverChildren(Graphics& g)
 
 void MainComponent::resized()
 {
-    gainSlider.setBounds(170, 0, 30, 150);
-    openFileButton.setBounds(0, 0, 150, 50);
-    playButton.setBounds(0, 50, 50, 50);
-    pauseButton.setBounds(50, 50, 50, 50);
-    stopButton.setBounds(100, 50, 50, 50);
-    timeLabel.setBounds(0, 110, 150, 40);
+    playerGUI.setBounds(0, 0, 200, 150);
     transformImage.setBounds(0, 375, 256, 256);
     waveform.setBounds(0, 200, 200, 150);
     queueDisplay.setBounds(300, 0, 500, 300);
@@ -165,7 +139,7 @@ void MainComponent::menuItemSelected(int menuItemID, int topLevelMenuIndex)
 
 void MainComponent::buttonClicked(Button* button)
 {
-    if(button == &openFileButton)
+    if(button == &playerGUI.openFileButton)
     {
         if(fileChooser.browseForFileToOpen() == true)
         {
@@ -189,10 +163,12 @@ void MainComponent::buttonClicked(Button* button)
             {
                 DBG("No readers for that file");
             }
+            
+            queueDisplay.addNewItem(&selectedFile);
         }
     }
     
-    else if(button == &playButton)
+    else if(button == &playerGUI.playButton)
     {
         if(transportState == stopped)
         {
@@ -205,62 +181,38 @@ void MainComponent::buttonClicked(Button* button)
         audioTransportSource.start();
         Timer::startTimer(40);
         transformImage.timerTrigger();
-        playButton.setEnabled(false);
-        stopButton.setToggleState(false, dontSendNotification);
-        stopButton.setEnabled(true);
-        pauseButton.setToggleState(false, dontSendNotification);
-        pauseButton.setEnabled(true);
+        playerGUI.audioPlayed();
         transportState = playing;
     }
     
-    else if(button == &stopButton)
+    else if(button == &playerGUI.stopButton)
     {
         audioTransportSource.stop();
         Timer::stopTimer();
-        stopButton.setEnabled(false);
-        pauseButton.setToggleState(false, dontSendNotification);
-        pauseButton.setEnabled(false);
-        playButton.setToggleState(false, dontSendNotification);
-        playButton.setEnabled(true);
+        playerGUI.audioStopped();
         transportState = stopped;
     }
     
-    else if (button == &pauseButton)
+    else if (button == &playerGUI.pauseButton)
     {
         pausePosition = audioTransportSource.getCurrentPosition();
         audioTransportSource.stop();
-        pauseButton.setEnabled(false);
-        playButton.setToggleState(false, dontSendNotification);
-        playButton.setEnabled(true);
-        stopButton.setToggleState(false, dontSendNotification);
-        stopButton.setEnabled(true);
+        playerGUI.audioPaused();
         transportState = paused;
     }
-    
 }
 
 void MainComponent::sliderValueChanged(Slider* slider)
 {
-    if(slider == &gainSlider)
+    if(slider == &playerGUI.gainSlider)
     {
-        audioTransportSource.setGain(gainSlider.getValue());
+        audioTransportSource.setGain(playerGUI.gainSlider.getValue());
     }
 }
 
 void MainComponent::timerCallback()
 {
-    int64_t numMins = floor(audioTransportSource.getCurrentPosition() / 60);
-    double numSecs = fmod(audioTransportSource.getCurrentPosition(), 60);
-    double decPoint = fmod(numSecs, 1);
-    int64_t numSecsInt = numSecs - decPoint;
-    
-    std::string numMinsString = std::to_string(numMins);
-    std::string numSecsString = std::to_string(numSecsInt);
-    
-    std::string fullTime = numMinsString + ":" + numSecsString;
-        
-    const MessageManagerLock labelLock;
-    timeLabel.setText(fullTime, dontSendNotification);
+    playerGUI.changeTime(audioTransportSource.getCurrentPosition());
 }
 
 void MainComponent::mouseDown(const MouseEvent &event)

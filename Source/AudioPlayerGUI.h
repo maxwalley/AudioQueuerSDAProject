@@ -23,7 +23,22 @@ public:
 
     void paint (Graphics&) override;
     void resized() override;
-
+    
+    void audioStopped();
+    void audioPaused();
+    void audioPlayed();
+    
+    void changeTime(double audioPosition);
+    
+    Slider gainSlider;
+    TextButton playButton;
+    TextButton pauseButton;
+    TextButton stopButton;
+    TextButton openFileButton;
+    
 private:
+    
+    Label timeLabel;
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioPlayerGUI)
 };

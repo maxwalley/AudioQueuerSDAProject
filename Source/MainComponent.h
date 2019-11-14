@@ -13,6 +13,7 @@
 #include "QueueDisplayBox.h"
 #include "AudioWaveform.h"
 #include "FFT.h"
+#include "AudioPlayerGUI.h"
 
 //==============================================================================
 /*
@@ -55,12 +56,12 @@ private:
     AudioTransportSource audioTransportSource;
     bool fileLoaded;
     
-    Label timeLabel;
+    /*Label timeLabel;
     Slider gainSlider;
     TextButton playButton;
     TextButton pauseButton;
     TextButton stopButton;
-    TextButton openFileButton;
+    TextButton openFileButton;*/
     
     void buttonClicked(Button* button) override;
     void sliderValueChanged(Slider* slider) override;
@@ -84,7 +85,7 @@ private:
     AudioWaveform waveform;
     
     FFT transformImage;
-    
+    AudioPlayerGUI playerGUI;
     
     QueueDisplayBox queueDisplay;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)

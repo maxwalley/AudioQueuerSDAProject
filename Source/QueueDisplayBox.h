@@ -25,9 +25,13 @@ public:
     void paint (Graphics&) override;
     void resized() override;
 
+    void addNewItem(File* file);
 private:
     Rectangle<int> mainDisplay;
-    QueueItem item;
+    
+    Array<QueueItem* ,CriticalSection> items;
+    
+    int numItems;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (QueueDisplayBox)
 };
