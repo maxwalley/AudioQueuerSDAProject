@@ -2,7 +2,24 @@
 
 <JUCERPROJECT id="mGP3HA" name="NewProject" projectType="guiapp" jucerVersion="5.4.5">
   <MAINGROUP id="utjANr" name="NewProject">
+    <GROUP id="{6D7795C2-BB8E-38C9-2424-C6B953A82BDC}" name="Audio">
+      <FILE id="V38h7r" name="WAVWriter.h" compile="0" resource="0" file="Source/WAVWriter.h"/>
+      <FILE id="tOIKFQ" name="WAVWriter.cpp" compile="1" resource="0" file="Source/WAVWriter.cpp"/>
+    </GROUP>
     <GROUP id="{D0169949-7A6A-ECE1-224E-BDEBA828A34A}" name="GUI">
+      <GROUP id="{725DCBBF-D78B-B684-A3EE-A47707B2AEDF}" name="Audio">
+        <FILE id="zHjYdY" name="AudioPlayerGUI.cpp" compile="1" resource="0"
+              file="Source/AudioPlayerGUI.cpp"/>
+        <FILE id="tlN0B1" name="AudioPlayerGUI.h" compile="0" resource="0"
+              file="Source/AudioPlayerGUI.h"/>
+        <FILE id="TbVogq" name="AudioPlayer.h" compile="0" resource="0" file="Source/AudioPlayer.h"/>
+        <FILE id="opkHQ0" name="AudioPlayer.cpp" compile="1" resource="0" file="Source/AudioPlayer.cpp"/>
+        <FILE id="taGVW4" name="AudioWaveform.h" compile="0" resource="0" file="Source/AudioWaveform.h"/>
+        <FILE id="sueaiz" name="AudioWaveform.cpp" compile="1" resource="0"
+              file="Source/AudioWaveform.cpp"/>
+        <FILE id="JoDi8x" name="FFT.h" compile="0" resource="0" file="Source/FFT.h"/>
+        <FILE id="XvrdyH" name="FFT.cpp" compile="1" resource="0" file="Source/FFT.cpp"/>
+      </GROUP>
       <FILE id="OkJxCX" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="Dlqsce" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
@@ -10,19 +27,14 @@
       <FILE id="Glv5SQ" name="MenuModel.cpp" compile="1" resource="0" file="Source/GUI/MenuModel.cpp"/>
     </GROUP>
     <GROUP id="{10162CB2-3966-F301-8905-0981EBF00FD2}" name="Source">
-      <FILE id="Ljndyk" name="Array.hpp" compile="0" resource="0" file="Source/Array.hpp"/>
-      <FILE id="BiWtIP" name="Array.cpp" compile="1" resource="0" file="Source/Array.cpp"/>
       <FILE id="cctsbC" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
-      <FILE id="TbVogq" name="AudioPlayer.h" compile="0" resource="0" file="Source/AudioPlayer.h"/>
-      <FILE id="opkHQ0" name="AudioPlayer.cpp" compile="1" resource="0" file="Source/AudioPlayer.cpp"/>
-      <FILE id="taGVW4" name="AudioWaveform.h" compile="0" resource="0" file="Source/AudioWaveform.h"/>
-      <FILE id="sueaiz" name="AudioWaveform.cpp" compile="1" resource="0"
-            file="Source/AudioWaveform.cpp"/>
-      <FILE id="JoDi8x" name="FFT.h" compile="0" resource="0" file="Source/FFT.h"/>
-      <FILE id="XvrdyH" name="FFT.cpp" compile="1" resource="0" file="Source/FFT.cpp"/>
-      <FILE id="V38h7r" name="WAVWriter.h" compile="0" resource="0" file="Source/WAVWriter.h"/>
-      <FILE id="tOIKFQ" name="WAVWriter.cpp" compile="1" resource="0" file="Source/WAVWriter.cpp"/>
     </GROUP>
+    <FILE id="MSC4RV" name="QueueDisplayBox.cpp" compile="1" resource="0"
+          file="Source/QueueDisplayBox.cpp"/>
+    <FILE id="Yw7obw" name="QueueDisplayBox.h" compile="0" resource="0"
+          file="Source/QueueDisplayBox.h"/>
+    <FILE id="LwaZt3" name="QueueItem.cpp" compile="1" resource="0" file="Source/QueueItem.cpp"/>
+    <FILE id="cqn6Z4" name="QueueItem.h" compile="0" resource="0" file="Source/QueueItem.h"/>
   </MAINGROUP>
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">

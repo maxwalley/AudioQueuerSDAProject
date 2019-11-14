@@ -12,15 +12,16 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "AudioWaveform.h"
+#include "FFT.h"
 
 //==============================================================================
 /*
 */
-class AudioPlayer    : public Component,
-                       public AudioSource,
-                       public Button::Listener,
-                       public Slider::Listener,
-                       public Timer
+class AudioPlayer    :   public Component,
+                            public AudioSource,
+                            public Button::Listener,
+                            public Slider::Listener,
+                            public Timer
 {
 public:
     AudioPlayer();
@@ -68,27 +69,12 @@ private:
     };
     uint64_t pausePosition;
     
+    
     TransportState transportState;
     
     AudioWaveform waveform;
     
-    enum
-    {
-        fftOrder = 10,
-        fftSize = 1 << fftOrder,
-    };
-    
-    dsp::FFT transform;
-    Array<float> transformInputArray;
-    Array<float> transformOutputArray;
-    int inputIndex;
-    //float transformInputArray[1024];
-    //float transformOutputArray[2048];
-    bool arrayPushingFinished;
-    void fillInputArray(float sample);
-    void drawSpectogram();
-    
-    Image spectogram;
+    FFT transformImage;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioPlayer)
 };

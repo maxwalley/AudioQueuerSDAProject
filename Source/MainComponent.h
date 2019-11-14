@@ -9,16 +9,21 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "AudioPlayer.h"
-#include "WAVWriter.h"
 #include "GUI/MenuModel.h"
+#include "QueueDisplayBox.h"
+#include "AudioWaveform.h"
+#include "FFT.h"
 
 //==============================================================================
 /*
     This component lives inside our window, and this is where you should put all
     your controls and content.
 */
-class MainComponent   : public AudioAppComponent
+class MainComponent   : public AudioAppComponent,
+                        public MenuBarModel,
+                        public Button::Listener,
+                        public Slider::Listener,
+                        public Timer
 {
 public:
     //==============================================================================
@@ -32,18 +37,55 @@ public:
 
     //==============================================================================
     void paint (Graphics& g) override;
+    void paintOverChildren(Graphics& g) override;
     void resized() override;
+    
+    //==============================================================================
+    StringArray getMenuBarNames() override;
+    PopupMenu getMenuForIndex (int topLevelMenuIndex, const String& menuName) override;
+    void menuItemSelected (int menuItemID, int topLevelMenuIndex) override;
     
 private:
     //==============================================================================
     // Your private member variables go here...
-    AudioPlayer audioPlayer;
-    WAVWriter wavWriter;
+    FileChooser fileChooser;
+    File selectedFile;
+    AudioFormatManager audioFormatManager;
+    std::unique_ptr<AudioFormatReaderSource> audioFormatReaderSource;
+    AudioTransportSource audioTransportSource;
+    bool fileLoaded;
     
-    MenuModel menuSettings;
-    MenuBarComponent menu;
+    Label timeLabel;
+    Slider gainSlider;
+    TextButton playButton;
+    TextButton pauseButton;
+    TextButton stopButton;
+    TextButton openFileButton;
     
-    AudioDeviceManager deviceManager;
+    void buttonClicked(Button* button) override;
+    void sliderValueChanged(Slider* slider) override;
     
+    void timerCallback() override;
+    int timerCount;
+    
+    void mouseDown (const MouseEvent &event) override;
+    void changeAudioPosition(int xAxis);
+    
+    enum TransportState
+    {
+        playing,
+        stopped,
+        paused,
+    };
+    uint64_t pausePosition;
+    
+    TransportState transportState;
+    
+    AudioWaveform waveform;
+    
+    FFT transformImage;
+    
+    
+    QueueDisplayBox queueDisplay;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

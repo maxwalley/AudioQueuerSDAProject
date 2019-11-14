@@ -12,9 +12,9 @@
 #include "AudioPlayer.h"
 
 //==============================================================================
-AudioPlayer::AudioPlayer() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), playButton("Play"), pauseButton("Pause"), stopButton("Stop"), openFileButton("Open File"), timerCount(1),  waveform(audioFormatManager), transform(fftOrder), inputIndex(0), arrayPushingFinished(false), spectogram(Image::RGB, 512, 512, true)
+AudioPlayer::AudioPlayer() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), playButton("Play"), pauseButton("Pause"), stopButton("Stop"), openFileButton("Open File"), timerCount(1), waveform(audioFormatManager)
 {
-    setSize (812, 512);
+    setSize (256, 800);
     
     audioFormatManager.registerBasicFormats();
        
@@ -52,6 +52,8 @@ AudioPlayer::AudioPlayer() : fileChooser("Pick a file", File(), "*.wav", true, t
     pausePosition = 0;
     
     waveform.addMouseListener(this, false);
+    
+    addAndMakeVisible(transformImage);
 }
 
 AudioPlayer::~AudioPlayer()
@@ -63,8 +65,6 @@ void AudioPlayer::paint (Graphics& g)
     playButton.setColour(TextButton::ColourIds::buttonOnColourId, Colours::darkred);
     pauseButton.setColour(TextButton::ColourIds::buttonOnColourId, Colours::darkred);
     stopButton.setColour(TextButton::ColourIds::buttonOnColourId, Colours::darkred);
-    
-    g.drawImage(spectogram, 300, 0, 512, 512, 0, 0, 512, 512);
 }
 
 void AudioPlayer::paintOverChildren(Graphics& g)
@@ -83,7 +83,7 @@ void AudioPlayer::resized()
     pauseButton.setBounds(50, 50, 50, 50);
     stopButton.setBounds(100, 50, 50, 50);
     timeLabel.setBounds(0, 110, 150, 40);
-    
+    transformImage.setBounds(0, 375, 256, 256);
     waveform.setBounds(0, 200, 200, 150);
 }
 
@@ -128,6 +128,7 @@ void AudioPlayer::buttonClicked(Button* button)
         }
         audioTransportSource.start();
         Timer::startTimer(40);
+        transformImage.timerTrigger();
         playButton.setEnabled(false);
         stopButton.setToggleState(false, dontSendNotification);
         stopButton.setEnabled(true);
@@ -188,7 +189,7 @@ void AudioPlayer::getNextAudioBlock(const AudioSourceChannelInfo &bufferToFill)
         auto* channelData = bufferToFill.buffer->getReadPointer (0, bufferToFill.startSample);
         for (int i = 0; i < bufferToFill.numSamples; ++i)
         {
-            fillInputArray(channelData[i]);
+            transformImage.fillInputArray(channelData[i]);
         }
     }
 }
@@ -200,39 +201,20 @@ void AudioPlayer::releaseResources()
 
 void AudioPlayer::timerCallback()
 {
-    if(timerCount == 25)
-    {
-        int64_t numMins = floor(audioTransportSource.getCurrentPosition() / 60);
-        double numSecs = fmod(audioTransportSource.getCurrentPosition(), 60);
-        double decPoint = fmod(numSecs, 1);
-        int64_t numSecsInt = numSecs - decPoint;
+    int64_t numMins = floor(audioTransportSource.getCurrentPosition() / 60);
+    double numSecs = fmod(audioTransportSource.getCurrentPosition(), 60);
+    double decPoint = fmod(numSecs, 1);
+    int64_t numSecsInt = numSecs - decPoint;
     
-        std::string numMinsString = std::to_string(numMins);
-        std::string numSecsString = std::to_string(numSecsInt);
+    std::string numMinsString = std::to_string(numMins);
+    std::string numSecsString = std::to_string(numSecsInt);
     
-        std::string fullTime = numMinsString + ":" + numSecsString;
+    std::string fullTime = numMinsString + ":" + numSecsString;
     
-        //DBG("Time is: " << fullTime);
+    //DBG("Time is: " << fullTime);
         
-        timerCount = 0;
-        
-        const MessageManagerLock labelLock;
-        timeLabel.setText(fullTime, dontSendNotification);
-    }
-    //const MessageManagerLock paintLock;
-    if (arrayPushingFinished == true)
-    {
-        
-        drawSpectogram();
-        
-        
-        arrayPushingFinished = false;
-        repaint();
-    }
-    //drawSpectogram();
-    //arrayPushingFinished = false;
-    //repaint();
-    timerCount++;
+    const MessageManagerLock labelLock;
+    timeLabel.setText(fullTime, dontSendNotification);
 }
 
 void AudioPlayer::mouseDown(const MouseEvent &event)
@@ -258,55 +240,4 @@ void AudioPlayer::changeAudioPosition(int xAxis)
     audioTransportSource.setPosition(newPosOnFile);
     
     //audioTransportSource.setPosition((waveform.getThumbnailLenght()/100) * disFromStart) * (audioTransportSource.getTotalLength()/100));
-}
-
-void AudioPlayer::fillInputArray(float sample)
-{
-    //DBG("Array size: " << transformInputArray.size());
-    if(transformInputArray.size() == fftSize)
-    {
-        if(arrayPushingFinished == false)
-        {
-            transformOutputArray.clear();
-            transformOutputArray.addArray(transformInputArray);
-            arrayPushingFinished = true;
-        }
-        transformInputArray.clear();
-    }
-    transformInputArray.add(sample);
-}
-
-void AudioPlayer::drawSpectogram()
-{
-    spectogram.moveImageSection (0, 0, 1, 0, spectogram.getWidth() - 1, spectogram.getHeight());
-    
-    float array[fftSize * 2];
-    
-    for(int index = 0; index < fftSize; index++)
-    {
-        //moves dynamic array into normal one for fft
-        array[index] = transformOutputArray.getReference(index);
-        //DBG("data in Array = " << array[index]);
-    }
-    
-    auto rightHandEdge = spectogram.getWidth() - 1;
-    auto imageHeight   = spectogram.getHeight();
-    
-    spectogram.moveImageSection (0, 0, 1, 0, rightHandEdge - 1, imageHeight);
-    
-    transform.performRealOnlyForwardTransform(array);
-
-    auto maxLevel = FloatVectorOperations::findMinAndMax (array, fftSize/2);
-    for (auto y = 1; y < imageHeight; ++y)
-    {
-        
-        auto skewedProportionY = 1.0f - std::exp (std::log (y / (float) imageHeight) * 0.2f);
-        
-        auto fftDataIndex = jlimit (0, fftSize / 2, (int) (skewedProportionY * fftSize / 2));
-        auto level = jmap (array[fftDataIndex], 0.0f, jmax (maxLevel.getEnd(), 1e-5f), 0.0f, 1.0f);
-        
-        spectogram.setPixelAt (rightHandEdge - 1, y, Colour::fromHSV (level, 1.0f, level, 1.0f));
-    }
-    
-
 }
