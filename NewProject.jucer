@@ -2,6 +2,18 @@
 
 <JUCERPROJECT id="mGP3HA" name="NewProject" projectType="guiapp" jucerVersion="5.4.5">
   <MAINGROUP id="utjANr" name="NewProject">
+    <GROUP id="{49777A83-665A-A214-DF8D-74FCA81C4F19}" name="Queue">
+      <FILE id="Yw7obw" name="QueueDisplayBox.h" compile="0" resource="0"
+            file="Source/QueueDisplayBox.h"/>
+      <FILE id="MSC4RV" name="QueueDisplayBox.cpp" compile="1" resource="0"
+            file="Source/QueueDisplayBox.cpp"/>
+      <FILE id="cqn6Z4" name="QueueItem.h" compile="0" resource="0" file="Source/QueueItem.h"/>
+      <FILE id="LwaZt3" name="QueueItem.cpp" compile="1" resource="0" file="Source/QueueItem.cpp"/>
+      <FILE id="lGQUYx" name="QueueHeader.h" compile="0" resource="0" file="Source/QueueHeader.h"/>
+      <FILE id="oDxziH" name="QueueHeader.cpp" compile="1" resource="0" file="Source/QueueHeader.cpp"/>
+      <FILE id="V5g8j1" name="QueueFooter.h" compile="0" resource="0" file="Source/QueueFooter.h"/>
+      <FILE id="TaPbSN" name="QueueFooter.cpp" compile="1" resource="0" file="Source/QueueFooter.cpp"/>
+    </GROUP>
     <GROUP id="{6D7795C2-BB8E-38C9-2424-C6B953A82BDC}" name="Audio">
       <FILE id="V38h7r" name="WAVWriter.h" compile="0" resource="0" file="Source/WAVWriter.h"/>
       <FILE id="tOIKFQ" name="WAVWriter.cpp" compile="1" resource="0" file="Source/WAVWriter.cpp"/>
@@ -27,12 +39,6 @@
     <GROUP id="{10162CB2-3966-F301-8905-0981EBF00FD2}" name="Source">
       <FILE id="cctsbC" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
     </GROUP>
-    <FILE id="MSC4RV" name="QueueDisplayBox.cpp" compile="1" resource="0"
-          file="Source/QueueDisplayBox.cpp"/>
-    <FILE id="Yw7obw" name="QueueDisplayBox.h" compile="0" resource="0"
-          file="Source/QueueDisplayBox.h"/>
-    <FILE id="LwaZt3" name="QueueItem.cpp" compile="1" resource="0" file="Source/QueueItem.cpp"/>
-    <FILE id="cqn6Z4" name="QueueItem.h" compile="0" resource="0" file="Source/QueueItem.h"/>
   </MAINGROUP>
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">

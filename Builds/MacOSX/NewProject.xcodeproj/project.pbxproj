@@ -61,6 +61,22 @@
 			isa = PBXBuildFile;
 			fileRef = 5681B841DC2DCBA127A5D3BD;
 		};
+		A445947A3A8CE41DA0CAA561 = {
+			isa = PBXBuildFile;
+			fileRef = BBB2A76EDA6420EA34D99D56;
+		};
+		9A8AF33F2DE9D35710B669C8 = {
+			isa = PBXBuildFile;
+			fileRef = 19BAE7243891B890A04D7300;
+		};
+		A4DFAD26B4480368A1A9FD66 = {
+			isa = PBXBuildFile;
+			fileRef = BA805DC00EA6EC492C9F84E1;
+		};
+		7DA4210761D3BFEC000F73BC = {
+			isa = PBXBuildFile;
+			fileRef = 8A0886AF36ED651280C8FAE4;
+		};
 		9F8AD2A16E2CE519AFF1EF3D = {
 			isa = PBXBuildFile;
 			fileRef = 53906F32D56B6D3AC8A4F8E6;
@@ -88,14 +104,6 @@
 		B1D5E1258E624D23351868BC = {
 			isa = PBXBuildFile;
 			fileRef = 65E7959614FE25293999B573;
-		};
-		A445947A3A8CE41DA0CAA561 = {
-			isa = PBXBuildFile;
-			fileRef = BBB2A76EDA6420EA34D99D56;
-		};
-		9A8AF33F2DE9D35710B669C8 = {
-			isa = PBXBuildFile;
-			fileRef = 19BAE7243891B890A04D7300;
 		};
 		BAF754B8993D431486155F12 = {
 			isa = PBXBuildFile;
@@ -307,6 +315,13 @@
 			path = ../../JuceLibraryCode/JuceHeader.h;
 			sourceTree = "SOURCE_ROOT";
 		};
+		5E914FC871AD6940337253B5 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = QueueHeader.h;
+			path = ../../Source/QueueHeader.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		65E7959614FE25293999B573 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -377,6 +392,13 @@
 			path = "../../JuceLibraryCode/include_juce_events.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		8A0886AF36ED651280C8FAE4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = QueueFooter.cpp;
+			path = ../../Source/QueueFooter.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		8B9B7B5D83373B11A5941686 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -410,6 +432,13 @@
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_audio_basics.mm";
 			path = "../../JuceLibraryCode/include_juce_audio_basics.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		A72B92A53C86779A872CEAC3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = QueueFooter.h;
+			path = ../../Source/QueueFooter.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		A8A04D5CAE2EB934DECF5298 = {
@@ -452,6 +481,13 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = FFT.cpp;
 			path = ../../Source/FFT.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		BA805DC00EA6EC492C9F84E1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = QueueHeader.cpp;
+			path = ../../Source/QueueHeader.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		BBB2A76EDA6420EA34D99D56 = {
@@ -594,6 +630,21 @@
 			path = System/Library/Frameworks/CoreAudioKit.framework;
 			sourceTree = SDKROOT;
 		};
+		2F4E36976ED83E5CB5D231EF = {
+			isa = PBXGroup;
+			children = (
+				507B14C964AF53BE1659FA0B,
+				BBB2A76EDA6420EA34D99D56,
+				6AE8FE01608D6EF6A8237FAB,
+				19BAE7243891B890A04D7300,
+				5E914FC871AD6940337253B5,
+				BA805DC00EA6EC492C9F84E1,
+				A72B92A53C86779A872CEAC3,
+				8A0886AF36ED651280C8FAE4,
+			);
+			name = Queue;
+			sourceTree = "<group>";
+		};
 		0F5316B61D8D19820692AB94 = {
 			isa = PBXGroup;
 			children = (
@@ -639,13 +690,10 @@
 		77435C30CEADAB09AA6E1689 = {
 			isa = PBXGroup;
 			children = (
+				2F4E36976ED83E5CB5D231EF,
 				0F5316B61D8D19820692AB94,
 				0A81025DDA70290059710CA3,
 				A4D8A61FCFE6E0B33272563E,
-				BBB2A76EDA6420EA34D99D56,
-				507B14C964AF53BE1659FA0B,
-				19BAE7243891B890A04D7300,
-				6AE8FE01608D6EF6A8237FAB,
 			);
 			name = NewProject;
 			sourceTree = "<group>";
@@ -957,6 +1005,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A445947A3A8CE41DA0CAA561,
+				9A8AF33F2DE9D35710B669C8,
+				A4DFAD26B4480368A1A9FD66,
+				7DA4210761D3BFEC000F73BC,
 				9F8AD2A16E2CE519AFF1EF3D,
 				C821630C5FB8D6B313F0EFA8,
 				06587ECA6131E92B0B978EC7,
@@ -964,8 +1016,6 @@
 				A95EC111D6473DAAB0F36B8F,
 				89F2882D30AE94B44FA325C1,
 				B1D5E1258E624D23351868BC,
-				A445947A3A8CE41DA0CAA561,
-				9A8AF33F2DE9D35710B669C8,
 				BAF754B8993D431486155F12,
 				20C28117B572D69AB7AEBC7E,
 				39A0A04D445C112DD42994D2,

@@ -29,15 +29,28 @@ public:
     
     void setFile(File* file);
     
+    void setSelected(bool isSelected);
+    void setLast(bool last);
+    
     String getFileName();
 
 private:
     int itemIndex;
     File currentFile;
-    int length;
-    int sampleRate;
+    int64_t size;
+    
+    AudioFormatReader* reader;
+    int64_t lengthInSamples;
+    double sampleRate;
     int numChannels;
+    
+    bool selected;
     bool lastId;
+    
+    void workOutLengthInSecs();
+    int lengthInSecs;
+    void workOutTime();
+    String lengthInTime;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (QueueItem)
 };

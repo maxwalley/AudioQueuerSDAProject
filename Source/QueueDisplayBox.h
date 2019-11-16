@@ -12,6 +12,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "QueueItem.h"
+#include "QueueHeader.h"
 
 //==============================================================================
 /*
@@ -32,6 +33,12 @@ private:
     Array<QueueItem* ,CriticalSection> items;
     
     int numItems;
+    
+    int selectedItem;
+    
+    QueueHeader header;
+    
+    void mouseDown(const MouseEvent &event) override;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (QueueDisplayBox)
 };
