@@ -22,6 +22,10 @@ QueueDisplayBox::QueueDisplayBox() : mainDisplay(0, 0, 500, 300), selectedItem(0
 
 QueueDisplayBox::~QueueDisplayBox()
 {
+    for(int index = 0; index < items.size(); index++)
+    {
+        delete items[index];
+    }
 }
 
 void QueueDisplayBox::paint (Graphics& g)
@@ -38,9 +42,9 @@ void QueueDisplayBox::addNewItem(File* file)
 {
     int currentID = items.size();
     
-    QueueItem newItem(currentID + 1, file);
+    QueueItem* newItem = new QueueItem(currentID + 1, file);
     
-    items.add(&newItem);
+    items.add(newItem);
     
     items[currentID]->setLast(true);
     if(currentID != 0)

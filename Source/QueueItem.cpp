@@ -28,7 +28,7 @@ QueueItem::QueueItem(int idNum, File* file) : itemIndex(idNum)
 
 QueueItem::~QueueItem()
 {
-    
+    delete reader;
 }
 
 void QueueItem::paint (Graphics& g)
@@ -57,15 +57,15 @@ void QueueItem::paint (Graphics& g)
     g.drawText(String(itemIndex), 0, 0, 20, 30, Justification::centred);
     g.drawLine(20, 0, 20, 30);
     
-    g.drawText(currentFile.getFileName(), 20, 0, 100, 30, Justification::left);
-    g.drawLine(120, 0, 120, 30);
+    g.drawText(currentFile.getFileName(), 20, 0, 135, 30, Justification::centred);
+    g.drawLine(155, 0, 155, 30);
     
-    g.drawText(String(size), 120, 0, 75, 30, Justification::left);
-    g.drawLine(195, 0, 195, 30);
+    g.drawText(String(size), 155, 0, 75, 30, Justification::centred);
+    g.drawLine(230, 0, 230, 30);
     
     workOutTime();
-    g.drawText(lengthInTime, 195, 0, 75, 30, Justification::left);
-    g.drawLine(260, 0, 260, 30);
+    g.drawText(lengthInTime, 230, 0, 100, 30, Justification::centred);
+    g.drawLine(330, 0, 330, 30);
     
     
 }
