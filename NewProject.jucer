@@ -2,6 +2,18 @@
 
 <JUCERPROJECT id="mGP3HA" name="NewProject" projectType="guiapp" jucerVersion="5.4.5">
   <MAINGROUP id="utjANr" name="NewProject">
+    <FILE id="JaY4V0" name="PlayButton.cpp" compile="1" resource="0" file="Source/PlayButton.cpp"/>
+    <FILE id="bF7Y8h" name="PlayButton.h" compile="0" resource="0" file="Source/PlayButton.h"/>
+    <FILE id="aKtfcV" name="QueueTableHeader.cpp" compile="1" resource="0"
+          file="Source/QueueTableHeader.cpp"/>
+    <FILE id="QgTsJj" name="QueueTableHeader.h" compile="0" resource="0"
+          file="Source/QueueTableHeader.h"/>
+    <FILE id="CifwSI" name="QueueTableModel.cpp" compile="1" resource="0"
+          file="Source/QueueTableModel.cpp"/>
+    <FILE id="x9t7jK" name="QueueTableModel.h" compile="0" resource="0"
+          file="Source/QueueTableModel.h"/>
+    <FILE id="rxy6eL" name="QueueTable.cpp" compile="1" resource="0" file="Source/QueueTable.cpp"/>
+    <FILE id="SGUgm5" name="QueueTable.h" compile="0" resource="0" file="Source/QueueTable.h"/>
     <GROUP id="{49777A83-665A-A214-DF8D-74FCA81C4F19}" name="Queue">
       <FILE id="Yw7obw" name="QueueDisplayBox.h" compile="0" resource="0"
             file="Source/QueueDisplayBox.h"/>

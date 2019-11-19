@@ -14,7 +14,6 @@
 //==============================================================================
 QueueItem::QueueItem(int idNum, File* file) : itemIndex(idNum)
 {
-    setSize(500, 30);
     currentFile = File(*file);
     size = currentFile.getSize();
     
@@ -24,6 +23,9 @@ QueueItem::QueueItem(int idNum, File* file) : itemIndex(idNum)
     
     lengthInSamples = reader->lengthInSamples;
     sampleRate = reader->sampleRate;
+    
+    playTimeLabel.setEditable(false, true, false);
+    stopTimeLabel.setEditable(false, true, false);
 }
 
 QueueItem::~QueueItem()
@@ -33,40 +35,6 @@ QueueItem::~QueueItem()
 
 void QueueItem::paint (Graphics& g)
 {
-    if(itemIndex % 2 == 0 && selected == false)
-    {
-        g.setColour(Colours::lightblue);
-    }
-    else if(itemIndex % 2 != 0 && selected == false)
-    {
-        g.setColour(Colours::orange);
-    }
-    else
-    {
-        g.setColour(Colours::darkblue);
-    }
-    
-    g.fillAll();
-    
-    g.setColour(Colours::black);
-    if(lastId == true)
-    {
-        g.drawLine(0, 30, 500, 30);
-    }
-   
-    g.drawText(String(itemIndex), 0, 0, 20, 30, Justification::centred);
-    g.drawLine(20, 0, 20, 30);
-    
-    g.drawText(currentFile.getFileName(), 20, 0, 135, 30, Justification::centred);
-    g.drawLine(155, 0, 155, 30);
-    
-    g.drawText(String(size), 155, 0, 75, 30, Justification::centred);
-    g.drawLine(230, 0, 230, 30);
-    
-    workOutTime();
-    g.drawText(lengthInTime, 230, 0, 100, 30, Justification::centred);
-    g.drawLine(330, 0, 330, 30);
-    
     
 }
 
@@ -75,9 +43,24 @@ void QueueItem::resized()
     
 }
 
+int QueueItem::getItemIndex() const
+{
+    return itemIndex;
+}
+
+void QueueItem::setItemIndex(int index)
+{
+    itemIndex = index;
+}
+
 String QueueItem::getFileName()
 {
     return currentFile.getFileName();
+}
+
+int64_t QueueItem::getFileSize()
+{
+    return size;
 }
 
 void QueueItem::workOutLengthInSecs()
@@ -96,6 +79,27 @@ void QueueItem::workOutTime()
     std::string numSecsString = std::to_string(numSecs);
     
     lengthInTime = numMinsString + ":" + numSecsString;
+}
+
+String QueueItem::getLengthInTime()
+{
+    workOutTime();
+    return lengthInTime;
+}
+
+Label* QueueItem::getPlayTimeLabel() const
+{
+    return &playTimeLabel;
+}
+
+Label* QueueItem::getStopTimeLabel() const
+{
+    return &stopTimeLabel;
+}
+
+PlayButton* QueueItem::getPlayButton() const
+{
+    return &playButton;
 }
 
 void QueueItem::setLast(bool last)

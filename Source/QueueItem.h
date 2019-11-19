@@ -11,6 +11,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "PlayButton.h"
 
 //==============================================================================
 /*
@@ -24,20 +25,34 @@ public:
     void paint (Graphics&) override;
     void resized() override;
     
-    void setItemIndex(int index);
-    int getItemIndex();
-    
     void setFile(File* file);
+    
+    void setItemIndex(int index);
+    int getItemIndex()const ;
+    
+    String getFileName();
+    
+    int64_t getFileSize();
+    
+    String getLengthInTime();
+    
+    Label* getPlayTimeLabel() const;
+    Label* getStopTimeLabel() const;
+    
+    PlayButton* getPlayButton() const;
     
     void setSelected(bool isSelected);
     void setLast(bool last);
-    
-    String getFileName();
 
 private:
     int itemIndex;
     File currentFile;
     int64_t size;
+    
+    Label playTimeLabel;
+    Label stopTimeLabel;
+    
+    PlayButton playButton;
     
     AudioFormatReader* reader;
     int64_t lengthInSamples;

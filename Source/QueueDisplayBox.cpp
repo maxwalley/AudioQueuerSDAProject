@@ -18,6 +18,8 @@ QueueDisplayBox::QueueDisplayBox() : mainDisplay(0, 0, 500, 300), selectedItem(0
     
     addAndMakeVisible(header);
     
+    addMouseListener(this, true);
+    
 }
 
 QueueDisplayBox::~QueueDisplayBox()
@@ -58,16 +60,20 @@ void QueueDisplayBox::addNewItem(File* file)
     DBG(items[currentID]->getFileName());
     
     addAndMakeVisible(items[currentID]);
-    items[currentID]->setBounds(0, 30, 500, 30);
+    items[currentID]->setBounds(0, (currentID + 1) * 30, 500, 30);
     
     selectedItem = currentID;
 }
 
 void QueueDisplayBox::mouseDown(const MouseEvent &event)
 {
-    items[selectedItem]->setSelected(false);
+    int tempSelectedItem = floor(event.getMouseDownY()/30);
     
-    selectedItem = floor(event.getMouseDownScreenY()/30);
-    
-    items[selectedItem]->setSelected(true);
+    if(tempSelectedItem < items.size())
+    {
+        items[selectedItem]->setSelected(false);
+        selectedItem = tempSelectedItem;
+        items[selectedItem]->setSelected(true);
+    }
+    DBG("Click at: " << event.getMouseDownY());
 }
