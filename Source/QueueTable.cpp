@@ -15,7 +15,6 @@
 QueueTable::QueueTable()
 {
     setSize(500, 300);
-    items.clear();
     
     setHeader(&header);
 }
@@ -34,3 +33,7 @@ void QueueTable::resized()
     
 }
 
+void QueueTable::addItem(File* file)
+{
+    updateContent();
+}

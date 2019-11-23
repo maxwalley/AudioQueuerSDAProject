@@ -36,10 +36,10 @@ public:
     
     String getLengthInTime();
     
-    Label* getPlayTimeLabel() const;
-    Label* getStopTimeLabel() const;
+    Label* getPlayTimeLabel();
+    Label* getStopTimeLabel();
     
-    PlayButton* getPlayButton() const;
+    PlayButton* getPlayButton();
     
     void setSelected(bool isSelected);
     void setLast(bool last);

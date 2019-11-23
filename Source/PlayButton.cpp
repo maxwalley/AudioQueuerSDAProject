@@ -14,7 +14,7 @@
 //==============================================================================
 PlayButton::PlayButton() : Button (String())
 {
-    setSize(15, 15);
+    //setSize(15, 15);
     setClickingTogglesState(true);
     setToggleState(false, dontSendNotification);
 }
@@ -23,9 +23,10 @@ PlayButton::~PlayButton()
 {
 }
 
-void PlayButton::paint (Graphics& g)
+void PlayButton::paintButton (Graphics& g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown)
 {
-    g.drawLine(0, 0, 15, 7.5);
-    g.drawLine(0, 0, 0, 15);
-    g.drawLine(0, 15, 15, 7.5);
+    //Draws triangle
+    g.drawLine(getWidth()/3, 0, getWidth()/3, getHeight());
+    g.drawLine(getWidth()/3, 0, getWidth()/3, getHeight()/2);
+    g.drawLine(getWidth()/3 , getHeight(), getWidth(),3, getHeight()/2);
 }

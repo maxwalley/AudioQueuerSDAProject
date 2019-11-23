@@ -24,8 +24,3 @@ QueueTableHeader::QueueTableHeader()
     addColumn("Stop Point", 6, 75, 12, -1, 63, 5);
     addColumn("Play", 7, 20, 5, -1, 63, 6);
 }
-
-QueueTableHeader::~QueueTableHeader()
-{
-    
-}

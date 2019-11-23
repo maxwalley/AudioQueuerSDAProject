@@ -21,7 +21,7 @@ public:
     PlayButton();
     ~PlayButton();
 
-    void paint (Graphics&) override;
+    void paintButton (Graphics& g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override;
 
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlayButton)

@@ -10,7 +10,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "GUI/MenuModel.h"
-#include "QueueDisplayBox.h"
+#include "QueueTableModel.h"
 #include "AudioWaveform.h"
 #include "FFT.h"
 #include "AudioPlayerGUI.h"
@@ -84,9 +84,9 @@ private:
     
     AudioWaveform waveform;
     
-    FFT transformImage;
+    FFT transformImage;    
     AudioPlayerGUI playerGUI;
     
-    QueueDisplayBox queueDisplay;
+    QueueTableModel table;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

@@ -87,17 +87,17 @@ String QueueItem::getLengthInTime()
     return lengthInTime;
 }
 
-Label* QueueItem::getPlayTimeLabel() const
+Label* QueueItem::getPlayTimeLabel()
 {
     return &playTimeLabel;
 }
 
-Label* QueueItem::getStopTimeLabel() const
+Label* QueueItem::getStopTimeLabel()
 {
     return &stopTimeLabel;
 }
 
-PlayButton* QueueItem::getPlayButton() const
+PlayButton* QueueItem::getPlayButton()
 {
     return &playButton;
 }

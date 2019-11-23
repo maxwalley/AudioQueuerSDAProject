@@ -43,8 +43,9 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     
     waveform.addMouseListener(this, false);
     
+    addAndMakeVisible(table);
+    
     addAndMakeVisible(transformImage);
-    addAndMakeVisible(queueDisplay);
 }
 
 MainComponent::~MainComponent()
@@ -100,7 +101,7 @@ void MainComponent::resized()
     playerGUI.setBounds(0, 0, 200, 150);
     transformImage.setBounds(0, 375, 256, 256);
     waveform.setBounds(0, 200, 200, 150);
-    queueDisplay.setBounds(300, 0, 500, 300);
+    table.setBounds(300, 0, 500, 300);
 }
 
 StringArray MainComponent::getMenuBarNames()
@@ -164,7 +165,7 @@ void MainComponent::buttonClicked(Button* button)
                 DBG("No readers for that file");
             }
             
-            queueDisplay.addNewItem(&selectedFile);
+            table.addNewItem(&selectedFile);
         }
     }
     
