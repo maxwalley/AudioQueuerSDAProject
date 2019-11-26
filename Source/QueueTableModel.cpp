@@ -64,42 +64,49 @@ void QueueTableModel::paintCell(Graphics &g, int rowNumber, int columnId, int wi
     
     if(columnId == 1)
     {
-        stringToDraw = String(items[rowNumber - 1]->getItemIndex());
+        stringToDraw = String(items[rowNumber]->getItemIndex());
     }
     
     else if(columnId == 2)
     {
-        stringToDraw = items[rowNumber - 1]->getFileName();
+        stringToDraw = items[rowNumber]->getFileName();
     }
     
     else if(columnId == 3)
     {
-        stringToDraw = String(items[rowNumber - 1]->getFileSize());
+        stringToDraw = String(items[rowNumber]->getFileSize());
     }
     
     else if(columnId == 4)
     {
-        stringToDraw = items[rowNumber - 1]->getLengthInTime();
+        stringToDraw = items[rowNumber]->getLengthInTime();
     }
     
+    g.setColour(Colours::black);
     g.drawText(stringToDraw, 0, 0, width, height, Justification::centred);
+    
+    /*if (columnId == 2)
+    {
+        g.setColour(Colours::black);
+        g.drawText("Hello", 0, 0, width, height, Justification::centred);
+    }*/
 }
 
 Component* QueueTableModel::refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component* existingComponentToUpdate)
 {
     if(columnId == 5)
     {
-        return items[rowNumber - 1]->getPlayTimeLabel();
+        return items[rowNumber]->getPlayTimeLabel();
     }
     
     else if(columnId == 6)
     {
-        return items[rowNumber - 1]->getStopTimeLabel();
+        return items[rowNumber]->getStopTimeLabel();
     }
     
     else if(columnId == 7)
     {
-        return items[rowNumber - 1]->getPlayButton();
+        return items[rowNumber]->getPlayButton();
     }
     
     else
@@ -115,6 +122,6 @@ void QueueTableModel::addNewItem(File* file)
     QueueItem* newItem = new QueueItem(currentNumFiles + 1, file);
     
     items.add(newItem);
-    
+
     embeddedTable.updateContent();
 }
