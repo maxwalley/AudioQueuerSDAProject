@@ -125,3 +125,13 @@ void QueueTableModel::addNewItem(File* file)
 
     embeddedTable.updateContent();
 }
+
+void QueueTableModel::selectedRowsChanged(int lastRowSelected)
+{
+    transport.setSource(items[lastRowSelected]->audioFormatReaderSource.get(), 0, nullptr, items[lastRowSelected]->getReaderSampleRate(), items[lastRowSelected]->getReaderNumChannels());
+}
+
+int QueueTableModel::getSelectedRow()
+{
+    return embeddedTable.getSelectedRow();
+}

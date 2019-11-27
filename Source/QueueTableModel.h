@@ -25,19 +25,27 @@ public:
     ~QueueTableModel();
     
     void resized() override;
-
-    void addNewItem(File* file);
-private:
+    
+    TableListBox embeddedTable;
     
     Array<QueueItem*> items;
+    AudioTransportSource transport;
+
+    void addNewItem(File* file);
+    
+    int getSelectedRow();
+private:
+    
+    //Array<QueueItem*> items;
     
     int getNumRows() override;
     void paintRowBackground(Graphics& g, int rowNumber, int width, int height, bool rowIsSelected) override;
     void paintCell(Graphics &g, int rowNumber, int columnId, int width, int height, bool rowIsSelected) override;
     Component* refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component* existingComponentToUpdate) override;
 
+    void selectedRowsChanged(int lastRowSelected) override;
+    
     QueueTableHeader header;
-    TableListBox embeddedTable;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (QueueTableModel)
 };

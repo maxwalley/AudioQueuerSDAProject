@@ -53,8 +53,10 @@ private:
     File selectedFile;
     AudioFormatManager audioFormatManager;
     std::unique_ptr<AudioFormatReaderSource> audioFormatReaderSource;
-    AudioTransportSource audioTransportSource;
+    //AudioTransportSource audioTransportSource;
     bool fileLoaded;
+    
+    ComboBox playTypeCombo;
     
     /*Label timeLabel;
     Slider gainSlider;
@@ -88,5 +90,6 @@ private:
     AudioPlayerGUI playerGUI;
     
     QueueTableModel table;
+    int selectedItem;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

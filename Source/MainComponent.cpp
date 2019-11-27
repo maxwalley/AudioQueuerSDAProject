@@ -9,7 +9,7 @@
 #include "MainComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), timerCount(1), waveform(audioFormatManager)
+MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), timerCount(1), waveform(audioFormatManager), selectedItem(-2)
 {
     setSize (1100, 800);
 
@@ -27,7 +27,12 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     }
     audioFormatManager.registerBasicFormats();
        
-    audioTransportSource.setGain(playerGUI.gainSlider.getValue());
+    table.transport.setGain(playerGUI.gainSlider.getValue());
+    
+    addAndMakeVisible(playTypeCombo);
+    playTypeCombo.addItem("Play Selected", 1);
+    playTypeCombo.addItem("Play Playlist", 2);
+    playTypeCombo.setSelectedId(2);
     
     playerGUI.gainSlider.addListener(this);
     playerGUI.playButton.addListener(this);
@@ -56,30 +61,33 @@ MainComponent::~MainComponent()
 //==============================================================================
 void MainComponent::prepareToPlay (int samplesPerBlockExpected, double sampleRate)
 {
-    audioTransportSource.prepareToPlay(samplesPerBlockExpected, sampleRate);
+    table.transport.prepareToPlay(samplesPerBlockExpected, sampleRate);
 }
 
 void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
 {
-    if(audioFormatReaderSource.get() == nullptr)
-    {
-        bufferToFill.clearActiveBufferRegion();
-    }
-    else
-    {
-        audioTransportSource.getNextAudioBlock(bufferToFill);
+    //if(audioFormatReaderSource.get() == nullptr)
+    //{
+        //bufferToFill.clearActiveBufferRegion();
+    //}
+    //else
+    //{
+        //audioTransportSource.getNextAudioBlock(bufferToFill);
         
+    table.transport.getNextAudioBlock(bufferToFill);
+        
+        //FFT
         auto* channelData = bufferToFill.buffer->getReadPointer (0, bufferToFill.startSample);
         for (int i = 0; i < bufferToFill.numSamples; ++i)
         {
             transformImage.fillInputArray(channelData[i]);
         }
-    }
+    //}
 }
 
 void MainComponent::releaseResources()
 {
-    audioTransportSource.releaseResources();
+    table.transport.releaseResources();
 }
 
 //==============================================================================
@@ -90,14 +98,15 @@ void MainComponent::paint (Graphics& g)
 
 void MainComponent::paintOverChildren(Graphics& g)
 {
-    if(audioTransportSource.isPlaying() == true)
+    if(table.transport.isPlaying() == true)
     {
-        g.drawLine((audioTransportSource.getCurrentPosition()/waveform.getThumbnailLenght()) * 200, 200, ((audioTransportSource.getCurrentPosition()/waveform.getThumbnailLenght()) * 200), 350);
+        g.drawLine((table.transport.getCurrentPosition()/waveform.getThumbnailLenght()) * 200, 200, ((table.transport.getCurrentPosition()/waveform.getThumbnailLenght()) * 200), 350);
     }
 }
 
 void MainComponent::resized()
 {
+    playTypeCombo.setBounds(400, 400, 200, 30);
     playerGUI.setBounds(0, 0, 200, 150);
     transformImage.setBounds(0, 375, 256, 256);
     waveform.setBounds(0, 200, 200, 150);
@@ -148,7 +157,7 @@ void MainComponent::buttonClicked(Button* button)
             
             waveform.setSource(new FileInputSource(selectedFile));
             
-            AudioFormatReader* audioFormatReader = audioFormatManager.createReaderFor(selectedFile);
+            /*AudioFormatReader* audioFormatReader = audioFormatManager.createReaderFor(selectedFile);
             
             if(audioFormatReader != nullptr)
             {
@@ -163,7 +172,7 @@ void MainComponent::buttonClicked(Button* button)
             else
             {
                 DBG("No readers for that file");
-            }
+            }*/
             
             table.addNewItem(&selectedFile);
         }
@@ -173,13 +182,13 @@ void MainComponent::buttonClicked(Button* button)
     {
         if(transportState == stopped)
         {
-            audioTransportSource.setPosition(0);
+            table.transport.setPosition(0);
         }
         else if(transportState == paused)
         {
-            audioTransportSource.setPosition(pausePosition);
+            table.transport.setPosition(pausePosition);
         }
-        audioTransportSource.start();
+        table.transport.start();
         Timer::startTimer(40);
         transformImage.timerTrigger();
         playerGUI.audioPlayed();
@@ -188,7 +197,7 @@ void MainComponent::buttonClicked(Button* button)
     
     else if(button == &playerGUI.stopButton)
     {
-        audioTransportSource.stop();
+        table.transport.stop();
         Timer::stopTimer();
         playerGUI.audioStopped();
         transportState = stopped;
@@ -196,8 +205,8 @@ void MainComponent::buttonClicked(Button* button)
     
     else if (button == &playerGUI.pauseButton)
     {
-        pausePosition = audioTransportSource.getCurrentPosition();
-        audioTransportSource.stop();
+        pausePosition = table.transport.getCurrentPosition();
+        table.transport.stop();
         playerGUI.audioPaused();
         transportState = paused;
     }
@@ -207,20 +216,21 @@ void MainComponent::sliderValueChanged(Slider* slider)
 {
     if(slider == &playerGUI.gainSlider)
     {
-        audioTransportSource.setGain(playerGUI.gainSlider.getValue());
+        table.transport.setGain(playerGUI.gainSlider.getValue());
     }
 }
 
 void MainComponent::timerCallback()
 {
-    playerGUI.changeTime(audioTransportSource.getCurrentPosition());
+    playerGUI.changeTime(table.transport.getCurrentPosition());
 }
 
 void MainComponent::mouseDown(const MouseEvent &event)
 {
     //Checks its in the waveform area
-    if(event.originalComponent == &waveform && fileLoaded == true)
+    if(event.originalComponent == &waveform /*&& fileLoaded == true*/)
     {
+        DBG("Mouse clicked in waveform");
         changeAudioPosition(event.getMouseDownX());
     }
 }
@@ -232,11 +242,11 @@ void MainComponent::changeAudioPosition(int xAxis)
     //This is wrong for some reason
     double percentOfWaveform = waveform.getThumbnailLenght()/100;
     double newClickPosOnWaveform = percentOfWaveform * disFromStart;
-    double percentOfFile = audioTransportSource.getTotalLength()/100;
+    //double percentOfFile = audioTransportSource.getTotalLength()/100;
     
-    double newPosOnFile = newClickPosOnWaveform * percentOfFile;
+    //double newPosOnFile = newClickPosOnWaveform * percentOfFile;
     
-    audioTransportSource.setPosition(newPosOnFile);
+    //audioTransportSource.setPosition(newPosOnFile);
     
     //audioTransportSource.setPosition((waveform.getThumbnailLenght()/100) * disFromStart) * (audioTransportSource.getTotalLength()/100));
 }

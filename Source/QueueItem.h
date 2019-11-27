@@ -43,6 +43,12 @@ public:
     
     void setSelected(bool isSelected);
     void setLast(bool last);
+    
+    //AudioTransportSource audioTransportSource;
+    std::unique_ptr<AudioFormatReaderSource> audioFormatReaderSource;
+    
+    double getReaderSampleRate();
+    int getReaderNumChannels();
 
 private:
     int itemIndex;
@@ -58,6 +64,8 @@ private:
     int64_t lengthInSamples;
     double sampleRate;
     int numChannels;
+    
+    //std::unique_ptr<AudioFormatReaderSource> audioFormatReaderSource;
     
     bool selected;
     bool lastId;

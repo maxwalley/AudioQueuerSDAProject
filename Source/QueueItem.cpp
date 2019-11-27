@@ -21,6 +21,15 @@ QueueItem::QueueItem(int idNum, File* file) : itemIndex(idNum)
     tempManager.registerBasicFormats();
     reader = tempManager.createReaderFor(currentFile);
     
+    if(reader != nullptr)
+    {
+        std::unique_ptr<AudioFormatReaderSource> tempAudioFormatReaderSource (new AudioFormatReaderSource (reader, true));
+    
+        //audioTransportSource.setSource(tempAudioFormatReaderSource.get(), 0, nullptr, reader->sampleRate, reader->numChannels);
+    
+        audioFormatReaderSource.reset(tempAudioFormatReaderSource.release());
+    }
+    
     lengthInSamples = reader->lengthInSamples;
     sampleRate = reader->sampleRate;
     
@@ -115,4 +124,14 @@ void QueueItem::setSelected(bool isSelected)
 {
     selected = isSelected;
     repaint();
+}
+
+double QueueItem::getReaderSampleRate()
+{
+    return reader->sampleRate;
+}
+
+int QueueItem::getReaderNumChannels()
+{
+    return reader->numChannels;
 }
