@@ -16,7 +16,8 @@
 //==============================================================================
 /*
 */
-class QueueItem : public Component
+class QueueItem : public Component,
+                  public Label::Listener
 {
 public:
     QueueItem(int idNum, File* file);
@@ -58,6 +59,7 @@ private:
     
     Label playTimeLabel;
     Label stopTimeLabel;
+    void labelTextChanged(Label* labelThatHasChanged) override;
     
     PlayButton playButton;
     

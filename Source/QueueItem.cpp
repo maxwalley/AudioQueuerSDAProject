@@ -34,7 +34,9 @@ QueueItem::QueueItem(int idNum, File* file) : itemIndex(idNum)
     sampleRate = reader->sampleRate;
     
     playTimeLabel.setEditable(false, true, false);
+    playTimeLabel.addListener(this);
     stopTimeLabel.setEditable(false, true, false);
+    stopTimeLabel.addListener(this);
 }
 
 QueueItem::~QueueItem()
@@ -139,4 +141,20 @@ double QueueItem::getReaderSampleRate()
 int QueueItem::getReaderNumChannels()
 {
     return reader->numChannels;
+}
+
+void QueueItem::labelTextChanged(Label* labelThatHasChanged)
+{
+    String newText = labelThatHasChanged->getText();
+    int textLength = newText.length();
+    
+    for(int i = 0; i < textLength; i++)
+    {
+        String currentChar = String::charToString(newText[i]);
+        
+        if(currentChar.compare("0") != 0 && currentChar.compare("1") != 0 && currentChar.compare("2") != 0 && currentChar.compare("3") != 0 && currentChar.compare("4") != 0 && currentChar.compare("5") != 0 && currentChar.compare("6") != 0 && currentChar.compare("7") != 0 && currentChar.compare("8") != 0 && currentChar.compare("9") != 0 && currentChar.compare(":") != 0)
+        {
+            labelThatHasChanged->setText("", dontSendNotification);
+        }
+    }
 }
