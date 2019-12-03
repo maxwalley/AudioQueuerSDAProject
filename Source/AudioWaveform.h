@@ -24,7 +24,8 @@ public:
     void paint (Graphics&) override;
     void resized() override;
     
-    void setSource(InputSource *newSource);
+    void set(InputSource *newSource);
+    
     double getThumbnailLenght() const;
     
 private:

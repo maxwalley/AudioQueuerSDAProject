@@ -52,6 +52,11 @@ void QueueItem::resized()
     
 }
 
+File* QueueItem::getFile()
+{
+    return &currentFile;
+}
+
 int QueueItem::getItemIndex() const
 {
     return itemIndex;

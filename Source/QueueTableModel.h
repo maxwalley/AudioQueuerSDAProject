@@ -18,7 +18,8 @@
 /*
 */
 class QueueTableModel    : public TableListBoxModel,
-                           public Component
+                           public Component,
+                            public ActionBroadcaster
 {
 public:
     QueueTableModel();
@@ -34,6 +35,8 @@ public:
     void addNewItem(File* file);
     
     int getSelectedRow();
+    File* getSelectedFile();
+    
 private:
     
     //Array<QueueItem*> items;

@@ -49,6 +49,7 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     waveform.addMouseListener(this, false);
     
     addAndMakeVisible(table);
+    table.addActionListener(this);
     
     addAndMakeVisible(transformImage);
 }
@@ -154,26 +155,6 @@ void MainComponent::buttonClicked(Button* button)
         if(fileChooser.browseForFileToOpen() == true)
         {
             selectedFile = fileChooser.getResult();
-            
-            waveform.setSource(new FileInputSource(selectedFile));
-            
-            /*AudioFormatReader* audioFormatReader = audioFormatManager.createReaderFor(selectedFile);
-            
-            if(audioFormatReader != nullptr)
-            {
-                fileLoaded = true;
-                
-                std::unique_ptr<AudioFormatReaderSource> tempAudioFormatReaderSource (new AudioFormatReaderSource (audioFormatReader, true));
-            
-                audioTransportSource.setSource(tempAudioFormatReaderSource.get(), 0, nullptr, audioFormatReader->sampleRate, audioFormatReader->numChannels);
-            
-                audioFormatReaderSource.reset(tempAudioFormatReaderSource.release());
-            }
-            else
-            {
-                DBG("No readers for that file");
-            }*/
-            
             table.addNewItem(&selectedFile);
         }
     }
@@ -249,4 +230,13 @@ void MainComponent::changeAudioPosition(int xAxis)
     //audioTransportSource.setPosition(newPosOnFile);
     
     //audioTransportSource.setPosition((waveform.getThumbnailLenght()/100) * disFromStart) * (audioTransportSource.getTotalLength()/100));
+}
+
+void MainComponent::actionListenerCallback(const String &message)
+{
+    if(message == "Selected Row Changed")
+    {
+        File* selectedFile = table.getSelectedFile();
+        waveform.set(new FileInputSource(*selectedFile));
+    }
 }

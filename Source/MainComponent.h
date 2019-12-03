@@ -24,7 +24,8 @@ class MainComponent   : public AudioAppComponent,
                         public MenuBarModel,
                         public Button::Listener,
                         public Slider::Listener,
-                        public Timer
+                        public Timer,
+                        public ActionListener
 {
 public:
     //==============================================================================
@@ -91,5 +92,8 @@ private:
     
     QueueTableModel table;
     int selectedItem;
+    
+    void actionListenerCallback(const String& message) override;
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

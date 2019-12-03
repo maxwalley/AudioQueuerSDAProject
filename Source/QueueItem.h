@@ -26,6 +26,7 @@ public:
     void resized() override;
     
     void setFile(File* file);
+    File* getFile();
     
     void setItemIndex(int index);
     int getItemIndex()const ;

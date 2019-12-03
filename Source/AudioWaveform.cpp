@@ -34,9 +34,13 @@ void AudioWaveform::resized()
 
 }
 
-void AudioWaveform::setSource(InputSource *newSource)
+void AudioWaveform::set(InputSource *newSource)
 {
+    thumbnail.clear();
     thumbnail.setSource(newSource);
+    while (thumbnail.isFullyLoaded() == false)
+    {
+    }
     repaint();
 }
 

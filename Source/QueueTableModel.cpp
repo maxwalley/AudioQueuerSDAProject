@@ -117,9 +117,9 @@ Component* QueueTableModel::refreshComponentForCell(int rowNumber, int columnId,
 
 void QueueTableModel::addNewItem(File* file)
 {
-    int currentNumFiles = items.size();
+    int currentNumFiles = items.size() + 1;
     
-    QueueItem* newItem = new QueueItem(currentNumFiles + 1, file);
+    QueueItem* newItem = new QueueItem(currentNumFiles, file);
     
     items.add(newItem);
 
@@ -129,9 +129,16 @@ void QueueTableModel::addNewItem(File* file)
 void QueueTableModel::selectedRowsChanged(int lastRowSelected)
 {
     transport.setSource(items[lastRowSelected]->audioFormatReaderSource.get(), 0, nullptr, items[lastRowSelected]->getReaderSampleRate(), items[lastRowSelected]->getReaderNumChannels());
+    sendActionMessage("Selected Row Changed");
 }
 
 int QueueTableModel::getSelectedRow()
 {
     return embeddedTable.getSelectedRow();
+}
+
+File* QueueTableModel::getSelectedFile()
+{
+    int selectedRowNum = getSelectedRow();
+    return items[selectedRowNum]->getFile();
 }
