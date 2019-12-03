@@ -78,5 +78,15 @@ private:
     void workOutTime();
     String lengthInTime;
     
+    struct labelTimes
+    {
+        int preColonNum;
+        int postColonNum;
+    }
+    
+    labelTimes playLabelTime;
+    labelTimes stopLabelTime;
+    
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (QueueItem)
 };

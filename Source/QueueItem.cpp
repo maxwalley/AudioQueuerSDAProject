@@ -147,6 +147,9 @@ void QueueItem::labelTextChanged(Label* labelThatHasChanged)
 {
     String newText = labelThatHasChanged->getText();
     int textLength = newText.length();
+    int colonIndex = 0;
+    String preColonStr = "";
+    String postColonStr = "";
     
     for(int i = 0; i < textLength; i++)
     {
@@ -156,5 +159,31 @@ void QueueItem::labelTextChanged(Label* labelThatHasChanged)
         {
             labelThatHasChanged->setText("", dontSendNotification);
         }
+        
+        else if(currentChar.compare(":") == 0)
+        {
+            colonIndex = i;
+        }
+    }
+
+    for(int i = 0; i < colonIndex; i++)
+    {
+        preColonStr += newText[i];
+    }
+    
+    for(int i = colonIndex + 1; i < textLength; i++)
+    {
+        postColonStr += newText[i];
+    }
+    
+    if(labelThatHasChanged == &playTimeLabel)
+    {
+        playLabelTime.preColonNum = preColonStr.getIntValue();
+        playLabelTime.postColonNum = postColonStr.getIntValue();
+    }
+    else if (labelThatHasChanged == &stopTimeLabel)
+    {
+        stopLabelTime.preColonNum = preColonStr.getIntValue();
+        stopLabelTime.postColonNum = postColonStr.getIntValue();
     }
 }
