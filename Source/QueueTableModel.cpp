@@ -142,3 +142,9 @@ File* QueueTableModel::getSelectedFile()
     int selectedRowNum = getSelectedRow();
     return items[selectedRowNum]->getFile();
 }
+
+void QueueTableModel::moveTransportOn()
+{
+    int selectedRowNum = getSelectedRow();
+    embeddedTable.selectRow(selectedRowNum + 1, true, true);
+}

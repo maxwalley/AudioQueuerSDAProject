@@ -37,6 +37,8 @@ public:
     int getSelectedRow();
     File* getSelectedFile();
     
+    void moveTransportOn();
+    
 private:
     
     //Array<QueueItem*> items;

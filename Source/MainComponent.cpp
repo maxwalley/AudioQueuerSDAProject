@@ -74,16 +74,23 @@ void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFil
     //else
     //{
         //audioTransportSource.getNextAudioBlock(bufferToFill);
+    if(table.transport.hasStreamFinished() == false)
+    {
+        table.transport.getNextAudioBlock(bufferToFill);
+    }
+    else
+    {
+        const MessageManagerLock lock;
+        table.moveTransportOn();
+        table.transport.start();
+    }
         
-    table.transport.getNextAudioBlock(bufferToFill);
-        
-        //FFT
-        auto* channelData = bufferToFill.buffer->getReadPointer (0, bufferToFill.startSample);
-        for (int i = 0; i < bufferToFill.numSamples; ++i)
-        {
-            transformImage.fillInputArray(channelData[i]);
-        }
-    //}
+    //FFT
+    auto* channelData = bufferToFill.buffer->getReadPointer (0, bufferToFill.startSample);
+    for (int i = 0; i < bufferToFill.numSamples; ++i)
+    {
+        transformImage.fillInputArray(channelData[i]);
+    }
 }
 
 void MainComponent::releaseResources()
