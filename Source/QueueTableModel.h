@@ -39,6 +39,8 @@ public:
     
     void moveTransportOn();
     
+    void startQueue();
+    
 private:
     
     //Array<QueueItem*> items;

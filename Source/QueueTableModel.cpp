@@ -148,3 +148,21 @@ void QueueTableModel::moveTransportOn()
     int selectedRowNum = getSelectedRow();
     embeddedTable.selectRow(selectedRowNum + 1, true, true);
 }
+
+void QueueTableModel::startQueue()
+{
+    //Checks the array isnt empty
+    if(items.size() > 0)
+    {
+        //Sets transport source to first item in the queue
+        transport.setSource(items[0]->audioFormatReaderSource.get(), 0, nullptr, items[0]->getReaderSampleRate(), items[0]->getReaderNumChannels());
+        
+        //Checks the play label isn't empty
+        if(items[0]->getPlayPoint() != 0)
+        {
+            transport.setPosition(items[0]->getPlayPoint());
+        }
+        
+        transport.start();
+    }
+}

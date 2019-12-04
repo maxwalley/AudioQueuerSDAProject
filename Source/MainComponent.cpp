@@ -176,7 +176,8 @@ void MainComponent::buttonClicked(Button* button)
         {
             table.transport.setPosition(pausePosition);
         }
-        table.transport.start();
+        //table.transport.start();
+        table.startQueue();
         Timer::startTimer(40);
         transformImage.timerTrigger();
         playerGUI.audioPlayed();

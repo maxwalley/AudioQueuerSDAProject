@@ -37,6 +37,12 @@ QueueItem::QueueItem(int idNum, File* file) : itemIndex(idNum)
     playTimeLabel.addListener(this);
     stopTimeLabel.setEditable(false, true, false);
     stopTimeLabel.addListener(this);
+    
+    playLabelTime.preColonNum = 0;
+    playLabelTime.postColonNum = 0;
+    
+    stopLabelTime.preColonNum = 0;
+    stopLabelTime.postColonNum = 0;
 }
 
 QueueItem::~QueueItem()
@@ -186,4 +192,14 @@ void QueueItem::labelTextChanged(Label* labelThatHasChanged)
         stopLabelTime.preColonNum = preColonStr.getIntValue();
         stopLabelTime.postColonNum = postColonStr.getIntValue();
     }
+}
+
+int QueueItem::getPlayPoint()
+{
+    return (playLabelTime.preColonNum * 60) + playLabelTime.postColonNum;
+}
+
+int QueueItem::getStopPoint()
+{
+    return (stopLabelTime.preColonNum * 60) + stopLabelTime.postColonNum;
 }

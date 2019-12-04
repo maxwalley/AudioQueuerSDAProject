@@ -19,6 +19,7 @@ class QueueTableHeader    : public TableHeaderComponent
 {
 public:
     QueueTableHeader();
+    ~QueueTableHeader();
 
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (QueueTableHeader)

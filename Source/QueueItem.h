@@ -51,6 +51,9 @@ public:
     
     double getReaderSampleRate();
     int getReaderNumChannels();
+    
+    int getPlayPoint();
+    int getStopPoint();
 
 private:
     int itemIndex;
@@ -82,7 +85,7 @@ private:
     {
         int preColonNum;
         int postColonNum;
-    }
+    };
     
     labelTimes playLabelTime;
     labelTimes stopLabelTime;
