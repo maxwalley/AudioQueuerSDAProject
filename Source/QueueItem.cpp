@@ -93,7 +93,7 @@ void QueueItem::workOutTime()
     workOutLengthInSecs();
     
     int numMins = floor(lengthInSecs/60);
-    int numSecs = (fmod(lengthInSecs, 60)) * 60;
+    int numSecs = (fmod(lengthInSecs, 60));
     
     std::string numMinsString = std::to_string(numMins);
     std::string numSecsString = std::to_string(numSecs);
