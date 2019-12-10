@@ -69,26 +69,22 @@ void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFil
 {
     if(table.itemPlaying() == true)
     {
-        //Checks if last item finished
-        if(table.transport.hasStreamFinished() == false)
-        {
-            table.transport.getNextAudioBlock(bufferToFill);
-        }
-        else
-        {
-            const MessageManagerLock lock;
-            table.moveTransportOn();
-        }
+        table.transport.getNextAudioBlock(bufferToFill);
     
-        //const MessageManagerLock stopPointLock;
-        //table.stopPointReached();
-        
-        //FFT
-        auto* channelData = bufferToFill.buffer->getReadPointer (0, bufferToFill.startSample);
-        for (int i = 0; i < bufferToFill.numSamples; ++i)
-        {
-            transformImage.fillInputArray(channelData[i]);
-        }
+        const MessageManagerLock stopPointLock;
+        table.stopPointReached();
+    }
+    else
+    {
+        //Clears buffer if nothing is playing
+        bufferToFill.clearActiveBufferRegion();
+    }
+    
+    //FFT
+    auto* channelData = bufferToFill.buffer->getReadPointer (0, bufferToFill.startSample);
+    for (int i = 0; i < bufferToFill.numSamples; ++i)
+    {
+        transformImage.fillInputArray(channelData[i]);
     }
 }
 

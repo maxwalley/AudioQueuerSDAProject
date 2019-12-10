@@ -145,15 +145,22 @@ File* QueueTableModel::getSelectedFile()
 
 void QueueTableModel::moveTransportOn()
 {
+    //Stops transport
     transport.stop();
     
-    int selectedRowNum = getSelectedRow();
-    embeddedTable.selectRow(selectedRowNum + 1, true, true);
+    //Builds on current index
+    currentIndexPlaying++;
     
-    currentIndexPlaying = selectedRowNum - 1;
-    
-    transport.setPosition(items[currentIndexPlaying]->getPlayPoint());
-    transport.start();
+    //Checks to see if we're at the end of the list
+    if(currentIndexPlaying != items.size())
+    {
+        setUpTransport();
+    }
+    else
+    {
+        //Resets current index playing to none
+        currentIndexPlaying = -1;
+    }
 }
 
 void QueueTableModel::startQueue()
@@ -161,16 +168,9 @@ void QueueTableModel::startQueue()
     //Checks the array isnt empty
     if(items.size() > 0)
     {
-        //Sets transport source to first item in the queue
-        transport.setSource(items[0]->audioFormatReaderSource.get(), 0, nullptr, items[0]->getReaderSampleRate(), items[0]->getReaderNumChannels());
-        
-        //Sets current index playing to the first item
         currentIndexPlaying = 0;
         
-        //Sets transport position to where the user has specified (or zero if no specification is given)
-        transport.setPosition(items[0]->getPlayPoint());
-        
-        transport.start();
+        setUpTransport();
     }
 }
 
@@ -197,6 +197,11 @@ void QueueTableModel::stopPointReached()
                 moveTransportOn();
             }
         }
+        
+        else if(transport.hasStreamFinished() == true)
+        {
+            moveTransportOn();
+        }
     }
 }
 
@@ -210,4 +215,11 @@ bool QueueTableModel::itemPlaying() const
     {
         return false;
     }
+}
+
+void QueueTableModel::setUpTransport()
+{
+    transport.setSource(items[currentIndexPlaying]->audioFormatReaderSource.get(), 0, nullptr, items[currentIndexPlaying]->getReaderSampleRate(), items[currentIndexPlaying]->getReaderNumChannels());
+    transport.setPosition(items[currentIndexPlaying]->getPlayPoint());
+    transport.start();
 }
