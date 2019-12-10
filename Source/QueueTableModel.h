@@ -42,7 +42,7 @@ public:
     void startQueue();
     
     int getCurrentStopPoint() const;
-    bool stopPointReached();
+    void stopPointReached();
     
     /**Returns true if an item on the table is playing*/
     bool itemPlaying() const;
@@ -55,6 +55,8 @@ private:
     void paintRowBackground(Graphics& g, int rowNumber, int width, int height, bool rowIsSelected) override;
     void paintCell(Graphics &g, int rowNumber, int columnId, int width, int height, bool rowIsSelected) override;
     Component* refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component* existingComponentToUpdate) override;
+    
+    std::unique_ptr<AudioFormatReaderSource> audioFormatReaderSource;
 
     void selectedRowsChanged(int lastRowSelected) override;
     

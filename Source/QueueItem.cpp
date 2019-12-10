@@ -25,8 +25,6 @@ QueueItem::QueueItem(int idNum, File* file) : itemIndex(idNum)
     {
         std::unique_ptr<AudioFormatReaderSource> tempAudioFormatReaderSource (new AudioFormatReaderSource (reader, true));
     
-        //audioTransportSource.setSource(tempAudioFormatReaderSource.get(), 0, nullptr, reader->sampleRate, reader->numChannels);
-    
         audioFormatReaderSource.reset(tempAudioFormatReaderSource.release());
     }
     
@@ -157,26 +155,31 @@ void QueueItem::labelTextChanged(Label* labelThatHasChanged)
     String preColonStr = "";
     String postColonStr = "";
     
+    //Iterates through new text
     for(int i = 0; i < textLength; i++)
     {
         String currentChar = String::charToString(newText[i]);
         
+        //Checks for anything other than a digit or ':'
         if(currentChar.compare("0") != 0 && currentChar.compare("1") != 0 && currentChar.compare("2") != 0 && currentChar.compare("3") != 0 && currentChar.compare("4") != 0 && currentChar.compare("5") != 0 && currentChar.compare("6") != 0 && currentChar.compare("7") != 0 && currentChar.compare("8") != 0 && currentChar.compare("9") != 0 && currentChar.compare(":") != 0)
         {
             labelThatHasChanged->setText("", dontSendNotification);
         }
         
+        //Looks for ':'
         else if(currentChar.compare(":") == 0)
         {
             colonIndex = i;
         }
     }
 
+    //Puts the mins in this string
     for(int i = 0; i < colonIndex; i++)
     {
         preColonStr += newText[i];
     }
     
+    //Puts the secs in this string
     for(int i = colonIndex + 1; i < textLength; i++)
     {
         postColonStr += newText[i];

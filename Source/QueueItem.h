@@ -46,7 +46,6 @@ public:
     void setSelected(bool isSelected);
     void setLast(bool last);
     
-    //AudioTransportSource audioTransportSource;
     std::unique_ptr<AudioFormatReaderSource> audioFormatReaderSource;
     
     double getReaderSampleRate();

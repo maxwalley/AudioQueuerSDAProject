@@ -145,6 +145,8 @@ File* QueueTableModel::getSelectedFile()
 
 void QueueTableModel::moveTransportOn()
 {
+    transport.stop();
+    
     int selectedRowNum = getSelectedRow();
     embeddedTable.selectRow(selectedRowNum + 1, true, true);
     
@@ -160,16 +162,13 @@ void QueueTableModel::startQueue()
     if(items.size() > 0)
     {
         //Sets transport source to first item in the queue
-        transport.setSource(items[1]->audioFormatReaderSource.get(), 0, nullptr, items[1]->getReaderSampleRate(), items[1]->getReaderNumChannels());
+        transport.setSource(items[0]->audioFormatReaderSource.get(), 0, nullptr, items[0]->getReaderSampleRate(), items[0]->getReaderNumChannels());
         
         //Sets current index playing to the first item
-        currentIndexPlaying = 1;
+        currentIndexPlaying = 0;
         
-        //Checks the play label isn't empty
-        if(items[1]->getPlayPoint() != 0)
-        {
-            transport.setPosition(items[1]->getPlayPoint());
-        }
+        //Sets transport position to where the user has specified (or zero if no specification is given)
+        transport.setPosition(items[0]->getPlayPoint());
         
         transport.start();
     }
@@ -182,23 +181,22 @@ int QueueTableModel::getCurrentStopPoint() const
     {
         return items[currentIndexPlaying]->getStopPoint();
     }
-    else
-    {
-        return -1;
-    }
 }
 
-bool QueueTableModel::stopPointReached()
+void QueueTableModel::stopPointReached()
 {
-    if(transport.getCurrentPosition() >= items[currentIndexPlaying]->getStopPoint())
+    //Checks a file is playing
+    if(currentIndexPlaying != -1)
     {
-        transport.stop();
-        moveTransportOn();
-        return true;
-    }
-    else
-    {
-        return false;
+        //Checks if the user has specified a stop point
+        if (items[currentIndexPlaying]->getStopPoint() != 0)
+        {
+            //Checks if current position is after the stop point
+            if(transport.getCurrentPosition() >= items[currentIndexPlaying]->getStopPoint())
+            {
+                moveTransportOn();
+            }
+        }
     }
 }
 

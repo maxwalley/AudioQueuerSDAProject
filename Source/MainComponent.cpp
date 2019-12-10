@@ -80,7 +80,8 @@ void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFil
             table.moveTransportOn();
         }
     
-        table.stopPointReached();
+        //const MessageManagerLock stopPointLock;
+        //table.stopPointReached();
         
         //FFT
         auto* channelData = bufferToFill.buffer->getReadPointer (0, bufferToFill.startSample);
@@ -104,10 +105,10 @@ void MainComponent::paint (Graphics& g)
 
 void MainComponent::paintOverChildren(Graphics& g)
 {
-    if(table.transport.isPlaying() == true)
+    /*if(table.transport.isPlaying() == true)
     {
         g.drawLine((table.transport.getCurrentPosition()/waveform.getThumbnailLenght()) * 200, 200, ((table.transport.getCurrentPosition()/waveform.getThumbnailLenght()) * 200), 350);
-    }
+    }*/
 }
 
 void MainComponent::resized()
