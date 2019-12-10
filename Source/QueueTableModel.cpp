@@ -12,7 +12,7 @@
 #include "QueueTableModel.h"
 
 //==============================================================================
-QueueTableModel::QueueTableModel()
+QueueTableModel::QueueTableModel() : currentIndexPlaying(-1)
 {
     addAndMakeVisible(embeddedTable);
     
@@ -147,6 +147,11 @@ void QueueTableModel::moveTransportOn()
 {
     int selectedRowNum = getSelectedRow();
     embeddedTable.selectRow(selectedRowNum + 1, true, true);
+    
+    currentIndexPlaying = selectedRowNum - 1;
+    
+    transport.setPosition(items[currentIndexPlaying]->getPlayPoint());
+    transport.start();
 }
 
 void QueueTableModel::startQueue()
@@ -155,14 +160,56 @@ void QueueTableModel::startQueue()
     if(items.size() > 0)
     {
         //Sets transport source to first item in the queue
-        transport.setSource(items[0]->audioFormatReaderSource.get(), 0, nullptr, items[0]->getReaderSampleRate(), items[0]->getReaderNumChannels());
+        transport.setSource(items[1]->audioFormatReaderSource.get(), 0, nullptr, items[1]->getReaderSampleRate(), items[1]->getReaderNumChannels());
+        
+        //Sets current index playing to the first item
+        currentIndexPlaying = 1;
         
         //Checks the play label isn't empty
-        if(items[0]->getPlayPoint() != 0)
+        if(items[1]->getPlayPoint() != 0)
         {
-            transport.setPosition(items[0]->getPlayPoint());
+            transport.setPosition(items[1]->getPlayPoint());
         }
         
         transport.start();
+    }
+}
+
+int QueueTableModel::getCurrentStopPoint() const
+{
+    //Checks a file is playing
+    if(currentIndexPlaying != -1)
+    {
+        return items[currentIndexPlaying]->getStopPoint();
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+bool QueueTableModel::stopPointReached()
+{
+    if(transport.getCurrentPosition() >= items[currentIndexPlaying]->getStopPoint())
+    {
+        transport.stop();
+        moveTransportOn();
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool QueueTableModel::itemPlaying() const
+{
+    if(currentIndexPlaying != -1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }

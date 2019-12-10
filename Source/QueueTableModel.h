@@ -19,7 +19,7 @@
 */
 class QueueTableModel    : public TableListBoxModel,
                            public Component,
-                            public ActionBroadcaster
+                           public ActionBroadcaster
 {
 public:
     QueueTableModel();
@@ -41,6 +41,12 @@ public:
     
     void startQueue();
     
+    int getCurrentStopPoint() const;
+    bool stopPointReached();
+    
+    /**Returns true if an item on the table is playing*/
+    bool itemPlaying() const;
+    
 private:
     
     //Array<QueueItem*> items;
@@ -51,6 +57,8 @@ private:
     Component* refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component* existingComponentToUpdate) override;
 
     void selectedRowsChanged(int lastRowSelected) override;
+    
+    int currentIndexPlaying;
     
     QueueTableHeader header;
     

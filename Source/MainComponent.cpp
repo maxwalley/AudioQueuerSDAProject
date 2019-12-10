@@ -67,29 +67,27 @@ void MainComponent::prepareToPlay (int samplesPerBlockExpected, double sampleRat
 
 void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
 {
-    //if(audioFormatReaderSource.get() == nullptr)
-    //{
-        //bufferToFill.clearActiveBufferRegion();
-    //}
-    //else
-    //{
-        //audioTransportSource.getNextAudioBlock(bufferToFill);
-    if(table.transport.hasStreamFinished() == false)
+    if(table.itemPlaying() == true)
     {
-        table.transport.getNextAudioBlock(bufferToFill);
-    }
-    else
-    {
-        const MessageManagerLock lock;
-        table.moveTransportOn();
-        table.transport.start();
-    }
+        //Checks if last item finished
+        if(table.transport.hasStreamFinished() == false)
+        {
+            table.transport.getNextAudioBlock(bufferToFill);
+        }
+        else
+        {
+            const MessageManagerLock lock;
+            table.moveTransportOn();
+        }
+    
+        table.stopPointReached();
         
-    //FFT
-    auto* channelData = bufferToFill.buffer->getReadPointer (0, bufferToFill.startSample);
-    for (int i = 0; i < bufferToFill.numSamples; ++i)
-    {
-        transformImage.fillInputArray(channelData[i]);
+        //FFT
+        auto* channelData = bufferToFill.buffer->getReadPointer (0, bufferToFill.startSample);
+        for (int i = 0; i < bufferToFill.numSamples; ++i)
+        {
+            transformImage.fillInputArray(channelData[i]);
+        }
     }
 }
 
@@ -178,7 +176,7 @@ void MainComponent::buttonClicked(Button* button)
         }
         //table.transport.start();
         table.startQueue();
-        Timer::startTimer(40);
+        Timer::startTimer(100);
         transformImage.timerTrigger();
         playerGUI.audioPlayed();
         transportState = playing;
