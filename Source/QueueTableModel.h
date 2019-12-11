@@ -19,7 +19,8 @@
 */
 class QueueTableModel    : public TableListBoxModel,
                            public Component,
-                           public ActionBroadcaster
+                           public ActionBroadcaster,
+                           public ActionListener
 {
 public:
     QueueTableModel();
@@ -62,7 +63,9 @@ private:
     
     int currentIndexPlaying;
     
-    void setUpTransport();
+    void setUpTransport(int indexToPlay);
+    
+    void actionListenerCallback(const String &message) override;
     
     QueueTableHeader header;
     

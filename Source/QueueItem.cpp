@@ -31,6 +31,8 @@ QueueItem::QueueItem(int idNum, File* file) : itemIndex(idNum)
     lengthInSamples = reader->lengthInSamples;
     sampleRate = reader->sampleRate;
     
+    playButton.addListener(this);
+    
     playTimeLabel.setEditable(false, true, false);
     playTimeLabel.addListener(this);
     stopTimeLabel.setEditable(false, true, false);
@@ -194,6 +196,18 @@ void QueueItem::labelTextChanged(Label* labelThatHasChanged)
     {
         stopLabelTime.preColonNum = preColonStr.getIntValue();
         stopLabelTime.postColonNum = postColonStr.getIntValue();
+    }
+}
+
+void QueueItem::buttonClicked(Button* button)
+{
+    //Checks its the play button thats been pressed
+    if(button == &playButton)
+    {
+        //Puts the item index into a string
+        String indexNumString(itemIndex);
+        
+        sendActionMessage("Play button pressed on index:" + indexNumString);
     }
 }
 

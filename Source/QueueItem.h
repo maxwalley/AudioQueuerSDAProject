@@ -17,7 +17,9 @@
 /*
 */
 class QueueItem : public Component,
-                  public Label::Listener
+                  public Label::Listener,
+                  public Button::Listener,
+                  public ActionBroadcaster
 {
 public:
     QueueItem(int idNum, File* file);
@@ -64,6 +66,7 @@ private:
     void labelTextChanged(Label* labelThatHasChanged) override;
     
     PlayButton playButton;
+    void buttonClicked(Button* button) override;
     
     AudioFormatReader* reader;
     int64_t lengthInSamples;

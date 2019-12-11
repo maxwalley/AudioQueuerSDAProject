@@ -64,7 +64,7 @@ void QueueTableModel::paintCell(Graphics &g, int rowNumber, int columnId, int wi
     
     if(columnId == 1)
     {
-        stringToDraw = String(items[rowNumber]->getItemIndex());
+        stringToDraw = String(items[rowNumber]->getItemIndex() + 1);
     }
     
     else if(columnId == 2)
@@ -117,11 +117,14 @@ Component* QueueTableModel::refreshComponentForCell(int rowNumber, int columnId,
 
 void QueueTableModel::addNewItem(File* file)
 {
-    int currentNumFiles = items.size() + 1;
+    int nextIndex = items.size();
     
-    QueueItem* newItem = new QueueItem(currentNumFiles, file);
+    QueueItem* newItem = new QueueItem(nextIndex, file);
     
     items.add(newItem);
+    
+    //Adds this as an action listener for the new item
+    items[nextIndex]->addActionListener(this);
 
     embeddedTable.updateContent();
 }
@@ -154,7 +157,7 @@ void QueueTableModel::moveTransportOn()
     //Checks to see if we're at the end of the list
     if(currentIndexPlaying != items.size())
     {
-        setUpTransport();
+        setUpTransport(currentIndexPlaying);
     }
     else
     {
@@ -169,8 +172,7 @@ void QueueTableModel::startQueue()
     if(items.size() > 0)
     {
         currentIndexPlaying = 0;
-        
-        setUpTransport();
+        setUpTransport(currentIndexPlaying);
     }
 }
 
@@ -217,9 +219,26 @@ bool QueueTableModel::itemPlaying() const
     }
 }
 
-void QueueTableModel::setUpTransport()
+void QueueTableModel::setUpTransport(int indexToPlay)
 {
-    transport.setSource(items[currentIndexPlaying]->audioFormatReaderSource.get(), 0, nullptr, items[currentIndexPlaying]->getReaderSampleRate(), items[currentIndexPlaying]->getReaderNumChannels());
-    transport.setPosition(items[currentIndexPlaying]->getPlayPoint());
+    if(transport.isPlaying() == true)
+    {
+        transport.stop();
+    }
+    
+    transport.setSource(items[indexToPlay]->audioFormatReaderSource.get(), 0, nullptr, items[indexToPlay]->getReaderSampleRate(), items[indexToPlay]->getReaderNumChannels());
+    transport.setPosition(items[indexToPlay]->getPlayPoint());
     transport.start();
+}
+
+void QueueTableModel::actionListenerCallback(const String &message)
+{
+    //Checks message is from a play button
+    if(message.startsWith("Play button pressed on index:") == true)
+    {
+        //Takes last character of the message and finds out what number it is. Then uses this number as the index to play
+        String indexNumString = message.getLastCharacters(1);
+        currentIndexPlaying = indexNumString.getIntValue();
+        setUpTransport(currentIndexPlaying);
+    }
 }
