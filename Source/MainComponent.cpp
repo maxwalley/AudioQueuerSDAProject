@@ -245,4 +245,11 @@ void MainComponent::actionListenerCallback(const String &message)
         File* currentFile = table.getCurrentPlayingFile();
         waveform.set(new FileInputSource(*currentFile));
     }
+    
+    //Called if a new row is selected
+    else if(message == "Selected Item Changed")
+    {
+        //Sends the data from the selected row to the info box
+        infoBox.changeData(table.getCurrentSelectedDataStruct());
+    }
 }

@@ -18,12 +18,15 @@
 class InfoSection    : public Component
 {
 public:
-    InfoSection(String description, String data);
+    InfoSection(String description);
     ~InfoSection();
 
     void paint (Graphics&) override;
     void resized() override;
 
+    /**Sets the data of the section*/
+    void setData(String data);
+    
 private:
     /**Holds the description of the data of the section*/
     Label descriptorLabel;

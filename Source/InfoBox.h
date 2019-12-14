@@ -11,6 +11,8 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "ItemDataStruct.h"
+#include "InfoSection.h"
 
 //==============================================================================
 /*
@@ -23,9 +25,17 @@ public:
 
     void paint (Graphics&) override;
     void resized() override;
+    
+    /**Changes the data that is shown in the info box*/
+    void changeData(ItemInfo currentDataStruct);
 
 private:
-    
+    InfoSection fileNameSection;
+    InfoSection filePathSection;
+    InfoSection fileSizeSection;
+    InfoSection fileLengthSection;
+    InfoSection fileSampleRateSection;
+    InfoSection fileNumChannelsSection;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (InfoBox)
 };

@@ -132,7 +132,10 @@ void QueueTableModel::addNewItem(File* file)
 void QueueTableModel::selectedRowsChanged(int lastRowSelected)
 {
     //Sets current index selected to the selected row
-    currentIndexSelected = lastRowSelected - 1;
+    currentIndexSelected = lastRowSelected;
+    
+    //Sends message to main component to trigger infoBox to change
+    sendActionMessage("Selected Item Changed");
 }
 
 int QueueTableModel::getSelectedRow()

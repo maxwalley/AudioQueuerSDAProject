@@ -15,15 +15,15 @@
 QueueItem::QueueItem(int idNum, File* file)
 {
     itemData.itemIndex = idNum;
-    itemData.currentFile = file;
-    itemData.size = itemData.currentFile->getSize();
+    itemData.file = file;
+    itemData.size = itemData.file->getSize();
     
     //currentFile = File(*file);
     //size = currentFile.getSize();
     
     AudioFormatManager tempManager;
     tempManager.registerBasicFormats();
-    reader = tempManager.createReaderFor(*itemData.currentFile);
+    reader = tempManager.createReaderFor(*itemData.file);
     
     if(reader != nullptr)
     {
@@ -34,6 +34,7 @@ QueueItem::QueueItem(int idNum, File* file)
     
     itemData.lengthInSamples = reader->lengthInSamples;
     itemData.sampleRate = reader->sampleRate;
+    itemData.numChannels = reader->numChannels;
     
     playButton.addListener(this);
     
@@ -66,7 +67,7 @@ void QueueItem::resized()
 
 File* QueueItem::getFile()
 {
-    return itemData.currentFile;
+    return itemData.file;
 }
 
 int QueueItem::getItemIndex() const
@@ -81,7 +82,7 @@ void QueueItem::setItemIndex(int index)
 
 String QueueItem::getFileName()
 {
-    return itemData.currentFile->getFileName();
+    return itemData.file->getFileName();
 }
 
 int64_t QueueItem::getFileSize()

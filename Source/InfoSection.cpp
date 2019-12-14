@@ -12,7 +12,7 @@
 #include "InfoSection.h"
 
 //==============================================================================
-InfoSection::InfoSection(String description, String data)
+InfoSection::InfoSection(String description)
 {
     setSize(200, 50);
     
@@ -23,7 +23,7 @@ InfoSection::InfoSection(String description, String data)
     dataLabel.setJustificationType(Justification::centred);
     
     descriptorLabel.setText(description, dontSendNotification);
-    dataLabel.setText(data, dontSendNotification);
+    dataLabel.setText("", dontSendNotification);
 }
 
 InfoSection::~InfoSection()
@@ -43,4 +43,9 @@ void InfoSection::resized()
 {
     descriptorLabel.setBounds(0, 10, 100, 30);
     dataLabel.setBounds(100, 10, 100, 30);
+}
+
+void InfoSection::setData(String data)
+{
+    dataLabel.setText(data, dontSendNotification);
 }

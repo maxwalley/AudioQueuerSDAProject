@@ -13,7 +13,7 @@
 struct ItemInfo
 {
     int itemIndex;
-    File* currentFile;
+    File* file;
     int64_t size;
     int64_t lengthInSamples;
     double sampleRate;
