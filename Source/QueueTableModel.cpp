@@ -131,8 +131,7 @@ void QueueTableModel::addNewItem(File* file)
 
 void QueueTableModel::selectedRowsChanged(int lastRowSelected)
 {
-    transport.setSource(items[lastRowSelected]->audioFormatReaderSource.get(), 0, nullptr, items[lastRowSelected]->getReaderSampleRate(), items[lastRowSelected]->getReaderNumChannels());
-    sendActionMessage("Selected Row Changed");
+    
 }
 
 int QueueTableModel::getSelectedRow()
@@ -228,6 +227,10 @@ void QueueTableModel::setUpTransport(int indexToPlay)
     
     transport.setSource(items[indexToPlay]->audioFormatReaderSource.get(), 0, nullptr, items[indexToPlay]->getReaderSampleRate(), items[indexToPlay]->getReaderNumChannels());
     transport.setPosition(items[indexToPlay]->getPlayPoint());
+    
+    //Sends message to main component so thumbnail can be changed
+    sendActionMessage("Playing Item Changed");
+    
     transport.start();
 }
 
@@ -241,4 +244,9 @@ void QueueTableModel::actionListenerCallback(const String &message)
         currentIndexPlaying = indexNumString.getIntValue();
         setUpTransport(currentIndexPlaying);
     }
+}
+
+File* QueueTableModel::currentPlayingFile() const
+{
+    return items[currentIndexPlaying]->getFile();
 }

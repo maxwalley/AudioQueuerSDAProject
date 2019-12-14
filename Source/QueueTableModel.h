@@ -48,6 +48,9 @@ public:
     /**Returns true if an item on the table is playing*/
     bool itemPlaying() const;
     
+    /**Returns the current file that is playing*/
+    File* currentPlayingFile() const;
+    
 private:
     
     //Array<QueueItem*> items;

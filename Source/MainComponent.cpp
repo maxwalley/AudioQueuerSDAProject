@@ -171,7 +171,6 @@ void MainComponent::buttonClicked(Button* button)
         {
             table.transport.setPosition(pausePosition);
         }
-        //table.transport.start();
         table.startQueue();
         Timer::startTimer(100);
         transformImage.timerTrigger();
@@ -237,9 +236,10 @@ void MainComponent::changeAudioPosition(int xAxis)
 
 void MainComponent::actionListenerCallback(const String &message)
 {
-    if(message == "Selected Row Changed")
+    if(message == "Playing Item Changed")
     {
-        File* selectedFile = table.getSelectedFile();
-        waveform.set(new FileInputSource(*selectedFile));
+        //Retrieves the current file that is playing and sends it to the waveform
+        File* currentFile = table.currentPlayingFile();
+        waveform.set(new FileInputSource(*currentFile));
     }
 }
