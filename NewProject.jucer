@@ -2,6 +2,8 @@
 
 <JUCERPROJECT id="mGP3HA" name="NewProject" projectType="guiapp" jucerVersion="5.4.5">
   <MAINGROUP id="utjANr" name="NewProject">
+    <FILE id="PxDwuW" name="ItemDataStruct.h" compile="0" resource="0"
+          file="Source/ItemDataStruct.h"/>
     <FILE id="W6g8Fd" name="QueueItem.cpp" compile="1" resource="0" file="Source/QueueItem.cpp"/>
     <FILE id="PVGxyB" name="QueueItem.h" compile="0" resource="0" file="Source/QueueItem.h"/>
     <FILE id="JaY4V0" name="PlayButton.cpp" compile="1" resource="0" file="Source/PlayButton.cpp"/>
@@ -15,6 +17,10 @@
     <FILE id="x9t7jK" name="QueueTableModel.h" compile="0" resource="0"
           file="Source/QueueTableModel.h"/>
     <GROUP id="{D0169949-7A6A-ECE1-224E-BDEBA828A34A}" name="GUI">
+      <FILE id="HvLMAh" name="InfoSection.h" compile="0" resource="0" file="Source/InfoSection.h"/>
+      <FILE id="H5RSW7" name="InfoSection.cpp" compile="1" resource="0" file="Source/InfoSection.cpp"/>
+      <FILE id="cPNy6S" name="InfoBox.h" compile="0" resource="0" file="Source/InfoBox.h"/>
+      <FILE id="zqFUZ8" name="InfoBox.cpp" compile="1" resource="0" file="Source/InfoBox.cpp"/>
       <GROUP id="{725DCBBF-D78B-B684-A3EE-A47707B2AEDF}" name="Audio">
         <FILE id="zHjYdY" name="AudioPlayerGUI.cpp" compile="1" resource="0"
               file="Source/AudioPlayerGUI.cpp"/>

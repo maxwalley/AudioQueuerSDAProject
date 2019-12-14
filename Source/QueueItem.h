@@ -12,6 +12,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PlayButton.h"
+#include "ItemDataStruct.h"
 
 //==============================================================================
 /*
@@ -50,16 +51,20 @@ public:
     
     std::unique_ptr<AudioFormatReaderSource> audioFormatReaderSource;
     
-    double getReaderSampleRate();
-    int getReaderNumChannels();
+    double getSampleRate();
+    int getNumChannels();
     
     int getPlayPoint();
     int getStopPoint();
+    
+    ItemInfo getItemData() const;
 
 private:
-    int itemIndex;
+    /*int itemIndex;
     File currentFile;
-    int64_t size;
+    int64_t size;*/
+    
+    ItemInfo itemData;
     
     Label playTimeLabel;
     Label stopTimeLabel;
@@ -69,19 +74,14 @@ private:
     void buttonClicked(Button* button) override;
     
     AudioFormatReader* reader;
-    int64_t lengthInSamples;
+    /*int64_t lengthInSamples;
     double sampleRate;
-    int numChannels;
-    
-    //std::unique_ptr<AudioFormatReaderSource> audioFormatReaderSource;
-    
-    bool selected;
-    bool lastId;
+    int numChannels;*/
     
     void workOutLengthInSecs();
-    int lengthInSecs;
+    //int lengthInSecs;
     void workOutTime();
-    String lengthInTime;
+    //String lengthInTime;
     
     struct labelTimes
     {

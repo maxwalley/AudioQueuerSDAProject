@@ -12,14 +12,18 @@
 #include "QueueItem.h"
 
 //==============================================================================
-QueueItem::QueueItem(int idNum, File* file) : itemIndex(idNum)
+QueueItem::QueueItem(int idNum, File* file)
 {
-    currentFile = File(*file);
-    size = currentFile.getSize();
+    itemData.itemIndex = idNum;
+    itemData.currentFile = file;
+    itemData.size = itemData.currentFile->getSize();
+    
+    //currentFile = File(*file);
+    //size = currentFile.getSize();
     
     AudioFormatManager tempManager;
     tempManager.registerBasicFormats();
-    reader = tempManager.createReaderFor(currentFile);
+    reader = tempManager.createReaderFor(*itemData.currentFile);
     
     if(reader != nullptr)
     {
@@ -28,8 +32,8 @@ QueueItem::QueueItem(int idNum, File* file) : itemIndex(idNum)
         audioFormatReaderSource.reset(tempAudioFormatReaderSource.release());
     }
     
-    lengthInSamples = reader->lengthInSamples;
-    sampleRate = reader->sampleRate;
+    itemData.lengthInSamples = reader->lengthInSamples;
+    itemData.sampleRate = reader->sampleRate;
     
     playButton.addListener(this);
     
@@ -62,51 +66,51 @@ void QueueItem::resized()
 
 File* QueueItem::getFile()
 {
-    return &currentFile;
+    return itemData.currentFile;
 }
 
 int QueueItem::getItemIndex() const
 {
-    return itemIndex;
+    return itemData.itemIndex;
 }
 
 void QueueItem::setItemIndex(int index)
 {
-    itemIndex = index;
+    itemData.itemIndex = index;
 }
 
 String QueueItem::getFileName()
 {
-    return currentFile.getFileName();
+    return itemData.currentFile->getFileName();
 }
 
 int64_t QueueItem::getFileSize()
 {
-    return size;
+    return itemData.size;
 }
 
 void QueueItem::workOutLengthInSecs()
 {
-    lengthInSecs = floor(lengthInSamples/sampleRate);
+    itemData.lengthInSecs = floor(itemData.lengthInSamples/itemData.sampleRate);
 }
 
 void QueueItem::workOutTime()
 {
     workOutLengthInSecs();
     
-    int numMins = floor(lengthInSecs/60);
-    int numSecs = (fmod(lengthInSecs, 60));
+    int numMins = floor(itemData.lengthInSecs/60);
+    int numSecs = (fmod(itemData.lengthInSecs, 60));
     
     std::string numMinsString = std::to_string(numMins);
     std::string numSecsString = std::to_string(numSecs);
     
-    lengthInTime = numMinsString + ":" + numSecsString;
+    itemData.lengthInTime = numMinsString + ":" + numSecsString;
 }
 
 String QueueItem::getLengthInTime()
 {
     workOutTime();
-    return lengthInTime;
+    return itemData.lengthInTime;
 }
 
 Label* QueueItem::getPlayTimeLabel()
@@ -124,29 +128,14 @@ PlayButton* QueueItem::getPlayButton()
     return &playButton;
 }
 
-void QueueItem::setLast(bool last)
+double QueueItem::getSampleRate()
 {
-    lastId = last;
-    if(last == false)
-    {
-        repaint();
-    }
+    return itemData.sampleRate;
 }
 
-void QueueItem::setSelected(bool isSelected)
+int QueueItem::getNumChannels()
 {
-    selected = isSelected;
-    repaint();
-}
-
-double QueueItem::getReaderSampleRate()
-{
-    return reader->sampleRate;
-}
-
-int QueueItem::getReaderNumChannels()
-{
-    return reader->numChannels;
+    return itemData.numChannels;
 }
 
 void QueueItem::labelTextChanged(Label* labelThatHasChanged)
@@ -205,7 +194,7 @@ void QueueItem::buttonClicked(Button* button)
     if(button == &playButton)
     {
         //Puts the item index into a string
-        String indexNumString(itemIndex);
+        String indexNumString(itemData.itemIndex);
         
         sendActionMessage("Play button pressed on index:" + indexNumString);
     }
@@ -219,4 +208,9 @@ int QueueItem::getPlayPoint()
 int QueueItem::getStopPoint()
 {
     return (stopLabelTime.preColonNum * 60) + stopLabelTime.postColonNum;
+}
+
+ItemInfo QueueItem::getItemData() const
+{
+    return itemData;
 }

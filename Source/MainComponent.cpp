@@ -52,6 +52,8 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     table.addActionListener(this);
     
     addAndMakeVisible(transformImage);
+    
+    addAndMakeVisible(infoBox);
 }
 
 MainComponent::~MainComponent()
@@ -113,7 +115,8 @@ void MainComponent::resized()
     playerGUI.setBounds(0, 0, 200, 150);
     transformImage.setBounds(0, 375, 256, 256);
     waveform.setBounds(0, 200, 200, 150);
-    table.setBounds(300, 0, 500, 300);
+    table.setBounds(300, 50, 500, 300);
+    infoBox.setBounds(850, 50, 200, 500);
 }
 
 StringArray MainComponent::getMenuBarNames()
@@ -239,7 +242,7 @@ void MainComponent::actionListenerCallback(const String &message)
     if(message == "Playing Item Changed")
     {
         //Retrieves the current file that is playing and sends it to the waveform
-        File* currentFile = table.currentPlayingFile();
+        File* currentFile = table.getCurrentPlayingFile();
         waveform.set(new FileInputSource(*currentFile));
     }
 }

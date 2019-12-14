@@ -13,6 +13,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "QueueItem.h"
 #include "QueueTableHeader.h"
+#include "ItemDataStruct.h"
 
 //==============================================================================
 /*
@@ -36,7 +37,6 @@ public:
     void addNewItem(File* file);
     
     int getSelectedRow();
-    File* getSelectedFile();
     
     void moveTransportOn();
     
@@ -45,15 +45,18 @@ public:
     int getCurrentStopPoint() const;
     void stopPointReached();
     
-    /**Returns true if an item on the table is playing*/
+    File* getCurrentPlayingFile() const;
+    
+    /**Returns true if and item is playing, false if not*/
     bool itemPlaying() const;
     
-    /**Returns the current file that is playing*/
-    File* currentPlayingFile() const;
+    /**Returns the info of the current playing item in a struct*/
+    ItemInfo getCurrentPlayingDataStruct() const;
     
-private:
+    /**Returns the info of the current playing item in a struct*/
+    ItemInfo getCurrentSelectedDataStruct() const;
     
-    //Array<QueueItem*> items;
+    private:
     
     int getNumRows() override;
     void paintRowBackground(Graphics& g, int rowNumber, int width, int height, bool rowIsSelected) override;
@@ -65,6 +68,7 @@ private:
     void selectedRowsChanged(int lastRowSelected) override;
     
     int currentIndexPlaying;
+    int currentIndexSelected;
     
     void setUpTransport(int indexToPlay);
     

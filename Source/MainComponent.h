@@ -14,6 +14,7 @@
 #include "AudioWaveform.h"
 #include "FFT.h"
 #include "AudioPlayerGUI.h"
+#include "InfoBox.h"
 
 //==============================================================================
 /*
@@ -94,6 +95,8 @@ private:
     int selectedItem;
     
     void actionListenerCallback(const String& message) override;
+    
+    InfoBox infoBox;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

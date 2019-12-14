@@ -12,7 +12,7 @@
 #include "QueueTableModel.h"
 
 //==============================================================================
-QueueTableModel::QueueTableModel() : currentIndexPlaying(-1)
+QueueTableModel::QueueTableModel() : currentIndexPlaying(-1), currentIndexSelected(-1)
 {
     addAndMakeVisible(embeddedTable);
     
@@ -131,18 +131,13 @@ void QueueTableModel::addNewItem(File* file)
 
 void QueueTableModel::selectedRowsChanged(int lastRowSelected)
 {
-    
+    //Sets current index selected to the selected row
+    currentIndexSelected = lastRowSelected - 1;
 }
 
 int QueueTableModel::getSelectedRow()
 {
     return embeddedTable.getSelectedRow();
-}
-
-File* QueueTableModel::getSelectedFile()
-{
-    int selectedRowNum = getSelectedRow();
-    return items[selectedRowNum]->getFile();
 }
 
 void QueueTableModel::moveTransportOn()
@@ -225,7 +220,7 @@ void QueueTableModel::setUpTransport(int indexToPlay)
         transport.stop();
     }
     
-    transport.setSource(items[indexToPlay]->audioFormatReaderSource.get(), 0, nullptr, items[indexToPlay]->getReaderSampleRate(), items[indexToPlay]->getReaderNumChannels());
+    transport.setSource(items[indexToPlay]->audioFormatReaderSource.get(), 0, nullptr, items[indexToPlay]->getSampleRate(), items[indexToPlay]->getNumChannels());
     transport.setPosition(items[indexToPlay]->getPlayPoint());
     
     //Sends message to main component so thumbnail can be changed
@@ -246,7 +241,17 @@ void QueueTableModel::actionListenerCallback(const String &message)
     }
 }
 
-File* QueueTableModel::currentPlayingFile() const
+File* QueueTableModel::getCurrentPlayingFile() const
 {
     return items[currentIndexPlaying]->getFile();
+}
+
+ItemInfo QueueTableModel::getCurrentPlayingDataStruct() const
+{
+    return items[currentIndexPlaying]->getItemData();
+}
+
+ItemInfo QueueTableModel::getCurrentSelectedDataStruct() const
+{
+    return items[currentIndexSelected]->getItemData();
 }
