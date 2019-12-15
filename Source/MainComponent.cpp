@@ -9,7 +9,7 @@
 #include "MainComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), timerCount(1), waveform(audioFormatManager), selectedItem(-2)
+MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), timerCount(1), waveform(audioFormatManager), selectedItem(-2), infoBox(audioFormatManager)
 {
     setSize (1100, 800);
 
@@ -223,7 +223,7 @@ void MainComponent::mouseDown(const MouseEvent &event)
 
 void MainComponent::changeAudioPosition(int xAxis)
 {
-    int disFromStart = waveform.getThumbnailLenght() - xAxis;
+    int disFromStart = waveform.getThumbnailLength() - xAxis;
     
     //This is wrong for some reason
     double percentOfWaveform = waveform.getThumbnailLength()/100;

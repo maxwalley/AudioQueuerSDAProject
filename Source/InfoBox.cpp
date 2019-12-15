@@ -12,7 +12,7 @@
 #include "InfoBox.h"
 
 //==============================================================================
-InfoBox::InfoBox() : fileNameSection("File Name"), filePathSection("File Path"), fileSizeSection("File Size (Bytes)"), fileLengthSection("File Length"), fileSampleRateSection("Sample Rate"), fileNumChannelsSection("Number of Channels")
+InfoBox::InfoBox(AudioFormatManager &manager) : fileNameSection("File Name"), filePathSection("File Path"), fileSizeSection("File Size (Bytes)"), fileLengthSection("File Length"), fileSampleRateSection("Sample Rate"), fileNumChannelsSection("Number of Channels"), waveform(manager)
 {
     setSize(200, 500);
     
@@ -22,6 +22,8 @@ InfoBox::InfoBox() : fileNameSection("File Name"), filePathSection("File Path"),
     addAndMakeVisible(fileLengthSection);
     addAndMakeVisible(fileSampleRateSection);
     addAndMakeVisible(fileNumChannelsSection);
+    
+    addAndMakeVisible(waveform);
 }
 
 InfoBox::~InfoBox()
@@ -41,6 +43,8 @@ void InfoBox::resized()
     fileLengthSection.setBounds(0, 150, 200, 50);
     fileSampleRateSection.setBounds(0, 200, 200, 50);
     fileNumChannelsSection.setBounds(0, 250, 200, 50);
+    
+    waveform.setBounds(0, 350, 200, 150);
 }
 
 void InfoBox::changeData(ItemInfo currentDataStruct)
@@ -52,4 +56,6 @@ void InfoBox::changeData(ItemInfo currentDataStruct)
     fileSampleRateSection.setData(String(currentDataStruct.sampleRate));
     fileNumChannelsSection.setData(String(currentDataStruct.numChannels));
     repaint();
+    
+    waveform.set(new FileInputSource(*currentDataStruct.file));
 }

@@ -13,6 +13,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "ItemDataStruct.h"
 #include "InfoSection.h"
+#include "AudioWaveform.h"
 
 //==============================================================================
 /*
@@ -20,7 +21,7 @@
 class InfoBox    : public Component
 {
 public:
-    InfoBox();
+    InfoBox(AudioFormatManager &manager);
     ~InfoBox();
 
     void paintOverChildren (Graphics&) override;
@@ -36,6 +37,8 @@ private:
     InfoSection fileLengthSection;
     InfoSection fileSampleRateSection;
     InfoSection fileNumChannelsSection;
+    
+    AudioWaveform waveform;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (InfoBox)
 };
