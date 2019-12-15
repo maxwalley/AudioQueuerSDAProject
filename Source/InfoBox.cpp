@@ -16,6 +16,11 @@ InfoBox::InfoBox(AudioFormatManager &manager) : fileNameSection("File Name"), fi
 {
     setSize(200, 500);
     
+    addAndMakeVisible(headerLabel);
+    headerLabel.setText("Selected Item Info", dontSendNotification);
+    headerLabel.setJustificationType(Justification::centred);
+    headerLabel.setFont(Font(20));
+    
     addAndMakeVisible(fileNameSection);
     addAndMakeVisible(filePathSection);
     addAndMakeVisible(fileSizeSection);
@@ -37,12 +42,14 @@ void InfoBox::paintOverChildren (Graphics& g)
 
 void InfoBox::resized()
 {
-    fileNameSection.setBounds(0, 0, 200, 50);
-    filePathSection.setBounds(0, 50, 200, 50);
-    fileSizeSection.setBounds(0, 100, 200, 50);
-    fileLengthSection.setBounds(0, 150, 200, 50);
-    fileSampleRateSection.setBounds(0, 200, 200, 50);
-    fileNumChannelsSection.setBounds(0, 250, 200, 50);
+    headerLabel.setBounds(0, 0, 200, 45);
+    
+    fileNameSection.setBounds(0, 50, 200, 50);
+    filePathSection.setBounds(0, 100, 200, 50);
+    fileSizeSection.setBounds(0, 150, 200, 50);
+    fileLengthSection.setBounds(0, 200, 200, 50);
+    fileSampleRateSection.setBounds(0, 250, 200, 50);
+    fileNumChannelsSection.setBounds(0, 300, 200, 50);
     
     waveform.setBounds(0, 350, 200, 150);
 }

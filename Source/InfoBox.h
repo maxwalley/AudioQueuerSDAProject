@@ -31,6 +31,8 @@ public:
     void changeData(ItemInfo currentDataStruct);
 
 private:
+    Label headerLabel;
+    
     InfoSection fileNameSection;
     InfoSection filePathSection;
     InfoSection fileSizeSection;
