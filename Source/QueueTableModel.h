@@ -56,6 +56,9 @@ public:
     /**Returns the info of the current playing item in a struct*/
     ItemInfo getCurrentSelectedDataStruct() const;
     
+    /**Sets the transports position*/
+    void setTransportPosition(double newPosition);
+    
     private:
     
     int getNumRows() override;

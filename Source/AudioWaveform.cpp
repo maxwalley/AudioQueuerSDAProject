@@ -27,6 +27,8 @@ void AudioWaveform::paint (Graphics& g)
     g.fillRect(thumbnailArea);
     g.setColour(Colours::black);
     thumbnail.drawChannels(g, thumbnailArea, 0, thumbnail.getTotalLength(), 1.0);
+    
+    
 }
 
 void AudioWaveform::resized()

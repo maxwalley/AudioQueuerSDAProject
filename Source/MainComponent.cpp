@@ -103,10 +103,10 @@ void MainComponent::paint (Graphics& g)
 
 void MainComponent::paintOverChildren(Graphics& g)
 {
-    /*if(table.transport.isPlaying() == true)
+    if(table.transport.isPlaying() == true)
     {
-        g.drawLine((table.transport.getCurrentPosition()/waveform.getThumbnailLenght()) * 200, 200, ((table.transport.getCurrentPosition()/waveform.getThumbnailLenght()) * 200), 350);
-    }*/
+        g.drawLine((table.transport.getCurrentPosition()/waveform.getThumbnailLength()) * 200, 200, ((table.transport.getCurrentPosition()/waveform.getThumbnailLength()) * 200), 350);
+    }
 }
 
 void MainComponent::resized()
@@ -209,6 +209,7 @@ void MainComponent::sliderValueChanged(Slider* slider)
 void MainComponent::timerCallback()
 {
     playerGUI.changeTime(table.transport.getCurrentPosition());
+    repaint(0, 200, 200, 150);
 }
 
 void MainComponent::mouseDown(const MouseEvent &event)
@@ -223,18 +224,14 @@ void MainComponent::mouseDown(const MouseEvent &event)
 
 void MainComponent::changeAudioPosition(int xAxis)
 {
-    int disFromStart = waveform.getThumbnailLength() - xAxis;
+    //Finds the percentage across the waveform component
+    double percentageAcrossWaveform = (double(xAxis)/waveform.getWidth()) * 100.0;
     
-    //This is wrong for some reason
-    double percentOfWaveform = waveform.getThumbnailLength()/100;
-    double newClickPosOnWaveform = percentOfWaveform * disFromStart;
-    //double percentOfFile = audioTransportSource.getTotalLength()/100;
+    //Finds this point in the song
+    double percentageInTrack = (waveform.getThumbnailLength()/100) * percentageAcrossWaveform;
     
-    //double newPosOnFile = newClickPosOnWaveform * percentOfFile;
-    
-    //audioTransportSource.setPosition(newPosOnFile);
-    
-    //audioTransportSource.setPosition((waveform.getThumbnailLenght()/100) * disFromStart) * (audioTransportSource.getTotalLength()/100));
+    //Sets the new transport position
+    table.setTransportPosition(percentageInTrack);
 }
 
 void MainComponent::actionListenerCallback(const String &message)

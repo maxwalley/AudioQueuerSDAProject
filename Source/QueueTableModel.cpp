@@ -258,3 +258,8 @@ ItemInfo QueueTableModel::getCurrentSelectedDataStruct() const
 {
     return items[currentIndexSelected]->getItemData();
 }
+
+void QueueTableModel::setTransportPosition(double newPosition)
+{
+    transport.setPosition(newPosition);
+}

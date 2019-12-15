@@ -55,17 +55,9 @@ private:
     File selectedFile;
     AudioFormatManager audioFormatManager;
     std::unique_ptr<AudioFormatReaderSource> audioFormatReaderSource;
-    //AudioTransportSource audioTransportSource;
     bool fileLoaded;
     
     ComboBox playTypeCombo;
-    
-    /*Label timeLabel;
-    Slider gainSlider;
-    TextButton playButton;
-    TextButton pauseButton;
-    TextButton stopButton;
-    TextButton openFileButton;*/
     
     void buttonClicked(Button* button) override;
     void sliderValueChanged(Slider* slider) override;
