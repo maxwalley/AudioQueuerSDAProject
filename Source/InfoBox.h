@@ -23,7 +23,7 @@ public:
     InfoBox();
     ~InfoBox();
 
-    void paint (Graphics&) override;
+    void paintOverChildren (Graphics&) override;
     void resized() override;
     
     /**Changes the data that is shown in the info box*/

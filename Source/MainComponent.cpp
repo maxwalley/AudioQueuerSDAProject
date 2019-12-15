@@ -226,7 +226,7 @@ void MainComponent::changeAudioPosition(int xAxis)
     int disFromStart = waveform.getThumbnailLenght() - xAxis;
     
     //This is wrong for some reason
-    double percentOfWaveform = waveform.getThumbnailLenght()/100;
+    double percentOfWaveform = waveform.getThumbnailLength()/100;
     double newClickPosOnWaveform = percentOfWaveform * disFromStart;
     //double percentOfFile = audioTransportSource.getTotalLength()/100;
     

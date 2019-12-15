@@ -16,24 +16,30 @@ InfoSection::InfoSection(String description)
 {
     setSize(200, 50);
     
-    addAndMakeVisible(descriptorLabel);
-    addAndMakeVisible(dataLabel);
+    addAndMakeVisible(descriptorText);
+    addAndMakeVisible(dataText);
     
-    descriptorLabel.setJustificationType(Justification::centred);
-    dataLabel.setJustificationType(Justification::centred);
+    descriptorText.setLookAndFeel(&editorLookAndFeel);
+    dataText.setLookAndFeel(&editorLookAndFeel);
     
-    descriptorLabel.setText(description, dontSendNotification);
-    dataLabel.setText("", dontSendNotification);
+    descriptorText.setReadOnly(true);
+    dataText.setReadOnly(true);
+    
+    descriptorText.setMultiLine(true);
+    dataText.setMultiLine(true);
+    
+    descriptorText.setText(description);
+    dataText.setText("");
 }
 
 InfoSection::~InfoSection()
 {
 }
 
-void InfoSection::paint (Graphics& g)
+void InfoSection::paintOverChildren (Graphics& g)
 {
     //Line across the bottom
-    g.drawLine(0, 50, 200, 50);
+    g.drawLine(0, 50, 200, 50, 3);
     
     //Line down the middle
     g.drawLine(100, 0, 100, 50);
@@ -41,11 +47,16 @@ void InfoSection::paint (Graphics& g)
 
 void InfoSection::resized()
 {
-    descriptorLabel.setBounds(0, 10, 100, 30);
-    dataLabel.setBounds(100, 10, 100, 30);
+    descriptorText.setBounds(0, 0, 100, 50);
+    dataText.setBounds(100, 0, 100, 50);
 }
 
 void InfoSection::setData(String data)
 {
-    dataLabel.setText(data, dontSendNotification);
+    dataText.setText(data, dontSendNotification);
+}
+
+void TextEditorLookAndFeel::drawTextEditorOutline(Graphics& g, int width, int height, TextEditor& )
+{
+    
 }

@@ -26,7 +26,7 @@ public:
     
     void set(InputSource *newSource);
     
-    double getThumbnailLenght() const;
+    double getThumbnailLength() const;
     
 private:
     AudioThumbnail thumbnail;

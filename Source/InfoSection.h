@@ -15,13 +15,22 @@
 //==============================================================================
 /*
 */
+class TextEditorLookAndFeel : public LookAndFeel_V4
+{
+private:
+    /**Overidden from TextEditor::LookAndFeelMethods
+     Allows the outline of the text editor to be redrawn*/
+    void drawTextEditorOutline(Graphics& g, int width, int height, TextEditor& ) override;
+};
+
+
 class InfoSection    : public Component
 {
 public:
     InfoSection(String description);
     ~InfoSection();
 
-    void paint (Graphics&) override;
+    void paintOverChildren (Graphics&) override;
     void resized() override;
 
     /**Sets the data of the section*/
@@ -29,10 +38,12 @@ public:
     
 private:
     /**Holds the description of the data of the section*/
-    Label descriptorLabel;
+    TextEditor descriptorText;
     
     /**Holds the data of the section*/
-    Label dataLabel;
+    TextEditor dataText;
+    
+    TextEditorLookAndFeel editorLookAndFeel;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (InfoSection)
 };

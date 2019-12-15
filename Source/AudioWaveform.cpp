@@ -44,7 +44,7 @@ void AudioWaveform::set(InputSource *newSource)
     repaint();
 }
 
-double AudioWaveform::getThumbnailLenght() const
+double AudioWaveform::getThumbnailLength() const
 {
     return thumbnail.getTotalLength();
 }

@@ -28,7 +28,7 @@ InfoBox::~InfoBox()
 {
 }
 
-void InfoBox::paint (Graphics& g)
+void InfoBox::paintOverChildren (Graphics& g)
 {
     g.drawRoundedRectangle(0, 0, 200, 500, 10, 4);
 }
