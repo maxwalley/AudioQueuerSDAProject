@@ -17,7 +17,7 @@
 /*
 */
 class Menu    : public MenuBarModel,
-                public Component
+                public ActionBroadcaster
 {
 public:
     Menu(AudioDeviceManager* devManager);
@@ -25,15 +25,30 @@ public:
 
     void paint (Graphics&) override;
     void resized() override;
+    
+    /**Changes what menu items are enabled*/
+    void changeEnabledItems();
 
 private:
-    MenuBarComponent menu;
-    
+    /**Overriden from MenuBarModel
+     Returns a list of the menu bar names as a string array*/
     StringArray getMenuBarNames() override;
+    
+    /**Overriden from MenuBarModel
+     Returns the PopupMenu to display for a given top level menu
+     Parameters:
+        topLevelMenuIndex = The index of the top level menu to show
+        menuName = The name of the top level menu to show*/
     PopupMenu getMenuForIndex (int topLevelMenuIndex, const String& menuName) override;
+    
+    /**Overriden from MenuBarModel
+     This is called when a menu item has been clicked on.
+     Parameters:
+        menuItemID = The item ID of the PopupMenu item that was selected
+        topLevelMenuIndex = the index of the top-level menu from which the item was chosen (just in case you've used duplicate ID numbers on more than one of the popup menus)*/
     void menuItemSelected (int menuItemID, int topLevelMenuIndex) override;
     
-    DeviceSelectorWindow deviceSelectorWindow;
+    //DeviceSelectorWindow deviceSelectorWindow;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Menu)
 };

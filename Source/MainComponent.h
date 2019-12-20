@@ -57,6 +57,18 @@ private:
     void buttonClicked(Button* button) override;
     void sliderValueChanged(Slider* slider) override;
     
+    /**Adds a file to the queue*/
+    void addFile();
+    
+    /**Plays the queue*/
+    void playQueue();
+    
+    /**Pauses the audio*/
+    void pauseAudio();
+    
+    /**Stops the audio*/
+    void stopAudio();
+    
     void timerCallback() override;
     int timerCount;
     

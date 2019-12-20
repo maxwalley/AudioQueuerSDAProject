@@ -55,7 +55,7 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     
     addAndMakeVisible(infoBox);
     
-    addAndMakeVisible(menu);
+    menu.addActionListener(this);
     
     deviceManager.initialise(0, 2, nullptr, true);
 }
@@ -121,52 +121,71 @@ void MainComponent::resized()
     waveform.setBounds(0, 250, 200, 150);
     table.setBounds(300, 50, 500, 300);
     infoBox.setBounds(850, 50, 200, 500);
-    menu.setBounds(0, 0, 1100, 20);
 }
 
 void MainComponent::buttonClicked(Button* button)
 {
     if(button == &playerGUI.openFileButton)
     {
-        if(fileChooser.browseForFileToOpen() == true)
-        {
-            selectedFile = fileChooser.getResult();
-            table.addNewItem(&selectedFile);
-        }
+        addFile();
     }
     
     else if(button == &playerGUI.playButton)
     {
-        if(transportState == stopped)
-        {
-            table.transport.setPosition(0);
-        }
-        else if(transportState == paused)
-        {
-            table.transport.setPosition(pausePosition);
-        }
-        table.startQueue();
-        Timer::startTimer(100);
-        transformImage.timerTrigger();
-        playerGUI.audioPlayed();
-        transportState = playing;
+        playQueue();
     }
     
     else if(button == &playerGUI.stopButton)
     {
-        table.transport.stop();
-        Timer::stopTimer();
-        playerGUI.audioStopped();
-        transportState = stopped;
+        stopAudio();
     }
     
     else if (button == &playerGUI.pauseButton)
     {
-        pausePosition = table.transport.getCurrentPosition();
-        table.transport.stop();
-        playerGUI.audioPaused();
-        transportState = paused;
+        pauseAudio();
     }
+}
+
+void MainComponent::addFile()
+{
+    if(fileChooser.browseForFileToOpen() == true)
+    {
+        selectedFile = fileChooser.getResult();
+        table.addNewItem(&selectedFile);
+    }
+}
+
+void MainComponent::playQueue()
+{
+    if(transportState == stopped)
+    {
+        table.transport.setPosition(0);
+    }
+    else if(transportState == paused)
+    {
+        table.transport.setPosition(pausePosition);
+    }
+    table.startQueue();
+    Timer::startTimer(100);
+    transformImage.timerTrigger();
+    playerGUI.audioPlayed();
+    transportState = playing;
+}
+
+void MainComponent::pauseAudio()
+{
+    pausePosition = table.transport.getCurrentPosition();
+    table.transport.stop();
+    playerGUI.audioPaused();
+    transportState = paused;
+}
+
+void MainComponent::stopAudio()
+{
+    table.transport.stop();
+    Timer::stopTimer();
+    playerGUI.audioStopped();
+    transportState = stopped;
 }
 
 void MainComponent::sliderValueChanged(Slider* slider)
@@ -218,5 +237,25 @@ void MainComponent::actionListenerCallback(const String &message)
     {
         //Sends the data from the selected row to the info box
         infoBox.changeData(table.getCurrentSelectedDataStruct());
+    }
+    
+    else if(message == "Add file")
+    {
+        addFile();
+    }
+    
+    else if(message == "Play queue")
+    {
+        playQueue();
+    }
+    
+    else if(message == "Pause audio")
+    {
+        pauseAudio();
+    }
+    
+    else if(message == "Stop audio")
+    {
+        stopAudio();
     }
 }
