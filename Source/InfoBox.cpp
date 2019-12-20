@@ -40,6 +40,7 @@ InfoBox::InfoBox(AudioFormatManager &manager) : fileNameSection("File Name"), fi
     addAndMakeVisible(loopNumDataLabel);
     loopNumDataLabel.setEditable(false);
     loopNumDataLabel.setText("0", dontSendNotification);
+    loopNumDataLabel.addListener(this);
     
     addAndMakeVisible(waveform);
 }
@@ -85,7 +86,7 @@ void InfoBox::changeData(ItemInfo currentDataStruct)
     fileSampleRateSection.setData(String(currentDataStruct.sampleRate));
     fileNumChannelsSection.setData(String(currentDataStruct.numChannels));
     
-    if(currentDataStruct.Loop == true)
+    if(currentDataStruct.loop == true)
     {
         loopToggle.setToggleState(true, dontSendNotification);
         loopNumDataLabel.setText(String(currentDataStruct.numLoops), dontSendNotification);

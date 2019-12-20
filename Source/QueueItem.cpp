@@ -221,10 +221,21 @@ ItemInfo QueueItem::getItemData() const
 
 void QueueItem::setLoop(bool loop)
 {
-    itemData.Loop = loop;
+    itemData.loop = loop;
+}
+
+bool QueueItem::getLoop() const
+{
+    return itemData.loop;
 }
 
 void QueueItem::setNumLoops(int numLoops)
 {
+    DBG("New num loops is: " << numLoops);
     itemData.numLoops = numLoops;
+}
+
+int QueueItem::getNumLoops() const
+{
+    return itemData.numLoops;
 }

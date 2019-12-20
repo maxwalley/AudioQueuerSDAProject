@@ -62,8 +62,14 @@ public:
     /**Sets whether the item loops or not*/
     void setLoop(bool loop);
     
+    /**Returns whether the item is set to loop or not*/
+    bool getLoop() const;
+    
     /**Sets the amount of loops the item does*/
     void setNumLoops(int numLoops);
+    
+    /**Returns the amount of loops this item is set to perform*/
+    int getNumLoops() const;
 
 private:
     

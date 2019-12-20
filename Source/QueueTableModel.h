@@ -79,6 +79,8 @@ public:
     int currentIndexPlaying;
     int currentIndexSelected;
     
+    int loopCounter;
+    
     void setUpTransport(int indexToPlay);
     
     void actionListenerCallback(const String &message) override;

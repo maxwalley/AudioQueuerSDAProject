@@ -12,7 +12,7 @@
 #include "QueueTableModel.h"
 
 //==============================================================================
-QueueTableModel::QueueTableModel() : currentIndexPlaying(-1), currentIndexSelected(-1)
+QueueTableModel::QueueTableModel() : currentIndexPlaying(-1), currentIndexSelected(-1), loopCounter(0)
 {
     addAndMakeVisible(embeddedTable);
     
@@ -148,8 +148,27 @@ void QueueTableModel::moveTransportOn()
     //Stops transport
     transport.stop();
     
-    //Builds on current index
-    currentIndexPlaying++;
+    //Checks to see if the item is set to loop
+    if(items[currentIndexPlaying]->getLoop() == true)
+    {
+        DBG("Num Loops is " << items[currentIndexPlaying]->getNumLoops() << " loop counter is " << loopCounter);
+        
+        //Checks to see if the specified number of loops have been completed
+        if(items[currentIndexPlaying]->getNumLoops() > loopCounter)
+        {
+            loopCounter++;
+        }
+        else
+        {
+            currentIndexPlaying++;
+        }
+    }
+    else
+    {
+        
+        //Moves index onto next
+        currentIndexPlaying++;
+    }
     
     //Checks to see if we're at the end of the list
     if(currentIndexPlaying != items.size())
