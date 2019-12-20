@@ -14,13 +14,13 @@
 //==============================================================================
 PlayButton::PlayButton() : Button (String())
 {
-    //setSize(15, 15);
     setClickingTogglesState(true);
     setToggleState(false, dontSendNotification);
 }
 
 PlayButton::~PlayButton()
 {
+    
 }
 
 void PlayButton::paintButton (Graphics& g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown)

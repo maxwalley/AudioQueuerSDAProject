@@ -12,9 +12,9 @@
 #include "InfoBox.h"
 
 //==============================================================================
-InfoBox::InfoBox(AudioFormatManager &manager) : fileNameSection("File Name"), filePathSection("File Path"), fileSizeSection("File Size (Bytes)"), fileLengthSection("File Length"), fileSampleRateSection("Sample Rate"), fileNumChannelsSection("Number of Channels"), newNumLoops(0), waveform(manager)
+InfoBox::InfoBox(AudioFormatManager &manager) : fileNameSection("File Name"), filePathSection("File Path"), fileSizeSection("File Size (Bytes)"), fileLengthSection("File Length"), fileSampleRateSection("Sample Rate"), fileNumChannelsSection("Number of Channels"), newNumLoops(0), deleteButton("Delete"), waveform(manager)
 {
-    setSize(200, 500);
+    setSize(200, 525);
     
     addAndMakeVisible(headerLabel);
     headerLabel.setText("Selected Item Info", dontSendNotification);
@@ -42,6 +42,9 @@ InfoBox::InfoBox(AudioFormatManager &manager) : fileNameSection("File Name"), fi
     loopNumDataLabel.setText("0", dontSendNotification);
     loopNumDataLabel.addListener(this);
     
+    addAndMakeVisible(deleteButton);
+    deleteButton.addListener(this);
+    
     addAndMakeVisible(waveform);
 }
 
@@ -51,10 +54,11 @@ InfoBox::~InfoBox()
 
 void InfoBox::paintOverChildren (Graphics& g)
 {
-    g.drawRoundedRectangle(0, 0, 200, 500, 10, 4);
+    g.drawRoundedRectangle(0, 0, 200, 550, 10, 4);
     
     g.drawLine(100, 275, 100, 350);
     g.drawLine(0, 300, 200, 300);
+    g.drawLine(0, 350, 200, 350);
 }
 
 void InfoBox::resized()
@@ -74,7 +78,9 @@ void InfoBox::resized()
     loopNumDescriptionLabel.setBounds(0, 300, 100, 50);
     loopNumDataLabel.setBounds(100, 300, 100, 50);
     
-    waveform.setBounds(0, 350, 200, 150);
+    deleteButton.setBounds(0, 350, 200, 25);
+    
+    waveform.setBounds(0, 375, 200, 150);
 }
 
 void InfoBox::changeData(ItemInfo currentDataStruct)
@@ -130,6 +136,15 @@ void InfoBox::buttonClicked(Button* button)
             loopNumDataLabel.setEditable(false);
             loopNumDataLabel.setText("0", dontSendNotification);
             loopNumDataLabel.repaint();
+        }
+    }
+    
+    else if(button == &deleteButton)
+    {
+        //Opens an alert window to make sure the user wants to delete this item
+        if(AlertWindow::showOkCancelBox(AlertWindow::AlertIconType::WarningIcon, "Delete from Queue?", "Are you sure you want to delete this item from the queue?", "Yes", "No") == true)
+        {
+            sendActionMessage("Delete button pressed");
         }
     }
 }

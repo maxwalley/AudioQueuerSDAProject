@@ -110,7 +110,7 @@ void MainComponent::paintOverChildren(Graphics& g)
 {
     if(table.transport.isPlaying() == true)
     {
-        g.drawLine((table.transport.getCurrentPosition()/waveform.getThumbnailLength()) * 200, 200, ((table.transport.getCurrentPosition()/waveform.getThumbnailLength()) * 200), 350);
+        g.drawLine((table.transport.getCurrentPosition()/waveform.getThumbnailLength()) * 200, 250, ((table.transport.getCurrentPosition()/waveform.getThumbnailLength()) * 200), 400);
     }
 }
 
@@ -121,7 +121,7 @@ void MainComponent::resized()
     transformImage.setBounds(0, 450, 256, 256);
     waveform.setBounds(0, 250, 200, 150);
     table.setBounds(300, 50, 500, 300);
-    infoBox.setBounds(850, 50, 200, 500);
+    infoBox.setBounds(850, 50, 200, 525);
 }
 
 void MainComponent::buttonClicked(Button* button)
@@ -248,6 +248,11 @@ void MainComponent::actionListenerCallback(const String &message)
     else if(message == "Number of loops changed")
     {
         table.updateSelectedItemNumLoops(infoBox.getNewNumLoops());
+    }
+    
+    else if(message == "Delete button pressed")
+    {
+        table.deleteSelectedItem();
     }
     
     else if(message == "Add file")

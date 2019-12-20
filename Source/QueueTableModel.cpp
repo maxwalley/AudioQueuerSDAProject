@@ -129,6 +129,16 @@ void QueueTableModel::addNewItem(File* file)
     embeddedTable.updateContent();
 }
 
+void QueueTableModel::deleteSelectedItem()
+{
+    items.remove(currentIndexSelected);
+    
+    embeddedTable.updateContent();
+    
+    //Resets the selected index since nothing will be selected
+    currentIndexSelected = -1;
+}
+
 void QueueTableModel::selectedRowsChanged(int lastRowSelected)
 {
     //Sets current index selected to the selected row
@@ -151,8 +161,6 @@ void QueueTableModel::moveTransportOn()
     //Checks to see if the item is set to loop
     if(items[currentIndexPlaying]->getLoop() == true)
     {
-        DBG("Num Loops is " << items[currentIndexPlaying]->getNumLoops() << " loop counter is " << loopCounter);
-        
         //Checks to see if the specified number of loops have been completed
         if(items[currentIndexPlaying]->getNumLoops() > loopCounter)
         {

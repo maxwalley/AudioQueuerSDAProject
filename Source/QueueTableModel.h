@@ -34,7 +34,11 @@ public:
     Array<QueueItem*> items;
     AudioTransportSource transport;
 
+    /**Adds a new item to the array of items*/
     void addNewItem(File* file);
+    
+    /**Deletes the currently selected item from the array of items*/
+    void deleteSelectedItem();
     
     int getSelectedRow();
     
