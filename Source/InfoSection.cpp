@@ -14,9 +14,18 @@
 //==============================================================================
 InfoSection::InfoSection(String description)
 {
-    setSize(200, 50);
+    //Sets some as smaller than others
+    if(description == "File Size (Bytes)" || description == "File Length" || description == "Sample Rate")
+    {
+        setSize(200, 25);
+    }
+    else
+    {
+        setSize(200, 50);
+    }
     
     addAndMakeVisible(descriptorText);
+    
     addAndMakeVisible(dataText);
     
     descriptorText.setLookAndFeel(&editorLookAndFeel);
@@ -41,7 +50,7 @@ InfoSection::~InfoSection()
 void InfoSection::paintOverChildren (Graphics& g)
 {
     //Line across the bottom
-    g.drawLine(0, 50, 200, 50, 3);
+    g.drawLine(0, getHeight(), 200, getHeight(), 3);
     
     //Line down the middle
     g.drawLine(100, 0, 100, 50);
@@ -49,8 +58,8 @@ void InfoSection::paintOverChildren (Graphics& g)
 
 void InfoSection::resized()
 {
-    descriptorText.setBounds(0, 0, 100, 50);
-    dataText.setBounds(100, 0, 100, 50);
+    descriptorText.setBounds(0, 0, 100, getHeight());
+    dataText.setBounds(100, 0, 100, getHeight());
 }
 
 void InfoSection::setData(String data)

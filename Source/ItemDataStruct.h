@@ -20,4 +20,6 @@ struct ItemInfo
     int numChannels;
     int lengthInSecs;
     String lengthInTime;
+    bool Loop;
+    int numLoops;
 };

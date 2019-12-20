@@ -22,9 +22,6 @@ class Menu    : public MenuBarModel,
 public:
     Menu(AudioDeviceManager* devManager);
     ~Menu();
-
-    void paint (Graphics&) override;
-    void resized() override;
     
     /**Changes what menu items are enabled*/
     void changeEnabledItems();

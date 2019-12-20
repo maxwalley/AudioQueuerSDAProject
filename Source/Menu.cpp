@@ -14,26 +14,11 @@
 //==============================================================================
 Menu::Menu(AudioDeviceManager* devManager) //: deviceSelectorWindow(devManager)
 {
-    //setSize(1100, 20);
-    
     setMacMainMenu(this);
-    
-    //addAndMakeVisible(menu);
-    //menu.setModel(this);
 }
 
 Menu::~Menu()
 {
-}
-
-void Menu::paint (Graphics& g)
-{
-    
-}
-
-void Menu::resized()
-{
-    menu.setBounds(0, 0, 1100, 20);
 }
 
 StringArray Menu::getMenuBarNames()

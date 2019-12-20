@@ -54,6 +54,7 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     addAndMakeVisible(transformImage);
     
     addAndMakeVisible(infoBox);
+    infoBox.addActionListener(this);
     
     menu.addActionListener(this);
     
@@ -237,6 +238,16 @@ void MainComponent::actionListenerCallback(const String &message)
     {
         //Sends the data from the selected row to the info box
         infoBox.changeData(table.getCurrentSelectedDataStruct());
+    }
+    
+    else if(message == "Loop button changed")
+    {
+        table.updateSelectedItemLoopToggle(infoBox.getLoopButtonState());
+    }
+    
+    else if(message == "Number of loops changed")
+    {
+        table.updateSelectedItemNumLoops(infoBox.getNewNumLoops());
     }
     
     else if(message == "Add file")

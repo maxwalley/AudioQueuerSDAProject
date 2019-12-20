@@ -36,6 +36,9 @@ QueueItem::QueueItem(int idNum, File* file)
     itemData.sampleRate = reader->sampleRate;
     itemData.numChannels = reader->numChannels;
     
+    itemData.loop = false;
+    itemData.numLoops = 0;
+    
     playButton.addListener(this);
     
     playTimeLabel.setEditable(false, true, false);
@@ -214,4 +217,14 @@ int QueueItem::getStopPoint()
 ItemInfo QueueItem::getItemData() const
 {
     return itemData;
+}
+
+void QueueItem::setLoop(bool loop)
+{
+    itemData.Loop = loop;
+}
+
+void QueueItem::setNumLoops(int numLoops)
+{
+    itemData.numLoops = numLoops;
 }

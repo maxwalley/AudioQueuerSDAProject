@@ -58,11 +58,14 @@ public:
     int getStopPoint();
     
     ItemInfo getItemData() const;
+    
+    /**Sets whether the item loops or not*/
+    void setLoop(bool loop);
+    
+    /**Sets the amount of loops the item does*/
+    void setNumLoops(int numLoops);
 
 private:
-    /*int itemIndex;
-    File currentFile;
-    int64_t size;*/
     
     ItemInfo itemData;
     

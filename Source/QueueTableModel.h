@@ -59,6 +59,12 @@ public:
     /**Sets the transports position*/
     void setTransportPosition(double newPosition);
     
+    /**Updates the data struct of the currently selected item with the new loop toggle selection*/
+    void updateSelectedItemLoopToggle(bool newLoopToggle);
+    
+    /**Updates the data struct of the currently selected item with the new loop toggle selection*/
+    void updateSelectedItemNumLoops(int newNumLoops);
+    
     private:
     
     int getNumRows() override;

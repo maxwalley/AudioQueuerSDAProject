@@ -263,3 +263,13 @@ void QueueTableModel::setTransportPosition(double newPosition)
 {
     transport.setPosition(newPosition);
 }
+
+void QueueTableModel::updateSelectedItemLoopToggle(bool newLoopToggle)
+{
+    items[currentIndexSelected]->setLoop(newLoopToggle);
+}
+
+void QueueTableModel::updateSelectedItemNumLoops(int newNumLoops)
+{
+    items[currentIndexSelected]->setNumLoops(newNumLoops);
+}

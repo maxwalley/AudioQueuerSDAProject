@@ -18,7 +18,10 @@
 //==============================================================================
 /*
 */
-class InfoBox    : public Component
+class InfoBox    : public Component,
+                   public Button::Listener,
+                   public ActionBroadcaster,
+                   public Label::Listener
 {
 public:
     InfoBox(AudioFormatManager &manager);
@@ -29,6 +32,12 @@ public:
     
     /**Changes the data that is shown in the info box*/
     void changeData(ItemInfo currentDataStruct);
+    
+    /**Returns the loop button state*/
+    bool getLoopButtonState() const;
+    
+    /**Returns new number of loops*/
+    int getNewNumLoops() const;
 
 private:
     Label headerLabel;
@@ -39,6 +48,20 @@ private:
     InfoSection fileLengthSection;
     InfoSection fileSampleRateSection;
     InfoSection fileNumChannelsSection;
+    
+    Label loopDescriptionLabel;
+    ToggleButton loopToggle;
+    
+    Label loopNumDescriptionLabel;
+    Label loopNumDataLabel;
+    
+    /**Overriden from Button::Listener*/
+    void buttonClicked(Button* button) override;
+    
+    /**Overidden from Label::Listener*/
+    void labelTextChanged(Label* labelThatHasChanged) override;
+    
+    int newNumLoops;
     
     AudioWaveform waveform;
     
