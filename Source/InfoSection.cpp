@@ -34,6 +34,8 @@ InfoSection::InfoSection(String description)
 
 InfoSection::~InfoSection()
 {
+    //descriptorText.setLookAndFeel(nullptr);
+    //dataText.setLookAndFeel(nullptr);
 }
 
 void InfoSection::paintOverChildren (Graphics& g)

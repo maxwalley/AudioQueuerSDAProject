@@ -9,7 +9,7 @@
 #include "MainComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), timerCount(1), waveform(audioFormatManager), selectedItem(-2), infoBox(audioFormatManager)
+MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), timerCount(1), waveform(audioFormatManager), selectedItem(-2), infoBox(audioFormatManager), menu(&deviceManager)
 {
     setSize (1100, 800);
 
@@ -54,6 +54,10 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     addAndMakeVisible(transformImage);
     
     addAndMakeVisible(infoBox);
+    
+    addAndMakeVisible(menu);
+    
+    deviceManager.initialise(0, 2, nullptr, true);
 }
 
 MainComponent::~MainComponent()
@@ -112,45 +116,12 @@ void MainComponent::paintOverChildren(Graphics& g)
 void MainComponent::resized()
 {
     playTypeCombo.setBounds(400, 400, 200, 30);
-    playerGUI.setBounds(0, 0, 200, 150);
-    transformImage.setBounds(0, 375, 256, 256);
-    waveform.setBounds(0, 200, 200, 150);
+    playerGUI.setBounds(0, 50, 200, 150);
+    transformImage.setBounds(0, 450, 256, 256);
+    waveform.setBounds(0, 250, 200, 150);
     table.setBounds(300, 50, 500, 300);
     infoBox.setBounds(850, 50, 200, 500);
-}
-
-StringArray MainComponent::getMenuBarNames()
-{
-    const char* const names[] = { "File", 0 };
-    return StringArray (names);
-}
-
-PopupMenu MainComponent::getMenuForIndex(int topLevelMenuIndex, const String &menuName)
-{
-    PopupMenu menu;
-    
-    if (topLevelMenuIndex == 0)
-    {
-        menu.addItem(1, "Audio Prefrences", true, false);
-        menu.addItem(2, "Open File", true, false);
-    }
-    
-    return menu;
-}
-
-void MainComponent::menuItemSelected(int menuItemID, int topLevelMenuIndex)
-{
-    if(topLevelMenuIndex == 0)
-    {
-        if (menuItemID == 1)
-        {
-            DBG("AUDIO PREFS CLICKED");
-        }
-        else if (menuItemID == 2)
-        {
-            
-        }
-    }
+    menu.setBounds(0, 0, 1100, 20);
 }
 
 void MainComponent::buttonClicked(Button* button)
@@ -217,7 +188,6 @@ void MainComponent::mouseDown(const MouseEvent &event)
     //Checks its in the waveform area
     if(event.originalComponent == &waveform /*&& fileLoaded == true*/)
     {
-        DBG("Mouse clicked in waveform");
         changeAudioPosition(event.getMouseDownX());
     }
 }

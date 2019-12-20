@@ -15,6 +15,7 @@
 #include "FFT.h"
 #include "AudioPlayerGUI.h"
 #include "InfoBox.h"
+#include "Menu.h"
 
 //==============================================================================
 /*
@@ -22,7 +23,6 @@
     your controls and content.
 */
 class MainComponent   : public AudioAppComponent,
-                        public MenuBarModel,
                         public Button::Listener,
                         public Slider::Listener,
                         public Timer,
@@ -42,11 +42,6 @@ public:
     void paint (Graphics& g) override;
     void paintOverChildren(Graphics& g) override;
     void resized() override;
-    
-    //==============================================================================
-    StringArray getMenuBarNames() override;
-    PopupMenu getMenuForIndex (int topLevelMenuIndex, const String& menuName) override;
-    void menuItemSelected (int menuItemID, int topLevelMenuIndex) override;
     
 private:
     //==============================================================================
@@ -89,6 +84,9 @@ private:
     void actionListenerCallback(const String& message) override;
     
     InfoBox infoBox;
+    Menu menu;
+    
+    AudioDeviceManager deviceManager;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };
