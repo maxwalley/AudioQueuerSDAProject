@@ -28,6 +28,10 @@
       <FILE id="cPNy6S" name="InfoBox.h" compile="0" resource="0" file="Source/InfoBox.h"/>
       <FILE id="zqFUZ8" name="InfoBox.cpp" compile="1" resource="0" file="Source/InfoBox.cpp"/>
       <GROUP id="{725DCBBF-D78B-B684-A3EE-A47707B2AEDF}" name="Audio">
+        <FILE id="lCFplO" name="PlayPauseButton.cpp" compile="1" resource="0"
+              file="Source/PlayPauseButton.cpp"/>
+        <FILE id="FO4OQg" name="PlayPauseButton.h" compile="0" resource="0"
+              file="Source/PlayPauseButton.h"/>
         <FILE id="zHjYdY" name="AudioPlayerGUI.cpp" compile="1" resource="0"
               file="Source/AudioPlayerGUI.cpp"/>
         <FILE id="tlN0B1" name="AudioPlayerGUI.h" compile="0" resource="0"

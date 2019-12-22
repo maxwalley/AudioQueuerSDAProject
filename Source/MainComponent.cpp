@@ -133,7 +133,15 @@ void MainComponent::buttonClicked(Button* button)
     
     else if(button == &playerGUI.playButton)
     {
-        playQueue();
+        if(playerGUI.playButton.getButtonState() == 0)
+        {
+            playQueue();
+        }
+        else if(playerGUI.playButton.getButtonState() == 1)
+        {
+            pauseAudio();
+        }
+        playerGUI.triggerButtonStateChange();
     }
     
     else if(button == &playerGUI.stopButton)

@@ -93,6 +93,10 @@
 			isa = PBXBuildFile;
 			fileRef = F6B5A0CC5C113A997CE506DF;
 		};
+		AB4E25C0EEB8F92E7FE3A778 = {
+			isa = PBXBuildFile;
+			fileRef = B4A01A7BBCE4FFF62912CC62;
+		};
 		C821630C5FB8D6B313F0EFA8 = {
 			isa = PBXBuildFile;
 			fileRef = 906E260511411CC9E25B0AF0;
@@ -425,6 +429,13 @@
 			path = ../../Source/QueueTableHeader.h;
 			sourceTree = "SOURCE_ROOT";
 		};
+		833903CF33D299BB156CBEB7 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = PlayPauseButton.h;
+			path = ../../Source/PlayPauseButton.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		89B37109915FF86FDFA0069B = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
@@ -515,6 +526,13 @@
 			name = Carbon.framework;
 			path = System/Library/Frameworks/Carbon.framework;
 			sourceTree = SDKROOT;
+		};
+		B4A01A7BBCE4FFF62912CC62 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = PlayPauseButton.cpp;
+			path = ../../Source/PlayPauseButton.cpp;
+			sourceTree = "SOURCE_ROOT";
 		};
 		B54D20FA52E21643C8646F8D = {
 			isa = PBXFileReference;
@@ -694,6 +712,8 @@
 		C790A858C3C28CBA9F97C1A7 = {
 			isa = PBXGroup;
 			children = (
+				B4A01A7BBCE4FFF62912CC62,
+				833903CF33D299BB156CBEB7,
 				906E260511411CC9E25B0AF0,
 				EA32FA9412852778543F66AB,
 				4C649AE7CB38A81F88A957A1,
@@ -1065,6 +1085,7 @@
 				66A49005076558B0AFD09EA3,
 				EB5A58E00C0D465B74B06717,
 				3E8FC2D98B3C4E85D4DA2C5B,
+				AB4E25C0EEB8F92E7FE3A778,
 				C821630C5FB8D6B313F0EFA8,
 				06587ECA6131E92B0B978EC7,
 				4B7F8A475EE796F75316D8C8,

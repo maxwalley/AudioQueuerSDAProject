@@ -11,10 +11,12 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "PlayPauseButton.h"
 
 //==============================================================================
 /*
 */
+
 class AudioPlayerGUI    : public Component
 {
 public:
@@ -30,8 +32,11 @@ public:
     
     void changeTime(double audioPosition);
     
+    void triggerButtonStateChange();
+    
     Slider gainSlider;
-    TextButton playButton;
+    
+    PlayPauseButton playButton;
     TextButton pauseButton;
     TextButton stopButton;
     TextButton openFileButton;
@@ -39,6 +44,8 @@ public:
 private:
     
     Label timeLabel;
+    
+    
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioPlayerGUI)
 };

@@ -129,6 +129,7 @@ Label* QueueItem::getStopTimeLabel()
 
 PlayButton* QueueItem::getPlayButton()
 {
+    //return playButton.getComponent();
     return &playButton;
 }
 

@@ -12,7 +12,7 @@
 #include "AudioPlayerGUI.h"
 
 //==============================================================================
-AudioPlayerGUI::AudioPlayerGUI() : playButton("Play"), pauseButton("Pause"), stopButton("Stop"), openFileButton("Open File")
+AudioPlayerGUI::AudioPlayerGUI() : pauseButton("Pause"), stopButton("Stop"), openFileButton("Open File")
 {
     setSize(200, 150);
     
@@ -22,9 +22,7 @@ AudioPlayerGUI::AudioPlayerGUI() : playButton("Play"), pauseButton("Pause"), sto
     gainSlider.setValue(0.5);
        
     addAndMakeVisible(playButton);
-    playButton.setClickingTogglesState(true);
-    playButton.setToggleState(false, dontSendNotification);
-       
+    
     addAndMakeVisible(pauseButton);
     pauseButton.setClickingTogglesState(true);
     pauseButton.setToggleState(false, dontSendNotification);
@@ -45,7 +43,7 @@ AudioPlayerGUI::~AudioPlayerGUI()
 
 void AudioPlayerGUI::paint (Graphics& g)
 {
-    playButton.setColour(TextButton::ColourIds::buttonOnColourId, Colours::darkred);
+    playButton.setColour(TextButton::buttonColourId, Colours::white);
     pauseButton.setColour(TextButton::ColourIds::buttonOnColourId, Colours::darkred);
     stopButton.setColour(TextButton::ColourIds::buttonOnColourId, Colours::darkred);
 }
@@ -65,22 +63,22 @@ void AudioPlayerGUI::audioStopped()
     stopButton.setEnabled(false);
     pauseButton.setToggleState(false, dontSendNotification);
     pauseButton.setEnabled(false);
-    playButton.setToggleState(false, dontSendNotification);
-    playButton.setEnabled(true);
+    //playButton.setToggleState(false, dontSendNotification);
+    //playButton.setEnabled(true);
 }
 
 void AudioPlayerGUI::audioPaused()
 {
     pauseButton.setEnabled(false);
-    playButton.setToggleState(false, dontSendNotification);
-    playButton.setEnabled(true);
+    //playButton.setToggleState(false, dontSendNotification);
+    //playButton.setEnabled(true);
     stopButton.setToggleState(false, dontSendNotification);
     stopButton.setEnabled(true);
 }
 
 void AudioPlayerGUI::audioPlayed()
 {
-    playButton.setEnabled(false);
+    //playButton.setEnabled(false);
     stopButton.setToggleState(false, dontSendNotification);
     stopButton.setEnabled(true);
     pauseButton.setToggleState(false, dontSendNotification);
@@ -101,4 +99,9 @@ void AudioPlayerGUI::changeTime(double audioPosition)
         
     const MessageManagerLock labelLock;
     timeLabel.setText(fullTime, dontSendNotification);
+}
+
+void AudioPlayerGUI::triggerButtonStateChange()
+{
+    playButton.changeState();
 }
