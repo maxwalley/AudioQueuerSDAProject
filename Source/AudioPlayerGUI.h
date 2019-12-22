@@ -12,6 +12,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PlayPauseButton.h"
+#include "PlayerControlButton.h"
 
 //==============================================================================
 /*
@@ -37,13 +38,18 @@ public:
     Slider gainSlider;
     
     PlayPauseButton playButton;
-    TextButton pauseButton;
-    TextButton stopButton;
-    TextButton openFileButton;
+    PlayerControlButton stopButton;
+    PlayerControlButton nextButton;
+    PlayerControlButton lastButton;
+    
+    /**Sets the play button to be enabled*/
+    void setPlayButtonEnabled();
     
 private:
     
     Label timeLabel;
+    
+    Label playingFileNameLabel;
     
     
     

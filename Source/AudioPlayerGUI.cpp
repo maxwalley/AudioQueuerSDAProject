@@ -12,29 +12,30 @@
 #include "AudioPlayerGUI.h"
 
 //==============================================================================
-AudioPlayerGUI::AudioPlayerGUI() : pauseButton("Pause"), stopButton("Stop"), openFileButton("Open File")
+AudioPlayerGUI::AudioPlayerGUI() : stopButton(PlayerControlButton::stop), nextButton(PlayerControlButton::next), lastButton(PlayerControlButton::last)
 {
-    setSize(200, 150);
+    setSize(200, 250);
     
     addAndMakeVisible(gainSlider);
-    gainSlider.setSliderStyle(Slider::SliderStyle::LinearVertical);
+    gainSlider.setSliderStyle(Slider::SliderStyle::LinearHorizontal);
+    gainSlider.setTextBoxStyle(Slider::NoTextBox, true, 0, 0);
     gainSlider.setRange(0, 1);
     gainSlider.setValue(0.5);
        
     addAndMakeVisible(playButton);
-    
-    addAndMakeVisible(pauseButton);
-    pauseButton.setClickingTogglesState(true);
-    pauseButton.setToggleState(false, dontSendNotification);
+    playButton.setEnabled(false);
        
     addAndMakeVisible(stopButton);
-    stopButton.setClickingTogglesState(true);
-    stopButton.setToggleState(true, dontSendNotification);
+    stopButton.setEnabled(false);
        
-    addAndMakeVisible(openFileButton);
-
+    addAndMakeVisible(nextButton);
+    
+    addAndMakeVisible(lastButton);
+    
     addAndMakeVisible(timeLabel);
     timeLabel.setText("0", dontSendNotification);
+    
+    addAndMakeVisible(playingFileNameLabel);
 }
 
 AudioPlayerGUI::~AudioPlayerGUI()
@@ -44,32 +45,31 @@ AudioPlayerGUI::~AudioPlayerGUI()
 void AudioPlayerGUI::paint (Graphics& g)
 {
     playButton.setColour(TextButton::buttonColourId, Colours::white);
-    pauseButton.setColour(TextButton::ColourIds::buttonOnColourId, Colours::darkred);
-    stopButton.setColour(TextButton::ColourIds::buttonOnColourId, Colours::darkred);
+    
 }
 
 void AudioPlayerGUI::resized()
 {
-    gainSlider.setBounds(170, 0, 30, 150);
-    openFileButton.setBounds(0, 0, 150, 50);
-    playButton.setBounds(0, 50, 50, 50);
-    pauseButton.setBounds(50, 50, 50, 50);
-    stopButton.setBounds(100, 50, 50, 50);
-    timeLabel.setBounds(0, 110, 150, 40);
+    timeLabel.setBounds(0, 0, 50, 30);
+    
+    playButton.setBounds(75, 80, 50, 50);
+    stopButton.setBounds(80, 140, 40, 40);
+    nextButton.setBounds(165, 85, 35, 35);
+    lastButton.setBounds(0, 85, 35, 35);
+    
+    gainSlider.setBounds(0, 200, getWidth(), 20);
 }
 
 void AudioPlayerGUI::audioStopped()
 {
     stopButton.setEnabled(false);
-    pauseButton.setToggleState(false, dontSendNotification);
-    pauseButton.setEnabled(false);
     //playButton.setToggleState(false, dontSendNotification);
     //playButton.setEnabled(true);
 }
 
 void AudioPlayerGUI::audioPaused()
 {
-    pauseButton.setEnabled(false);
+    
     //playButton.setToggleState(false, dontSendNotification);
     //playButton.setEnabled(true);
     stopButton.setToggleState(false, dontSendNotification);
@@ -81,8 +81,7 @@ void AudioPlayerGUI::audioPlayed()
     //playButton.setEnabled(false);
     stopButton.setToggleState(false, dontSendNotification);
     stopButton.setEnabled(true);
-    pauseButton.setToggleState(false, dontSendNotification);
-    pauseButton.setEnabled(true);
+    
 }
 
 void AudioPlayerGUI::changeTime(double audioPosition)
@@ -104,4 +103,9 @@ void AudioPlayerGUI::changeTime(double audioPosition)
 void AudioPlayerGUI::triggerButtonStateChange()
 {
     playButton.changeState();
+}
+
+void AudioPlayerGUI::setPlayButtonEnabled()
+{
+    playButton.setEnabled(true);
 }

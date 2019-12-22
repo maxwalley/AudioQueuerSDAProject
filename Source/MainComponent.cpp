@@ -11,7 +11,7 @@
 //==============================================================================
 MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), timerCount(1), waveform(audioFormatManager), selectedItem(-2), infoBox(audioFormatManager), menu(&deviceManager)
 {
-    setSize (1100, 800);
+    setSize (1100, 700);
 
     // Some platforms require permissions to open input channels so request that here
     if (RuntimePermissions::isRequired (RuntimePermissions::recordAudio)
@@ -36,9 +36,10 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     
     playerGUI.gainSlider.addListener(this);
     playerGUI.playButton.addListener(this);
-    playerGUI.pauseButton.addListener(this);
     playerGUI.stopButton.addListener(this);
-    playerGUI.openFileButton.addListener(this);
+    playerGUI.nextButton.addListener(this);
+    playerGUI.lastButton.addListener(this);
+    queueControls.openFileButton.addListener(this);
     
     addAndMakeVisible(playerGUI);
     addAndMakeVisible(waveform);
@@ -59,6 +60,8 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     menu.addActionListener(this);
     
     deviceManager.initialise(0, 2, nullptr, true);
+    
+    addAndMakeVisible(queueControls);
 }
 
 MainComponent::~MainComponent()
@@ -117,18 +120,20 @@ void MainComponent::paintOverChildren(Graphics& g)
 void MainComponent::resized()
 {
     playTypeCombo.setBounds(400, 400, 200, 30);
-    playerGUI.setBounds(0, 50, 200, 150);
+    playerGUI.setBounds(450, 450, 200, 250);
     transformImage.setBounds(0, 450, 256, 256);
     waveform.setBounds(0, 250, 200, 150);
     table.setBounds(300, 50, 500, 300);
     infoBox.setBounds(850, 50, 200, 525);
+    queueControls.setBounds(0, 0, 100, 300);
 }
 
 void MainComponent::buttonClicked(Button* button)
 {
-    if(button == &playerGUI.openFileButton)
+    if(button == &queueControls.openFileButton)
     {
         addFile();
+        playerGUI.setPlayButtonEnabled();
     }
     
     else if(button == &playerGUI.playButton)
@@ -141,7 +146,7 @@ void MainComponent::buttonClicked(Button* button)
         {
             pauseAudio();
         }
-        playerGUI.triggerButtonStateChange();
+        
     }
     
     else if(button == &playerGUI.stopButton)
@@ -149,10 +154,6 @@ void MainComponent::buttonClicked(Button* button)
         stopAudio();
     }
     
-    else if (button == &playerGUI.pauseButton)
-    {
-        pauseAudio();
-    }
 }
 
 void MainComponent::addFile()

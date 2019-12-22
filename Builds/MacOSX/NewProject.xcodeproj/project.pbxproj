@@ -85,6 +85,10 @@
 			isa = PBXBuildFile;
 			fileRef = D052CFB9386C8C8B063FB495;
 		};
+		308013AFA2C588537806A3A5 = {
+			isa = PBXBuildFile;
+			fileRef = A1398042311AC2AC5E7C4C6F;
+		};
 		EB5A58E00C0D465B74B06717 = {
 			isa = PBXBuildFile;
 			fileRef = DF8D9254A3C1B84765DF4895;
@@ -92,6 +96,10 @@
 		3E8FC2D98B3C4E85D4DA2C5B = {
 			isa = PBXBuildFile;
 			fileRef = F6B5A0CC5C113A997CE506DF;
+		};
+		8F151411B1427279F6273A54 = {
+			isa = PBXBuildFile;
+			fileRef = C6373FEDE1024AAC7585DF47;
 		};
 		AB4E25C0EEB8F92E7FE3A778 = {
 			isa = PBXBuildFile;
@@ -457,6 +465,13 @@
 			path = System/Library/Frameworks/DiscRecording.framework;
 			sourceTree = SDKROOT;
 		};
+		8F90C2035AC648C8C23573C3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = PlayerControlButton.h;
+			path = ../../Source/PlayerControlButton.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		906E260511411CC9E25B0AF0 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -490,6 +505,20 @@
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_audio_basics.mm";
 			path = "../../JuceLibraryCode/include_juce_audio_basics.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		A1398042311AC2AC5E7C4C6F = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = QueueControls.cpp;
+			path = ../../Source/QueueControls.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		A2A9C373DC3FB618B97D419A = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = QueueControls.h;
+			path = ../../Source/QueueControls.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		A8A04D5CAE2EB934DECF5298 = {
@@ -568,6 +597,13 @@
 			name = AudioToolbox.framework;
 			path = System/Library/Frameworks/AudioToolbox.framework;
 			sourceTree = SDKROOT;
+		};
+		C6373FEDE1024AAC7585DF47 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = PlayerControlButton.cpp;
+			path = ../../Source/PlayerControlButton.cpp;
+			sourceTree = "SOURCE_ROOT";
 		};
 		C82FF5F1E83DF701F6162E9F = {
 			isa = PBXFileReference;
@@ -712,6 +748,8 @@
 		C790A858C3C28CBA9F97C1A7 = {
 			isa = PBXGroup;
 			children = (
+				C6373FEDE1024AAC7585DF47,
+				8F90C2035AC648C8C23573C3,
 				B4A01A7BBCE4FFF62912CC62,
 				833903CF33D299BB156CBEB7,
 				906E260511411CC9E25B0AF0,
@@ -727,6 +765,8 @@
 		0A81025DDA70290059710CA3 = {
 			isa = PBXGroup;
 			children = (
+				A1398042311AC2AC5E7C4C6F,
+				A2A9C373DC3FB618B97D419A,
 				8AFBFBF6E5A94A8C53B0EC9F,
 				DF8D9254A3C1B84765DF4895,
 				F77808A52822758B4734CE6F,
@@ -1083,8 +1123,10 @@
 				3BD91E4E6B639C4ABE52F79F,
 				C0D114C15DF4495C968C1F74,
 				66A49005076558B0AFD09EA3,
+				308013AFA2C588537806A3A5,
 				EB5A58E00C0D465B74B06717,
 				3E8FC2D98B3C4E85D4DA2C5B,
+				8F151411B1427279F6273A54,
 				AB4E25C0EEB8F92E7FE3A778,
 				C821630C5FB8D6B313F0EFA8,
 				06587ECA6131E92B0B978EC7,

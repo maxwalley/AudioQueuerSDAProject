@@ -23,11 +23,18 @@
     <FILE id="x9t7jK" name="QueueTableModel.h" compile="0" resource="0"
           file="Source/QueueTableModel.h"/>
     <GROUP id="{D0169949-7A6A-ECE1-224E-BDEBA828A34A}" name="GUI">
+      <FILE id="DAMxZc" name="QueueControls.cpp" compile="1" resource="0"
+            file="Source/QueueControls.cpp"/>
+      <FILE id="KADnSj" name="QueueControls.h" compile="0" resource="0" file="Source/QueueControls.h"/>
       <FILE id="HvLMAh" name="InfoSection.h" compile="0" resource="0" file="Source/InfoSection.h"/>
       <FILE id="H5RSW7" name="InfoSection.cpp" compile="1" resource="0" file="Source/InfoSection.cpp"/>
       <FILE id="cPNy6S" name="InfoBox.h" compile="0" resource="0" file="Source/InfoBox.h"/>
       <FILE id="zqFUZ8" name="InfoBox.cpp" compile="1" resource="0" file="Source/InfoBox.cpp"/>
       <GROUP id="{725DCBBF-D78B-B684-A3EE-A47707B2AEDF}" name="Audio">
+        <FILE id="q7l2ce" name="PlayerControlButton.cpp" compile="1" resource="0"
+              file="Source/PlayerControlButton.cpp"/>
+        <FILE id="hVxIjf" name="PlayerControlButton.h" compile="0" resource="0"
+              file="Source/PlayerControlButton.h"/>
         <FILE id="lCFplO" name="PlayPauseButton.cpp" compile="1" resource="0"
               file="Source/PlayPauseButton.cpp"/>
         <FILE id="FO4OQg" name="PlayPauseButton.h" compile="0" resource="0"
