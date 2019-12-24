@@ -153,40 +153,70 @@ int QueueTableModel::getSelectedRow()
     return embeddedTable.getSelectedRow();
 }
 
-void QueueTableModel::moveTransportOn()
+void QueueTableModel::moveTransportOn(bool ignoreLooping)
 {
     //Stops transport
     transport.stop();
     
-    //Checks to see if the item is set to loop
-    if(items[currentIndexPlaying]->getLoop() == true)
+    //Checks to see something is playing
+    if(currentIndexPlaying != -1)
     {
-        //Checks to see if the specified number of loops have been completed
-        if(items[currentIndexPlaying]->getNumLoops() > loopCounter)
+        //Checks to see if looping mechanism should be skipped
+        if(ignoreLooping == false)
         {
-            loopCounter++;
+            //Checks to see if the item is set to loop
+            if(items[currentIndexPlaying]->getLoop() == true)
+            {
+                //Checks to see if the specified number of loops have been completed
+                if(items[currentIndexPlaying]->getNumLoops() > loopCounter)
+                {
+                    loopCounter++;
+                }
+                else
+                {
+                    currentIndexPlaying++;
+                }
+            }
+            else
+            {
+                //Moves index onto next
+                currentIndexPlaying++;
+            }
         }
         else
         {
             currentIndexPlaying++;
         }
-    }
-    else
-    {
-        
-        //Moves index onto next
-        currentIndexPlaying++;
-    }
     
-    //Checks to see if we're at the end of the list
-    if(currentIndexPlaying != items.size())
-    {
-        setUpTransport(currentIndexPlaying);
+        //Checks to see if we're at the end of the list
+        if(currentIndexPlaying != items.size())
+        {
+            setUpTransport(currentIndexPlaying);
+        }
+        else
+        {
+            //Resets current index playing to none
+            currentIndexPlaying = -1;
+        
+            sendActionMessage("Queue finished");
+        }
     }
-    else
+}
+
+void QueueTableModel::moveTransportBack()
+{
+    transport.stop();
+    
+    //Checks to see something is playing
+    if(currentIndexPlaying != -1)
     {
-        //Resets current index playing to none
-        currentIndexPlaying = -1;
+        //Checks to see if current playing item is not the first on the list
+        if(currentIndexPlaying != 0)
+        {
+            currentIndexPlaying--;
+            
+            setUpTransport(currentIndexPlaying);
+        }
     }
 }
 
@@ -220,13 +250,13 @@ void QueueTableModel::stopPointReached()
             //Checks if current position is after the stop point
             if(transport.getCurrentPosition() >= items[currentIndexPlaying]->getStopPoint())
             {
-                moveTransportOn();
+                moveTransportOn(false);
             }
         }
         
         else if(transport.hasStreamFinished() == true)
         {
-            moveTransportOn();
+            moveTransportOn(false);
         }
     }
 }

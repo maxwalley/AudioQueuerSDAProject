@@ -48,7 +48,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "185"
             endingLineNumber = "185"
-            landmarkName = "QueueTableModel::moveTransportOn()"
+            landmarkName = "QueueTableModel::moveTransportOn(ignoreLooping)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -64,7 +64,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "185"
             endingLineNumber = "185"
-            landmarkName = "QueueTableModel::moveTransportOn()"
+            landmarkName = "QueueTableModel::moveTransportOn(ignoreLooping)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -96,7 +96,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "270"
             endingLineNumber = "270"
-            landmarkName = "QueueTableModel::actionListenerCallback(message)"
+            landmarkName = "QueueTableModel::setUpTransport(indexToPlay)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -112,23 +112,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "160"
             endingLineNumber = "160"
-            landmarkName = "QueueTableModel::moveTransportOn()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B451246E-1FC3-48CB-9F41-052B8EE55D4D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../Source/QueueTableModel.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "QueueTableModel::moveTransportOn()"
+            landmarkName = "QueueTableModel::moveTransportOn(ignoreLooping)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -144,7 +128,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "167"
             endingLineNumber = "167"
-            landmarkName = "QueueTableModel::moveTransportOn()"
+            landmarkName = "QueueTableModel::moveTransportOn(ignoreLooping)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -154,6 +154,11 @@ void MainComponent::buttonClicked(Button* button)
         stopAudio();
     }
     
+    else if(button == &playerGUI.nextButton)
+    {
+        table.moveTransportOn(true);
+    }
+    
 }
 
 void MainComponent::addFile()
@@ -280,6 +285,11 @@ void MainComponent::actionListenerCallback(const String &message)
     }
     
     else if(message == "Stop audio")
+    {
+        stopAudio();
+    }
+    
+    else if(message == "Queue finished")
     {
         stopAudio();
     }

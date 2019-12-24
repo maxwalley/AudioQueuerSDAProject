@@ -42,7 +42,13 @@ public:
     
     int getSelectedRow();
     
-    void moveTransportOn();
+    /**Moves the audio transport onto the next item in the queue. If there are no more items to play it will stop the queue
+     Parameters:
+     bool ignoreLooping - true if the looping mechanism wants to be ignored, false if not*/
+    void moveTransportOn(bool ignoreLooping);
+    
+    /**Moves the audio transport back to the last item in the queue. If there is nothing before it will stop the queue */
+    void moveTransportBack();
     
     void startQueue();
     
