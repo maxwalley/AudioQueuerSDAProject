@@ -23,6 +23,12 @@ QueueControls::QueueControls() : openFileButton("Open File")
     
     addAndMakeVisible(loopQueueLabel);
     loopQueueLabel.setText("Loop Queue?", dontSendNotification);
+    
+    addAndMakeVisible(shuffleQueueButton);
+    shuffleQueueButton.setToggleState(false, dontSendNotification);
+    
+    addAndMakeVisible(shuffleQueueLabel);
+    shuffleQueueLabel.setText("Shuffle Queue?", dontSendNotification);
 }
 
 QueueControls::~QueueControls()
@@ -41,4 +47,9 @@ void QueueControls::resized()
 bool QueueControls::getLoopQueueButtonState()
 {
     return loopQueueButton.getToggleState();
+}
+
+bool QueueControls::getShuffleQueueButtonState()
+{
+    return shuffleQueueButton.getToggleState();
 }

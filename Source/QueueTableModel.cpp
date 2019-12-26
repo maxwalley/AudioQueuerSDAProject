@@ -10,11 +10,16 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "QueueTableModel.h"
+#include "QueueControls.h"
 
 //==============================================================================
 QueueTableModel::QueueTableModel() : currentIndexPlaying(-1), currentIndexSelected(-1), loopCounter(0)
 {
+    setSize(500, 500);
+    
     addAndMakeVisible(embeddedTable);
+    
+    addAndMakeVisible(queueControls);
     
     embeddedTable.setHeader(&header);
     embeddedTable.setModel(this);
@@ -32,7 +37,7 @@ QueueTableModel::~QueueTableModel()
 
 void QueueTableModel::resized()
 {
-    embeddedTable.setBounds(0, 0, getWidth(), getHeight());
+    embeddedTable.setBounds(200, 0, 300, getHeight());
 }
 
 int QueueTableModel::getNumRows()
@@ -153,7 +158,7 @@ int QueueTableModel::getSelectedRow()
     return embeddedTable.getSelectedRow();
 }
 
-void QueueTableModel::moveTransportOn(bool ignoreLooping, bool loopQueue)
+void QueueTableModel::moveTransportOn(bool ignoreLooping)
 {
     //Stops transport
     transport.stop();
@@ -174,6 +179,7 @@ void QueueTableModel::moveTransportOn(bool ignoreLooping, bool loopQueue)
                 }
                 else
                 {
+                    loopCounter = 0;
                     currentIndexPlaying++;
                 }
             }
@@ -188,6 +194,17 @@ void QueueTableModel::moveTransportOn(bool ignoreLooping, bool loopQueue)
             currentIndexPlaying++;
         }
     
+        //Checks that a loop is not currently being played
+        if(loopCounter == 0)
+        {
+            //If shuffle is on
+            if(queueControls.getShuffleQueueButtonState() == true)
+            {
+                //Gets a random value in the range of how many items there are
+                currentIndexPlaying = Random::getSystemRandom().nextInt(items.size() - 1);
+            }
+        }
+        
         //Checks to see if we're at the end of the list
         if(currentIndexPlaying != items.size())
         {
@@ -195,7 +212,7 @@ void QueueTableModel::moveTransportOn(bool ignoreLooping, bool loopQueue)
         }
         else
         {
-            if(loopQueue == true)
+            if(queueControls.getLoopQueueButtonState() == true)
             {
                 //Restarts the queue
                 startQueue();
@@ -247,7 +264,7 @@ int QueueTableModel::getCurrentStopPoint() const
     }
 }
 
-void QueueTableModel::stopPointReached(bool loopQueue)
+void QueueTableModel::stopPointReached()
 {
     //Checks a file is playing
     if(currentIndexPlaying != -1)
@@ -258,14 +275,14 @@ void QueueTableModel::stopPointReached(bool loopQueue)
             //Checks if current position is after the stop point
             if(transport.getCurrentPosition() >= items[currentIndexPlaying]->getStopPoint())
             {
-                moveTransportOn(false, loopQueue);
+                moveTransportOn(false);
             }
         }
         
         //Checks if the file has finished
         else if(transport.hasStreamFinished() == true)
         {
-            moveTransportOn(false, loopQueue);
+            moveTransportOn(false);
         }
     }
 }

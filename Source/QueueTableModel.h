@@ -14,6 +14,7 @@
 #include "QueueItem.h"
 #include "QueueTableHeader.h"
 #include "ItemDataStruct.h"
+#include "QueueControls.h"
 
 //==============================================================================
 /*
@@ -44,9 +45,8 @@ public:
     
     /**Moves the audio transport onto the next item in the queue. If there are no more items to play it will stop the queue
      Parameters:
-     bool ignoreLooping - true if the looping mechanism wants to be ignored, false if not
-     bool loopQueue - true if the whole queue is set to loop*/
-    void moveTransportOn(bool ignoreLooping, bool loopQueue);
+     bool ignoreLooping - true if the looping mechanism wants to be ignored, false if not*/
+    void moveTransportOn(bool ignoreLooping);
     
     /**Moves the audio transport back to the last item in the queue. If there is nothing before it will stop the queue */
     void moveTransportBack();
@@ -54,7 +54,7 @@ public:
     void startQueue();
     
     int getCurrentStopPoint() const;
-    void stopPointReached(bool loopQueue);
+    void stopPointReached();
     
     File* getCurrentPlayingFile() const;
     
@@ -75,6 +75,8 @@ public:
     
     /**Updates the data struct of the currently selected item with the new loop toggle selection*/
     void updateSelectedItemNumLoops(int newNumLoops);
+    
+    QueueControls queueControls;
     
     private:
     

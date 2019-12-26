@@ -16,7 +16,6 @@
 #include "AudioPlayerGUI.h"
 #include "InfoBox.h"
 #include "Menu.h"
-#include "QueueControls.h"
 
 //==============================================================================
 /*
@@ -100,8 +99,5 @@ private:
     Menu menu;
     
     AudioDeviceManager deviceManager;
-    
-    QueueControls queueControls;
-    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

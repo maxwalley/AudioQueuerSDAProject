@@ -39,7 +39,7 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     playerGUI.stopButton.addListener(this);
     playerGUI.nextButton.addListener(this);
     playerGUI.lastButton.addListener(this);
-    queueControls.openFileButton.addListener(this);
+    table.queueControls.openFileButton.addListener(this);
     
     addAndMakeVisible(playerGUI);
     addAndMakeVisible(waveform);
@@ -60,8 +60,6 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     menu.addActionListener(this);
     
     deviceManager.initialise(0, 2, nullptr, true);
-    
-    addAndMakeVisible(queueControls);
 }
 
 MainComponent::~MainComponent()
@@ -82,7 +80,7 @@ void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFil
         table.transport.getNextAudioBlock(bufferToFill);
     
         const MessageManagerLock stopPointLock;
-        table.stopPointReached(queueControls.getLoopQueueButtonState());
+        table.stopPointReached();
     }
     else
     {
@@ -125,12 +123,11 @@ void MainComponent::resized()
     waveform.setBounds(0, 250, 200, 150);
     table.setBounds(300, 50, 500, 300);
     infoBox.setBounds(850, 50, 200, 525);
-    queueControls.setBounds(0, 0, 100, 300);
 }
 
 void MainComponent::buttonClicked(Button* button)
 {
-    if(button == &queueControls.openFileButton)
+    if(button == &table.queueControls.openFileButton)
     {
         addFile();
         playerGUI.setPlayButtonEnabled();
@@ -156,7 +153,7 @@ void MainComponent::buttonClicked(Button* button)
     
     else if(button == &playerGUI.nextButton)
     {
-        table.moveTransportOn(true, queueControls.getLoopQueueButtonState());
+        table.moveTransportOn(true);
     }
     
     else if(button == &playerGUI.lastButton)
