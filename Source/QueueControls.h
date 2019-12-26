@@ -21,11 +21,18 @@ public:
     QueueControls();
     ~QueueControls();
 
-    void paint (Graphics&) override;
     void resized() override;
     
     TextButton openFileButton;
+    
+    /**Returns the state of the loop queue toggle button
+     true for button selected
+     false for button deselected*/
+    bool getLoopQueueButtonState();
 
 private:
+    ToggleButton loopQueueButton;
+    Label loopQueueLabel;
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (QueueControls)
 };

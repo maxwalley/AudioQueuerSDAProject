@@ -82,7 +82,7 @@ void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFil
         table.transport.getNextAudioBlock(bufferToFill);
     
         const MessageManagerLock stopPointLock;
-        table.stopPointReached();
+        table.stopPointReached(queueControls.getLoopQueueButtonState());
     }
     else
     {
@@ -156,7 +156,12 @@ void MainComponent::buttonClicked(Button* button)
     
     else if(button == &playerGUI.nextButton)
     {
-        table.moveTransportOn(true);
+        table.moveTransportOn(true, queueControls.getLoopQueueButtonState());
+    }
+    
+    else if(button == &playerGUI.lastButton)
+    {
+        table.moveTransportBack();
     }
     
 }

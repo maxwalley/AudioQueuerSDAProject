@@ -153,7 +153,7 @@ int QueueTableModel::getSelectedRow()
     return embeddedTable.getSelectedRow();
 }
 
-void QueueTableModel::moveTransportOn(bool ignoreLooping)
+void QueueTableModel::moveTransportOn(bool ignoreLooping, bool loopQueue)
 {
     //Stops transport
     transport.stop();
@@ -195,8 +195,16 @@ void QueueTableModel::moveTransportOn(bool ignoreLooping)
         }
         else
         {
-            //Resets current index playing to none
-            currentIndexPlaying = -1;
+            if(loopQueue == true)
+            {
+                //Restarts the queue
+                startQueue();
+            }
+            else
+            {
+                //Resets current index playing to none
+                currentIndexPlaying = -1;
+            }
         
             sendActionMessage("Queue finished");
         }
@@ -239,7 +247,7 @@ int QueueTableModel::getCurrentStopPoint() const
     }
 }
 
-void QueueTableModel::stopPointReached()
+void QueueTableModel::stopPointReached(bool loopQueue)
 {
     //Checks a file is playing
     if(currentIndexPlaying != -1)
@@ -250,13 +258,14 @@ void QueueTableModel::stopPointReached()
             //Checks if current position is after the stop point
             if(transport.getCurrentPosition() >= items[currentIndexPlaying]->getStopPoint())
             {
-                moveTransportOn(false);
+                moveTransportOn(false, loopQueue);
             }
         }
         
+        //Checks if the file has finished
         else if(transport.hasStreamFinished() == true)
         {
-            moveTransportOn(false);
+            moveTransportOn(false, loopQueue);
         }
     }
 }
