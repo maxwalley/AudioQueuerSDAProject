@@ -15,13 +15,13 @@
 QueueItem::QueueItem(int idNum, File* file)
 {
     itemData.itemIndex = idNum;
-    itemData.file = file;
-    itemData.fileName = file->getFileName();
-    itemData.size = itemData.file->getSize();
+    itemData.file = *file;
+    itemData.fileName = itemData.file.getFileName();
+    itemData.size = itemData.file.getSize();
 
     AudioFormatManager tempManager;
     tempManager.registerBasicFormats();
-    reader = tempManager.createReaderFor(*itemData.file);
+    reader = tempManager.createReaderFor(itemData.file);
     
     if(reader != nullptr)
     {
@@ -68,7 +68,7 @@ void QueueItem::resized()
 
 File* QueueItem::getFile()
 {
-    return itemData.file;
+    return &itemData.file;
 }
 
 int QueueItem::getItemIndex() const

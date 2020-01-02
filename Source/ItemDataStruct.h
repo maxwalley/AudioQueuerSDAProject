@@ -13,7 +13,7 @@
 struct ItemInfo
 {
     int itemIndex;
-    File* file;
+    File file;
     String fileName;
     int64_t size;
     int64_t lengthInSamples;

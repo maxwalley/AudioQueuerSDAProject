@@ -45,6 +45,7 @@ InfoBox::InfoBox(AudioFormatManager &manager) : fileNameSection("File Name"), fi
     
     addAndMakeVisible(deleteButton);
     deleteButton.addListener(this);
+    deleteButton.setEnabled(false);
     
     addAndMakeVisible(waveform);
 }
@@ -87,7 +88,7 @@ void InfoBox::resized()
 void InfoBox::changeData(ItemInfo currentDataStruct)
 {
     fileNameSection.setData(currentDataStruct.fileName);
-    filePathSection.setData(currentDataStruct.file->getFullPathName());
+    filePathSection.setData(currentDataStruct.file.getFullPathName());
     fileSizeSection.setData(String(currentDataStruct.size));
     fileLengthSection.setData(currentDataStruct.lengthInTime);
     fileSampleRateSection.setData(String(currentDataStruct.sampleRate));
@@ -108,9 +109,10 @@ void InfoBox::changeData(ItemInfo currentDataStruct)
     
     newNumLoops = 0;
     
-    waveform.set(new FileInputSource(*currentDataStruct.file));
+    waveform.set(new FileInputSource(currentDataStruct.file));
     
     loopToggle.setEnabled(true);
+    deleteButton.setEnabled(true);
 }
 
 bool InfoBox::getLoopButtonState() const

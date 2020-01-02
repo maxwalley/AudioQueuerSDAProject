@@ -194,12 +194,12 @@ void QueueTableModel::moveTransportOn(bool ignoreLooping)
             if(queueControls.getShuffleQueueButtonState() == true)
             {
                 //Gets a random value in the range of how many items there are
-                currentIndexPlaying = Random::getSystemRandom().nextInt(items.size() - 1);
+                currentIndexPlaying = Random::getSystemRandom().nextInt(items.size());
             }
         }
         
-        //Checks to see if we're at the end of the list
-        if(currentIndexPlaying != items.size())
+        //Checks to see if we're at the end of the list or the shuffle button is enabled
+        if(currentIndexPlaying != items.size() || queueControls.getShuffleQueueButtonState() == true)
         {
             setUpTransport(currentIndexPlaying);
         }
@@ -335,6 +335,7 @@ void QueueTableModel::actionListenerCallback(const String &message)
 
 File* QueueTableModel::getCurrentPlayingFile() const
 {
+    DBG(items[currentIndexPlaying]->getFileName());
     return items[currentIndexPlaying]->getFile();
 }
 
