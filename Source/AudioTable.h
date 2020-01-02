@@ -19,14 +19,14 @@
 //==============================================================================
 /*
 */
-class QueueTableModel    : public TableListBoxModel,
-                           public Component,
-                           public ActionBroadcaster,
-                           public ActionListener
+class AudioTable    : public TableListBoxModel,
+                      public Component,
+                      public ActionBroadcaster,
+                      public ActionListener
 {
 public:
-    QueueTableModel();
-    ~QueueTableModel();
+    AudioTable();
+    ~AudioTable();
     
     void resized() override;
     
@@ -105,5 +105,5 @@ public:
     
     QueueTableHeader header;
     
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (QueueTableModel)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioTable)
 };

@@ -9,11 +9,11 @@
 */
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "QueueTableModel.h"
+#include "AudioTable.h"
 #include "QueueControls.h"
 
 //==============================================================================
-QueueTableModel::QueueTableModel() : currentIndexPlaying(-1), currentIndexSelected(-1), loopCounter(0)
+AudioTable::AudioTable() : currentIndexPlaying(-1), currentIndexSelected(-1), loopCounter(0)
 {
     addAndMakeVisible(embeddedTable);
     
@@ -25,7 +25,7 @@ QueueTableModel::QueueTableModel() : currentIndexPlaying(-1), currentIndexSelect
     items.clear();
 }
 
-QueueTableModel::~QueueTableModel()
+AudioTable::~AudioTable()
 {
     for(int i = 0; i < items.size(); i++)
     {
@@ -33,18 +33,18 @@ QueueTableModel::~QueueTableModel()
     }
 }
 
-void QueueTableModel::resized()
+void AudioTable::resized()
 {
     queueControls.setBounds(0, 0, 150, 300);
     embeddedTable.setBounds(200, 0, 550, getHeight());
 }
 
-int QueueTableModel::getNumRows()
+int AudioTable::getNumRows()
 {
     return items.size();
 }
 
-void QueueTableModel::paintRowBackground(Graphics& g, int rowNumber, int width, int height, bool rowIsSelected)
+void AudioTable::paintRowBackground(Graphics& g, int rowNumber, int width, int height, bool rowIsSelected)
 {
     if(rowIsSelected == true)
     {
@@ -62,7 +62,7 @@ void QueueTableModel::paintRowBackground(Graphics& g, int rowNumber, int width, 
     g.fillAll();
 }
 
-void QueueTableModel::paintCell(Graphics &g, int rowNumber, int columnId, int width, int height, bool rowIsSelected)
+void AudioTable::paintCell(Graphics &g, int rowNumber, int columnId, int width, int height, bool rowIsSelected)
 {
     String stringToDraw;
     
@@ -90,7 +90,7 @@ void QueueTableModel::paintCell(Graphics &g, int rowNumber, int columnId, int wi
     g.drawText(stringToDraw, 0, 0, width, height, Justification::centred);
 }
 
-Component* QueueTableModel::refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component* existingComponentToUpdate)
+Component* AudioTable::refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component* existingComponentToUpdate)
 {
     if(columnId == 5)
     {
@@ -113,7 +113,7 @@ Component* QueueTableModel::refreshComponentForCell(int rowNumber, int columnId,
     }
 }
 
-void QueueTableModel::addNewItem(File* file)
+void AudioTable::addNewItem(File* file)
 {
     int nextIndex = items.size();
     
@@ -127,7 +127,7 @@ void QueueTableModel::addNewItem(File* file)
     embeddedTable.updateContent();
 }
 
-void QueueTableModel::deleteSelectedItem()
+void AudioTable::deleteSelectedItem()
 {
     items.remove(currentIndexSelected);
     
@@ -137,7 +137,7 @@ void QueueTableModel::deleteSelectedItem()
     currentIndexSelected = -1;
 }
 
-void QueueTableModel::selectedRowsChanged(int lastRowSelected)
+void AudioTable::selectedRowsChanged(int lastRowSelected)
 {
     //Sets current index selected to the selected row
     currentIndexSelected = lastRowSelected;
@@ -146,12 +146,12 @@ void QueueTableModel::selectedRowsChanged(int lastRowSelected)
     sendActionMessage("Selected Item Changed");
 }
 
-int QueueTableModel::getSelectedRow()
+int AudioTable::getSelectedRow()
 {
     return embeddedTable.getSelectedRow();
 }
 
-void QueueTableModel::moveTransportOn(bool ignoreLooping)
+void AudioTable::moveTransportOn(bool ignoreLooping)
 {
     //Stops transport
     transport.stop();
@@ -220,7 +220,7 @@ void QueueTableModel::moveTransportOn(bool ignoreLooping)
     }
 }
 
-void QueueTableModel::moveTransportBack()
+void AudioTable::moveTransportBack()
 {
     transport.stop();
     
@@ -237,7 +237,7 @@ void QueueTableModel::moveTransportBack()
     }
 }
 
-void QueueTableModel::startQueue()
+void AudioTable::startQueue()
 {
     //Checks the array isnt empty
     if(items.size() > 0)
@@ -256,7 +256,7 @@ void QueueTableModel::startQueue()
     }
 }
 
-int QueueTableModel::getCurrentStopPoint() const
+int AudioTable::getCurrentStopPoint() const
 {
     //Checks a file is playing
     if(currentIndexPlaying != -1)
@@ -265,7 +265,7 @@ int QueueTableModel::getCurrentStopPoint() const
     }
 }
 
-void QueueTableModel::stopPointReached()
+void AudioTable::stopPointReached()
 {
     //Checks a file is playing
     if(currentIndexPlaying != -1)
@@ -288,7 +288,7 @@ void QueueTableModel::stopPointReached()
     }
 }
 
-bool QueueTableModel::itemPlaying() const
+bool AudioTable::itemPlaying() const
 {
     if(currentIndexPlaying != -1)
     {
@@ -300,7 +300,7 @@ bool QueueTableModel::itemPlaying() const
     }
 }
 
-void QueueTableModel::setUpTransport(int indexToPlay)
+void AudioTable::setUpTransport(int indexToPlay)
 {
     if(transport.isPlaying() == true)
     {
@@ -321,7 +321,7 @@ void QueueTableModel::setUpTransport(int indexToPlay)
     transport.start();
 }
 
-void QueueTableModel::actionListenerCallback(const String &message)
+void AudioTable::actionListenerCallback(const String &message)
 {
     //Checks message is from a play button
     if(message.startsWith("Play button pressed on index:") == true)
@@ -333,38 +333,38 @@ void QueueTableModel::actionListenerCallback(const String &message)
     }
 }
 
-File* QueueTableModel::getCurrentPlayingFile() const
+File* AudioTable::getCurrentPlayingFile() const
 {
     DBG(items[currentIndexPlaying]->getFileName());
     return items[currentIndexPlaying]->getFile();
 }
 
-ItemInfo QueueTableModel::getCurrentPlayingDataStruct() const
+ItemInfo AudioTable::getCurrentPlayingDataStruct() const
 {
     return items[currentIndexPlaying]->getItemData();
 }
 
-ItemInfo QueueTableModel::getCurrentSelectedDataStruct() const
+ItemInfo AudioTable::getCurrentSelectedDataStruct() const
 {
     return items[currentIndexSelected]->getItemData();
 }
 
-void QueueTableModel::setTransportPosition(double newPosition)
+void AudioTable::setTransportPosition(double newPosition)
 {
     transport.setPosition(newPosition);
 }
 
-void QueueTableModel::updateSelectedItemLoopToggle(bool newLoopToggle)
+void AudioTable::updateSelectedItemLoopToggle(bool newLoopToggle)
 {
     items[currentIndexSelected]->setLoop(newLoopToggle);
 }
 
-void QueueTableModel::updateSelectedItemNumLoops(int newNumLoops)
+void AudioTable::updateSelectedItemNumLoops(int newNumLoops)
 {
     items[currentIndexSelected]->setNumLoops(newNumLoops);
 }
 
-void QueueTableModel::pauseAudio()
+void AudioTable::pauseAudio()
 {
     pausePosition = transport.getCurrentPosition();
     transport.stop();

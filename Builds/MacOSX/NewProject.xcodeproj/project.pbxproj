@@ -81,9 +81,9 @@
 			isa = PBXBuildFile;
 			fileRef = 58654D1F82E74A2D05DCD4F7;
 		};
-		66A49005076558B0AFD09EA3 = {
+		8D8D4CC77E289F8D4885F9D8 = {
 			isa = PBXBuildFile;
-			fileRef = D052CFB9386C8C8B063FB495;
+			fileRef = 6696D5D405C3FA7EE33D1AF3;
 		};
 		308013AFA2C588537806A3A5 = {
 			isa = PBXBuildFile;
@@ -304,13 +304,6 @@
 			path = ../../Source/FFT.h;
 			sourceTree = "SOURCE_ROOT";
 		};
-		543E49C335FC664983DBF376 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = QueueTableModel.h;
-			path = ../../Source/QueueTableModel.h;
-			sourceTree = "SOURCE_ROOT";
-		};
 		5681B841DC2DCBA127A5D3BD = {
 			isa = PBXFileReference;
 			lastKnownFileType = file.nib;
@@ -351,6 +344,13 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = Main.cpp;
 			path = ../../Source/Main.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		6696D5D405C3FA7EE33D1AF3 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = AudioTable.cpp;
+			path = ../../Source/AudioTable.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		69AC092D8B8F078661E180C5 = {
@@ -500,6 +500,13 @@
 			path = "../../JuceLibraryCode/include_juce_audio_basics.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		9B4BCB5E8E225E457E019EA7 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = AudioTable.h;
+			path = ../../Source/AudioTable.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		A1398042311AC2AC5E7C4C6F = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -617,13 +624,6 @@
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_gui_extra.mm";
 			path = "../../JuceLibraryCode/include_juce_gui_extra.mm";
-			sourceTree = "SOURCE_ROOT";
-		};
-		D052CFB9386C8C8B063FB495 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = QueueTableModel.cpp;
-			path = ../../Source/QueueTableModel.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		D13702644EB97212EDF2681C = {
@@ -802,8 +802,8 @@
 				90CBDFE8E16135BC071A2C1F,
 				58654D1F82E74A2D05DCD4F7,
 				79BC19F92BE81CAD57EE4955,
-				D052CFB9386C8C8B063FB495,
-				543E49C335FC664983DBF376,
+				6696D5D405C3FA7EE33D1AF3,
+				9B4BCB5E8E225E457E019EA7,
 				0A81025DDA70290059710CA3,
 				A4D8A61FCFE6E0B33272563E,
 			);
@@ -1122,7 +1122,7 @@
 				9A8AF33F2DE9D35710B669C8,
 				3BD91E4E6B639C4ABE52F79F,
 				C0D114C15DF4495C968C1F74,
-				66A49005076558B0AFD09EA3,
+				8D8D4CC77E289F8D4885F9D8,
 				308013AFA2C588537806A3A5,
 				EB5A58E00C0D465B74B06717,
 				3E8FC2D98B3C4E85D4DA2C5B,

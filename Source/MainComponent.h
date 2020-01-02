@@ -10,7 +10,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "GUI/MenuModel.h"
-#include "QueueTableModel.h"
+#include "AudioTable.h"
 #include "AudioWaveform.h"
 #include "FFT.h"
 #include "AudioPlayerGUI.h"
@@ -78,7 +78,7 @@ private:
     FFT transformImage;    
     AudioPlayerGUI playerGUI;
     
-    QueueTableModel table;
+    AudioTable table;
     int selectedItem;
     
     void actionListenerCallback(const String& message) override;
