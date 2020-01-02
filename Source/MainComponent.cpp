@@ -29,11 +29,6 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
        
     table.transport.setGain(playerGUI.gainSlider.getValue());
     
-    addAndMakeVisible(playTypeCombo);
-    playTypeCombo.addItem("Play Selected", 1);
-    playTypeCombo.addItem("Play Playlist", 2);
-    playTypeCombo.setSelectedId(2);
-    
     playerGUI.gainSlider.addListener(this);
     playerGUI.playButton.addListener(this);
     playerGUI.stopButton.addListener(this);
@@ -111,17 +106,16 @@ void MainComponent::paintOverChildren(Graphics& g)
 {
     if(table.transport.isPlaying() == true)
     {
-        g.drawLine((table.transport.getCurrentPosition()/waveform.getThumbnailLength()) * 200, 250, ((table.transport.getCurrentPosition()/waveform.getThumbnailLength()) * 200), 400);
+        g.drawLine((table.transport.getCurrentPosition()/table.transport.getLengthInSeconds()) * 200, 250, ((table.transport.getCurrentPosition()/table.transport.getLengthInSeconds()) * 200), 400);
     }
 }
 
 void MainComponent::resized()
 {
-    playTypeCombo.setBounds(400, 400, 200, 30);
     playerGUI.setBounds(450, 450, 200, 250);
     transformImage.setBounds(0, 450, 256, 256);
     waveform.setBounds(0, 250, 200, 150);
-    table.setBounds(300, 50, 500, 300);
+    table.setBounds(50, 50, 750, 300);
     infoBox.setBounds(850, 50, 200, 525);
 }
 
@@ -183,10 +177,10 @@ void MainComponent::playQueue()
         table.transport.setPosition(pausePosition);
     }
     table.startQueue();
-    Timer::startTimer(100);
     transformImage.timerTrigger();
     playerGUI.audioPlayed();
     transportState = playing;
+    Timer:startTimer(100);
 }
 
 void MainComponent::pauseAudio()
@@ -222,7 +216,7 @@ void MainComponent::timerCallback()
 void MainComponent::mouseDown(const MouseEvent &event)
 {
     //Checks its in the waveform area
-    if(event.originalComponent == &waveform /*&& fileLoaded == true*/)
+    if(event.originalComponent == &waveform)
     {
         changeAudioPosition(event.getMouseDownX());
     }

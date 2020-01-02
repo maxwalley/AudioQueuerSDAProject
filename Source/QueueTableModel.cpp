@@ -15,8 +15,6 @@
 //==============================================================================
 QueueTableModel::QueueTableModel() : currentIndexPlaying(-1), currentIndexSelected(-1), loopCounter(0)
 {
-    setSize(500, 500);
-    
     addAndMakeVisible(embeddedTable);
     
     addAndMakeVisible(queueControls);
@@ -37,7 +35,8 @@ QueueTableModel::~QueueTableModel()
 
 void QueueTableModel::resized()
 {
-    embeddedTable.setBounds(200, 0, 300, getHeight());
+    queueControls.setBounds(0, 0, 150, 300);
+    embeddedTable.setBounds(200, 0, 550, getHeight());
 }
 
 int QueueTableModel::getNumRows()

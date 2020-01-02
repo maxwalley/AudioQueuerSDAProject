@@ -52,8 +52,6 @@ private:
     std::unique_ptr<AudioFormatReaderSource> audioFormatReaderSource;
     bool fileLoaded;
     
-    ComboBox playTypeCombo;
-    
     void buttonClicked(Button* button) override;
     void sliderValueChanged(Slider* slider) override;
     

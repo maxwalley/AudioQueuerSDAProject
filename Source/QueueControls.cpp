@@ -14,7 +14,7 @@
 //==============================================================================
 QueueControls::QueueControls() : openFileButton("Open File")
 {
-    setSize(100, 300);
+    setSize(150, 300);
     
     addAndMakeVisible(openFileButton);
     
@@ -40,8 +40,11 @@ void QueueControls::resized()
 {
     openFileButton.setBounds(0, 0, getWidth(), 30);
     
-    loopQueueButton.setBounds(75, 50, 25, 25);
-    loopQueueLabel.setBounds(0, 50, 75, 25);
+    loopQueueButton.setBounds(100, 50, 25, 25);
+    loopQueueLabel.setBounds(0, 50, 100, 25);
+    
+    shuffleQueueButton.setBounds(100, 100, 25, 25);
+    shuffleQueueLabel.setBounds(0, 100, 100, 25);
 }
 
 bool QueueControls::getLoopQueueButtonState()

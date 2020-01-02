@@ -15,6 +15,7 @@
 AudioWaveform::AudioWaveform(AudioFormatManager &formatManagerToUse) : thumbnail(512, formatManagerToUse, thumbnailCache), thumbnailArea(0, 0, 200, 150), thumbnailCache(5)
 {
     setSize(200, 150);
+    setAlwaysOnTop(true);
 }
 
 AudioWaveform::~AudioWaveform()
@@ -27,8 +28,6 @@ void AudioWaveform::paint (Graphics& g)
     g.fillRect(thumbnailArea);
     g.setColour(Colours::black);
     thumbnail.drawChannels(g, thumbnailArea, 0, thumbnail.getTotalLength(), 1.0);
-    
-    
 }
 
 void AudioWaveform::resized()
