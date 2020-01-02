@@ -30,9 +30,10 @@ InfoBox::InfoBox(AudioFormatManager &manager) : fileNameSection("File Name"), fi
     
     addAndMakeVisible(loopDescriptionLabel);
     loopDescriptionLabel.setText("Loop?", dontSendNotification);
+
     addAndMakeVisible(loopToggle);
-    
     loopToggle.addListener(this);
+    loopToggle.setEnabled(false);
     
     addAndMakeVisible(loopNumDescriptionLabel);
     loopNumDescriptionLabel.setText("Number of Loops", dontSendNotification);
@@ -108,6 +109,8 @@ void InfoBox::changeData(ItemInfo currentDataStruct)
     newNumLoops = 0;
     
     waveform.set(new FileInputSource(*currentDataStruct.file));
+    
+    loopToggle.setEnabled(true);
 }
 
 bool InfoBox::getLoopButtonState() const

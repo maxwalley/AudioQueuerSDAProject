@@ -38,7 +38,7 @@ public:
     
     /**Returns new number of loops*/
     int getNewNumLoops() const;
-
+    
 private:
     Label headerLabel;
     
