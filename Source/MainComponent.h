@@ -73,16 +73,6 @@ private:
     void mouseDown (const MouseEvent &event) override;
     void changeAudioPosition(int xAxis);
     
-    enum TransportState
-    {
-        playing,
-        stopped,
-        paused,
-    };
-    uint64_t pausePosition;
-    
-    TransportState transportState;
-    
     AudioWaveform waveform;
     
     FFT transformImage;    

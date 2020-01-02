@@ -42,18 +42,17 @@ void PlayPauseButton::paintButton (Graphics &g, bool shouldDrawButtonAsHighlight
     }
 }
 
-void PlayPauseButton::changeState()
+void PlayPauseButton::changeState(bool newState)
 {
-    switch(buttonState)
+    if(newState == 0 && buttonState == pause)
     {
-        case play:
-            buttonState = pause;
-            break;
-            
-        case pause:
-            buttonState = play;
-            break;
+        buttonState = play;
     }
+    else if(newState == 1 && buttonState == play)
+    {
+        buttonState = pause;
+    }
+    
     repaint();
 }
 

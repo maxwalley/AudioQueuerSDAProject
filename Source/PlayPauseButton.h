@@ -24,7 +24,10 @@ public:
 
     void paintButton (Graphics &g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override;
 
-    void changeState();
+    /**Causes the button to change its state to a selected new state
+     0 for play
+     1 for pause*/
+    void changeState(bool newState);
     
     /**Returns the current state of the button*/
     int getButtonState();

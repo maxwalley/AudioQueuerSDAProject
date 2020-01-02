@@ -39,9 +39,6 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     addAndMakeVisible(playerGUI);
     addAndMakeVisible(waveform);
     
-    transportState = stopped;
-    pausePosition = 0;
-    
     waveform.addMouseListener(this, false);
     
     addAndMakeVisible(table);
@@ -168,35 +165,30 @@ void MainComponent::addFile()
 
 void MainComponent::playQueue()
 {
-    if(transportState == stopped)
-    {
-        table.transport.setPosition(0);
-    }
-    else if(transportState == paused)
-    {
-        table.transport.setPosition(pausePosition);
-    }
     table.startQueue();
     transformImage.timerTrigger();
     playerGUI.audioPlayed();
-    transportState = playing;
     Timer:startTimer(100);
 }
 
 void MainComponent::pauseAudio()
 {
-    pausePosition = table.transport.getCurrentPosition();
-    table.transport.stop();
-    playerGUI.audioPaused();
-    transportState = paused;
+    //checks a file is playing
+    if(table.transport.isPlaying() == true)
+    {
+        table.pauseAudio();
+        playerGUI.audioPaused();
+    }
 }
 
 void MainComponent::stopAudio()
 {
-    table.transport.stop();
-    Timer::stopTimer();
-    playerGUI.audioStopped();
-    transportState = stopped;
+    if(table.transport.isPlaying() == true)
+    {
+        table.transport.stop();
+        Timer::stopTimer();
+        playerGUI.audioStopped();
+    }
 }
 
 void MainComponent::sliderValueChanged(Slider* slider)

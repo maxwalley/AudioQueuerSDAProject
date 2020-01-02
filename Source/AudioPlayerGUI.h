@@ -33,8 +33,6 @@ public:
     
     void changeTime(double audioPosition);
     
-    void triggerButtonStateChange();
-    
     Slider gainSlider;
     
     PlayPauseButton playButton;

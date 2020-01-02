@@ -63,24 +63,20 @@ void AudioPlayerGUI::resized()
 void AudioPlayerGUI::audioStopped()
 {
     stopButton.setEnabled(false);
-    //playButton.setToggleState(false, dontSendNotification);
-    //playButton.setEnabled(true);
+    playButton.changeState(0);
 }
 
 void AudioPlayerGUI::audioPaused()
 {
-    
-    //playButton.setToggleState(false, dontSendNotification);
-    //playButton.setEnabled(true);
-    stopButton.setToggleState(false, dontSendNotification);
     stopButton.setEnabled(true);
+    playButton.changeState(0);
 }
 
 void AudioPlayerGUI::audioPlayed()
 {
-    //playButton.setEnabled(false);
     stopButton.setToggleState(false, dontSendNotification);
     stopButton.setEnabled(true);
+    playButton.changeState(1);
     
 }
 
@@ -98,11 +94,6 @@ void AudioPlayerGUI::changeTime(double audioPosition)
         
     const MessageManagerLock labelLock;
     timeLabel.setText(fullTime, dontSendNotification);
-}
-
-void AudioPlayerGUI::triggerButtonStateChange()
-{
-    playButton.changeState();
 }
 
 void AudioPlayerGUI::setPlayButtonEnabled()

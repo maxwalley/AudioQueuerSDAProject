@@ -249,8 +249,17 @@ void QueueTableModel::startQueue()
     //Checks the array isnt empty
     if(items.size() > 0)
     {
-        currentIndexPlaying = 0;
-        setUpTransport(currentIndexPlaying);
+        //Checks the audio isn't paused
+        if(pausePosition == 0)
+        {
+            currentIndexPlaying = 0;
+            setUpTransport(currentIndexPlaying);
+        }
+        else
+        {
+            transport.setPosition(pausePosition);
+            transport.start();
+        }
     }
 }
 
@@ -311,6 +320,9 @@ void QueueTableModel::setUpTransport(int indexToPlay)
     //Sends message to main component so thumbnail can be changed
     sendActionMessage("Playing Item Changed");
     
+    //Resets pause position
+    pausePosition = 0;
+    
     transport.start();
 }
 
@@ -354,4 +366,10 @@ void QueueTableModel::updateSelectedItemLoopToggle(bool newLoopToggle)
 void QueueTableModel::updateSelectedItemNumLoops(int newNumLoops)
 {
     items[currentIndexSelected]->setNumLoops(newNumLoops);
+}
+
+void QueueTableModel::pauseAudio()
+{
+    pausePosition = transport.getCurrentPosition();
+    transport.stop();
 }

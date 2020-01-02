@@ -78,6 +78,9 @@ public:
     
     QueueControls queueControls;
     
+    /**Pauses the audio stream*/
+    void pauseAudio();
+    
     private:
     
     int getNumRows() override;
@@ -97,6 +100,8 @@ public:
     void setUpTransport(int indexToPlay);
     
     void actionListenerCallback(const String &message) override;
+    
+    double pausePosition;
     
     QueueTableHeader header;
     

@@ -62,9 +62,9 @@
             filePath = "../../Source/QueueTableModel.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
-            landmarkName = "QueueTableModel::stopPointReached()"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
+            landmarkName = "QueueTableModel::getCurrentStopPoint()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -110,10 +110,10 @@
             filePath = "../../Source/QueueTableModel.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "309"
-            endingLineNumber = "309"
-            landmarkName = "QueueTableModel::setUpTransport(indexToPlay)"
-            landmarkType = "7">
+            startingLineNumber = "318"
+            endingLineNumber = "318"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -126,9 +126,9 @@
             filePath = "../../Source/QueueTableModel.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "308"
-            endingLineNumber = "308"
-            landmarkName = "QueueTableModel::setUpTransport(indexToPlay)"
+            startingLineNumber = "317"
+            endingLineNumber = "317"
+            landmarkName = "QueueTableModel::itemPlaying()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
