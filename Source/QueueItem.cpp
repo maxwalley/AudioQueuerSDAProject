@@ -16,11 +16,9 @@ QueueItem::QueueItem(int idNum, File* file)
 {
     itemData.itemIndex = idNum;
     itemData.file = file;
+    itemData.fileName = file->getFileName();
     itemData.size = itemData.file->getSize();
-    
-    //currentFile = File(*file);
-    //size = currentFile.getSize();
-    
+
     AudioFormatManager tempManager;
     tempManager.registerBasicFormats();
     reader = tempManager.createReaderFor(*itemData.file);
@@ -85,7 +83,7 @@ void QueueItem::setItemIndex(int index)
 
 String QueueItem::getFileName()
 {
-    return itemData.file->getFileName();
+    return itemData.fileName;
 }
 
 int64_t QueueItem::getFileSize()

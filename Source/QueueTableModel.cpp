@@ -88,12 +88,6 @@ void QueueTableModel::paintCell(Graphics &g, int rowNumber, int columnId, int wi
     
     g.setColour(Colours::black);
     g.drawText(stringToDraw, 0, 0, width, height, Justification::centred);
-    
-    /*if (columnId == 2)
-    {
-        g.setColour(Colours::black);
-        g.drawText("Hello", 0, 0, width, height, Justification::centred);
-    }*/
 }
 
 Component* QueueTableModel::refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component* existingComponentToUpdate)
@@ -220,9 +214,8 @@ void QueueTableModel::moveTransportOn(bool ignoreLooping)
             {
                 //Resets current index playing to none
                 currentIndexPlaying = -1;
+                sendActionMessage("Queue finished");
             }
-        
-            sendActionMessage("Queue finished");
         }
     }
 }
@@ -322,6 +315,8 @@ void QueueTableModel::setUpTransport(int indexToPlay)
     
     //Resets pause position
     pausePosition = 0;
+    
+    DBG("Transport starting at index:" << indexToPlay);
     
     transport.start();
 }

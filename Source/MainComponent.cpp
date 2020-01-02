@@ -183,12 +183,9 @@ void MainComponent::pauseAudio()
 
 void MainComponent::stopAudio()
 {
-    if(table.transport.isPlaying() == true)
-    {
-        table.transport.stop();
-        Timer::stopTimer();
-        playerGUI.audioStopped();
-    }
+    table.transport.stop();
+    Timer::stopTimer();
+    playerGUI.audioStopped();
 }
 
 void MainComponent::sliderValueChanged(Slider* slider)

@@ -14,6 +14,7 @@ struct ItemInfo
 {
     int itemIndex;
     File* file;
+    String fileName;
     int64_t size;
     int64_t lengthInSamples;
     double sampleRate;

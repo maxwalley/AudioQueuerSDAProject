@@ -23,22 +23,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C249C233-A5A6-437B-B513-7612DC6C1A22"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../Source/QueueTableModel.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "QueueTableModel::addNewItem(file)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "E0AD7C8A-2F53-4F2F-AEAB-D2782C9AE6C7"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -62,9 +46,9 @@
             filePath = "../../Source/QueueTableModel.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
-            landmarkName = "QueueTableModel::getCurrentStopPoint()"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
+            landmarkName = "QueueTableModel::stopPointReached()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -78,8 +62,8 @@
             filePath = "../../Source/QueueTableModel.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "QueueTableModel::moveTransportOn(ignoreLooping)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +78,8 @@
             filePath = "../../Source/QueueTableModel.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "QueueTableModel::moveTransportOn(ignoreLooping)"
             landmarkType = "7">
          </BreakpointContent>
@@ -110,10 +94,10 @@
             filePath = "../../Source/QueueTableModel.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "318"
-            endingLineNumber = "318"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "311"
+            endingLineNumber = "311"
+            landmarkName = "QueueTableModel::setUpTransport(indexToPlay)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -126,9 +110,25 @@
             filePath = "../../Source/QueueTableModel.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
-            landmarkName = "QueueTableModel::itemPlaying()"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
+            landmarkName = "QueueTableModel::setUpTransport(indexToPlay)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "27EFB149-7368-4DC4-B7B8-E72E4ABDB3A1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Source/QueueTableModel.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
+            landmarkName = "QueueTableModel::startQueue()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -85,7 +85,7 @@ void InfoBox::resized()
 
 void InfoBox::changeData(ItemInfo currentDataStruct)
 {
-    fileNameSection.setData(currentDataStruct.file->getFileName());
+    fileNameSection.setData(currentDataStruct.fileName);
     filePathSection.setData(currentDataStruct.file->getFullPathName());
     fileSizeSection.setData(String(currentDataStruct.size));
     fileLengthSection.setData(currentDataStruct.lengthInTime);
