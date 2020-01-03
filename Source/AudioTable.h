@@ -28,6 +28,7 @@ public:
     AudioTable();
     ~AudioTable();
     
+    void paint(Graphics& g) override;
     void resized() override;
     
     TableListBox embeddedTable;

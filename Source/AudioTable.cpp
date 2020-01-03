@@ -33,6 +33,13 @@ AudioTable::~AudioTable()
     }
 }
 
+void AudioTable::paint(Graphics& g)
+{
+    header.setColour(TableHeaderComponent::ColourIds::textColourId, Colours::black);
+    
+    embeddedTable.setColour(ListBox::ColourIds::backgroundColourId, Colours::lightgrey);
+}
+
 void AudioTable::resized()
 {
     queueControls.setBounds(0, 0, 150, 300);
@@ -48,15 +55,11 @@ void AudioTable::paintRowBackground(Graphics& g, int rowNumber, int width, int h
 {
     if(rowIsSelected == true)
     {
-        g.setColour(Colours::green);
+        g.setColour(Colours::grey);
     }
-    else if(rowNumber % 2 == 0)
+    else
     {
-        g.setColour(Colours::lightblue);
-    }
-    else if(rowNumber % 2 != 0)
-    {
-        g.setColour(Colours::orange);
+        g.setColour(Colours::white);
     }
     
     g.fillAll();
