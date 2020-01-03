@@ -82,9 +82,6 @@ private:
     void buttonClicked(Button* button) override;
     
     AudioFormatReader* reader;
-    /*int64_t lengthInSamples;
-    double sampleRate;
-    int numChannels;*/
     
     void workOutLengthInSecs();
     //int lengthInSecs;

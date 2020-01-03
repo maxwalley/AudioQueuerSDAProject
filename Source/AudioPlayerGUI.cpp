@@ -26,7 +26,6 @@ AudioPlayerGUI::AudioPlayerGUI() : stopButton(PlayerControlButton::stop), nextBu
     playButton.setEnabled(false);
        
     addAndMakeVisible(stopButton);
-    stopButton.setEnabled(false);
        
     addAndMakeVisible(nextButton);
     
@@ -62,20 +61,17 @@ void AudioPlayerGUI::resized()
 
 void AudioPlayerGUI::audioStopped()
 {
-    stopButton.setEnabled(false);
     playButton.changeState(0);
 }
 
 void AudioPlayerGUI::audioPaused()
 {
-    stopButton.setEnabled(true);
     playButton.changeState(0);
 }
 
 void AudioPlayerGUI::audioPlayed()
 {
     stopButton.setToggleState(false, dontSendNotification);
-    stopButton.setEnabled(true);
     playButton.changeState(1);
     
 }

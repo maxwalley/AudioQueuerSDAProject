@@ -11,7 +11,7 @@
 //==============================================================================
 MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), timerCount(1), waveform(audioFormatManager), selectedItem(-2), infoBox(audioFormatManager), menu(&deviceManager)
 {
-    setSize (1100, 700);
+    setSize (1100, 650);
 
     // Some platforms require permissions to open input channels so request that here
     if (RuntimePermissions::isRequired (RuntimePermissions::recordAudio)
@@ -109,8 +109,8 @@ void MainComponent::paintOverChildren(Graphics& g)
 
 void MainComponent::resized()
 {
-    playerGUI.setBounds(450, 450, 200, 250);
-    transformImage.setBounds(0, 450, 256, 256);
+    playerGUI.setBounds(450, 375, 200, 250);
+    transformImage.setBounds(0, 425, 256, 256);
     waveform.setBounds(0, 250, 200, 150);
     table.setBounds(50, 50, 750, 300);
     infoBox.setBounds(850, 50, 200, 525);

@@ -48,7 +48,6 @@ private:
     FileChooser fileChooser;
     File selectedFile;
     AudioFormatManager audioFormatManager;
-    std::unique_ptr<AudioFormatReaderSource> audioFormatReaderSource;
     bool fileLoaded;
     
     void buttonClicked(Button* button) override;
