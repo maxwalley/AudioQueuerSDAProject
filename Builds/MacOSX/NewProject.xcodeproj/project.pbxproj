@@ -85,10 +85,6 @@
 			isa = PBXBuildFile;
 			fileRef = 6696D5D405C3FA7EE33D1AF3;
 		};
-		604DD7E5975B7D8E1E49747D = {
-			isa = PBXBuildFile;
-			fileRef = FD949CAA4E1D2C976FC1A5B2;
-		};
 		308013AFA2C588537806A3A5 = {
 			isa = PBXBuildFile;
 			fileRef = A1398042311AC2AC5E7C4C6F;
@@ -703,13 +699,6 @@
 			path = "/Applications/JUCE/modules/juce_cryptography";
 			sourceTree = "<absolute>";
 		};
-		F5A67CD5F3B027979FAF6B38 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = LoopToggleButton.h;
-			path = ../../Source/LoopToggleButton.h;
-			sourceTree = "SOURCE_ROOT";
-		};
 		F6B5A0CC5C113A997CE506DF = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -738,13 +727,6 @@
 			path = "/Applications/JUCE/modules/juce_audio_formats";
 			sourceTree = "<absolute>";
 		};
-		FD949CAA4E1D2C976FC1A5B2 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = LoopToggleButton.cpp;
-			path = ../../Source/LoopToggleButton.cpp;
-			sourceTree = "SOURCE_ROOT";
-		};
 		C790A858C3C28CBA9F97C1A7 = {
 			isa = PBXGroup;
 			children = (
@@ -765,8 +747,6 @@
 		0A81025DDA70290059710CA3 = {
 			isa = PBXGroup;
 			children = (
-				F5A67CD5F3B027979FAF6B38,
-				FD949CAA4E1D2C976FC1A5B2,
 				A1398042311AC2AC5E7C4C6F,
 				A2A9C373DC3FB618B97D419A,
 				8AFBFBF6E5A94A8C53B0EC9F,
@@ -1123,7 +1103,6 @@
 				3BD91E4E6B639C4ABE52F79F,
 				C0D114C15DF4495C968C1F74,
 				8D8D4CC77E289F8D4885F9D8,
-				604DD7E5975B7D8E1E49747D,
 				308013AFA2C588537806A3A5,
 				EB5A58E00C0D465B74B06717,
 				3E8FC2D98B3C4E85D4DA2C5B,
