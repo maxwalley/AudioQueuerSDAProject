@@ -39,8 +39,14 @@ QueueItem::QueueItem(int idNum, File* file)
     
     playButton.addListener(this);
     
+    
+    playTimeLabel.setColour(Label::ColourIds::textColourId, Colours::black);
+    playTimeLabel.setColour(Label::ColourIds::textWhenEditingColourId, Colours::black);
     playTimeLabel.setEditable(false, true, false);
     playTimeLabel.addListener(this);
+    
+    stopTimeLabel.setColour(Label::ColourIds::textColourId, Colours::black);
+    stopTimeLabel.setColour(Label::ColourIds::textWhenEditingColourId, Colours::black);
     stopTimeLabel.setEditable(false, true, false);
     stopTimeLabel.addListener(this);
     
@@ -58,12 +64,7 @@ QueueItem::~QueueItem()
 
 void QueueItem::paint (Graphics& g)
 {
-    
-}
 
-void QueueItem::resized()
-{
-    
 }
 
 File* QueueItem::getFile()
@@ -127,7 +128,6 @@ Label* QueueItem::getStopTimeLabel()
 
 PlayButton* QueueItem::getPlayButton()
 {
-    //return playButton.getComponent();
     return &playButton;
 }
 

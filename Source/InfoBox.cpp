@@ -12,6 +12,7 @@
 #include "InfoBox.h"
 
 //==============================================================================
+
 InfoBox::InfoBox(AudioFormatManager &manager) : fileNameSection("File Name"), filePathSection("File Path"), fileSizeSection("File Size (Bytes)"), fileLengthSection("File Length"), fileSampleRateSection("Sample Rate"), fileNumChannelsSection("Number of Channels"), newNumLoops(0), deleteButton("Delete"), waveform(manager)
 {
     setSize(200, 525);
@@ -34,6 +35,7 @@ InfoBox::InfoBox(AudioFormatManager &manager) : fileNameSection("File Name"), fi
     addAndMakeVisible(loopToggle);
     loopToggle.addListener(this);
     loopToggle.setEnabled(false);
+    loopToggle.setVisible(false);
     
     addAndMakeVisible(loopNumDescriptionLabel);
     loopNumDescriptionLabel.setText("Number of Loops", dontSendNotification);
@@ -42,6 +44,7 @@ InfoBox::InfoBox(AudioFormatManager &manager) : fileNameSection("File Name"), fi
     loopNumDataLabel.setEditable(false);
     loopNumDataLabel.setText("0", dontSendNotification);
     loopNumDataLabel.addListener(this);
+    loopNumDataLabel.setVisible(false);
     
     addAndMakeVisible(deleteButton);
     deleteButton.addListener(this);
@@ -58,11 +61,12 @@ void InfoBox::paint(Graphics& g)
 {
     g.fillAll(Colours::white);
     
+    g.setColour(Colours::grey);
+    g.fillRect(0, 275, getWidth(), 100);
+    
     headerLabel.setColour(Label::ColourIds::textColourId, Colours::black);
     
     loopDescriptionLabel.setColour(Label::ColourIds::textColourId, Colours::black);
-    loopToggle.setColour(TextButton::ColourIds::buttonColourId, Colours::black);
-    loopToggle.setColour(ToggleButton::ColourIds::tickColourId, Colours::black);
     
     loopNumDescriptionLabel.setColour(Label::ColourIds::textColourId, Colours::black);
     loopNumDataLabel.setColour(Label::ColourIds::textColourId, Colours::black);
@@ -132,6 +136,9 @@ void InfoBox::changeData(ItemInfo currentDataStruct)
     waveform.set(new FileInputSource(currentDataStruct.file));
     
     loopToggle.setEnabled(true);
+    loopToggle.setVisible(true);
+    loopNumDataLabel.setVisible(true);
+    
     deleteButton.setEnabled(true);
 }
 

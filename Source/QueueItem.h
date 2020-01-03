@@ -27,7 +27,6 @@ public:
     ~QueueItem();
 
     void paint (Graphics&) override;
-    void resized() override;
     
     void setFile(File* file);
     File* getFile();

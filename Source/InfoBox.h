@@ -14,6 +14,7 @@
 #include "ItemDataStruct.h"
 #include "InfoSection.h"
 #include "AudioWaveform.h"
+#include "LoopToggleButton.h"
 
 //==============================================================================
 /*

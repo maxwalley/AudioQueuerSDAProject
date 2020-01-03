@@ -21,6 +21,10 @@
     <FILE id="CifwSI" name="AudioTable.cpp" compile="1" resource="0" file="Source/AudioTable.cpp"/>
     <FILE id="x9t7jK" name="AudioTable.h" compile="0" resource="0" file="Source/AudioTable.h"/>
     <GROUP id="{D0169949-7A6A-ECE1-224E-BDEBA828A34A}" name="GUI">
+      <FILE id="IxSWVO" name="LoopToggleButton.h" compile="0" resource="0"
+            file="Source/LoopToggleButton.h"/>
+      <FILE id="Le9NTC" name="LoopToggleButton.cpp" compile="1" resource="0"
+            file="Source/LoopToggleButton.cpp"/>
       <FILE id="DAMxZc" name="QueueControls.cpp" compile="1" resource="0"
             file="Source/QueueControls.cpp"/>
       <FILE id="KADnSj" name="QueueControls.h" compile="0" resource="0" file="Source/QueueControls.h"/>
@@ -50,8 +54,6 @@
       <FILE id="OkJxCX" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="Dlqsce" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
-      <FILE id="GcTNwz" name="MenuModel.h" compile="0" resource="0" file="Source/GUI/MenuModel.h"/>
-      <FILE id="Glv5SQ" name="MenuModel.cpp" compile="1" resource="0" file="Source/GUI/MenuModel.cpp"/>
     </GROUP>
     <GROUP id="{10162CB2-3966-F301-8905-0981EBF00FD2}" name="Source">
       <FILE id="cctsbC" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>

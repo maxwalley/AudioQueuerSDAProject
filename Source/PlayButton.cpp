@@ -32,9 +32,4 @@ void PlayButton::paintButton (Graphics& g, bool shouldDrawButtonAsHighlighted, b
     path.closeSubPath();
     
     g.fillPath(path);
-    
-    /*//Draws triangle
-    g.drawLine(2, 0, 2, getHeight(),2);
-    g.drawLine(2, 0, getHeight(), getHeight()/2,2);
-    g.drawLine(2, getHeight(), getHeight(), getHeight()/2,2);*/
 }

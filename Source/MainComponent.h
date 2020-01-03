@@ -9,7 +9,6 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "GUI/MenuModel.h"
 #include "AudioTable.h"
 #include "AudioWaveform.h"
 #include "FFT.h"
