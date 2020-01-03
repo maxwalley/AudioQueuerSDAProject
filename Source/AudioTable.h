@@ -86,6 +86,9 @@ public:
      @param control - the control to toggle. 1 for loop control and 2 for shuffle control*/
     void changeQueueControlToggle(int control);
     
+    /**Resets everything back to as if no item had been played*/
+    void reset();
+    
     private:
     
     int getNumRows() override;

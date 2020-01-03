@@ -44,3 +44,9 @@ double AudioWaveform::getThumbnailLength() const
 {
     return thumbnail.getTotalLength();
 }
+
+void AudioWaveform::clear()
+{
+    thumbnail.clear();
+    repaint();
+}

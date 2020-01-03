@@ -27,6 +27,9 @@ public:
     
     double getThumbnailLength() const;
     
+    /**Clears the waveform*/
+    void clear();
+    
 private:
     AudioThumbnail thumbnail;
     Rectangle<int> thumbnailArea;

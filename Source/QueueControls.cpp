@@ -29,6 +29,12 @@ QueueControls::QueueControls() : openFileButton("Open File")
     
     addAndMakeVisible(shuffleQueueLabel);
     shuffleQueueLabel.setText("Shuffle Queue?", dontSendNotification);
+    
+    addAndMakeVisible(playContinuouslyButton);
+    playContinuouslyButton.setToggleState(true, dontSendNotification);
+    
+    addAndMakeVisible(playContinuouslyLabel);
+    playContinuouslyLabel.setText("Play Continuously?", dontSendNotification);
 }
 
 QueueControls::~QueueControls()
@@ -47,11 +53,14 @@ void QueueControls::resized()
 {
     openFileButton.setBounds(0, 0, getWidth(), 30);
     
-    loopQueueButton.setBounds(100, 50, 25, 25);
-    loopQueueLabel.setBounds(0, 50, 100, 25);
+    loopQueueButton.setBounds(125, 50, 25, 25);
+    loopQueueLabel.setBounds(0, 50, 125, 25);
     
-    shuffleQueueButton.setBounds(100, 100, 25, 25);
-    shuffleQueueLabel.setBounds(0, 100, 100, 25);
+    shuffleQueueButton.setBounds(125, 100, 25, 25);
+    shuffleQueueLabel.setBounds(0, 100, 125, 25);
+    
+    playContinuouslyButton.setBounds(125, 150, 25, 25);
+    playContinuouslyLabel.setBounds(0, 150, 125, 25);
 }
 
 bool QueueControls::getLoopQueueButtonState()
@@ -62,6 +71,11 @@ bool QueueControls::getLoopQueueButtonState()
 bool QueueControls::getShuffleQueueButtonState()
 {
     return shuffleQueueButton.getToggleState();
+}
+
+bool QueueControls::getContinousButtonState()
+{
+    return playContinuouslyButton.getToggleState();
 }
 
 void QueueControls::changeToggleState(int control)

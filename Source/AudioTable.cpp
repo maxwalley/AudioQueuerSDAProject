@@ -204,18 +204,40 @@ void AudioTable::moveTransportOn(bool ignoreLooping)
         //Checks to see if we're at the end of the list or the shuffle button is enabled
         if(currentIndexPlaying != items.size() || queueControls.getShuffleQueueButtonState() == true)
         {
-            setUpTransport(currentIndexPlaying);
+            //Checks that the continuous play button is selected
+            if(queueControls.getContinousButtonState() == true)
+            {
+                setUpTransport(currentIndexPlaying);
+            }
+            else
+            {
+                transport.setSource(nullptr);
+                sendActionMessage("Break");
+            }
+            DBG("Activated");
         }
         else
         {
             if(queueControls.getLoopQueueButtonState() == true)
             {
-                //Restarts the queue
-                startQueue();
+                //Checks that the continuous play button is selected
+                if(queueControls.getContinousButtonState() == true)
+                {
+                    //Restarts the queue
+                    startQueue();
+                }
+                else if(queueControls.getContinousButtonState() == false)
+                {
+                    transport.setSource(nullptr);
+                    //Resets current index playing for the next time
+                    currentIndexPlaying = 0;
+                    sendActionMessage("Break");
+                }
             }
             else
             {
                 //Resets current index playing to none
+                DBG("Activates");
                 currentIndexPlaying = -1;
                 sendActionMessage("Queue finished");
             }
@@ -248,8 +270,22 @@ void AudioTable::startQueue()
         //Checks the audio isn't paused
         if(pausePosition == 0)
         {
-            currentIndexPlaying = 0;
-            setUpTransport(currentIndexPlaying);
+            //Checks if continuous play button is ticked
+            if(queueControls.getContinousButtonState() == true)
+            {
+                currentIndexPlaying = 0;
+                setUpTransport(currentIndexPlaying);
+            }
+            else if(queueControls.getContinousButtonState() == false)
+            {
+                //Checks that its not set to play nothing
+                if(currentIndexPlaying == -1)
+                {
+                    //Resets the playing index to 0 if it is
+                    currentIndexPlaying = 0;
+                }
+                setUpTransport(currentIndexPlaying);
+            }
         }
         else
         {
@@ -287,6 +323,7 @@ void AudioTable::stopPointReached()
         else if(transport.hasStreamFinished() == true)
         {
             moveTransportOn(false);
+            DBG("Hello");
         }
     }
 }
@@ -376,4 +413,11 @@ void AudioTable::pauseAudio()
 void AudioTable::changeQueueControlToggle(int control)
 {
     queueControls.changeToggleState(control);
+}
+
+void AudioTable::reset()
+{
+    transport.stop();
+    transport.setSource(nullptr);
+    currentIndexPlaying = -1;
 }

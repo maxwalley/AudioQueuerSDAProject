@@ -32,7 +32,7 @@ AudioPlayerGUI::AudioPlayerGUI() : stopButton(PlayerControlButton::stop), nextBu
     addAndMakeVisible(lastButton);
     
     addAndMakeVisible(timeLabel);
-    timeLabel.setText("0", dontSendNotification);
+    timeLabel.setText("", dontSendNotification);
     
     addAndMakeVisible(playingFileNameLabel);
 }
@@ -62,6 +62,7 @@ void AudioPlayerGUI::resized()
 void AudioPlayerGUI::audioStopped()
 {
     playButton.changeState(0);
+    timeLabel.setText("", dontSendNotification);
 }
 
 void AudioPlayerGUI::audioPaused()

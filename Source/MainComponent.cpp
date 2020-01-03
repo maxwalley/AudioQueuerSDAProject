@@ -183,9 +183,10 @@ void MainComponent::pauseAudio()
 
 void MainComponent::stopAudio()
 {
-    table.transport.stop();
+    table.reset();
     Timer::stopTimer();
     playerGUI.audioStopped();
+    waveform.clear();
 }
 
 void MainComponent::sliderValueChanged(Slider* slider)
@@ -287,5 +288,10 @@ void MainComponent::actionListenerCallback(const String &message)
     else if(message == "Shuffle Queue Clicked")
     {
         table.changeQueueControlToggle(2);
+    }
+    
+    else if(message == "Break")
+    {
+        playerGUI.audioStopped();
     }
 }

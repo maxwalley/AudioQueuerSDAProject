@@ -36,6 +36,11 @@ public:
      false for button deselected*/
     bool getShuffleQueueButtonState();
     
+    /**Returns the state of the play continuously toggle button
+     true for button selected
+     false for button deselected*/
+    bool getContinousButtonState();
+    
     /**Changes the toggle state of one of the controls
      @param control - the control to change. 1 for loop control, 2 for shuffle control*/
     void changeToggleState(int control);
@@ -46,6 +51,9 @@ private:
     
     ToggleButton shuffleQueueButton;
     Label shuffleQueueLabel;
+    
+    ToggleButton playContinuouslyButton;
+    Label playContinuouslyLabel;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (QueueControls)
 };
