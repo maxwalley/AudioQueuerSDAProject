@@ -45,6 +45,9 @@ private:
         topLevelMenuIndex = the index of the top-level menu from which the item was chosen (just in case you've used duplicate ID numbers on more than one of the popup menus)*/
     void menuItemSelected (int menuItemID, int topLevelMenuIndex) override;
     
+    bool queueLoop;
+    bool queueShuffle;
+    
     //DeviceSelectorWindow deviceSelectorWindow;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Menu)

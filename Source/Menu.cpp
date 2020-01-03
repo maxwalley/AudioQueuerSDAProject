@@ -24,7 +24,7 @@ Menu::~Menu()
 StringArray Menu::getMenuBarNames()
 {
     //List of menu titles
-    const char* const names[] = { "File", "Audio", 0 };
+    const char* const names[] = { "File", "Audio", "Queue", 0 };
     return StringArray (names);
 }
 
@@ -45,6 +45,13 @@ PopupMenu Menu::getMenuForIndex(int topLevelMenuIndex, const String &menuName)
         menu.addItem(1, "Play Queue", true, false);
         menu.addItem(2, "Pause", true, false);
         menu.addItem(3, "Stop", true, false);
+    }
+    
+    //Queue tab
+    else if(topLevelMenuIndex == 2)
+    {
+        menu.addItem(1, "Loop Queue", true, false);
+        menu.addItem(2, "Shuffle Queue", true, false);
     }
     
     return menu;
@@ -80,6 +87,19 @@ void Menu::menuItemSelected(int menuItemID, int topLevelMenuIndex)
         else if(menuItemID == 3)
         {
             sendActionMessage("Stop Audio");
+        }
+    }
+    
+    else if(topLevelMenuIndex == 2)
+    {
+        if(menuItemID == 1)
+        {
+            sendActionMessage("Loop Queue Clicked");
+        }
+        
+        else if(menuItemID == 2)
+        {
+            sendActionMessage("Shuffle Queue Clicked");
         }
     }
 }

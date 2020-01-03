@@ -36,6 +36,10 @@ public:
      false for button deselected*/
     bool getShuffleQueueButtonState();
     
+    /**Changes the toggle state of one of the controls
+     @param control - the control to change. 1 for loop control, 2 for shuffle control*/
+    void changeToggleState(int control);
+    
 private:
     ToggleButton loopQueueButton;
     Label loopQueueLabel;

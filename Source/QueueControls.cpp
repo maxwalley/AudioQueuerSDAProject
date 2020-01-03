@@ -63,3 +63,32 @@ bool QueueControls::getShuffleQueueButtonState()
 {
     return shuffleQueueButton.getToggleState();
 }
+
+void QueueControls::changeToggleState(int control)
+{
+    //if control is the loop button
+    if(control == 1)
+    {
+        if(loopQueueButton.getToggleState() == true)
+        {
+            loopQueueButton.setToggleState(false, dontSendNotification);
+        }
+        else if(loopQueueButton.getToggleState() == false)
+        {
+            loopQueueButton.setToggleState(true, dontSendNotification);
+        }
+    }
+    
+    //if control is the shuffle control
+    else if(control == 2)
+    {
+        if(shuffleQueueButton.getToggleState() == true)
+        {
+            shuffleQueueButton.setToggleState(false, dontSendNotification);
+        }
+        else if (shuffleQueueButton.getToggleState() == false)
+        {
+            shuffleQueueButton.setToggleState(true, dontSendNotification);
+        }
+    }
+}

@@ -372,3 +372,8 @@ void AudioTable::pauseAudio()
     pausePosition = transport.getCurrentPosition();
     transport.stop();
 }
+
+void AudioTable::changeQueueControlToggle(int control)
+{
+    queueControls.changeToggleState(control);
+}

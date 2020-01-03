@@ -278,4 +278,14 @@ void MainComponent::actionListenerCallback(const String &message)
     {
         stopAudio();
     }
+    
+    else if(message == "Loop Queue Clicked")
+    {
+        table.changeQueueControlToggle(1);
+    }
+    
+    else if(message == "Shuffle Queue Clicked")
+    {
+        table.changeQueueControlToggle(2);
+    }
 }

@@ -82,6 +82,10 @@ public:
     /**Pauses the audio stream*/
     void pauseAudio();
     
+    /** Changes the value of a toggle control in the Queue Controls
+     @param control - the control to toggle. 1 for loop control and 2 for shuffle control*/
+    void changeQueueControlToggle(int control);
+    
     private:
     
     int getNumRows() override;
