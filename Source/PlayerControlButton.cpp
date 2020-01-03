@@ -30,24 +30,32 @@ void PlayerControlButton::paintButton (Graphics &g, bool shouldDrawButtonAsHighl
     g.fillEllipse(0, 0, getWidth(), getHeight());
     g.setColour(Colours::black);
     
+    Path path;
+    
     if(buttonFunc == stop)
     {
-        g.drawRect(getWidth()/3, getHeight()/3, getWidth()/3, getHeight()/3);
+        g.fillRect(getWidth()/3, getHeight()/3, getWidth()/3, getHeight()/3);
     }
     
     else if(buttonFunc == next)
     {
         g.drawLine((getWidth()/3) * 2, getHeight()/3, (getWidth()/3) * 2, (getHeight()/3) * 2);
-        g.drawLine(getWidth()/3, getHeight()/3, getWidth()/3, (getHeight()/3) * 2);
-        g.drawLine(getWidth()/3, getHeight()/3, (getWidth()/3) * 2, getHeight()/2);
-        g.drawLine(getWidth()/3, (getHeight()/3) * 2, (getWidth()/3) * 2, getHeight()/2);
+        
+        path.startNewSubPath(getWidth()/3, getHeight()/3);
+        path.lineTo(getWidth()/3, (getHeight()/3) * 2);
+        path.lineTo((getWidth()/3) * 2, getHeight()/2);
+        path.closeSubPath();
     }
     
     else if(buttonFunc == last)
     {
         g.drawLine(getWidth()/3, getHeight()/3, getWidth()/3, (getHeight()/3) * 2);
-        g.drawLine(getWidth()/3, getHeight()/2, (getWidth()/3) * 2, getHeight()/3);
-        g.drawLine(getWidth()/3, getHeight()/2, (getWidth()/3) * 2, (getHeight()/3) * 2);
-        g.drawLine((getWidth()/3) * 2, getHeight()/3, (getWidth()/3) * 2, (getHeight()/3) * 2);
+        
+        path.startNewSubPath((getWidth()/3) * 2, getHeight()/3);
+        path.lineTo((getWidth()/3) * 2, (getHeight()/3) * 2);
+        path.lineTo(getWidth()/3, getHeight()/2);
+        path.closeSubPath();
     }
+    
+    g.fillPath(path);
 }

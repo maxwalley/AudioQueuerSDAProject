@@ -22,7 +22,6 @@ public:
     ~AudioWaveform();
     
     void paint (Graphics&) override;
-    void resized() override;
     
     void set(InputSource *newSource);
     

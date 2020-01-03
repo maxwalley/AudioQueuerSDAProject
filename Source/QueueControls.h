@@ -21,6 +21,7 @@ public:
     QueueControls();
     ~QueueControls();
 
+    void paint(Graphics& g) override;
     void resized() override;
     
     TextButton openFileButton;

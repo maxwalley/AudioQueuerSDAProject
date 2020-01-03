@@ -30,10 +30,14 @@ void PlayPauseButton::paintButton (Graphics &g, bool shouldDrawButtonAsHighlight
     
     if(buttonState == play)
     {
-        //Draws triangle
-        g.drawLine(getWidth()/3, getHeight()/3, getWidth()/3, (getHeight()/3) * 2, 2);
-        g.drawLine(getWidth()/3, getHeight()/3, (getWidth()/3) * 2, getHeight()/2, 2);
-        g.drawLine(getWidth()/3, (getHeight()/3) * 2, (getWidth()/3) * 2, getHeight()/2, 2);
+        Path path;
+        
+        path.startNewSubPath(getWidth()/3, getHeight()/3);
+        path.lineTo(getWidth()/3, (getHeight()/3) * 2);
+        path.lineTo((getWidth()/3) * 2, getHeight()/2);
+        path.closeSubPath();
+        
+        g.fillPath(path);
     }
     else if(buttonState == pause)
     {

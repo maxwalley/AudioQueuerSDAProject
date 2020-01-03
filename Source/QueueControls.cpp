@@ -36,6 +36,13 @@ QueueControls::~QueueControls()
     
 }
 
+void QueueControls::paint(Graphics& g)
+{
+    openFileButton.setColour(TextButton::ColourIds::buttonColourId, Colours::white);
+    openFileButton.setColour(TextButton::ColourIds::textColourOffId, Colours::black);
+    openFileButton.setColour(TextButton::ColourIds::textColourOnId, Colours::black);
+}
+
 void QueueControls::resized()
 {
     openFileButton.setBounds(0, 0, getWidth(), 30);

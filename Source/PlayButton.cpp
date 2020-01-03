@@ -25,8 +25,16 @@ PlayButton::~PlayButton()
 
 void PlayButton::paintButton (Graphics& g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown)
 {
-    //Draws triangle
+    Path path;
+    path.startNewSubPath(2, 0);
+    path.lineTo(2, getHeight());
+    path.lineTo(getHeight(), getHeight()/2);
+    path.closeSubPath();
+    
+    g.fillPath(path);
+    
+    /*//Draws triangle
     g.drawLine(2, 0, 2, getHeight(),2);
     g.drawLine(2, 0, getHeight(), getHeight()/2,2);
-    g.drawLine(2, getHeight(), getHeight(), getHeight()/2,2);
+    g.drawLine(2, getHeight(), getHeight(), getHeight()/2,2);*/
 }

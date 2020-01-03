@@ -30,11 +30,6 @@ void AudioWaveform::paint (Graphics& g)
     thumbnail.drawChannels(g, thumbnailArea, 0, thumbnail.getTotalLength(), 1.0);
 }
 
-void AudioWaveform::resized()
-{
-
-}
-
 void AudioWaveform::set(InputSource *newSource)
 {
     thumbnail.clear();

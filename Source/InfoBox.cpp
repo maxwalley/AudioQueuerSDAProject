@@ -54,10 +54,30 @@ InfoBox::~InfoBox()
 {
 }
 
+void InfoBox::paint(Graphics& g)
+{
+    g.fillAll(Colours::white);
+    
+    headerLabel.setColour(Label::ColourIds::textColourId, Colours::black);
+    
+    loopDescriptionLabel.setColour(Label::ColourIds::textColourId, Colours::black);
+    loopToggle.setColour(TextButton::ColourIds::buttonColourId, Colours::black);
+    loopToggle.setColour(ToggleButton::ColourIds::tickColourId, Colours::black);
+    
+    loopNumDescriptionLabel.setColour(Label::ColourIds::textColourId, Colours::black);
+    loopNumDataLabel.setColour(Label::ColourIds::textColourId, Colours::black);
+    
+    deleteButton.setColour(TextButton::ColourIds::buttonColourId, Colours::lightgrey);
+    deleteButton.setColour(TextButton::ColourIds::textColourOnId, Colours::black);
+    deleteButton.setColour(TextButton::ColourIds::textColourOffId, Colours::black);
+}
+
 void InfoBox::paintOverChildren (Graphics& g)
 {
-    g.drawRoundedRectangle(0, 0, 200, 550, 10, 4);
+    g.drawRect(0, 0, getWidth(), getHeight(), 4);
     
+    g.drawLine(0, 45, 200, 45);
+    g.drawLine(100, 45, 100, 50);
     g.drawLine(100, 275, 100, 350);
     g.drawLine(0, 300, 200, 300);
     g.drawLine(0, 350, 200, 350);

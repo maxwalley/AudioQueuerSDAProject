@@ -43,8 +43,16 @@ InfoSection::InfoSection(String description)
 
 InfoSection::~InfoSection()
 {
-    //descriptorText.setLookAndFeel(nullptr);
-    //dataText.setLookAndFeel(nullptr);
+    
+}
+
+void InfoSection::paint(Graphics& g)
+{
+    descriptorText.setColour(TextEditor::ColourIds::backgroundColourId, Colours::white);
+    descriptorText.applyColourToAllText(Colours::black);
+    
+    dataText.setColour(TextEditor::ColourIds::backgroundColourId, Colours::white);
+    dataText.applyColourToAllText(Colours::black);
 }
 
 void InfoSection::paintOverChildren (Graphics& g)

@@ -27,7 +27,8 @@ public:
     InfoBox(AudioFormatManager &manager);
     ~InfoBox();
 
-    void paintOverChildren (Graphics&) override;
+    void paint(Graphics& g) override;
+    void paintOverChildren(Graphics& g) override;
     void resized() override;
     
     /**Changes the data that is shown in the info box*/

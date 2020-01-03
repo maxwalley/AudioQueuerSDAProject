@@ -96,7 +96,7 @@ void MainComponent::releaseResources()
 //==============================================================================
 void MainComponent::paint (Graphics& g)
 {
-    
+    g.fillAll(Colours::grey);
 }
 
 void MainComponent::paintOverChildren(Graphics& g)

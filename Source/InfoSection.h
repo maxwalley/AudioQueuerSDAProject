@@ -30,7 +30,8 @@ public:
     InfoSection(String description);
     ~InfoSection();
 
-    void paintOverChildren (Graphics&) override;
+    void paint(Graphics& g) override;
+    void paintOverChildren(Graphics& g) override;
     void resized() override;
 
     /**Sets the data of the section*/

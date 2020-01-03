@@ -44,8 +44,8 @@ AudioPlayerGUI::~AudioPlayerGUI()
 
 void AudioPlayerGUI::paint (Graphics& g)
 {
-    playButton.setColour(TextButton::buttonColourId, Colours::white);
-    
+    gainSlider.setColour(Slider::ColourIds::backgroundColourId, Colours::black);
+    gainSlider.setColour(Slider::ColourIds::thumbColourId, Colours::white);
 }
 
 void AudioPlayerGUI::resized()
