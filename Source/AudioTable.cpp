@@ -420,4 +420,5 @@ void AudioTable::reset()
     transport.stop();
     transport.setSource(nullptr);
     currentIndexPlaying = -1;
+    pausePosition = 0;
 }

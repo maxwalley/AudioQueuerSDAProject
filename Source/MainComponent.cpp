@@ -37,8 +37,8 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     table.queueControls.openFileButton.addListener(this);
     
     addAndMakeVisible(playerGUI);
-    addAndMakeVisible(waveform);
     
+    addAndMakeVisible(waveform);
     waveform.addMouseListener(this, false);
     
     addAndMakeVisible(table);
@@ -156,6 +156,7 @@ void MainComponent::buttonClicked(Button* button)
 
 void MainComponent::addFile()
 {
+    //Move this into audio table fully
     if(fileChooser.browseForFileToOpen() == true)
     {
         selectedFile = fileChooser.getResult();
