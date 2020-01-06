@@ -15,6 +15,7 @@
 #include "AudioPlayerGUI.h"
 #include "InfoBox.h"
 #include "Menu.h"
+#include "AudioPlayer.h"
 
 //==============================================================================
 /*
@@ -83,6 +84,8 @@ private:
     
     InfoBox infoBox;
     Menu menu;
+    
+    AudioPlayer player;
     
     AudioDeviceManager deviceManager;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)

@@ -52,6 +52,8 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     menu.addActionListener(this);
     
     deviceManager.initialise(0, 2, nullptr, true);
+    
+    player.addActionListener(this);
 }
 
 MainComponent::~MainComponent()
@@ -62,17 +64,28 @@ MainComponent::~MainComponent()
 //==============================================================================
 void MainComponent::prepareToPlay (int samplesPerBlockExpected, double sampleRate)
 {
-    table.transport.prepareToPlay(samplesPerBlockExpected, sampleRate);
+    player.transport.prepareToPlay(samplesPerBlockExpected, sampleRate);
 }
 
 void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
 {
-    if(table.itemPlaying() == true)
+    /*if(table.itemPlaying() == true)
     {
         table.transport.getNextAudioBlock(bufferToFill);
     
         const MessageManagerLock stopPointLock;
         table.stopPointReached();
+    }
+    else
+    {
+        //Clears buffer if nothing is playing
+        bufferToFill.clearActiveBufferRegion();
+    }*/
+    
+    if(player.transport.isPlaying() == true)
+    {
+        player.transport.getNextAudioBlock(bufferToFill);
+        player.stopPointReached();
     }
     else
     {
@@ -90,7 +103,7 @@ void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFil
 
 void MainComponent::releaseResources()
 {
-    table.transport.releaseResources();
+    player.transport.releaseResources();
 }
 
 //==============================================================================
@@ -167,6 +180,7 @@ void MainComponent::addFile()
 void MainComponent::playQueue()
 {
     table.startQueue();
+    player.loadNewFile(table.getCurrentPlayingFile());
     transformImage.timerTrigger();
     playerGUI.audioPlayed();
     Timer:startTimer(100);
@@ -231,6 +245,7 @@ void MainComponent::actionListenerCallback(const String &message)
     {
         //Retrieves the current file that is playing and sends it to the waveform
         File* currentFile = table.getCurrentPlayingFile();
+        player.loadNewFile(currentFile);
         waveform.set(new FileInputSource(*currentFile));
     }
     
@@ -294,5 +309,20 @@ void MainComponent::actionListenerCallback(const String &message)
     else if(message == "Break")
     {
         playerGUI.audioStopped();
+    }
+    
+    else if(message == "Transport Finished")
+    {
+        table.moveTransportOn(false);
+        
+        //If the stream has finished
+        if(table.getCurrentPlayingFile() == nullptr)
+        {
+            playerGUI.audioStopped();
+        }
+        else
+        {
+            player.loadNewFile(table.getCurrentPlayingFile());
+        }
     }
 }

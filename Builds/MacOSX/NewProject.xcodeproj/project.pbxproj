@@ -61,6 +61,10 @@
 			isa = PBXBuildFile;
 			fileRef = 5681B841DC2DCBA127A5D3BD;
 		};
+		A7ED68300024645F57784216 = {
+			isa = PBXBuildFile;
+			fileRef = 11C6BDB7ED6ECE5BFCB75120;
+		};
 		A85A666C4E100A0FA9B42886 = {
 			isa = PBXBuildFile;
 			fileRef = AB7B7A4F9BEE6889EB6A83A9;
@@ -181,6 +185,13 @@
 			isa = PBXBuildFile;
 			fileRef = CB7DD23764C95A0FD097656A;
 		};
+		11C6BDB7ED6ECE5BFCB75120 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = AudioPlayer.cpp;
+			path = ../../Source/AudioPlayer.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		13FAEE17C36C8C70741107C3 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
@@ -207,6 +218,13 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = QueueItem.cpp;
 			path = ../../Source/QueueItem.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		1E861DD4C09B960E8A528AF4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = AudioPlayer.h;
+			path = ../../Source/AudioPlayer.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		20D495E1D66C4D8A5EC4A5F0 = {
@@ -771,6 +789,8 @@
 		77435C30CEADAB09AA6E1689 = {
 			isa = PBXGroup;
 			children = (
+				11C6BDB7ED6ECE5BFCB75120,
+				1E861DD4C09B960E8A528AF4,
 				36CF7A1EEAF3414A7C759860,
 				AB7B7A4F9BEE6889EB6A83A9,
 				6DAF4B13370BC00BBD9198C6,
@@ -1097,6 +1117,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7ED68300024645F57784216,
 				A85A666C4E100A0FA9B42886,
 				9806D24D8B627D552DAA69E0,
 				9A8AF33F2DE9D35710B669C8,

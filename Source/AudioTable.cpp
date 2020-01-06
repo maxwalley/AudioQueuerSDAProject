@@ -156,94 +156,130 @@ int AudioTable::getSelectedRow()
 
 void AudioTable::moveTransportOn(bool ignoreLooping)
 {
-    //Stops transport
-    transport.stop();
-    
-    //Checks to see something is playing
-    if(currentIndexPlaying != -1)
+    //Checks to see if looping mechanism should be skipped
+   /* if(ignoreLooping == false)
     {
-        //Checks to see if looping mechanism should be skipped
-        if(ignoreLooping == false)
+        //Checks to see if the item is set to loop
+        if(items[currentIndexPlaying]->getLoop() == true)
         {
-            //Checks to see if the item is set to loop
-            if(items[currentIndexPlaying]->getLoop() == true)
+            //Checks to see if the specified number of loops have been completed
+            if(items[currentIndexPlaying]->getNumLoops() > loopCounter)
             {
-                //Checks to see if the specified number of loops have been completed
-                if(items[currentIndexPlaying]->getNumLoops() > loopCounter)
-                {
-                    loopCounter++;
-                }
-                else
-                {
-                    loopCounter = 0;
-                    currentIndexPlaying++;
-                }
+                loopCounter++;
             }
             else
             {
-                //Moves index onto next
+                loopCounter = 0;
                 currentIndexPlaying++;
             }
         }
         else
         {
+            //Moves index onto next
             currentIndexPlaying++;
         }
+    }
+    else
+    {
+        currentIndexPlaying++;
+    }
     
-        //Checks that a loop is not currently being played
-        if(loopCounter == 0)
+    //Checks that a loop is not currently being played
+    if(loopCounter == 0)
+    {
+        //If shuffle is on
+        if(queueControls.getShuffleQueueButtonState() == true)
         {
-            //If shuffle is on
-            if(queueControls.getShuffleQueueButtonState() == true)
-            {
-                //Gets a random value in the range of how many items there are
-                currentIndexPlaying = Random::getSystemRandom().nextInt(items.size());
-            }
+            //Gets a random value in the range of how many items there are
+            currentIndexPlaying = Random::getSystemRandom().nextInt(items.size());
         }
+    }
         
-        //Checks to see if we're at the end of the list or the shuffle button is enabled
-        if(currentIndexPlaying != items.size() || queueControls.getShuffleQueueButtonState() == true)
+    //Checks to see if we're at the end of the list or the shuffle button is enabled
+    if(currentIndexPlaying != items.size() || queueControls.getShuffleQueueButtonState() == true)
+    {
+        //Checks that the continuous play button is selected
+        if(queueControls.getContinousButtonState() == true)
+        {
+            setUpTransport(currentIndexPlaying);
+        }
+        else
+        {
+            transport.setSource(nullptr);
+            sendActionMessage("Break");
+        }
+            
+    }
+    else
+    {
+        if(queueControls.getLoopQueueButtonState() == true)
         {
             //Checks that the continuous play button is selected
             if(queueControls.getContinousButtonState() == true)
             {
-                setUpTransport(currentIndexPlaying);
+                //Restarts the queue
+                startQueue();
             }
-            else
+            else if(queueControls.getContinousButtonState() == false)
             {
                 transport.setSource(nullptr);
+                //Resets current index playing for the next time
+                currentIndexPlaying = 0;
                 sendActionMessage("Break");
             }
-            DBG("Activated");
         }
         else
         {
-            if(queueControls.getLoopQueueButtonState() == true)
-            {
-                //Checks that the continuous play button is selected
-                if(queueControls.getContinousButtonState() == true)
-                {
-                    //Restarts the queue
-                    startQueue();
-                }
-                else if(queueControls.getContinousButtonState() == false)
-                {
-                    transport.setSource(nullptr);
-                    //Resets current index playing for the next time
-                    currentIndexPlaying = 0;
-                    sendActionMessage("Break");
-                }
-            }
-            else
-            {
-                //Resets current index playing to none
-                DBG("Activates");
-                currentIndexPlaying = -1;
-                sendActionMessage("Queue finished");
-            }
+            //Resets current index playing to none
+            currentIndexPlaying = -1;
+            sendActionMessage("Queue finished");
+        }
+    }*/
+    
+    //If queue is set to shuffle
+    if(queueControls.getShuffleQueueButtonState() == true)
+    {
+        //Gets a random value in the range of how many items there are
+        currentIndexPlaying = Random::getSystemRandom().nextInt(items.size());
+    }
+    
+    //If we're not at the end of the queue
+    else if(currentIndexPlaying < items.size() - 1)
+    {
+        currentIndexPlaying++;
+    }
+    
+    else
+    {
+        //If queue is set to loop
+        if(queueControls.getLoopQueueButtonState() == true)
+        {
+            //Reset index to play
+            currentIndexPlaying = 0;
+        }
+        else
+        {
+            currentIndexPlaying = -1;
         }
     }
+    
+    //If the play continuosly button is not active
+    if(queueControls.getContinousButtonState() == false)
+    {
+        //Stores the next index
+        nextIndexToPlay = currentIndexPlaying;
+        
+        //Sets current index to not playing
+        currentIndexPlaying = -1;
+    }
+    else
+    {
+        nextIndexToPlay = -1;
+    }
+    
+    DBG("Current Index = " << currentIndexPlaying);
 }
+
 
 void AudioTable::moveTransportBack()
 {
@@ -267,31 +303,22 @@ void AudioTable::startQueue()
     //Checks the array isnt empty
     if(items.size() > 0)
     {
-        //Checks the audio isn't paused
-        if(pausePosition == 0)
+        //Resets the current index
+        currentIndexPlaying = 0;
+            
+        if(queueControls.getContinousButtonState() == false)
         {
-            //Checks if continuous play button is ticked
-            if(queueControls.getContinousButtonState() == true)
+            //Checks that its not set to play nothing
+            if(nextIndexToPlay != -1)
             {
-                currentIndexPlaying = 0;
-                setUpTransport(currentIndexPlaying);
-            }
-            else if(queueControls.getContinousButtonState() == false)
-            {
-                //Checks that its not set to play nothing
-                if(currentIndexPlaying == -1)
-                {
-                    //Resets the playing index to 0 if it is
-                    currentIndexPlaying = 0;
-                }
-                setUpTransport(currentIndexPlaying);
+                //Resumes playing from last stop
+                currentIndexPlaying = nextIndexToPlay;
             }
         }
-        else
-        {
-            transport.setPosition(pausePosition);
-            transport.start();
-        }
+    }
+    else
+    {
+        currentIndexPlaying = -1;
     }
 }
 
@@ -323,7 +350,6 @@ void AudioTable::stopPointReached()
         else if(transport.hasStreamFinished() == true)
         {
             moveTransportOn(false);
-            DBG("Hello");
         }
     }
 }
@@ -347,7 +373,7 @@ void AudioTable::setUpTransport(int indexToPlay)
         transport.stop();
     }
     
-    transport.setSource(items[indexToPlay]->audioFormatReaderSource.get(), 0, nullptr, items[indexToPlay]->getSampleRate(), items[indexToPlay]->getNumChannels());
+    //transport.setSource(items[indexToPlay]->audioFormatReaderSource.get(), 0, nullptr, items[indexToPlay]->getSampleRate(), items[indexToPlay]->getNumChannels());
     transport.setPosition(items[indexToPlay]->getPlayPoint());
     
     //Sends message to main component so thumbnail can be changed
@@ -375,8 +401,14 @@ void AudioTable::actionListenerCallback(const String &message)
 
 File* AudioTable::getCurrentPlayingFile() const
 {
-    DBG(items[currentIndexPlaying]->getFileName());
-    return items[currentIndexPlaying]->getFile();
+    if(currentIndexPlaying != -1)
+    {
+        return items[currentIndexPlaying]->getFile();
+    }
+    else
+    {
+        return nullptr;
+    }
 }
 
 ItemInfo AudioTable::getCurrentPlayingDataStruct() const

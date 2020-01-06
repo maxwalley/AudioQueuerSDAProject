@@ -102,6 +102,7 @@ public:
     
     int currentIndexPlaying;
     int currentIndexSelected;
+    int nextIndexToPlay;
     
     int loopCounter;
     

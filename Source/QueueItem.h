@@ -48,8 +48,6 @@ public:
     void setSelected(bool isSelected);
     void setLast(bool last);
     
-    std::unique_ptr<AudioFormatReaderSource> audioFormatReaderSource;
-    
     double getSampleRate();
     int getNumChannels();
     
@@ -80,8 +78,6 @@ private:
     
     PlayButton playButton;
     void buttonClicked(Button* button) override;
-    
-    AudioFormatReader* reader;
     
     void workOutLengthInSecs();
     //int lengthInSecs;

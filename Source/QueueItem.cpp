@@ -18,21 +18,10 @@ QueueItem::QueueItem(int idNum, File* file)
     itemData.file = *file;
     itemData.fileName = itemData.file.getFileName();
     itemData.size = itemData.file.getSize();
-
-    AudioFormatManager tempManager;
-    tempManager.registerBasicFormats();
-    reader = tempManager.createReaderFor(itemData.file);
     
-    if(reader != nullptr)
-    {
-        std::unique_ptr<AudioFormatReaderSource> tempAudioFormatReaderSource (new AudioFormatReaderSource (reader, true));
-    
-        audioFormatReaderSource.reset(tempAudioFormatReaderSource.release());
-    }
-    
-    itemData.lengthInSamples = reader->lengthInSamples;
+    /*itemData.lengthInSamples = reader->lengthInSamples;
     itemData.sampleRate = reader->sampleRate;
-    itemData.numChannels = reader->numChannels;
+    itemData.numChannels = reader->numChannels;*/
     
     itemData.loop = false;
     itemData.numLoops = 0;
@@ -59,7 +48,7 @@ QueueItem::QueueItem(int idNum, File* file)
 
 QueueItem::~QueueItem()
 {
-    delete reader;
+    
 }
 
 void QueueItem::paint (Graphics& g)
