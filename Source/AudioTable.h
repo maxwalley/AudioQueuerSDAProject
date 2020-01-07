@@ -56,12 +56,8 @@ public:
     
     int getCurrentPlayPoint() const;
     int getCurrentStopPoint() const;
-    void stopPointReached();
     
     File* getCurrentPlayingFile() const;
-    
-    /**Returns true if and item is playing, false if not*/
-    bool itemPlaying() const;
     
     /**Returns the info of the current playing item in a struct*/
     ItemInfo getCurrentPlayingDataStruct() const;
@@ -81,7 +77,7 @@ public:
     QueueControls queueControls;
     
     /** Changes the value of a toggle control in the Queue Controls
-     @param control - the control to toggle. 1 for loop control and 2 for shuffle control*/
+     @param control - the control to toggle. 1 for loop control, 2 for shuffle control and 3 for continuous control*/
     void changeQueueControlToggle(int control);
     
     /**Resets everything back to as if no item had been played*/
@@ -103,8 +99,6 @@ public:
     int nextIndexToPlay;
     
     int loopCounter;
-    
-    void setUpTransport(int indexToPlay);
     
     void actionListenerCallback(const String &message) override;
     

@@ -52,6 +52,7 @@ PopupMenu Menu::getMenuForIndex(int topLevelMenuIndex, const String &menuName)
     {
         menu.addItem(1, "Loop Queue", true, false);
         menu.addItem(2, "Shuffle Queue", true, false);
+        menu.addItem(3, "Play Continuously", true, false);
     }
     
     return menu;
@@ -100,6 +101,11 @@ void Menu::menuItemSelected(int menuItemID, int topLevelMenuIndex)
         else if(menuItemID == 2)
         {
             sendActionMessage("Shuffle Queue Clicked");
+        }
+        
+        else if(menuItemID == 3)
+        {
+            sendActionMessage("Continous Control Clicked");
         }
     }
 }

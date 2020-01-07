@@ -220,8 +220,6 @@ void AudioTable::moveTransportBack()
         if(currentIndexPlaying != 0)
         {
             currentIndexPlaying--;
-            
-            setUpTransport(currentIndexPlaying);
         }
     }
 }
@@ -266,56 +264,6 @@ int AudioTable::getCurrentStopPoint() const
     {
         return items[currentIndexPlaying]->getStopPoint();
     }
-}
-
-void AudioTable::stopPointReached()
-{
-    //Checks a file is playing
-    if(currentIndexPlaying != -1)
-    {
-        //Checks if the user has specified a stop point
-        if (items[currentIndexPlaying]->getStopPoint() != 0)
-        {
-            //Checks if current position is after the stop point
-            if(transport.getCurrentPosition() >= items[currentIndexPlaying]->getStopPoint())
-            {
-                moveTransportOn();
-            }
-        }
-    }
-}
-
-bool AudioTable::itemPlaying() const
-{
-    if(currentIndexPlaying != -1)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-void AudioTable::setUpTransport(int indexToPlay)
-{
-    if(transport.isPlaying() == true)
-    {
-        transport.stop();
-    }
-    
-    //transport.setSource(items[indexToPlay]->audioFormatReaderSource.get(), 0, nullptr, items[indexToPlay]->getSampleRate(), items[indexToPlay]->getNumChannels());
-    transport.setPosition(items[indexToPlay]->getPlayPoint());
-    
-    //Sends message to main component so thumbnail can be changed
-    sendActionMessage("Playing Item Changed");
-    
-    //Resets pause position
-    pausePosition = 0;
-    
-    DBG("Transport starting at index:" << indexToPlay);
-    
-    transport.start();
 }
 
 void AudioTable::actionListenerCallback(const String &message)

@@ -69,19 +69,6 @@ void MainComponent::prepareToPlay (int samplesPerBlockExpected, double sampleRat
 
 void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
 {
-    /*if(table.itemPlaying() == true)
-    {
-        table.transport.getNextAudioBlock(bufferToFill);
-    
-        const MessageManagerLock stopPointLock;
-        table.stopPointReached();
-    }
-    else
-    {
-        //Clears buffer if nothing is playing
-        bufferToFill.clearActiveBufferRegion();
-    }*/
-    
     if(player.transport.isPlaying() == true)
     {
         player.transport.getNextAudioBlock(bufferToFill);
@@ -303,6 +290,11 @@ void MainComponent::actionListenerCallback(const String &message)
     else if(message == "Shuffle Queue Clicked")
     {
         table.changeQueueControlToggle(2);
+    }
+    
+    else if(message == "Continous Control Clicked")
+    {
+        table.changeQueueControlToggle(3);
     }
     
     else if(message == "Break")

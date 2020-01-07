@@ -105,4 +105,17 @@ void QueueControls::changeToggleState(int control)
             shuffleQueueButton.setToggleState(true, dontSendNotification);
         }
     }
+    
+    //if control is the play continuous control
+    else if(control == 3)
+    {
+        if(playContinuouslyButton.getToggleState() == true)
+        {
+            playContinuouslyButton.setToggleState(false, dontSendNotification);
+        }
+        else if(playContinuouslyButton.getToggleState() == false)
+        {
+            playContinuouslyButton.setToggleState(true, dontSendNotification);
+        }
+    }
 }
