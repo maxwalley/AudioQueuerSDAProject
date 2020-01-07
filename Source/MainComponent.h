@@ -80,6 +80,8 @@ private:
     
     void actionListenerCallback(const String& message) override;
     
+    void setUpPlayer();
+    
     InfoBox infoBox;
     Menu menu;
     
