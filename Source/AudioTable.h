@@ -94,7 +94,7 @@ public:
 
     void selectedRowsChanged(int lastRowSelected) override;
     
-    int currentIndexPlaying;
+    int indexToPlay;
     int currentIndexSelected;
     int nextIndexToPlay;
     

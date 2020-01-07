@@ -138,13 +138,34 @@ void MainComponent::buttonClicked(Button* button)
     else if(button == &playerGUI.nextButton)
     {
         table.moveTransportOn();
-        player.loadNewFile(table.getCurrentPlayingFile(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), true);
+        
+        //If the stream has finished
+        if(table.getCurrentPlayingFile() == nullptr)
+        {
+            playerGUI.audioStopped();
+            stopAudio();
+        }
+        else
+        {
+            player.loadNewFile(table.getCurrentPlayingFile(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), true);
+            waveform.set(new FileInputSource(*table.getCurrentPlayingFile()));
+        }
     }
     
     else if(button == &playerGUI.lastButton)
     {
         table.moveTransportBack();
-        player.loadNewFile(table.getCurrentPlayingFile(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), true);
+        //If the stream has finished
+        if(table.getCurrentPlayingFile() == nullptr)
+        {
+            playerGUI.audioStopped();
+            stopAudio();
+        }
+        else
+        {
+            player.loadNewFile(table.getCurrentPlayingFile(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), true);
+            waveform.set(new FileInputSource(*table.getCurrentPlayingFile()));
+        }
     }
     
 }
