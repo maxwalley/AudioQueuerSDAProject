@@ -9,7 +9,7 @@
 #include "MainComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), timerCount(1), waveform(audioFormatManager), selectedItem(-2), infoBox(audioFormatManager), menu(&deviceManager)
+MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), timerCount(1), waveform(audioFormatManager), infoBox(audioFormatManager), menu(&deviceManager)
 {
     setSize (1100, 650);
 
@@ -112,13 +112,6 @@ void MainComponent::paint (Graphics& g)
     g.fillAll(Colours::grey);
 }
 
-void MainComponent::paintOverChildren(Graphics& g)
-{
-    if(table.transport.isPlaying() == true)
-    {
-        g.drawLine((table.transport.getCurrentPosition()/table.transport.getLengthInSeconds()) * 200, 250, ((table.transport.getCurrentPosition()/table.transport.getLengthInSeconds()) * 200), 400);
-    }
-}
 
 void MainComponent::resized()
 {
@@ -145,7 +138,7 @@ void MainComponent::buttonClicked(Button* button)
         }
         else if(playerGUI.playButton.getButtonState() == 1)
         {
-            player.pause();
+            pauseAudio();
         }
         
     }
@@ -198,9 +191,9 @@ void MainComponent::playQueue()
 void MainComponent::pauseAudio()
 {
     //checks a file is playing
-    if(table.transport.isPlaying() == true)
+    if(player.isPlaying() == true)
     {
-        table.pauseAudio();
+        player.pause();
         playerGUI.audioPaused();
     }
 }
@@ -208,6 +201,7 @@ void MainComponent::pauseAudio()
 void MainComponent::stopAudio()
 {
     table.reset();
+    player.stop();
     Timer::stopTimer();
     playerGUI.audioStopped();
     waveform.clear();
@@ -224,7 +218,11 @@ void MainComponent::sliderValueChanged(Slider* slider)
 void MainComponent::timerCallback()
 {
     playerGUI.changeTime(player.getTransportPosition());
-    repaint(0, 200, 200, 150);
+    
+    if(player.isPlaying() == true)
+    {
+        waveform.moveTransportLine((player.getTransportPosition()/player.getTransportLengthInSeconds()) * 200);
+    }
 }
 
 void MainComponent::mouseDown(const MouseEvent &event)
@@ -320,6 +318,7 @@ void MainComponent::actionListenerCallback(const String &message)
         if(table.getCurrentPlayingFile() == nullptr)
         {
             playerGUI.audioStopped();
+            stopAudio();
         }
         else
         {

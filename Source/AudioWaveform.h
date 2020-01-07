@@ -30,10 +30,14 @@ public:
     /**Clears the waveform*/
     void clear();
     
+    void moveTransportLine(double xPixelToMoveTo);
+    
 private:
     AudioThumbnail thumbnail;
     Rectangle<int> thumbnailArea;
     AudioThumbnailCache thumbnailCache;
+    
+    int transportXPos;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioWaveform)
 };

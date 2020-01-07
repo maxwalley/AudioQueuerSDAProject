@@ -66,7 +66,12 @@ void AudioPlayer::pause()
     transport.stop();
 }
 
-bool AudioPlayer::isPaused()
+bool AudioPlayer::isPlaying() const
+{
+    return transport.isPlaying();
+}
+
+bool AudioPlayer::isPaused() const
 {
     if(pausePosition == 0)
     {
@@ -97,4 +102,15 @@ void AudioPlayer::setGain(float gain)
 void AudioPlayer::setTransportPosition(double position)
 {
     transport.setPosition(position);
+}
+
+double AudioPlayer::getTransportLengthInSeconds() const
+{
+    return transport.getLengthInSeconds();
+}
+
+void AudioPlayer::stop()
+{
+    transport.stop();
+    transport.setSource(nullptr);
 }

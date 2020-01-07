@@ -12,7 +12,7 @@
 #include "AudioWaveform.h"
 
 //==============================================================================
-AudioWaveform::AudioWaveform(AudioFormatManager &formatManagerToUse) : thumbnail(512, formatManagerToUse, thumbnailCache), thumbnailArea(0, 0, 200, 150), thumbnailCache(5)
+AudioWaveform::AudioWaveform(AudioFormatManager &formatManagerToUse) : thumbnail(512, formatManagerToUse, thumbnailCache), thumbnailArea(0, 0, 200, 150), thumbnailCache(5), transportXPos(0)
 {
     setSize(200, 150);
     setAlwaysOnTop(true);
@@ -28,6 +28,11 @@ void AudioWaveform::paint (Graphics& g)
     g.fillRect(thumbnailArea);
     g.setColour(Colours::black);
     thumbnail.drawChannels(g, thumbnailArea, 0, thumbnail.getTotalLength(), 1.0);
+    
+    if(transportXPos != 0)
+    {
+        g.drawLine(transportXPos, 0, transportXPos, 150);
+    }
 }
 
 void AudioWaveform::set(InputSource *newSource)
@@ -47,6 +52,13 @@ double AudioWaveform::getThumbnailLength() const
 
 void AudioWaveform::clear()
 {
+    transportXPos = 0;
     thumbnail.clear();
+    repaint();
+}
+
+void AudioWaveform::moveTransportLine(double xPixelToMoveTo)
+{
+    transportXPos = xPixelToMoveTo;
     repaint();
 }

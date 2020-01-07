@@ -26,7 +26,9 @@ public:
     
     void pause();
     
-    bool isPaused();
+    bool isPlaying() const;
+    
+    bool isPaused() const;
     
     void playFromPause();
     
@@ -35,6 +37,10 @@ public:
     void setGain(float gain);
     
     void setTransportPosition(double position);
+    
+    double getTransportLengthInSeconds() const;
+    
+    void stop();
     
 private:
     AudioFormatManager formatManager;

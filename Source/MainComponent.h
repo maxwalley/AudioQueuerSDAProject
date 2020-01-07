@@ -40,7 +40,6 @@ public:
 
     //==============================================================================
     void paint (Graphics& g) override;
-    void paintOverChildren(Graphics& g) override;
     void resized() override;
     
 private:
@@ -78,7 +77,6 @@ private:
     AudioPlayerGUI playerGUI;
     
     AudioTable table;
-    int selectedItem;
     
     void actionListenerCallback(const String& message) override;
     

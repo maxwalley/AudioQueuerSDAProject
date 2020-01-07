@@ -367,12 +367,6 @@ void AudioTable::updateSelectedItemNumLoops(int newNumLoops)
     items[currentIndexSelected]->setNumLoops(newNumLoops);
 }
 
-void AudioTable::pauseAudio()
-{
-    pausePosition = transport.getCurrentPosition();
-    transport.stop();
-}
-
 void AudioTable::changeQueueControlToggle(int control)
 {
     queueControls.changeToggleState(control);
@@ -380,8 +374,5 @@ void AudioTable::changeQueueControlToggle(int control)
 
 void AudioTable::reset()
 {
-    transport.stop();
-    transport.setSource(nullptr);
     currentIndexPlaying = -1;
-    pausePosition = 0;
 }
