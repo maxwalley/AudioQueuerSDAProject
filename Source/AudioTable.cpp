@@ -154,112 +154,42 @@ int AudioTable::getSelectedRow()
     return embeddedTable.getSelectedRow();
 }
 
-void AudioTable::moveTransportOn(bool ignoreLooping)
+void AudioTable::moveTransportOn()
 {
-    //Checks to see if looping mechanism should be skipped
-   /* if(ignoreLooping == false)
+    //if current item is set to loop and the specified amount of loops have not been hit
+    if(items[currentIndexPlaying]->getLoop() == true && items[currentIndexPlaying]->getNumLoops() > loopCounter)
     {
-        //Checks to see if the item is set to loop
-        if(items[currentIndexPlaying]->getLoop() == true)
-        {
-            //Checks to see if the specified number of loops have been completed
-            if(items[currentIndexPlaying]->getNumLoops() > loopCounter)
-            {
-                loopCounter++;
-            }
-            else
-            {
-                loopCounter = 0;
-                currentIndexPlaying++;
-            }
-        }
-        else
-        {
-            //Moves index onto next
-            currentIndexPlaying++;
-        }
+        loopCounter++;
     }
     else
     {
-        currentIndexPlaying++;
-    }
-    
-    //Checks that a loop is not currently being played
-    if(loopCounter == 0)
-    {
-        //If shuffle is on
+        loopCounter = 0;
+        
+        //If queue is set to shuffle
         if(queueControls.getShuffleQueueButtonState() == true)
         {
             //Gets a random value in the range of how many items there are
             currentIndexPlaying = Random::getSystemRandom().nextInt(items.size());
         }
-    }
         
-    //Checks to see if we're at the end of the list or the shuffle button is enabled
-    if(currentIndexPlaying != items.size() || queueControls.getShuffleQueueButtonState() == true)
-    {
-        //Checks that the continuous play button is selected
-        if(queueControls.getContinousButtonState() == true)
+        //If we're not at the end of the queue
+        else if(currentIndexPlaying < items.size() - 1)
         {
-            setUpTransport(currentIndexPlaying);
+            currentIndexPlaying++;
         }
+        
         else
         {
-            transport.setSource(nullptr);
-            sendActionMessage("Break");
-        }
-            
-    }
-    else
-    {
-        if(queueControls.getLoopQueueButtonState() == true)
-        {
-            //Checks that the continuous play button is selected
-            if(queueControls.getContinousButtonState() == true)
+            //If queue is set to loop
+            if(queueControls.getLoopQueueButtonState() == true)
             {
-                //Restarts the queue
-                startQueue();
-            }
-            else if(queueControls.getContinousButtonState() == false)
-            {
-                transport.setSource(nullptr);
-                //Resets current index playing for the next time
+                //Reset index to play
                 currentIndexPlaying = 0;
-                sendActionMessage("Break");
             }
-        }
-        else
-        {
-            //Resets current index playing to none
-            currentIndexPlaying = -1;
-            sendActionMessage("Queue finished");
-        }
-    }*/
-    
-    //If queue is set to shuffle
-    if(queueControls.getShuffleQueueButtonState() == true)
-    {
-        //Gets a random value in the range of how many items there are
-        currentIndexPlaying = Random::getSystemRandom().nextInt(items.size());
-    }
-    
-    //If we're not at the end of the queue
-    else if(currentIndexPlaying < items.size() - 1)
-    {
-        currentIndexPlaying++;
-    }
-    
-    else
-    {
-        //If queue is set to loop
-        if(queueControls.getLoopQueueButtonState() == true)
-        {
-            //Reset index to play
-            currentIndexPlaying = 0;
-        }
-        else
-        {
-            currentIndexPlaying = -1;
+            else
+            {
+                currentIndexPlaying = -1;
+            }
         }
     }
     
@@ -283,8 +213,6 @@ void AudioTable::moveTransportOn(bool ignoreLooping)
 
 void AudioTable::moveTransportBack()
 {
-    transport.stop();
-    
     //Checks to see something is playing
     if(currentIndexPlaying != -1)
     {
@@ -322,6 +250,15 @@ void AudioTable::startQueue()
     }
 }
 
+int AudioTable::getCurrentPlayPoint() const
+{
+    //Checks a file is playing
+    if(currentIndexPlaying != -1)
+    {
+        return items[currentIndexPlaying]->getPlayPoint();
+    }
+}
+
 int AudioTable::getCurrentStopPoint() const
 {
     //Checks a file is playing
@@ -342,14 +279,8 @@ void AudioTable::stopPointReached()
             //Checks if current position is after the stop point
             if(transport.getCurrentPosition() >= items[currentIndexPlaying]->getStopPoint())
             {
-                moveTransportOn(false);
+                moveTransportOn();
             }
-        }
-        
-        //Checks if the file has finished
-        else if(transport.hasStreamFinished() == true)
-        {
-            moveTransportOn(false);
         }
     }
 }
@@ -395,7 +326,7 @@ void AudioTable::actionListenerCallback(const String &message)
         //Takes last character of the message and finds out what number it is. Then uses this number as the index to play
         String indexNumString = message.getLastCharacters(1);
         currentIndexPlaying = indexNumString.getIntValue();
-        setUpTransport(currentIndexPlaying);
+        sendActionMessage("Play button on QueueItem pressed");
     }
 }
 

@@ -20,15 +20,31 @@ public:
     
     AudioTransportSource transport;
     
-    void loadNewFile(File* fileToLoad);
+    void loadNewFile(File* fileToLoad, int playPoint, int stopPoint, bool sendNotificationAtEnd);
     
     void stopPointReached();
+    
+    void pause();
+    
+    bool isPaused();
+    
+    void playFromPause();
+    
+    double getTransportPosition() const;
+    
+    void setGain(float gain);
+    
+    void setTransportPosition(double position);
     
 private:
     AudioFormatManager formatManager;
     AudioFormatReader* reader;
     std::unique_ptr<AudioFormatReaderSource> audioFormatReaderSource;
     
+    bool sendNotificationAtEndOfPlayback;
+    int fileStopPoint;
+    
+    double pausePosition;
     
     //Have two readers and two reader sources and switch the transport between the two
 };

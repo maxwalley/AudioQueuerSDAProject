@@ -145,7 +145,7 @@ void MainComponent::buttonClicked(Button* button)
         }
         else if(playerGUI.playButton.getButtonState() == 1)
         {
-            pauseAudio();
+            player.pause();
         }
         
     }
@@ -157,19 +157,20 @@ void MainComponent::buttonClicked(Button* button)
     
     else if(button == &playerGUI.nextButton)
     {
-        table.moveTransportOn(true);
+        table.moveTransportOn();
+        player.loadNewFile(table.getCurrentPlayingFile(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), true);
     }
     
     else if(button == &playerGUI.lastButton)
     {
         table.moveTransportBack();
+        player.loadNewFile(table.getCurrentPlayingFile(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), true);
     }
     
 }
 
 void MainComponent::addFile()
 {
-    //Move this into audio table fully
     if(fileChooser.browseForFileToOpen() == true)
     {
         selectedFile = fileChooser.getResult();
@@ -179,8 +180,16 @@ void MainComponent::addFile()
 
 void MainComponent::playQueue()
 {
-    table.startQueue();
-    player.loadNewFile(table.getCurrentPlayingFile());
+    if(player.isPaused() == true)
+    {
+        player.playFromPause();
+    }
+    else
+    {
+        table.startQueue();
+        player.loadNewFile(table.getCurrentPlayingFile(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), true);
+        waveform.set(new FileInputSource(*table.getCurrentPlayingFile()));
+    }
     transformImage.timerTrigger();
     playerGUI.audioPlayed();
     Timer:startTimer(100);
@@ -208,13 +217,13 @@ void MainComponent::sliderValueChanged(Slider* slider)
 {
     if(slider == &playerGUI.gainSlider)
     {
-        table.transport.setGain(playerGUI.gainSlider.getValue());
+        player.setGain(playerGUI.gainSlider.getValue());
     }
 }
 
 void MainComponent::timerCallback()
 {
-    playerGUI.changeTime(table.transport.getCurrentPosition());
+    playerGUI.changeTime(player.getTransportPosition());
     repaint(0, 200, 200, 150);
 }
 
@@ -236,21 +245,13 @@ void MainComponent::changeAudioPosition(int xAxis)
     double percentageInTrack = (waveform.getThumbnailLength()/100) * percentageAcrossWaveform;
     
     //Sets the new transport position
-    table.setTransportPosition(percentageInTrack);
+    player.setTransportPosition(percentageInTrack);
 }
 
 void MainComponent::actionListenerCallback(const String &message)
 {
-    if(message == "Playing Item Changed")
-    {
-        //Retrieves the current file that is playing and sends it to the waveform
-        File* currentFile = table.getCurrentPlayingFile();
-        player.loadNewFile(currentFile);
-        waveform.set(new FileInputSource(*currentFile));
-    }
-    
     //Called if a new row is selected
-    else if(message == "Selected Item Changed")
+    if(message == "Selected Item Changed")
     {
         //Sends the data from the selected row to the info box
         infoBox.changeData(table.getCurrentSelectedDataStruct());
@@ -313,7 +314,7 @@ void MainComponent::actionListenerCallback(const String &message)
     
     else if(message == "Transport Finished")
     {
-        table.moveTransportOn(false);
+        table.moveTransportOn();
         
         //If the stream has finished
         if(table.getCurrentPlayingFile() == nullptr)
@@ -322,7 +323,14 @@ void MainComponent::actionListenerCallback(const String &message)
         }
         else
         {
-            player.loadNewFile(table.getCurrentPlayingFile());
+            player.loadNewFile(table.getCurrentPlayingFile(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), true);
+            waveform.set(new FileInputSource(*table.getCurrentPlayingFile()));
         }
+    }
+    
+    else if(message == "Play button on QueueItem pressed")
+    {
+        player.loadNewFile(table.getCurrentPlayingFile(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), false);
+        waveform.set(new FileInputSource(*table.getCurrentPlayingFile()));
     }
 }
