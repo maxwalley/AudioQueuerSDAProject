@@ -12,7 +12,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PlayPauseButton.h"
-#include "PlayerControlButton.h"
+#include "PlayerGUIButton.h"
 
 //==============================================================================
 /*
@@ -35,10 +35,19 @@ public:
     
     Slider gainSlider;
     
-    PlayPauseButton playButton;
+    Path stopButtonPath;
+    PlayerGUIButton stopButton;
+    
+    Path nextButtonPath;
+    PlayerGUIButton nextButton;
+    
+    Path lastButtonPath;
+    PlayerGUIButton lastButton;
+    
+    /*PlayPauseButton playButton;
     PlayerControlButton stopButton;
     PlayerControlButton nextButton;
-    PlayerControlButton lastButton;
+    PlayerControlButton lastButton;*/
     
     /**Sets the play button to be enabled*/
     void setPlayButtonEnabled();

@@ -15,24 +15,24 @@
 //==============================================================================
 /*
 */
-class PlayerControlButton    : public Button
+class PlayerGUIButton    : public Button
 {
 public:
-    enum Function
+    PlayerGUIButton(PlayerControl buttonFunc);
+    ~PlayerGUIButton();
+
+    void paintButton (Graphics &g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override;
+    
+    enum PlayerControl
     {
         stop,
         next,
         last
     };
     
-    PlayerControlButton(Function function);
-    ~PlayerControlButton();
-
-    void paintButton (Graphics &g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override;
-
 private:
     
-    Function buttonFunc;
+    PlayerControl control;
     
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlayerControlButton)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlayerGUIButton)
 };

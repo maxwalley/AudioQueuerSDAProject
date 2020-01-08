@@ -11,12 +11,13 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "PlayerGUIButton.h"
 
 //==============================================================================
 /*
 */
 
-class PlayPauseButton    : public Button
+class PlayPauseButton    : public PlayerGUIButton
 {
 public:
     PlayPauseButton();

@@ -9,21 +9,19 @@
 */
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "PlayerControlButton.h"
+#include "PlayerGUIButton.h"
 
 //==============================================================================
-PlayerControlButton::PlayerControlButton(Function function) : Button("")
+PlayerGUIButton::PlayerGUIButton() : Button("")
 {
-    buttonFunc = function;
-    
-    setColour(TextButton::buttonColourId, Colours::white);
+    //setColour(TextButton::buttonColourId, Colours::white);
 }
 
-PlayerControlButton::~PlayerControlButton()
+PlayerGUIButton::~PlayerGUIButton()
 {
 }
 
-void PlayerControlButton::paintButton (Graphics &g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown)
+void PlayerGUIButton::paintButton (Graphics &g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown)
 {
     g.setColour(Colours::white);
     
@@ -57,5 +55,6 @@ void PlayerControlButton::paintButton (Graphics &g, bool shouldDrawButtonAsHighl
         path.closeSubPath();
     }
     
-    g.fillPath(path);
+    g.fillPath(image);
 }
+

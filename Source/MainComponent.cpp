@@ -30,7 +30,7 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     table.transport.setGain(playerGUI.gainSlider.getValue());
     
     playerGUI.gainSlider.addListener(this);
-    playerGUI.playButton.addListener(this);
+    //playerGUI.playButton.addListener(this);
     playerGUI.stopButton.addListener(this);
     playerGUI.nextButton.addListener(this);
     playerGUI.lastButton.addListener(this);
@@ -117,7 +117,7 @@ void MainComponent::buttonClicked(Button* button)
         playerGUI.setPlayButtonEnabled();
     }
     
-    else if(button == &playerGUI.playButton)
+    /*else if(button == &playerGUI.playButton)
     {
         if(playerGUI.playButton.getButtonState() == 0)
         {
@@ -128,7 +128,7 @@ void MainComponent::buttonClicked(Button* button)
             pauseAudio();
         }
         
-    }
+    }*/
     
     else if(button == &playerGUI.stopButton)
     {

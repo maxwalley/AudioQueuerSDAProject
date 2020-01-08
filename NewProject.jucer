@@ -31,10 +31,10 @@
       <FILE id="cPNy6S" name="InfoBox.h" compile="0" resource="0" file="Source/InfoBox.h"/>
       <FILE id="zqFUZ8" name="InfoBox.cpp" compile="1" resource="0" file="Source/InfoBox.cpp"/>
       <GROUP id="{725DCBBF-D78B-B684-A3EE-A47707B2AEDF}" name="Audio">
-        <FILE id="q7l2ce" name="PlayerControlButton.cpp" compile="1" resource="0"
-              file="Source/PlayerControlButton.cpp"/>
-        <FILE id="hVxIjf" name="PlayerControlButton.h" compile="0" resource="0"
-              file="Source/PlayerControlButton.h"/>
+        <FILE id="q7l2ce" name="PlayerGUIButton.cpp" compile="1" resource="0"
+              file="Source/PlayerGUIButton.cpp"/>
+        <FILE id="hVxIjf" name="PlayerGUIButton.h" compile="0" resource="0"
+              file="Source/PlayerGUIButton.h"/>
         <FILE id="lCFplO" name="PlayPauseButton.cpp" compile="1" resource="0"
               file="Source/PlayPauseButton.cpp"/>
         <FILE id="FO4OQg" name="PlayPauseButton.h" compile="0" resource="0"

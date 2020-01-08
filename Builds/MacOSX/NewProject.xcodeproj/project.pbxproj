@@ -101,9 +101,9 @@
 			isa = PBXBuildFile;
 			fileRef = F6B5A0CC5C113A997CE506DF;
 		};
-		8F151411B1427279F6273A54 = {
+		E71140C8F8A9CCD012F50A0D = {
 			isa = PBXBuildFile;
-			fileRef = C6373FEDE1024AAC7585DF47;
+			fileRef = BE42CDA16081D5B758B238BA;
 		};
 		AB4E25C0EEB8F92E7FE3A778 = {
 			isa = PBXBuildFile;
@@ -479,13 +479,6 @@
 			path = System/Library/Frameworks/DiscRecording.framework;
 			sourceTree = SDKROOT;
 		};
-		8F90C2035AC648C8C23573C3 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = PlayerControlButton.h;
-			path = ../../Source/PlayerControlButton.h;
-			sourceTree = "SOURCE_ROOT";
-		};
 		906E260511411CC9E25B0AF0 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
@@ -584,6 +577,13 @@
 			path = ../../Source/FFT.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
+		BE42CDA16081D5B758B238BA = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = PlayerGUIButton.cpp;
+			path = ../../Source/PlayerGUIButton.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		BEA69E139FD58D3AD2292267 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
@@ -597,13 +597,6 @@
 			name = AudioToolbox.framework;
 			path = System/Library/Frameworks/AudioToolbox.framework;
 			sourceTree = SDKROOT;
-		};
-		C6373FEDE1024AAC7585DF47 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = PlayerControlButton.cpp;
-			path = ../../Source/PlayerControlButton.cpp;
-			sourceTree = "SOURCE_ROOT";
 		};
 		C7451FFC123B579EF43BE0FF = {
 			isa = PBXFileReference;
@@ -645,6 +638,13 @@
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_data_structures.mm";
 			path = "../../JuceLibraryCode/include_juce_data_structures.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		D3C99D9BD8B95ECE5881347E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = PlayerGUIButton.h;
+			path = ../../Source/PlayerGUIButton.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		DF8D9254A3C1B84765DF4895 = {
@@ -748,8 +748,8 @@
 		C790A858C3C28CBA9F97C1A7 = {
 			isa = PBXGroup;
 			children = (
-				C6373FEDE1024AAC7585DF47,
-				8F90C2035AC648C8C23573C3,
+				BE42CDA16081D5B758B238BA,
+				D3C99D9BD8B95ECE5881347E,
 				B4A01A7BBCE4FFF62912CC62,
 				833903CF33D299BB156CBEB7,
 				906E260511411CC9E25B0AF0,
@@ -1127,7 +1127,7 @@
 				308013AFA2C588537806A3A5,
 				EB5A58E00C0D465B74B06717,
 				3E8FC2D98B3C4E85D4DA2C5B,
-				8F151411B1427279F6273A54,
+				E71140C8F8A9CCD012F50A0D,
 				AB4E25C0EEB8F92E7FE3A778,
 				C821630C5FB8D6B313F0EFA8,
 				06587ECA6131E92B0B978EC7,

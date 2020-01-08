@@ -12,7 +12,7 @@
 #include "PlayPauseButton.h"
 
 //==============================================================================
-PlayPauseButton::PlayPauseButton() : Button(""), buttonState(play)
+PlayPauseButton::PlayPauseButton()
 {
     
 }
