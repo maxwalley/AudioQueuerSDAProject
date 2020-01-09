@@ -12,7 +12,7 @@
 #include "AudioPlayerGUI.h"
 
 //==============================================================================
-AudioPlayerGUI::AudioPlayerGUI() 
+AudioPlayerGUI::AudioPlayerGUI()  : playPauseButton(PlayerGUIButton::play), stopButton(PlayerGUIButton::stop), nextButton(PlayerGUIButton::next), lastButton(PlayerGUIButton::last)
 {
     setSize(200, 250);
     
@@ -21,28 +21,11 @@ AudioPlayerGUI::AudioPlayerGUI()
     gainSlider.setTextBoxStyle(Slider::NoTextBox, true, 0, 0);
     gainSlider.setRange(0, 1);
     gainSlider.setValue(0.5);
-       
-    /*addAndMakeVisible(playButton);
-    playButton.setEnabled(false);*/
     
-    stopButtonPath.addRectangle(stopButton.getWidth()/3, stopButton.getHeight()/3, stopButton.getWidth()/3, stopButton.getHeight()/3);
-    stopButton.setButtonImage(stopButtonPath);
-    
-    nextButtonPath.startNewSubPath((nextButton.getWidth()/3) * 2, nextButton.getHeight()/3);
-    nextButtonPath.lineTo((nextButton.getWidth()/3) * 2, (nextButton.getHeight()/3) * 2);
-    nextButtonPath.addTriangle(nextButton.getWidth()/3, getHeight()/3, (getWidth()/3) * 2, getHeight()/2, getWidth()/3, (getHeight()/3) * 2);
-    nextButton.setButtonImage(nextButtonPath);
-    
-    lastButtonPath.startNewSubPath(lastButton.getWidth()/3, lastButton.getHeight()/3);
-    lastButtonPath.lineTo(lastButton.getWidth()/3, (lastButton.getHeight()/3) * 2);
-    lastButtonPath.addTriangle(lastButton.getWidth()/3, lastButton.getHeight()/2, (lastButton.getWidth()/3) * 2, lastButton.getHeight()/3, (lastButton.getWidth()/3) * 2, (lastButton.getHeight()/3) * 2);
-    lastButton.setButtonImage(lastButtonPath);
-       
-    addAndMakeVisible(nextButton);
-    
-    addAndMakeVisible(lastButton);
-    
+    addAndMakeVisible(playPauseButton);
     addAndMakeVisible(stopButton);
+    addAndMakeVisible(nextButton);
+    addAndMakeVisible(lastButton);
     
     addAndMakeVisible(timeLabel);
     timeLabel.setText("", dontSendNotification);
@@ -64,7 +47,7 @@ void AudioPlayerGUI::resized()
 {
     timeLabel.setBounds(0, 0, 50, 30);
     
-    //playButton.setBounds(75, 80, 50, 50);
+    playPauseButton.setBounds(75, 80, 50, 50);
     stopButton.setBounds(80, 140, 40, 40);
     nextButton.setBounds(165, 85, 35, 35);
     lastButton.setBounds(0, 85, 35, 35);
@@ -74,19 +57,19 @@ void AudioPlayerGUI::resized()
 
 void AudioPlayerGUI::audioStopped()
 {
-    //playButton.changeState(0);
+    playPauseButton.changeFunction(PlayerGUIButton::play);
     timeLabel.setText("", dontSendNotification);
 }
 
 void AudioPlayerGUI::audioPaused()
 {
-    //playButton.changeState(0);
+    playPauseButton.changeFunction(PlayerGUIButton::play);
 }
 
 void AudioPlayerGUI::audioPlayed()
 {
     stopButton.setToggleState(false, dontSendNotification);
-    //playButton.changeState(1);
+    playPauseButton.changeFunction(PlayerGUIButton::pause);
     
 }
 
@@ -106,7 +89,7 @@ void AudioPlayerGUI::changeTime(double audioPosition)
     timeLabel.setText(fullTime, dontSendNotification);
 }
 
-void AudioPlayerGUI::setPlayButtonEnabled()
+void AudioPlayerGUI::setButtonEnabled(Button* button, bool enabled)
 {
-    //playButton.setEnabled(true);
+    button->setEnabled(enabled);
 }

@@ -12,9 +12,9 @@
 #include "PlayerGUIButton.h"
 
 //==============================================================================
-PlayerGUIButton::PlayerGUIButton() : Button("")
+PlayerGUIButton::PlayerGUIButton(ControlType function) : Button("")
 {
-    //setColour(TextButton::buttonColourId, Colours::white);
+    buttonFunc = function;
 }
 
 PlayerGUIButton::~PlayerGUIButton()
@@ -30,31 +30,44 @@ void PlayerGUIButton::paintButton (Graphics &g, bool shouldDrawButtonAsHighlight
     
     Path path;
     
-    if(buttonFunc == stop)
+    if(buttonFunc == play)
+    {
+        path.addTriangle(getWidth()/3, getHeight()/3, getWidth()/3, (getHeight()/3) * 2, (getWidth()/3) * 2, getHeight()/2);
+    }
+    
+    else if(buttonFunc == pause)
+    {
+        g.drawLine(getWidth()/3, getHeight()/3, getWidth()/3, (getHeight()/3) * 2);
+        g.drawLine((getWidth()/3) * 1.5, getHeight()/3, (getWidth()/3) * 1.5, (getHeight()/3) * 2);
+    }
+    
+    else if(buttonFunc == stop)
     {
         g.fillRect(getWidth()/3, getHeight()/3, getWidth()/3, getHeight()/3);
     }
     
     else if(buttonFunc == next)
     {
+        path.addTriangle(getWidth()/3, getHeight()/3, (getWidth()/3) * 2, getHeight()/2, getWidth()/3, (getHeight()/3) * 2);
         g.drawLine((getWidth()/3) * 2, getHeight()/3, (getWidth()/3) * 2, (getHeight()/3) * 2);
-        
-        path.startNewSubPath(getWidth()/3, getHeight()/3);
-        path.lineTo(getWidth()/3, (getHeight()/3) * 2);
-        path.lineTo((getWidth()/3) * 2, getHeight()/2);
-        path.closeSubPath();
     }
     
     else if(buttonFunc == last)
     {
+        path.addTriangle(getWidth()/3, getHeight()/2, (getWidth()/3) * 2, getHeight()/3, (getWidth()/3) * 2, (getHeight()/3) * 2);
         g.drawLine(getWidth()/3, getHeight()/3, getWidth()/3, (getHeight()/3) * 2);
-        
-        path.startNewSubPath((getWidth()/3) * 2, getHeight()/3);
-        path.lineTo((getWidth()/3) * 2, (getHeight()/3) * 2);
-        path.lineTo(getWidth()/3, getHeight()/2);
-        path.closeSubPath();
     }
     
-    g.fillPath(image);
+    g.fillPath(path);
 }
 
+void PlayerGUIButton::changeFunction(ControlType newFunction)
+{
+    buttonFunc = newFunction;
+    repaint();
+}
+
+int PlayerGUIButton::getFunction() const
+{
+    return buttonFunc;
+}

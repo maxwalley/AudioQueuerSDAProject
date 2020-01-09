@@ -35,22 +35,12 @@ public:
     
     Slider gainSlider;
     
-    Path stopButtonPath;
+    PlayerGUIButton playPauseButton;
     PlayerGUIButton stopButton;
-    
-    Path nextButtonPath;
     PlayerGUIButton nextButton;
-    
-    Path lastButtonPath;
     PlayerGUIButton lastButton;
     
-    /*PlayPauseButton playButton;
-    PlayerControlButton stopButton;
-    PlayerControlButton nextButton;
-    PlayerControlButton lastButton;*/
-    
-    /**Sets the play button to be enabled*/
-    void setPlayButtonEnabled();
+    void setButtonEnabled(Button* button, bool enabled);
     
 private:
     

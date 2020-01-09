@@ -12,7 +12,7 @@
 #include "PlayPauseButton.h"
 
 //==============================================================================
-PlayPauseButton::PlayPauseButton()
+PlayPauseButton::PlayPauseButton(ControlType function) : PlayerGUIButton(PlayerGUIButton::stop)
 {
     
 }
@@ -23,7 +23,7 @@ PlayPauseButton::~PlayPauseButton()
 
 void PlayPauseButton::paintButton (Graphics &g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown)
 {
-    g.setColour(Colours::white);
+    /*g.setColour(Colours::white);
     g.fillEllipse(0, 0, getWidth(), getHeight());
     
     g.setColour(Colours::black);
@@ -43,10 +43,10 @@ void PlayPauseButton::paintButton (Graphics &g, bool shouldDrawButtonAsHighlight
     {
         g.drawLine(getWidth()/3, getHeight()/3, getWidth()/3, (getHeight()/3) * 2);
         g.drawLine((getWidth()/3) * 1.5, getHeight()/3, (getWidth()/3) * 1.5, (getHeight()/3) * 2);
-    }
+    }*/
 }
 
-void PlayPauseButton::changeState(bool newState)
+/*void PlayPauseButton::changeState(bool newState)
 {
     if(newState == 0 && buttonState == pause)
     {
@@ -63,4 +63,4 @@ void PlayPauseButton::changeState(bool newState)
 int PlayPauseButton::getButtonState()
 {
     return buttonState;
-}
+}*/

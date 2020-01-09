@@ -30,13 +30,15 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     table.transport.setGain(playerGUI.gainSlider.getValue());
     
     playerGUI.gainSlider.addListener(this);
-    //playerGUI.playButton.addListener(this);
+    playerGUI.playPauseButton.addListener(this);
     playerGUI.stopButton.addListener(this);
     playerGUI.nextButton.addListener(this);
     playerGUI.lastButton.addListener(this);
     table.queueControls.openFileButton.addListener(this);
     
     addAndMakeVisible(playerGUI);
+    playerGUI.setButtonEnabled(&playerGUI.playPauseButton, false);
+    
     
     addAndMakeVisible(waveform);
     waveform.addMouseListener(this, false);
@@ -114,21 +116,21 @@ void MainComponent::buttonClicked(Button* button)
     if(button == &table.queueControls.openFileButton)
     {
         addFile();
-        playerGUI.setPlayButtonEnabled();
+        playerGUI.setButtonEnabled(&playerGUI.playPauseButton, true);
     }
     
-    /*else if(button == &playerGUI.playButton)
+    else if(button == &playerGUI.playPauseButton)
     {
-        if(playerGUI.playButton.getButtonState() == 0)
+        if(player.isPlaying() == false)
         {
             playQueue();
         }
-        else if(playerGUI.playButton.getButtonState() == 1)
+        else if(player.isPlaying() == true)
         {
             pauseAudio();
         }
         
-    }*/
+    }
     
     else if(button == &playerGUI.stopButton)
     {

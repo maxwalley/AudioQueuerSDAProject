@@ -18,21 +18,27 @@
 class PlayerGUIButton    : public Button
 {
 public:
-    PlayerGUIButton(PlayerControl buttonFunc);
-    ~PlayerGUIButton();
-
-    void paintButton (Graphics &g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override;
-    
-    enum PlayerControl
+    enum ControlType
     {
+        play,
+        pause,
         stop,
         next,
         last
     };
     
+    PlayerGUIButton(ControlType function);
+    ~PlayerGUIButton();
+
+    void paintButton (Graphics &g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override;
+    
+    void changeFunction(ControlType newFunction);
+    
+    int getFunction() const;
+    
 private:
     
-    PlayerControl control;
+    ControlType buttonFunc;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (PlayerGUIButton)
 };
