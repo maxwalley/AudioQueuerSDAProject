@@ -135,12 +135,9 @@ void AudioTable::deleteSelectedItem()
 {
     int tempSize = items.size();
     
-    items.remove(currentIndexSelected);
+    items.remove(currentIndexSelected, true);
     
-    if(items.size() < tempSize)
-    {
-        embeddedTable.updateContent();
-    }
+    embeddedTable.updateContent();
     
     //Resets the selected index since nothing will be selected
     currentIndexSelected = -1;
