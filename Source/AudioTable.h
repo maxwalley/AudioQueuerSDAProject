@@ -33,7 +33,7 @@ public:
     
     TableListBox embeddedTable;
     
-    Array<QueueItem*> items;
+    OwnedArray<QueueItem> items;
     AudioTransportSource transport;
 
     /**Adds a new item to the array of items*/

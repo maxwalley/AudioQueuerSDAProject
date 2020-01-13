@@ -114,6 +114,7 @@ Component* AudioTable::refreshComponentForCell(int rowNumber, int columnId, bool
     {
         return nullptr;
     }
+    
 }
 
 void AudioTable::addNewItem(File* file)
@@ -132,9 +133,14 @@ void AudioTable::addNewItem(File* file)
 
 void AudioTable::deleteSelectedItem()
 {
+    int tempSize = items.size();
+    
     items.remove(currentIndexSelected);
     
-    embeddedTable.updateContent();
+    if(items.size() < tempSize)
+    {
+        embeddedTable.updateContent();
+    }
     
     //Resets the selected index since nothing will be selected
     currentIndexSelected = -1;

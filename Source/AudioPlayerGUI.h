@@ -11,7 +11,6 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "PlayPauseButton.h"
 #include "PlayerGUIButton.h"
 
 //==============================================================================

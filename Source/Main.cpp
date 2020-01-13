@@ -40,9 +40,10 @@ public:
     //==============================================================================
     void systemRequestedQuit() override
     {
-        // This is called when the app is being asked to quit: you can ignore this
-        // request and let the app carry on running, or call quit() to allow the app to close.
-        quit();
+        if(AlertWindow::showOkCancelBox(AlertWindow::AlertIconType::WarningIcon, "Close Application", "Are you sure you want to close this application?", "Yes", "No") == true)
+        {
+            quit();
+        }
     }
 
     void anotherInstanceStarted (const String& commandLine) override

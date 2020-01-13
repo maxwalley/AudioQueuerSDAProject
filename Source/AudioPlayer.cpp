@@ -39,7 +39,7 @@ void AudioPlayer::loadNewFile(File* fileToLoad, int playPoint, int stopPoint, bo
             audioFormatReaderSource.reset(tempAudioFormatReaderSource.release());
         }
     
-        transport.setSource(audioFormatReaderSource.get());
+        transport.setSource(audioFormatReaderSource.get(), 0, nullptr, reader->sampleRate, reader->numChannels);
         transport.setPosition(playPoint);
         transport.start();
         
@@ -112,5 +112,6 @@ double AudioPlayer::getTransportLengthInSeconds() const
 void AudioPlayer::stop()
 {
     transport.stop();
+    pausePosition = 0;
     transport.setSource(nullptr);
 }

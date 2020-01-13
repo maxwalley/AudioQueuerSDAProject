@@ -17,16 +17,13 @@
 //==============================================================================
 /*
 */
-class QueueItem : public Component,
-                  public Label::Listener,
+class QueueItem : public Label::Listener,
                   public Button::Listener,
                   public ActionBroadcaster
 {
 public:
     QueueItem(int idNum, File* file);
     ~QueueItem();
-
-    void paint (Graphics&) override;
     
     void setFile(File* file);
     File* getFile();
@@ -72,6 +69,9 @@ private:
     
     ItemInfo itemData;
     
+    AudioFormatManager formatManager;
+    AudioFormatReader* reader;
+    
     Label playTimeLabel;
     Label stopTimeLabel;
     void labelTextChanged(Label* labelThatHasChanged) override;
@@ -80,9 +80,7 @@ private:
     void buttonClicked(Button* button) override;
     
     void workOutLengthInSecs();
-    //int lengthInSecs;
     void workOutTime();
-    //String lengthInTime;
     
     struct labelTimes
     {

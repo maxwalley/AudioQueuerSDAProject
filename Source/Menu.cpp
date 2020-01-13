@@ -82,12 +82,12 @@ void Menu::menuItemSelected(int menuItemID, int topLevelMenuIndex)
         
         else if(menuItemID == 2)
         {
-            sendActionMessage("Pause Audio");
+            sendActionMessage("Pause audio");
         }
         
         else if(menuItemID == 3)
         {
-            sendActionMessage("Stop Audio");
+            sendActionMessage("Stop audio");
         }
     }
     

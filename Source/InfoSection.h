@@ -38,13 +38,13 @@ public:
     void setData(String data);
     
 private:
+    TextEditorLookAndFeel editorLookAndFeel;
+    
     /**Holds the description of the data of the section*/
     TextEditor descriptorText;
     
     /**Holds the data of the section*/
     TextEditor dataText;
-    
-    TextEditorLookAndFeel editorLookAndFeel;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (InfoSection)
 };

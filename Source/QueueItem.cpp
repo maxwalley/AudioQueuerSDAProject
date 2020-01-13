@@ -14,14 +14,17 @@
 //==============================================================================
 QueueItem::QueueItem(int idNum, File* file)
 {
+    formatManager.registerBasicFormats();
+    reader = formatManager.createReaderFor(*file);
+    
     itemData.itemIndex = idNum;
     itemData.file = *file;
     itemData.fileName = itemData.file.getFileName();
     itemData.size = itemData.file.getSize();
     
-    /*itemData.lengthInSamples = reader->lengthInSamples;
+    itemData.lengthInSamples = reader->lengthInSamples;
     itemData.sampleRate = reader->sampleRate;
-    itemData.numChannels = reader->numChannels;*/
+    itemData.numChannels = reader->numChannels;
     
     itemData.loop = false;
     itemData.numLoops = 0;
@@ -49,11 +52,6 @@ QueueItem::QueueItem(int idNum, File* file)
 QueueItem::~QueueItem()
 {
     
-}
-
-void QueueItem::paint (Graphics& g)
-{
-
 }
 
 File* QueueItem::getFile()
