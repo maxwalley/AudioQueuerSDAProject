@@ -12,7 +12,7 @@
 #include "Menu.h"
 
 //==============================================================================
-Menu::Menu(AudioDeviceManager* devManager) //: deviceSelectorWindow(devManager)
+Menu::Menu(AudioDeviceManager &devManager) : selectorWindow(devManager)
 {
     setMacMainMenu(this);
 }
@@ -64,8 +64,7 @@ void Menu::menuItemSelected(int menuItemID, int topLevelMenuIndex)
     {
         if(menuItemID == 1)
         {
-            DBG("AUDIO PREFS CLICKED");
-            //deviceSelectorWindow.setVisible(true);
+            selectorWindow.showWindow(true);
         }
         else if(menuItemID == 2)
         {

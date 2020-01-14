@@ -20,7 +20,7 @@ class Menu    : public MenuBarModel,
                 public ActionBroadcaster
 {
 public:
-    Menu(AudioDeviceManager* devManager);
+    Menu(AudioDeviceManager &devManager);
     ~Menu();
     
     /**Changes what menu items are enabled*/
@@ -48,7 +48,7 @@ private:
     bool queueLoop;
     bool queueShuffle;
     
-    //DeviceSelectorWindow deviceSelectorWindow;
+    DeviceSelectorWindow selectorWindow;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Menu)
 };

@@ -12,11 +12,17 @@
 #include "DeviceSelectorWindow.h"
 
 //==============================================================================
-DeviceSelectorWindow::DeviceSelectorWindow(AudioDeviceManager* devManager) : DocumentWindow("Audio Device Selector", Colours::palegreen, 7), deviceSelector(*devManager, 0, 0, 1, 2, false, false, true, true)
+DeviceSelectorWindow::DeviceSelectorWindow(AudioDeviceManager &deviceManager) : deviceSelector(deviceManager, 0, 0, 0, 2, false, false, true, false), selectorWindow("Audio Device Selector", Desktop::getInstance().getDefaultLookAndFeel().findColour(ResizableWindow::backgroundColourId), DocumentWindow::allButtons)
 {
-    setSize(500, 500);
+    setSize(350, 200);
+    addAndMakeVisible(deviceSelector);
+    deviceSelector.setSize(350, 200);
     
-    addAndMakeVisible(&deviceSelector);
+    
+    selectorWindow.setContentOwned(this, true);
+    selectorWindow.setSize(350, 200);
+    selectorWindow.setUsingNativeTitleBar(true);
+    
 }
 
 DeviceSelectorWindow::~DeviceSelectorWindow()
@@ -30,5 +36,17 @@ void DeviceSelectorWindow::paint (Graphics& g)
 
 void DeviceSelectorWindow::resized()
 {
-    deviceSelector.setBounds(0, 0, getWidth(), getHeight());
+    
+}
+
+void DeviceSelectorWindow::showWindow(bool show)
+{
+    if(show == true)
+    {
+        selectorWindow.setVisible(true);
+    }
+    else
+    {
+        selectorWindow.setVisible(false);
+    }
 }

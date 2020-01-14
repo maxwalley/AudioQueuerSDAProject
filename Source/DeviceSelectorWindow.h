@@ -15,17 +15,22 @@
 //==============================================================================
 /*
 */
-class DeviceSelectorWindow    : public DocumentWindow
+class DeviceSelectorWindow    : public Component
 {
 public:
-    DeviceSelectorWindow(AudioDeviceManager* devManager);
+    DeviceSelectorWindow(AudioDeviceManager &deviceManager);
     ~DeviceSelectorWindow();
 
     void paint (Graphics&) override;
     void resized() override;
 
+    void showWindow(bool show);
+    
 private:
     
     AudioDeviceSelectorComponent deviceSelector;
+    
+    DocumentWindow selectorWindow;
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DeviceSelectorWindow)
 };

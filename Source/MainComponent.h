@@ -45,6 +45,8 @@ public:
 private:
     //==============================================================================
     // Your private member variables go here...
+    AudioDeviceManager deviceManager;
+
     FileChooser fileChooser;
     File selectedFile;
     AudioFormatManager audioFormatManager;
@@ -87,6 +89,5 @@ private:
     
     AudioPlayer player;
     
-    AudioDeviceManager deviceManager;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };
