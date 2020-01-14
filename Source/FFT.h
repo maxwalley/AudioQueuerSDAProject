@@ -22,7 +22,6 @@ public:
     ~FFT();
 
     void paint (Graphics&) override;
-    void resized() override;
     
     void fillInputArray(float sample);
     void timerTrigger();

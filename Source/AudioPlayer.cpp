@@ -115,3 +115,8 @@ void AudioPlayer::stop()
     pausePosition = 0;
     transport.setSource(nullptr);
 }
+
+AudioFormatManager* AudioPlayer::getAudioFormatManager()
+{
+    return &formatManager;
+}

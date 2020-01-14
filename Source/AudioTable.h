@@ -31,10 +31,10 @@ public:
     void paint(Graphics& g) override;
     void resized() override;
     
-    TableListBox embeddedTable;
+    //TableListBox embeddedTable;
     
+    QueueControls queueControls;
     OwnedArray<QueueItem> items;
-    AudioTransportSource transport;
 
     /**Adds a new item to the array of items*/
     void addNewItem(File* file);
@@ -74,8 +74,6 @@ public:
     /**Updates the data struct of the currently selected item with the new loop toggle selection*/
     void updateSelectedItemNumLoops(int newNumLoops);
     
-    QueueControls queueControls;
-    
     /** Changes the value of a toggle control in the Queue Controls
      @param control - the control to toggle. 1 for loop control, 2 for shuffle control and 3 for continuous control*/
     void changeQueueControlToggle(int control);
@@ -85,6 +83,8 @@ public:
     
     private:
     
+    TableListBox embeddedTable;
+
     int getNumRows() override;
     void paintRowBackground(Graphics& g, int rowNumber, int width, int height, bool rowIsSelected) override;
     void paintCell(Graphics &g, int rowNumber, int columnId, int width, int height, bool rowIsSelected) override;

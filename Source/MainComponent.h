@@ -47,9 +47,11 @@ private:
     // Your private member variables go here...
     AudioDeviceManager deviceManager;
 
+    AudioPlayer player;
+    
     FileChooser fileChooser;
     File selectedFile;
-    AudioFormatManager audioFormatManager;
+
     bool fileLoaded;
     
     void buttonClicked(Button* button) override;
@@ -86,8 +88,6 @@ private:
     
     InfoBox infoBox;
     Menu menu;
-    
-    AudioPlayer player;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

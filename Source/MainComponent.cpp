@@ -9,7 +9,7 @@
 #include "MainComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), timerCount(1), waveform(audioFormatManager), infoBox(audioFormatManager), menu(deviceManager)
+MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), timerCount(1), waveform(*player.getAudioFormatManager()), infoBox(*player.getAudioFormatManager()), menu(deviceManager)
 {
     setSize (1100, 650);
 
@@ -25,10 +25,7 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
         // Specify the number of input and output channels that we want to open
         setAudioChannels (0, 2);
     }
-    audioFormatManager.registerBasicFormats();
-       
-    table.transport.setGain(playerGUI.gainSlider.getValue());
-    
+
     playerGUI.gainSlider.addListener(this);
     playerGUI.playPauseButton.addListener(this);
     playerGUI.stopButton.addListener(this);

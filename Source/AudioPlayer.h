@@ -42,6 +42,8 @@ public:
     
     void stop();
     
+    AudioFormatManager* getAudioFormatManager();
+    
 private:
     AudioFormatManager formatManager;
     AudioFormatReader* reader;

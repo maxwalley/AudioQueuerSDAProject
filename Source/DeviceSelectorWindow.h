@@ -18,12 +18,23 @@
 class DeviceSelectorWindow    : public Component
 {
 public:
+    /**
+     Constructor
+     
+     @param deviceManager   The device manager that this component should control
+     */
     DeviceSelectorWindow(AudioDeviceManager &deviceManager);
+    
+    /**
+     Destructor
+     */
     ~DeviceSelectorWindow();
 
-    void paint (Graphics&) override;
-    void resized() override;
-
+    /**
+     Sets whether the window is shown or not
+     
+     @param show   Whether to show the window or not
+     */
     void showWindow(bool show);
     
 private:

@@ -26,11 +26,6 @@ void FFT::paint (Graphics& g)
     g.drawImage(spectogram, 0, 0, 256, 256, 0, 0, 512, 512);
 }
 
-void FFT::resized()
-{
-    
-}
-
 void FFT::fillInputArray(float sample)
 {
     //DBG("Array size: " << transformInputArray.size());
