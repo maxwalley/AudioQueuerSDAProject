@@ -48,13 +48,13 @@ public:
     
     /**Returns whether the player is currently playing or not
      
-     @returns whether the player is playing or not
+     @return whether the player is playing or not
      */
     bool isPlaying() const;
     
     /**Returns whether the player is currently paused or not
      
-     @returns whether the player is paused or not
+     @return whether the player is paused or not
      */
     bool isPaused() const;
     
@@ -63,7 +63,7 @@ public:
     
     /**Returns the current position of the transport in seconds
      
-     @returns the current position of the transport in seconds
+     @return the current position of the transport in seconds
      */
     double getTransportPosition() const;
     
@@ -81,7 +81,7 @@ public:
     
     /**Returns the length of the current file loaded into the player in seconds
      
-     @returns the length of the current file loaded into the player in seconds
+     @return the length of the current file loaded into the player in seconds
      */
     double getTransportLengthInSeconds() const;
     
@@ -90,7 +90,7 @@ public:
     
     /**Returns the AudioFormatManager this player is using
      
-     @returns the AudioFormatManager the player is using
+     @return the AudioFormatManager the player is using
      */
     AudioFormatManager* getAudioFormatManager();
     

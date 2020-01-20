@@ -19,12 +19,24 @@ class ComponentWindow    : public DocumentWindow,
                            public ActionBroadcaster
 {
 public:
+    /**Constructor
+     
+     @param name            the name of the window
+     @param backgroundColour            the background colour of the window
+     @param requiredButtons         the buttons to put in the top left hand corner of the windo
+     
+     @see DocumentWindow()
+     */
     ComponentWindow(const String &name, Colour backgroundColour, int requiredButtons);
+    
+    /**Destructor*/
     ~ComponentWindow();
 
 
 private:
     
+    /**Implementation of the DocumentWindow method*/
     void closeButtonPressed() override;
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ComponentWindow)
 };

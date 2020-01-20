@@ -37,7 +37,7 @@ PopupMenu Menu::getMenuForIndex(int topLevelMenuIndex, const String &menuName)
     //File tab
     if(topLevelMenuIndex == 0)
     {
-        menu.addItem(1, "Audio Prefrences", true, false);
+        menu.addItem(1, "Audio Preferences", true, false);
         menu.addItem(2, "Add File to Queue", true, false);
     }
     

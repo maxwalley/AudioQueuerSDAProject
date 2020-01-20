@@ -45,19 +45,19 @@ public:
     
     /**Returns the state of the loop queue toggle button
      
-     @returns the state of the loop queue toggle button
+     @return the state of the loop queue toggle button
      */
     bool getLoopQueueButtonState();
 
     /**Returns the state of the shuffle queue toggle button
      
-     @returns the state of the shuffle queue toggle button
+     @return the state of the shuffle queue toggle button
      */
     bool getShuffleQueueButtonState();
     
     /**Returns the state of the play continuously toggle button
      
-     @returns the state of the continuous toggle button
+     @return the state of the continuous toggle button
      */
     bool getContinuousButtonState();
     

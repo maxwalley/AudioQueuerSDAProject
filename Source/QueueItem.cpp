@@ -54,14 +54,14 @@ QueueItem::~QueueItem()
     
 }
 
+void QueueItem::setFile(File* file)
+{
+    itemData.file = *file;
+}
+
 File* QueueItem::getFile()
 {
     return &itemData.file;
-}
-
-int QueueItem::getItemIndex() const
-{
-    return itemData.itemIndex;
 }
 
 void QueueItem::setItemIndex(int index)
@@ -69,12 +69,17 @@ void QueueItem::setItemIndex(int index)
     itemData.itemIndex = index;
 }
 
-String QueueItem::getFileName()
+int QueueItem::getItemIndex() const
+{
+    return itemData.itemIndex;
+}
+
+String QueueItem::getFileName() const
 {
     return itemData.fileName;
 }
 
-int64_t QueueItem::getFileSize()
+int64_t QueueItem::getFileSize() const
 {
     return itemData.size;
 }
@@ -116,16 +121,6 @@ Label* QueueItem::getStopTimeLabel()
 PlayButton* QueueItem::getPlayButton()
 {
     return &playButton;
-}
-
-double QueueItem::getSampleRate()
-{
-    return itemData.sampleRate;
-}
-
-int QueueItem::getNumChannels()
-{
-    return itemData.numChannels;
 }
 
 void QueueItem::labelTextChanged(Label* labelThatHasChanged)
@@ -190,12 +185,12 @@ void QueueItem::buttonClicked(Button* button)
     }
 }
 
-int QueueItem::getPlayPoint()
+int QueueItem::getPlayPoint() const
 {
     return (playLabelTime.preColonNum * 60) + playLabelTime.postColonNum;
 }
 
-int QueueItem::getStopPoint()
+int QueueItem::getStopPoint() const
 {
     return (stopLabelTime.preColonNum * 60) + stopLabelTime.postColonNum;
 }

@@ -20,29 +20,23 @@ class Menu    : public MenuBarModel,
                 public ActionBroadcaster
 {
 public:
+    /**Constructor
+     
+     @param devManager          The audio device manager the audio system is using
+     */
     Menu(AudioDeviceManager &devManager);
-    ~Menu();
     
-    /**Changes what menu items are enabled*/
-    void changeEnabledItems();
+    /**Destructor*/
+    ~Menu();
 
 private:
-    /**Overriden from MenuBarModel
-     Returns a list of the menu bar names as a string array*/
+    /**Implementation of the MenuBarModel method*/
     StringArray getMenuBarNames() override;
     
-    /**Overriden from MenuBarModel
-     Returns the PopupMenu to display for a given top level menu
-     Parameters:
-        topLevelMenuIndex = The index of the top level menu to show
-        menuName = The name of the top level menu to show*/
+    /**Implementation of the MenuBarModel method*/
     PopupMenu getMenuForIndex (int topLevelMenuIndex, const String& menuName) override;
     
-    /**Overriden from MenuBarModel
-     This is called when a menu item has been clicked on.
-     Parameters:
-        menuItemID = The item ID of the PopupMenu item that was selected
-        topLevelMenuIndex = the index of the top-level menu from which the item was chosen (just in case you've used duplicate ID numbers on more than one of the popup menus)*/
+    /**Implementation of the MenuBarModel method*/
     void menuItemSelected (int menuItemID, int topLevelMenuIndex) override;
     
     bool queueLoop;
