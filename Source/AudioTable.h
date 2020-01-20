@@ -25,10 +25,16 @@ class AudioTable    : public TableListBoxModel,
                       public ActionListener
 {
 public:
+    /**Constructor*/
     AudioTable();
+    
+    /**Destructor*/
     ~AudioTable();
     
+    /**Implementation of the Component method*/
     void paint(Graphics& g) override;
+    
+    /**Implementation of the Component method*/
     void resized() override;
     
     QueueControls queueControls;
@@ -80,9 +86,16 @@ public:
     
     TableListBox embeddedTable;
 
+    /**Implementation of the TableListBoxModel method*/
     int getNumRows() override;
+    
+    /**Implementation of the TableListBoxModel method*/
     void paintRowBackground(Graphics& g, int rowNumber, int width, int height, bool rowIsSelected) override;
+    
+    /**Implementation of the TableListBoxModel method*/
     void paintCell(Graphics &g, int rowNumber, int columnId, int width, int height, bool rowIsSelected) override;
+    
+    /**Implementation of the TableListBoxModel method*/
     Component* refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component* existingComponentToUpdate) override;
     
     std::unique_ptr<AudioFormatReaderSource> audioFormatReaderSource;

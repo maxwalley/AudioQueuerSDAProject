@@ -18,8 +18,7 @@
 class TextEditorLookAndFeel : public LookAndFeel_V4
 {
 private:
-    /**Overidden from TextEditor::LookAndFeelMethods
-     Allows the outline of the text editor to be redrawn*/
+    /**Implementation of the LookAndFeel_V4 method*/
     void drawTextEditorOutline(Graphics& g, int width, int height, TextEditor& ) override;
 };
 
@@ -27,14 +26,28 @@ private:
 class InfoSection    : public Component
 {
 public:
+    /**Constructor
+     
+     @param description         the text to put in the description TextEditor
+     */
     InfoSection(String description);
+    
+    /**Destructor*/
     ~InfoSection();
 
+    /**Implementation of the Component method*/
     void paint(Graphics& g) override;
+    
+    /**Implementation of the Component method*/
     void paintOverChildren(Graphics& g) override;
+    
+    /**Implementation of the Component method*/
     void resized() override;
 
-    /**Sets the data of the section*/
+    /**Sets the text in the data TextEditor
+     
+     @param data            the text to put in the data TextEditor
+     */
     void setData(String data);
     
 private:

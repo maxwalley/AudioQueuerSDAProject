@@ -15,12 +15,17 @@
 //==============================================================================
 /*
 */
-class FFT    : public Component, public Timer
+class FFT    : public Component,
+               public Timer
 {
 public:
+    /**Constructor*/
     FFT();
+    
+    /**Destructor*/
     ~FFT();
 
+    /**Implementation of the Component method*/
     void paint (Graphics&) override;
     
     void fillInputArray(float sample);
@@ -44,6 +49,7 @@ private:
     
     Image spectogram;
     
+    /**Implementation of the Timer method*/
     void timerCallback() override;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FFT)

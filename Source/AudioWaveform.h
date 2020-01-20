@@ -21,6 +21,7 @@ public:
     AudioWaveform(AudioFormatManager &formatManagerToUse);
     ~AudioWaveform();
     
+    /**Implementation of the Component method*/
     void paint (Graphics&) override;
     
     void set(InputSource *newSource);

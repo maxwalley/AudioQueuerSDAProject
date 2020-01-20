@@ -20,7 +20,10 @@
 class AudioPlayerGUI    : public Component
 {
 public:
+    /**Constructor*/
     AudioPlayerGUI();
+    
+    /**Destructor*/
     ~AudioPlayerGUI();
 
     void paint (Graphics&) override;

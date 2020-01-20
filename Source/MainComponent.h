@@ -30,16 +30,27 @@ class MainComponent   : public AudioAppComponent,
 {
 public:
     //==============================================================================
+    /**Constructor*/
     MainComponent();
+    
+    /**Destructor*/
     ~MainComponent();
 
     //==============================================================================
+    /**Implementation of the AudioSource method*/
     void prepareToPlay (int samplesPerBlockExpected, double sampleRate) override;
+    
+    /**Implementation of the AudioSource method*/
     void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill) override;
+    
+    /**Implementation of the AudioSource method*/
     void releaseResources() override;
 
     //==============================================================================
+    /**Implementation of the Component method*/
     void paint (Graphics& g) override;
+    
+    /**Implementation of the Component method*/
     void resized() override;
     
 private:
@@ -54,7 +65,10 @@ private:
 
     bool fileLoaded;
     
+    /**Implementation of the Button::Listener method*/
     void buttonClicked(Button* button) override;
+    
+    /**Implementation of the Slider::Listener method*/
     void sliderValueChanged(Slider* slider) override;
     
     /**Adds a file to the queue*/
@@ -69,9 +83,11 @@ private:
     /**Stops the audio*/
     void stopAudio();
     
+    /**Implementation of the Timer method*/
     void timerCallback() override;
     int timerCount;
     
+    /**Implementation of the MouseListener method*/
     void mouseDown (const MouseEvent &event) override;
     void changeAudioPosition(int xAxis);
     
@@ -82,6 +98,7 @@ private:
     
     AudioTable table;
     
+    /**Implementation of the ActionListener method*/
     void actionListenerCallback(const String& message) override;
     
     void setUpPlayer();

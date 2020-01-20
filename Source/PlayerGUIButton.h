@@ -27,9 +27,13 @@ public:
         last
     };
     
+    //Contructor sort this
     PlayerGUIButton(ControlType function);
+    
+    /**Destructor*/
     ~PlayerGUIButton();
 
+    /**Implementation of the Component method*/
     void paintButton (Graphics &g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override;
     
     void changeFunction(ControlType newFunction);

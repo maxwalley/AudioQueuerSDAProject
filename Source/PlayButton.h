@@ -18,10 +18,13 @@
 class PlayButton    : public Button
 {
 public:
+    /**Constructor*/
     PlayButton();
+    
+    /**Destructor*/
     ~PlayButton();
 
-    /**Implementation of the Component method*/
+    /**Implementation of the Button method*/
     void paintButton (Graphics& g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override;
 
 private:

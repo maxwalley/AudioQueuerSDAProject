@@ -24,11 +24,22 @@ class InfoBox    : public Component,
                    public Label::Listener
 {
 public:
+    /**Constructor
+     
+     @param manager         the AudioFormatManager to use
+     */
     InfoBox(AudioFormatManager &manager);
+    
+    /**Destructor*/
     ~InfoBox();
 
+    /**Implementation of the Component method*/
     void paint(Graphics& g) override;
+    
+    /**Implementation of the Component method*/
     void paintOverChildren(Graphics& g) override;
+    
+    /**Implementation of the Component method*/
     void resized() override;
     
     /**Changes the data that is shown in the info box*/
@@ -56,10 +67,10 @@ private:
     Label loopNumDescriptionLabel;
     Label loopNumDataLabel;
     
-    /**Overriden from Button::Listener*/
+    /**Implementation of the Button::Listener method*/
     void buttonClicked(Button* button) override;
     
-    /**Overidden from Label::Listener*/
+    /**Implementation of the Label::Listener method*/
     void labelTextChanged(Label* labelThatHasChanged) override;
     
     int newNumLoops;
