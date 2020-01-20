@@ -11,7 +11,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "DeviceSelectorWindow.h"
+#include "ComponentWindow.h"
 
 //==============================================================================
 /*
@@ -48,7 +48,10 @@ private:
     bool queueLoop;
     bool queueShuffle;
     
-    DeviceSelectorWindow selectorWindow;
+    Component::SafePointer<ComponentWindow> selectorWindow;
+    
+    AudioDeviceManager* deviceManager;
+    Component::SafePointer<AudioDeviceSelectorComponent> selector;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Menu)
 };

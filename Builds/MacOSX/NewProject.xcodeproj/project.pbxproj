@@ -61,13 +61,13 @@
 			isa = PBXBuildFile;
 			fileRef = 5681B841DC2DCBA127A5D3BD;
 		};
+		7A696C24879BDD9877FCBB43 = {
+			isa = PBXBuildFile;
+			fileRef = F237778ABEFFDA646C5D0545;
+		};
 		A7ED68300024645F57784216 = {
 			isa = PBXBuildFile;
 			fileRef = 11C6BDB7ED6ECE5BFCB75120;
-		};
-		A85A666C4E100A0FA9B42886 = {
-			isa = PBXBuildFile;
-			fileRef = AB7B7A4F9BEE6889EB6A83A9;
 		};
 		9806D24D8B627D552DAA69E0 = {
 			isa = PBXBuildFile;
@@ -250,13 +250,6 @@
 			name = "juce_opengl";
 			path = "/Applications/JUCE/modules/juce_opengl";
 			sourceTree = "<absolute>";
-		};
-		36CF7A1EEAF3414A7C759860 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = DeviceSelectorWindow.h;
-			path = ../../Source/DeviceSelectorWindow.h;
-			sourceTree = "SOURCE_ROOT";
 		};
 		37F72530496421A9B9AE490B = {
 			isa = PBXFileReference;
@@ -454,6 +447,13 @@
 			path = "../../JuceLibraryCode/include_juce_events.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		89DEEF03659B18E12C370B17 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = ComponentWindow.h;
+			path = ../../Source/ComponentWindow.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		8AFBFBF6E5A94A8C53B0EC9F = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
@@ -530,13 +530,6 @@
 			includeInIndex = 0;
 			path = NewProject.app;
 			sourceTree = "BUILT_PRODUCTS_DIR";
-		};
-		AB7B7A4F9BEE6889EB6A83A9 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = DeviceSelectorWindow.cpp;
-			path = ../../Source/DeviceSelectorWindow.cpp;
-			sourceTree = "SOURCE_ROOT";
 		};
 		B3E4664E4FECB71A106B9F3A = {
 			isa = PBXFileReference;
@@ -685,6 +678,13 @@
 			path = "/Applications/JUCE/modules/juce_audio_processors";
 			sourceTree = "<absolute>";
 		};
+		F237778ABEFFDA646C5D0545 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = ComponentWindow.cpp;
+			path = ../../Source/ComponentWindow.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		F3793CA79A4EE1C8CC39CF63 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -769,10 +769,10 @@
 		77435C30CEADAB09AA6E1689 = {
 			isa = PBXGroup;
 			children = (
+				F237778ABEFFDA646C5D0545,
+				89DEEF03659B18E12C370B17,
 				11C6BDB7ED6ECE5BFCB75120,
 				1E861DD4C09B960E8A528AF4,
-				36CF7A1EEAF3414A7C759860,
-				AB7B7A4F9BEE6889EB6A83A9,
 				6DAF4B13370BC00BBD9198C6,
 				312A7BC47CF82560BF11089D,
 				15DFEB9145C578A59822317C,
@@ -1097,8 +1097,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A696C24879BDD9877FCBB43,
 				A7ED68300024645F57784216,
-				A85A666C4E100A0FA9B42886,
 				9806D24D8B627D552DAA69E0,
 				9A8AF33F2DE9D35710B669C8,
 				3BD91E4E6B639C4ABE52F79F,

@@ -21,16 +21,11 @@ AudioTable::AudioTable() : indexToPlay(-1), currentIndexSelected(-1), loopCounte
     
     embeddedTable.setHeader(&header);
     embeddedTable.setModel(this);
-    
-    items.clear();
 }
 
 AudioTable::~AudioTable()
 {
-    for(int i = 0; i < items.size(); i++)
-    {
-        delete items[i];
-    }
+    
 }
 
 void AudioTable::paint(Graphics& g)
@@ -121,20 +116,16 @@ void AudioTable::addNewItem(File* file)
 {
     int nextIndex = items.size();
     
-    QueueItem* newItem = new QueueItem(nextIndex, file);
-    
-    items.add(newItem);
+    items.add(new QueueItem(nextIndex, file));
     
     //Adds this as an action listener for the new item
     items[nextIndex]->addActionListener(this);
-
+    
     embeddedTable.updateContent();
 }
 
 void AudioTable::deleteSelectedItem()
 {
-    int tempSize = items.size();
-    
     items.remove(currentIndexSelected, true);
     
     embeddedTable.updateContent();
@@ -301,11 +292,6 @@ ItemInfo AudioTable::getCurrentPlayingDataStruct() const
 ItemInfo AudioTable::getCurrentSelectedDataStruct() const
 {
     return items[currentIndexSelected]->getItemData();
-}
-
-void AudioTable::setTransportPosition(double newPosition)
-{
-    transport.setPosition(newPosition);
 }
 
 void AudioTable::updateSelectedItemLoopToggle(bool newLoopToggle)

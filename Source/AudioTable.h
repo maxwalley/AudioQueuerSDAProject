@@ -31,10 +31,8 @@ public:
     void paint(Graphics& g) override;
     void resized() override;
     
-    //TableListBox embeddedTable;
-    
     QueueControls queueControls;
-    OwnedArray<QueueItem> items;
+    OwnedArray<QueueItem, CriticalSection> items;
 
     /**Adds a new item to the array of items*/
     void addNewItem(File* file);
@@ -64,9 +62,6 @@ public:
     
     /**Returns the info of the current playing item in a struct*/
     ItemInfo getCurrentSelectedDataStruct() const;
-    
-    /**Sets the transports position*/
-    void setTransportPosition(double newPosition);
     
     /**Updates the data struct of the currently selected item with the new loop toggle selection*/
     void updateSelectedItemLoopToggle(bool newLoopToggle);

@@ -12,9 +12,11 @@
 #include "Menu.h"
 
 //==============================================================================
-Menu::Menu(AudioDeviceManager &devManager) : selectorWindow(devManager)
+Menu::Menu(AudioDeviceManager &devManager)
 {
     setMacMainMenu(this);
+    
+    deviceManager = &devManager;
 }
 
 Menu::~Menu()
@@ -64,7 +66,13 @@ void Menu::menuItemSelected(int menuItemID, int topLevelMenuIndex)
     {
         if(menuItemID == 1)
         {
-            selectorWindow.showWindow(true);
+            selectorWindow = new ComponentWindow("Audio Preferences", Colours::grey, DocumentWindow::allButtons);
+            selectorWindow->setSize(300, 200);
+            selector = new AudioDeviceSelectorComponent(*deviceManager, 0, 0, 0, 2, false, false, true, false);
+            
+            selector->setSize(selectorWindow->getWidth(), selectorWindow->getHeight());
+            selectorWindow->setContentOwned(selector, true);
+            selectorWindow->setVisible(true);
         }
         else if(menuItemID == 2)
         {

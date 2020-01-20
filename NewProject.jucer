@@ -2,12 +2,12 @@
 
 <JUCERPROJECT id="mGP3HA" name="NewProject" projectType="guiapp" jucerVersion="5.4.5">
   <MAINGROUP id="utjANr" name="NewProject">
+    <FILE id="ZYi7yG" name="ComponentWindow.cpp" compile="1" resource="0"
+          file="Source/ComponentWindow.cpp"/>
+    <FILE id="ao2nli" name="ComponentWindow.h" compile="0" resource="0"
+          file="Source/ComponentWindow.h"/>
     <FILE id="XnUTrO" name="AudioPlayer.cpp" compile="1" resource="0" file="Source/AudioPlayer.cpp"/>
     <FILE id="Xip17q" name="AudioPlayer.h" compile="0" resource="0" file="Source/AudioPlayer.h"/>
-    <FILE id="FgtXOf" name="DeviceSelectorWindow.h" compile="0" resource="0"
-          file="Source/DeviceSelectorWindow.h"/>
-    <FILE id="NbRfcE" name="DeviceSelectorWindow.cpp" compile="1" resource="0"
-          file="Source/DeviceSelectorWindow.cpp"/>
     <FILE id="jbnu6x" name="Menu.h" compile="0" resource="0" file="Source/Menu.h"/>
     <FILE id="NTy6D0" name="Menu.cpp" compile="1" resource="0" file="Source/Menu.cpp"/>
     <FILE id="PxDwuW" name="ItemDataStruct.h" compile="0" resource="0"
