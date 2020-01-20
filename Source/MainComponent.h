@@ -45,7 +45,7 @@ public:
 private:
     //==============================================================================
     // Your private member variables go here...
-    AudioDeviceManager deviceManager;
+    //AudioDeviceManager deviceManager;
 
     AudioPlayer player;
     
