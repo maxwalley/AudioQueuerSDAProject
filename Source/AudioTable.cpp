@@ -187,8 +187,8 @@ void AudioTable::moveTransportOn()
         }
     }
     
-    //If the play continuosly button is not active
-    if(queueControls.getContinousButtonState() == false)
+    //If the play continuously button is not active
+    if(queueControls.getContinuousButtonState() == false)
     {
         //Stores the next index
         nextIndexToPlay = indexToPlay;
@@ -226,7 +226,7 @@ void AudioTable::startQueue()
         //Resets the current index
         indexToPlay = 0;
             
-        if(queueControls.getContinousButtonState() == false)
+        if(queueControls.getContinuousButtonState() == false)
         {
             //Checks that its not set to play nothing
             if(nextIndexToPlay != -1)

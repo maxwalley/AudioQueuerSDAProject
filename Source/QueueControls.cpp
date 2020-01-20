@@ -73,7 +73,7 @@ bool QueueControls::getShuffleQueueButtonState()
     return shuffleQueueButton.getToggleState();
 }
 
-bool QueueControls::getContinousButtonState()
+bool QueueControls::getContinuousButtonState()
 {
     return playContinuouslyButton.getToggleState();
 }
@@ -81,7 +81,7 @@ bool QueueControls::getContinousButtonState()
 void QueueControls::changeToggleState(int control)
 {
     //if control is the loop button
-    if(control == 1)
+    if(control == loopQueue)
     {
         if(loopQueueButton.getToggleState() == true)
         {
@@ -94,7 +94,7 @@ void QueueControls::changeToggleState(int control)
     }
     
     //if control is the shuffle control
-    else if(control == 2)
+    else if(control == shuffleQueue)
     {
         if(shuffleQueueButton.getToggleState() == true)
         {
@@ -107,7 +107,7 @@ void QueueControls::changeToggleState(int control)
     }
     
     //if control is the play continuous control
-    else if(control == 3)
+    else if(control == playContinuously)
     {
         if(playContinuouslyButton.getToggleState() == true)
         {

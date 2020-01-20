@@ -18,7 +18,10 @@
 class QueueTableHeader    : public TableHeaderComponent
 {
 public:
+    /**Constructor*/
     QueueTableHeader();
+    
+    /**Destructor*/
     ~QueueTableHeader();
 
 private:

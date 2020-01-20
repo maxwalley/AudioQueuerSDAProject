@@ -21,6 +21,7 @@ public:
     PlayButton();
     ~PlayButton();
 
+    /**Implementation of the Component method*/
     void paintButton (Graphics& g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override;
 
 private:

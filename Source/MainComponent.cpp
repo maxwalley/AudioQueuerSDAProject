@@ -282,17 +282,17 @@ void MainComponent::actionListenerCallback(const String &message)
     
     else if(message == "Loop Queue Clicked")
     {
-        table.changeQueueControlToggle(1);
+        table.changeQueueControlToggle(QueueControls::loopQueue);
     }
     
     else if(message == "Shuffle Queue Clicked")
     {
-        table.changeQueueControlToggle(2);
+        table.changeQueueControlToggle(QueueControls::shuffleQueue);
     }
     
     else if(message == "Continous Control Clicked")
     {
-        table.changeQueueControlToggle(3);
+        table.changeQueueControlToggle(QueueControls::playContinuously);
     }
     
     else if(message == "Break")

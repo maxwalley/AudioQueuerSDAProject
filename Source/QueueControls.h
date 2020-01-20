@@ -18,32 +18,56 @@
 class QueueControls    : public Component
 {
 public:
+    
+    /**The toggle buttons held by this component
+     
+     @see changeToggleState
+     */
+    enum ControlToggleButtons
+    {
+        loopQueue = 1,
+        shuffleQueue = 2,
+        playContinuously = 3
+    };
+    
+    
+    /**Constructor*/
     QueueControls();
+    
+    /**Destructor*/
     ~QueueControls();
 
+    /**Implementation of the Component method*/
     void paint(Graphics& g) override;
+    
+    /**Implementation of the Component method*/
     void resized() override;
     
-    TextButton openFileButton;
-    
     /**Returns the state of the loop queue toggle button
-     true for button selected
-     false for button deselected*/
+     
+     @returns the state of the loop queue toggle button
+     */
     bool getLoopQueueButtonState();
 
     /**Returns the state of the shuffle queue toggle button
-     true for button selected
-     false for button deselected*/
+     
+     @returns the state of the shuffle queue toggle button
+     */
     bool getShuffleQueueButtonState();
     
     /**Returns the state of the play continuously toggle button
-     true for button selected
-     false for button deselected*/
-    bool getContinousButtonState();
+     
+     @returns the state of the continuous toggle button
+     */
+    bool getContinuousButtonState();
     
     /**Changes the toggle state of one of the controls
-     @param control - the control to change. 1 for loop control, 2 for shuffle control*/
+     
+     @param control         the control to change the toggle state of
+     */
     void changeToggleState(int control);
+    
+    TextButton openFileButton;
     
 private:
     ToggleButton loopQueueButton;
