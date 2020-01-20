@@ -148,7 +148,7 @@ int AudioTable::getSelectedRow()
     return embeddedTable.getSelectedRow();
 }
 
-void AudioTable::moveTransportOn()
+void AudioTable::moveIndexToPlayOn()
 {
     //if current item is set to loop and the specified amount of loops have not been hit
     if(items[indexToPlay]->getLoop() == true && items[indexToPlay]->getNumLoops() > loopCounter)
@@ -205,7 +205,7 @@ void AudioTable::moveTransportOn()
 }
 
 
-void AudioTable::moveTransportBack()
+void AudioTable::moveIndexToPlayBack()
 {
     //Checks to see something is playing
     if(indexToPlay != -1)
@@ -214,6 +214,10 @@ void AudioTable::moveTransportBack()
         if(indexToPlay != 0)
         {
             indexToPlay--;
+        }
+        else
+        {
+            indexToPlay = -1;
         }
     }
 }
@@ -272,7 +276,7 @@ void AudioTable::actionListenerCallback(const String &message)
     }
 }
 
-File* AudioTable::getCurrentPlayingFile() const
+File* AudioTable::getFileToPlay() const
 {
     if(indexToPlay != -1)
     {

@@ -135,13 +135,13 @@ void MainComponent::buttonClicked(Button* button)
     
     else if(button == &playerGUI.nextButton)
     {
-        table.moveTransportOn();
+        table.moveIndexToPlayOn();
         setUpPlayer();
     }
     
     else if(button == &playerGUI.lastButton)
     {
-        table.moveTransportBack();
+        table.moveIndexToPlayBack();
         setUpPlayer();
     }
     
@@ -165,8 +165,8 @@ void MainComponent::playQueue()
     else
     {
         table.startQueue();
-        player.loadNewFile(table.getCurrentPlayingFile(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), true);
-        waveform.set(new FileInputSource(*table.getCurrentPlayingFile()));
+        player.loadNewFile(table.getFileToPlay(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), true);
+        waveform.set(new FileInputSource(*table.getFileToPlay()));
     }
     transformImage.timerTrigger();
     playerGUI.audioPlayed();
@@ -302,28 +302,28 @@ void MainComponent::actionListenerCallback(const String &message)
     
     else if(message == "Transport Finished")
     {
-        table.moveTransportOn();
+        table.moveIndexToPlayOn();
                
         setUpPlayer();
     }
     
     else if(message == "Play button on QueueItem pressed")
     {
-        player.loadNewFile(table.getCurrentPlayingFile(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), false);
-        waveform.set(new FileInputSource(*table.getCurrentPlayingFile()));
+        player.loadNewFile(table.getFileToPlay(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), false);
+        waveform.set(new FileInputSource(*table.getFileToPlay()));
     }
 }
 
 void MainComponent::setUpPlayer()
 {
-    if(table.getCurrentPlayingFile() == nullptr)
+    if(table.getFileToPlay() == nullptr)
     {
         playerGUI.audioStopped();
         stopAudio();
     }
     else
     {
-        player.loadNewFile(table.getCurrentPlayingFile(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), true);
-        waveform.set(new FileInputSource(*table.getCurrentPlayingFile()));
+        player.loadNewFile(table.getFileToPlay(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), true);
+        waveform.set(new FileInputSource(*table.getFileToPlay()));
     }
 }

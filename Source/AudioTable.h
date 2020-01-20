@@ -40,46 +40,81 @@ public:
     QueueControls queueControls;
     OwnedArray<QueueItem, CriticalSection> items;
 
-    /**Adds a new item to the array of items*/
+    /**Adds a new item to the array of items and displays it in the table
+     
+     @param file            the file to add
+     */
     void addNewItem(File* file);
     
-    /**Deletes the currently selected item from the array of items*/
+    /**Deletes the currently selected item from the array of items and from the table*/
     void deleteSelectedItem();
     
+    /**Returns the row number of the current selected row
+     
+     @return the row number of the current selected row
+     */
     int getSelectedRow();
     
-    /**Moves the audio transport onto the next item in the queue. If there are no more items to play it will stop the queue
-     Parameters:
-     bool ignoreLooping - true if the looping mechanism wants to be ignored, false if not*/
-    void moveTransportOn();
+    /**Moves the index to play onto the next QueueItem in the table, taking into account the toggle buttons on QueueControls*/
+    void moveIndexToPlayOn();
     
-    /**Moves the audio transport back to the last item in the queue. If there is nothing before it will stop the queue */
-    void moveTransportBack();
+    /**Moves the index to play back to the last QueueItem in the table. If the current playing index is the first in the table this will reset the index to play to nothing*/
+    void moveIndexToPlayBack();
     
+    /**Initilises next index to play in a variety of ways depending on QueueControls*/
     void startQueue();
     
+    /**Returns the play point of the current QueueItem to play
+     
+     @return the play point of the current QueueItem to play
+     */
     int getCurrentPlayPoint() const;
+    
+    /**Returns the stop point of the current QueueItem to play
+    
+    @return the stop point of the current QueueItem to play
+    */
     int getCurrentStopPoint() const;
     
-    File* getCurrentPlayingFile() const;
+    /**Returns the file to play from specific QueueItem that should play next. If there is no item to play next this will return nullptr
     
-    /**Returns the info of the current playing item in a struct*/
+    @return the file to play from specific QueueItem that should play next
+    */
+    File* getFileToPlay() const;
+    
+    /**Returns the info of the current QueueItem to play in an ItemInfo struct
+     
+     @return the info of the current QueueItem to play in an ItemInfo struct
+     */
     ItemInfo getCurrentPlayingDataStruct() const;
     
-    /**Returns the info of the current playing item in a struct*/
+    /**Returns the info of the current QueueItem selected in the table in an ItemInfo struct
+    
+    @return the info of the current QueueItem selected in an ItemInfo struct
+    */
     ItemInfo getCurrentSelectedDataStruct() const;
     
-    /**Updates the data struct of the currently selected item with the new loop toggle selection*/
+    /**Changes the loop toggle of the ItemInfo struct of the currently selected item. Essentially changing whether the selected QueueItem loops or not
+     
+     @param newLoopToggle           the new loop toggle selection
+     */
     void updateSelectedItemLoopToggle(bool newLoopToggle);
     
-    /**Updates the data struct of the currently selected item with the new loop toggle selection*/
+    /**Changes the amount of loops the currently selected QueueItem does by updating the number of loops in the items ItemInfo struct
+     
+     @param newNumLoops         the new amount of loops for this QueueItem to perform
+     */
     void updateSelectedItemNumLoops(int newNumLoops);
     
     /** Changes the value of a toggle control in the Queue Controls
-     @param control - the control to toggle. 1 for loop control, 2 for shuffle control and 3 for continuous control*/
+     
+     @param control - the control to toggle. Set using ControlToggleButtons enum in QueueControls
+     
+     @see ControlToggleButtons
+     */
     void changeQueueControlToggle(int control);
     
-    /**Resets everything back to as if no item had been played*/
+    /**Sets the index to play back to nothing*/
     void reset();
     
     private:
@@ -98,8 +133,7 @@ public:
     /**Implementation of the TableListBoxModel method*/
     Component* refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component* existingComponentToUpdate) override;
     
-    std::unique_ptr<AudioFormatReaderSource> audioFormatReaderSource;
-
+    /**Implementation of the TableListBoxModel method*/
     void selectedRowsChanged(int lastRowSelected) override;
     
     int indexToPlay;
@@ -108,6 +142,7 @@ public:
     
     int loopCounter;
     
+    /**Implementation of the ActionListener method*/
     void actionListenerCallback(const String &message) override;
     
     QueueTableHeader header;
