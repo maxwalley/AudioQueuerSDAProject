@@ -24,13 +24,25 @@ public:
     /**Implementation of the Component method*/
     void paint (Graphics&) override;
     
-    void set(InputSource *newSource);
+    /**Sets the waveform to show a source
+     
+     @param newSource           the source to show
+     */
+    void set(InputSource* newSource);
     
+    /**Returns the length of the file the thumbnail is showing in seconds
+     
+     @return the length of the file the thumbnail is showing
+     */
     double getThumbnailLength() const;
     
     /**Clears the waveform*/
     void clear();
     
+    /**Moves the transport line to a new position on the waveform
+     
+     @param xPixelToMoveTo          the new position on the waveform to move to in pixels
+     */
     void moveTransportLine(double xPixelToMoveTo);
     
 private:

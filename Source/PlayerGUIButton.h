@@ -27,7 +27,10 @@ public:
         last
     };
     
-    //Contructor sort this
+    /**Constructor
+     
+     @param function            the function this button will represent
+     */
     PlayerGUIButton(ControlType function);
     
     /**Destructor*/
@@ -36,8 +39,18 @@ public:
     /**Implementation of the Component method*/
     void paintButton (Graphics &g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override;
     
+    /**Changes the function this button represents
+     
+     @param newFunction         the new function this button should represent
+     */
     void changeFunction(ControlType newFunction);
     
+    /**Returns the function this button represents
+     
+     @return the function this button represents
+     
+     @see changeFunction
+     */
     int getFunction() const;
     
 private:

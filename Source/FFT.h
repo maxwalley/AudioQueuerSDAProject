@@ -28,7 +28,13 @@ public:
     /**Implementation of the Component method*/
     void paint (Graphics&) override;
     
+    /**Inputs data into the FFT
+     
+     @param sample          the input sample to put into the FFT
+     */
     void fillInputArray(float sample);
+    
+    /**Triggers the timer to start which starts drawing the FFT*/
     void timerTrigger();
     
 private:
@@ -36,9 +42,9 @@ private:
     Array<float> transformInputArray;
     Array<float> transformOutputArray;
     int inputIndex;
-    //float transformInputArray[1024];
-    //float transformOutputArray[2048];
     bool arrayPushingFinished;
+    
+    /**Draws the spectogram image*/
     void drawSpectogram();
     
     enum

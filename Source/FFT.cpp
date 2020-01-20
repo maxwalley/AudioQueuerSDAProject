@@ -28,7 +28,6 @@ void FFT::paint (Graphics& g)
 
 void FFT::fillInputArray(float sample)
 {
-    //DBG("Array size: " << transformInputArray.size());
     if(transformInputArray.size() == fftSize)
     {
         if(arrayPushingFinished == false)
@@ -50,9 +49,7 @@ void FFT::drawSpectogram()
     
     for(int index = 0; index < fftSize; index++)
     {
-        //moves dynamic array into normal one for fft
         array[index] = transformOutputArray.getReference(index);
-        //DBG("data in Array = " << array[index]);
     }
     
     auto rightHandEdge = spectogram.getWidth() - 1;

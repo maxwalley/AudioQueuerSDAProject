@@ -162,7 +162,10 @@ private:
     /**Implementation of the Button::Listener method*/
     void buttonClicked(Button* button) override;
     
+    /**Works out the length of the QueueItems file in seconds*/
     void workOutLengthInSecs();
+    
+    /**Works out the length of the QueueItems file and turns it into a string*/
     void workOutTime();
     
     struct labelTimes

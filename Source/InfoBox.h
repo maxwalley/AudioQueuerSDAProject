@@ -42,13 +42,22 @@ public:
     /**Implementation of the Component method*/
     void resized() override;
     
-    /**Changes the data that is shown in the info box*/
+    /**Changes the data that is shown in the info box
+     
+     @param currentDataStruct           the data to show
+     */
     void changeData(ItemInfo currentDataStruct);
     
-    /**Returns the loop button state*/
+    /**Returns the loop button state of the current data being shown
+     
+     @return the loop button state
+     */
     bool getLoopButtonState() const;
     
-    /**Returns new number of loops*/
+    /**Returns number of loops of the current data being shown
+     
+     @return the number of loops
+     */
     int getNewNumLoops() const;
     
 private:

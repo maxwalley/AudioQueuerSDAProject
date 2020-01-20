@@ -56,7 +56,6 @@ public:
 private:
     //==============================================================================
     // Your private member variables go here...
-    //AudioDeviceManager deviceManager;
 
     AudioPlayer player;
     
@@ -71,16 +70,19 @@ private:
     /**Implementation of the Slider::Listener method*/
     void sliderValueChanged(Slider* slider) override;
     
-    /**Adds a file to the queue*/
+    /**Adds a file to the queue using a FileChooser
+     
+     @see FileChooser
+     */
     void addFile();
     
     /**Plays the queue*/
     void playQueue();
     
-    /**Pauses the audio*/
+    /**Pauses the queue*/
     void pauseAudio();
     
-    /**Stops the audio*/
+    /**Stops the queue*/
     void stopAudio();
     
     /**Implementation of the Timer method*/
@@ -89,6 +91,11 @@ private:
     
     /**Implementation of the MouseListener method*/
     void mouseDown (const MouseEvent &event) override;
+    
+    /**Changes the current position in the audio stream
+     called when the AudioWaveform is clicked on
+     
+     @param xAxis           the x axis position of the click on the waveform*/
     void changeAudioPosition(int xAxis);
     
     AudioWaveform waveform;
@@ -101,6 +108,7 @@ private:
     /**Implementation of the ActionListener method*/
     void actionListenerCallback(const String& message) override;
     
+    /**Sets up the audio player with the next file to play from the table*/
     void setUpPlayer();
     
     InfoBox infoBox;
