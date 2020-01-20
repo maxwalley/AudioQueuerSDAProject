@@ -12,13 +12,21 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
-class AudioPlayer   : public ActionBroadcaster
+class AudioPlayer   : public AudioSource,
+                      public ActionBroadcaster
 {
 public:
+    /** Constructor */
     AudioPlayer();
+    
+    /** Destructor */
     ~AudioPlayer();
     
-    AudioTransportSource transport;
+    void prepareToPlay(int samplesPerBlockExpected, double sampleRate) override;
+    
+    void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill) override;
+    
+    void releaseResources() override;
     
     void loadNewFile(File* fileToLoad, int playPoint, int stopPoint, bool sendNotificationAtEnd);
     
@@ -49,10 +57,10 @@ private:
     AudioFormatReader* reader;
     std::unique_ptr<AudioFormatReaderSource> audioFormatReaderSource;
     
+    AudioTransportSource transport;
+    
     bool sendNotificationAtEndOfPlayback;
     int fileStopPoint;
     
     double pausePosition;
-    
-    //Have two readers and two reader sources and switch the transport between the two
 };

@@ -63,14 +63,14 @@ MainComponent::~MainComponent()
 //==============================================================================
 void MainComponent::prepareToPlay (int samplesPerBlockExpected, double sampleRate)
 {
-    player.transport.prepareToPlay(samplesPerBlockExpected, sampleRate);
+    player.prepareToPlay(samplesPerBlockExpected, sampleRate);
 }
 
 void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
 {
-    if(player.transport.isPlaying() == true)
+    if(player.isPlaying() == true)
     {
-        player.transport.getNextAudioBlock(bufferToFill);
+        player.getNextAudioBlock(bufferToFill);
         player.stopPointReached();
     }
     else
@@ -89,7 +89,7 @@ void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFil
 
 void MainComponent::releaseResources()
 {
-    player.transport.releaseResources();
+    player.releaseResources();
 }
 
 //==============================================================================

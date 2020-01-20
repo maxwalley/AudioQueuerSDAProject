@@ -20,6 +20,21 @@ AudioPlayer::~AudioPlayer()
     
 }
 
+void AudioPlayer::prepareToPlay(int samplesPerBlockExpected, double sampleRate)
+{
+    transport.prepareToPlay(samplesPerBlockExpected, sampleRate);
+}
+
+void AudioPlayer::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
+{
+    transport.getNextAudioBlock(bufferToFill);
+}
+
+void AudioPlayer::releaseResources()
+{
+    transport.releaseResources();
+}
+
 void AudioPlayer::loadNewFile(File* fileToLoad, int playPoint, int stopPoint, bool sendNotificationAtEnd)
 {
     transport.stop();

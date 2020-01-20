@@ -24,7 +24,5 @@ ComponentWindow::~ComponentWindow()
 
 void ComponentWindow::closeButtonPressed()
 {
-    setContentOwned(nullptr, false);
-    //sendActionMessage("Deleting window");
     delete this;
 }
