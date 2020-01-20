@@ -27,7 +27,12 @@ void AudioPlayer::prepareToPlay(int samplesPerBlockExpected, double sampleRate)
 
 void AudioPlayer::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
 {
-    transport.getNextAudioBlock(bufferToFill);
+    if(transport.isPlaying() == true)
+    {
+        transport.getNextAudioBlock(bufferToFill);
+    }
+    
+    stopPointReached();
 }
 
 void AudioPlayer::releaseResources()
@@ -100,8 +105,11 @@ bool AudioPlayer::isPaused() const
 
 void AudioPlayer::playFromPause()
 {
-    transport.setPosition(pausePosition);
-    transport.start();
+    if(isPaused() == true)
+    {
+        transport.setPosition(pausePosition);
+        transport.start();
+    }
 }
 
 double AudioPlayer::getTransportPosition() const

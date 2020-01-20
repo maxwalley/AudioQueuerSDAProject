@@ -71,7 +71,6 @@ void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFil
     if(player.isPlaying() == true)
     {
         player.getNextAudioBlock(bufferToFill);
-        player.stopPointReached();
     }
     else
     {
