@@ -31,7 +31,6 @@ QueueItem::QueueItem(int idNum, File* file)
     
     playButton.addListener(this);
     
-    
     playTimeLabel.setColour(Label::ColourIds::textColourId, Colours::black);
     playTimeLabel.setColour(Label::ColourIds::textWhenEditingColourId, Colours::black);
     playTimeLabel.setEditable(false, true, false);

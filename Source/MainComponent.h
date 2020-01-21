@@ -26,7 +26,8 @@ class MainComponent   : public AudioAppComponent,
                         public Button::Listener,
                         public Slider::Listener,
                         public Timer,
-                        public ActionListener
+                        public ActionListener,
+                        public MenuBarModel
 {
 public:
     //==============================================================================
@@ -52,6 +53,17 @@ public:
     
     /**Implementation of the Component method*/
     void resized() override;
+    
+    //==============================================================================
+    /**Implementation of the MenuBarModel method*/
+    StringArray getMenuBarNames() override;
+    
+    /**Implementation of the MenuBarModel method*/
+    PopupMenu getMenuForIndex (int topLevelMenuIndex, const String& menuName) override;
+    
+    /**Implementation of the MenuBarModel method*/
+    void menuItemSelected (int menuItemID, int topLevelMenuIndex) override;
+    
     
 private:
     //==============================================================================
@@ -112,7 +124,12 @@ private:
     void setUpPlayer();
     
     InfoBox infoBox;
-    Menu menu;
+    
+    //Menu menu;
+    
+    MenuBarComponent menu;
+    Component::SafePointer<ComponentWindow> selectorWindow;
+    Component::SafePointer<AudioDeviceSelectorComponent> selector;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

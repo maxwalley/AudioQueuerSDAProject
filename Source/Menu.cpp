@@ -15,7 +15,6 @@
 Menu::Menu(AudioDeviceManager &devManager)
 {
     setMacMainMenu(this);
-    
     deviceManager = &devManager;
 }
 

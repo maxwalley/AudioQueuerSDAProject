@@ -145,6 +145,5 @@ public:
     /**Implementation of the ActionListener method*/
     void actionListenerCallback(const String &message) override;
     
-    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioTable)
 };

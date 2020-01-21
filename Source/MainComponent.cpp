@@ -9,7 +9,7 @@
 #include "MainComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), timerCount(1), waveform(*player.getAudioFormatManager()), infoBox(*player.getAudioFormatManager()), menu(deviceManager)
+MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", true, true, nullptr), fileLoaded(false), timerCount(1), waveform(*player.getAudioFormatManager()), infoBox(*player.getAudioFormatManager()), menu(this)
 {
     setSize (1100, 650);
 
@@ -48,11 +48,11 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     addAndMakeVisible(infoBox);
     infoBox.addActionListener(this);
     
-    menu.addActionListener(this);
-    
     deviceManager.initialise(0, 2, nullptr, true);
     
     player.addActionListener(this);
+    
+    addAndMakeVisible(menu);
 }
 
 MainComponent::~MainComponent()
@@ -100,12 +100,109 @@ void MainComponent::paint (Graphics& g)
 
 void MainComponent::resized()
 {
+    menu.setBounds(0, 0, getWidth(), 20);
     playerGUI.setBounds(450, 375, 200, 250);
     transformImage.setBounds(0, 425, 256, 256);
     waveform.setBounds(0, 250, 200, 150);
     table.setBounds(50, 50, 750, 300);
     infoBox.setBounds(850, 50, 200, 525);
 }
+
+//==============================================================================
+StringArray MainComponent::getMenuBarNames()
+{
+    //List of menu titles
+    const char* const names[] = { "File", "Audio", "Queue", 0 };
+    return StringArray (names);
+}
+
+PopupMenu MainComponent::getMenuForIndex(int topLevelMenuIndex, const String &menuName)
+{
+    PopupMenu menu;
+    
+    //File tab
+    if(topLevelMenuIndex == 0)
+    {
+        menu.addItem(1, "Audio Preferences", true, false);
+        menu.addItem(2, "Add File to Queue", true, false);
+    }
+    
+    //Audio tab
+    else if(topLevelMenuIndex == 1)
+    {
+        menu.addItem(1, "Play Queue", true, false);
+        menu.addItem(2, "Pause", true, false);
+        menu.addItem(3, "Stop", true, false);
+    }
+    
+    //Queue tab
+    else if(topLevelMenuIndex == 2)
+    {
+        menu.addItem(1, "Loop Queue", true, false);
+        menu.addItem(2, "Shuffle Queue", true, false);
+        menu.addItem(3, "Play Continuously", true, false);
+    }
+    
+    return menu;
+}
+
+void MainComponent::menuItemSelected(int menuItemID, int topLevelMenuIndex)
+{
+    if(topLevelMenuIndex == 0)
+    {
+        if(menuItemID == 1)
+        {
+            selectorWindow = new ComponentWindow("Audio Preferences", Colours::grey, DocumentWindow::allButtons);
+            selectorWindow->setSize(300, 200);
+            selector = new AudioDeviceSelectorComponent(deviceManager, 0, 0, 0, 2, false, false, true, false);
+            
+            selector->setSize(selectorWindow->getWidth(), selectorWindow->getHeight());
+            selectorWindow->setContentOwned(selector, true);
+            selectorWindow->setVisible(true);
+        }
+        else if(menuItemID == 2)
+        {
+            addFile();
+        }
+    }
+    
+    else if(topLevelMenuIndex == 1)
+    {
+        if(menuItemID == 1)
+        {
+            playQueue();
+        }
+        
+        else if(menuItemID == 2)
+        {
+            pauseAudio();
+        }
+        
+        else if(menuItemID == 3)
+        {
+            stopAudio();
+        }
+    }
+    
+    else if(topLevelMenuIndex == 2)
+    {
+        if(menuItemID == 1)
+        {
+            table.changeQueueControlToggle(QueueControls::loopQueue);
+        }
+        
+        else if(menuItemID == 2)
+        {
+            table.changeQueueControlToggle(QueueControls::shuffleQueue);
+        }
+        
+        else if(menuItemID == 3)
+        {
+            table.changeQueueControlToggle(QueueControls::playContinuously);
+        }
+    }
+}
+
 
 void MainComponent::buttonClicked(Button* button)
 {
@@ -255,44 +352,9 @@ void MainComponent::actionListenerCallback(const String &message)
         table.deleteSelectedItem();
     }
     
-    else if(message == "Add file")
-    {
-        addFile();
-    }
-    
-    else if(message == "Play queue")
-    {
-        playQueue();
-    }
-    
-    else if(message == "Pause audio")
-    {
-        pauseAudio();
-    }
-    
-    else if(message == "Stop audio")
-    {
-        stopAudio();
-    }
-    
     else if(message == "Queue finished")
     {
         stopAudio();
-    }
-    
-    else if(message == "Loop Queue Clicked")
-    {
-        table.changeQueueControlToggle(QueueControls::loopQueue);
-    }
-    
-    else if(message == "Shuffle Queue Clicked")
-    {
-        table.changeQueueControlToggle(QueueControls::shuffleQueue);
-    }
-    
-    else if(message == "Continous Control Clicked")
-    {
-        table.changeQueueControlToggle(QueueControls::playContinuously);
     }
     
     else if(message == "Break")
