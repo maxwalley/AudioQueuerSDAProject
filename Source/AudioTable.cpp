@@ -317,3 +317,15 @@ void AudioTable::reset()
 {
     indexToPlay = -1;
 }
+
+bool AudioTable::isEmpty()
+{
+    if(items.size() == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}

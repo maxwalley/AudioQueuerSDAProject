@@ -261,13 +261,19 @@ void MainComponent::playQueue()
     }
     else
     {
-        table.startQueue();
-        player.loadNewFile(table.getFileToPlay(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), true);
-        waveform.set(new FileInputSource(*table.getFileToPlay()));
+        if(table.isEmpty() != true)
+        {
+            table.startQueue();
+            player.loadNewFile(table.getFileToPlay(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), true);
+            waveform.set(new FileInputSource(*table.getFileToPlay()));
+        }
     }
-    transformImage.timerTrigger();
-    playerGUI.audioPlayed();
-    Timer:startTimer(100);
+    if(table.isEmpty() != true)
+    {
+        transformImage.timerTrigger();
+        playerGUI.audioPlayed();
+        Timer:startTimer(100);
+    }
 }
 
 void MainComponent::pauseAudio()

@@ -117,6 +117,12 @@ public:
     /**Sets the index to play back to nothing*/
     void reset();
     
+    /**Returns whether the table is empty
+     
+     @return whether the table is empty
+     */
+    bool isEmpty();
+    
     private:
     
     TableListBox embeddedTable;
