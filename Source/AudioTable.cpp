@@ -19,7 +19,7 @@ AudioTable::AudioTable() : indexToPlay(-1), currentIndexSelected(-1), loopCounte
     
     addAndMakeVisible(queueControls);
     
-    embeddedTable.setHeader(&header);
+    embeddedTable.setHeader(new QueueTableHeader());
     embeddedTable.setModel(this);
 }
 
@@ -30,7 +30,7 @@ AudioTable::~AudioTable()
 
 void AudioTable::paint(Graphics& g)
 {
-    header.setColour(TableHeaderComponent::ColourIds::textColourId, Colours::black);
+    embeddedTable.getHeader().setColour(TableHeaderComponent::ColourIds::textColourId, Colours::black);
     
     embeddedTable.setColour(ListBox::ColourIds::backgroundColourId, Colours::lightgrey);
 }
