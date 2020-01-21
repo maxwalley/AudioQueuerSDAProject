@@ -92,22 +92,16 @@ Component* AudioTable::refreshComponentForCell(int rowNumber, int columnId, bool
 {
     if(columnId == 5)
     {
-        //return items[rowNumber]->getPlayTimeLabel();
-        return nullptr;
-
+        return items[rowNumber]->getPlayTimeLabel();
     }
     
     else if(columnId == 6)
     {
-        //return items[rowNumber]->getStopTimeLabel();
-        return nullptr;
+        return items[rowNumber]->getStopTimeLabel();
     }
     
     else if(columnId == 7)
     {
-        //return items[rowNumber]->getPlayButton();
-        
-        items[rowNumber]->setPlayButton(new PlayButton());
         return items[rowNumber]->getPlayButton();
     }
     

@@ -143,8 +143,6 @@ public:
      @see setNumLoops
      */
     int getNumLoops() const;
-    
-    void setPlayButton(PlayButton* button);
 
 private:
     

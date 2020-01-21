@@ -29,21 +29,26 @@ QueueItem::QueueItem(int idNum, File* file)
     itemData.loop = false;
     itemData.numLoops = 0;
     
-    /*playTimeLabel.setColour(Label::ColourIds::textColourId, Colours::black);
-    playTimeLabel.setColour(Label::ColourIds::textWhenEditingColourId, Colours::black);
-    playTimeLabel.setEditable(false, true, false);
-    playTimeLabel.addListener(this);
+    playTimeLabel = new Label();
+    playTimeLabel->setColour(Label::ColourIds::textColourId, Colours::black);
+    playTimeLabel->setColour(Label::ColourIds::textWhenEditingColourId, Colours::black);
+    playTimeLabel->setEditable(false, true, false);
+    playTimeLabel->addListener(this);
     
-    stopTimeLabel.setColour(Label::ColourIds::textColourId, Colours::black);
-    stopTimeLabel.setColour(Label::ColourIds::textWhenEditingColourId, Colours::black);
-    stopTimeLabel.setEditable(false, true, false);
-    stopTimeLabel.addListener(this);*/
+    stopTimeLabel = new Label();
+    stopTimeLabel->setColour(Label::ColourIds::textColourId, Colours::black);
+    stopTimeLabel->setColour(Label::ColourIds::textWhenEditingColourId, Colours::black);
+    stopTimeLabel->setEditable(false, true, false);
+    stopTimeLabel->addListener(this);
     
     playLabelTime.preColonNum = 0;
     playLabelTime.postColonNum = 0;
     
     stopLabelTime.preColonNum = 0;
     stopLabelTime.postColonNum = 0;
+    
+    playButton = new PlayButton();
+    playButton->addListener(this);
 }
 
 QueueItem::~QueueItem()
@@ -158,12 +163,12 @@ void QueueItem::labelTextChanged(Label* labelThatHasChanged)
         postColonStr += newText[i];
     }
     
-    if(labelThatHasChanged == &playTimeLabel)
+    if(labelThatHasChanged == playTimeLabel)
     {
         playLabelTime.preColonNum = preColonStr.getIntValue();
         playLabelTime.postColonNum = postColonStr.getIntValue();
     }
-    else if (labelThatHasChanged == &stopTimeLabel)
+    else if (labelThatHasChanged == stopTimeLabel)
     {
         stopLabelTime.preColonNum = preColonStr.getIntValue();
         stopLabelTime.postColonNum = postColonStr.getIntValue();
@@ -214,10 +219,4 @@ void QueueItem::setNumLoops(int numLoops)
 int QueueItem::getNumLoops() const
 {
     return itemData.numLoops;
-}
-
-void QueueItem::setPlayButton(PlayButton* button)
-{
-    playButton = button;
-    playButton->addListener(this);
 }
