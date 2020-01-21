@@ -53,7 +53,7 @@ QueueItem::QueueItem(int idNum, File* file)
 
 QueueItem::~QueueItem()
 {
-    
+    delete reader;
 }
 
 void QueueItem::setFile(File* file)
