@@ -339,8 +339,16 @@ void MainComponent::actionListenerCallback(const String &message)
     //Called if a new row is selected
     if(message == "Selected Item Changed")
     {
-        //Sends the data from the selected row to the info box
-        infoBox.changeData(table.getCurrentSelectedDataStruct());
+        //Checks if a row is selected
+        if(table.isRowSelected() == true)
+        {
+            //Sends the data from the selected row to the info box
+            infoBox.changeData(table.getCurrentSelectedDataStruct());
+        }
+        else
+        {
+            infoBox.clear();
+        }
     }
     
     else if(message == "Loop button changed")
@@ -379,6 +387,11 @@ void MainComponent::actionListenerCallback(const String &message)
     {
         player.loadNewFile(table.getFileToPlay(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), false);
         waveform.set(new FileInputSource(*table.getFileToPlay()));
+    }
+    
+    else if(message == "Stop Audio")
+    {
+        stopAudio();
     }
 }
 

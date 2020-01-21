@@ -123,6 +123,12 @@ public:
      */
     bool isEmpty();
     
+    /**Returns whether a row is currently selected
+     
+     @return whether a row is selected
+     */
+    bool isRowSelected();
+    
     private:
     
     TableListBox embeddedTable;

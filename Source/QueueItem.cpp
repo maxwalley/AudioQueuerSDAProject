@@ -29,9 +29,7 @@ QueueItem::QueueItem(int idNum, File* file)
     itemData.loop = false;
     itemData.numLoops = 0;
     
-    playButton.addListener(this);
-    
-    playTimeLabel.setColour(Label::ColourIds::textColourId, Colours::black);
+    /*playTimeLabel.setColour(Label::ColourIds::textColourId, Colours::black);
     playTimeLabel.setColour(Label::ColourIds::textWhenEditingColourId, Colours::black);
     playTimeLabel.setEditable(false, true, false);
     playTimeLabel.addListener(this);
@@ -39,7 +37,7 @@ QueueItem::QueueItem(int idNum, File* file)
     stopTimeLabel.setColour(Label::ColourIds::textColourId, Colours::black);
     stopTimeLabel.setColour(Label::ColourIds::textWhenEditingColourId, Colours::black);
     stopTimeLabel.setEditable(false, true, false);
-    stopTimeLabel.addListener(this);
+    stopTimeLabel.addListener(this);*/
     
     playLabelTime.preColonNum = 0;
     playLabelTime.postColonNum = 0;
@@ -109,17 +107,17 @@ String QueueItem::getLengthInTime()
 
 Label* QueueItem::getPlayTimeLabel()
 {
-    return &playTimeLabel;
+    return playTimeLabel;
 }
 
 Label* QueueItem::getStopTimeLabel()
 {
-    return &stopTimeLabel;
+    return stopTimeLabel;
 }
 
 PlayButton* QueueItem::getPlayButton()
 {
-    return &playButton;
+    return playButton;
 }
 
 void QueueItem::labelTextChanged(Label* labelThatHasChanged)
@@ -175,13 +173,11 @@ void QueueItem::labelTextChanged(Label* labelThatHasChanged)
 void QueueItem::buttonClicked(Button* button)
 {
     //Checks its the play button thats been pressed
-    if(button == &playButton)
-    {
-        //Puts the item index into a string
-        String indexNumString(itemData.itemIndex);
+   
+    //Puts the item index into a string
+    String indexNumString(itemData.itemIndex);
         
-        sendActionMessage("Play button pressed on index:" + indexNumString);
-    }
+    sendActionMessage("Play button pressed on index:" + indexNumString);
 }
 
 int QueueItem::getPlayPoint() const
@@ -218,4 +214,10 @@ void QueueItem::setNumLoops(int numLoops)
 int QueueItem::getNumLoops() const
 {
     return itemData.numLoops;
+}
+
+void QueueItem::setPlayButton(PlayButton* button)
+{
+    playButton = button;
+    playButton->addListener(this);
 }

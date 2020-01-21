@@ -41,10 +41,11 @@ InfoBox::InfoBox(AudioFormatManager &manager) : fileNameSection("File Name"), fi
     loopNumDescriptionLabel.setText("Number of Loops", dontSendNotification);
     
     addAndMakeVisible(loopNumDataLabel);
-    loopNumDataLabel.setEditable(false);
+    loopNumDataLabel.setEnabled(false);
     loopNumDataLabel.setText("0", dontSendNotification);
     loopNumDataLabel.addListener(this);
     loopNumDataLabel.setVisible(false);
+    loopNumDataLabel.setEditable(true);
     
     addAndMakeVisible(deleteButton);
     deleteButton.addListener(this);
@@ -121,6 +122,8 @@ void InfoBox::changeData(ItemInfo currentDataStruct)
     if(currentDataStruct.loop == true)
     {
         loopToggle.setToggleState(true, dontSendNotification);
+        loopNumDataLabel.setEnabled(true);
+        loopNumDataLabel.setVisible(true);
         loopNumDataLabel.setText(String(currentDataStruct.numLoops), dontSendNotification);
     }
     else
@@ -152,6 +155,27 @@ int InfoBox::getNewNumLoops() const
     return newNumLoops;
 }
 
+void InfoBox::clear()
+{
+    fileNameSection.clear();
+    filePathSection.clear();
+    fileSizeSection.clear();
+    fileLengthSection.clear();
+    fileSampleRateSection.clear();
+    fileNumChannelsSection.clear();
+    
+    loopToggle.setEnabled(false);
+    loopToggle.setVisible(false);
+    loopNumDataLabel.setEnabled(false);
+    loopNumDataLabel.setVisible(false);
+    
+    waveform.clear();
+    
+    deleteButton.setEnabled(true);
+    
+    repaint();
+}
+
 void InfoBox::buttonClicked(Button* button)
 {
     if(button == &loopToggle)
@@ -160,12 +184,12 @@ void InfoBox::buttonClicked(Button* button)
         
         if(getLoopButtonState() == true)
         {
-            loopNumDataLabel.setEditable(true);
+            loopNumDataLabel.setEnabled(true);
         }
         
         else if(getLoopButtonState() == false)
         {
-            loopNumDataLabel.setEditable(false);
+            loopNumDataLabel.setEnabled(false);
             loopNumDataLabel.setText("0", dontSendNotification);
             loopNumDataLabel.repaint();
         }

@@ -60,6 +60,9 @@ public:
      */
     int getNewNumLoops() const;
     
+    /**Clears all the data shown in the infobox*/
+    void clear();
+    
 private:
     Label headerLabel;
     

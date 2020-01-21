@@ -143,6 +143,8 @@ public:
      @see setNumLoops
      */
     int getNumLoops() const;
+    
+    void setPlayButton(PlayButton* button);
 
 private:
     
@@ -151,13 +153,13 @@ private:
     AudioFormatManager formatManager;
     AudioFormatReader* reader;
     
-    Label playTimeLabel;
-    Label stopTimeLabel;
+    Label* playTimeLabel;
+    Label* stopTimeLabel;
     
     /**Implementation of the Label::Listener method*/
     void labelTextChanged(Label* labelThatHasChanged) override;
     
-    PlayButton playButton;
+    PlayButton* playButton;
     
     /**Implementation of the Button::Listener method*/
     void buttonClicked(Button* button) override;

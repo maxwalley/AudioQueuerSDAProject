@@ -50,6 +50,9 @@ public:
      */
     void setData(String data);
     
+    /**Clears both TextEditors*/
+    void clear();
+    
 private:
     TextEditorLookAndFeel editorLookAndFeel;
     

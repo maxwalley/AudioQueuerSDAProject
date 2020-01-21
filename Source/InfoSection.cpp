@@ -75,6 +75,12 @@ void InfoSection::setData(String data)
     dataText.setText(data, dontSendNotification);
 }
 
+void InfoSection::clear()
+{
+    descriptorText.clear();
+    dataText.clear();
+}
+
 void TextEditorLookAndFeel::drawTextEditorOutline(Graphics& g, int width, int height, TextEditor& )
 {
     

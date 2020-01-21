@@ -92,16 +92,22 @@ Component* AudioTable::refreshComponentForCell(int rowNumber, int columnId, bool
 {
     if(columnId == 5)
     {
-        return items[rowNumber]->getPlayTimeLabel();
+        //return items[rowNumber]->getPlayTimeLabel();
+        return nullptr;
+
     }
     
     else if(columnId == 6)
     {
-        return items[rowNumber]->getStopTimeLabel();
+        //return items[rowNumber]->getStopTimeLabel();
+        return nullptr;
     }
     
     else if(columnId == 7)
     {
+        //return items[rowNumber]->getPlayButton();
+        
+        items[rowNumber]->setPlayButton(new PlayButton());
         return items[rowNumber]->getPlayButton();
     }
     
@@ -126,6 +132,13 @@ void AudioTable::addNewItem(File* file)
 
 void AudioTable::deleteSelectedItem()
 {
+    //If the deleted item is the one playing or about to play
+    if(currentIndexSelected == indexToPlay)
+    {
+        sendActionMessage("Stop Audio");
+        indexToPlay = -1;
+    }
+    
     items.remove(currentIndexSelected, true);
     
     embeddedTable.updateContent();
@@ -327,5 +340,17 @@ bool AudioTable::isEmpty()
     else
     {
         return false;
+    }
+}
+
+bool AudioTable::isRowSelected()
+{
+    if(embeddedTable.getNumSelectedRows() == 0)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
     }
 }
