@@ -14,8 +14,8 @@
 #include "FFT.h"
 #include "AudioPlayerGUI.h"
 #include "InfoBox.h"
-#include "Menu.h"
 #include "AudioPlayer.h"
+#include "ComponentWindow.h"
 
 //==============================================================================
 /*

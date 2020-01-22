@@ -69,10 +69,6 @@
 			isa = PBXBuildFile;
 			fileRef = 11C6BDB7ED6ECE5BFCB75120;
 		};
-		9806D24D8B627D552DAA69E0 = {
-			isa = PBXBuildFile;
-			fileRef = 312A7BC47CF82560BF11089D;
-		};
 		9A8AF33F2DE9D35710B669C8 = {
 			isa = PBXBuildFile;
 			fileRef = 19BAE7243891B890A04D7300;
@@ -230,13 +226,6 @@
 			path = "../../JuceLibraryCode/include_juce_core.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
-		312A7BC47CF82560BF11089D = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.cpp;
-			name = Menu.cpp;
-			path = ../../Source/Menu.cpp;
-			sourceTree = "SOURCE_ROOT";
-		};
 		35E5B1A7FB2418562E9B5897 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
@@ -369,13 +358,6 @@
 			name = "juce_audio_utils";
 			path = "/Users/maxwalley/Documents/C++ Libs and Frameworks/JUCE/modules/juce_audio_utils";
 			sourceTree = "<absolute>";
-		};
-		6DAF4B13370BC00BBD9198C6 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = Menu.h;
-			path = ../../Source/Menu.h;
-			sourceTree = "SOURCE_ROOT";
 		};
 		6E1C1EDA197533CD1BB23B44 = {
 			isa = PBXFileReference;
@@ -773,8 +755,6 @@
 				89DEEF03659B18E12C370B17,
 				11C6BDB7ED6ECE5BFCB75120,
 				1E861DD4C09B960E8A528AF4,
-				6DAF4B13370BC00BBD9198C6,
-				312A7BC47CF82560BF11089D,
 				15DFEB9145C578A59822317C,
 				19BAE7243891B890A04D7300,
 				6AE8FE01608D6EF6A8237FAB,
@@ -1099,7 +1079,6 @@
 			files = (
 				7A696C24879BDD9877FCBB43,
 				A7ED68300024645F57784216,
-				9806D24D8B627D552DAA69E0,
 				9A8AF33F2DE9D35710B669C8,
 				3BD91E4E6B639C4ABE52F79F,
 				C0D114C15DF4495C968C1F74,
