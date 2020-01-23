@@ -11,7 +11,7 @@
 //==============================================================================
 MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav; *.mp3; *.m4a; *.flac", true, true, nullptr), fileLoaded(false), timerCount(1), waveform(*player.getAudioFormatManager()), infoBox(*player.getAudioFormatManager()), menu(this)
 {
-    setSize (1100, 650);
+    setSize (1100, 675);
 
     if (RuntimePermissions::isRequired (RuntimePermissions::recordAudio)
         && ! RuntimePermissions::isGranted (RuntimePermissions::recordAudio))
@@ -104,7 +104,7 @@ void MainComponent::resized()
 {
     menu.setBounds(0, 0, getWidth(), 20);
     playerGUI.setBounds(450, 375, 200, 250);
-    transformImage.setBounds(0, 425, 256, 256);
+    transformImage.setBounds(0, 410, 256, 256);
     waveform.setBounds(0, 250, 200, 150);
     table.setBounds(50, 50, 750, 300);
     infoBox.setBounds(850, 50, 200, 525);
@@ -217,7 +217,7 @@ void MainComponent::menuItemSelected(int menuItemID, int topLevelMenuIndex)
         {
             backColSelWindow = new ColourSelectorWindow("Background Colour", Colours::grey, DocumentWindow::allButtons);
             backColSelWindow->addActionListener(this);
-            backColSelWindow->setSize(300, 200);
+            backColSelWindow->setSize(300, 500);
             backColSelWindow->setVisible(true);
         }
         
@@ -225,7 +225,7 @@ void MainComponent::menuItemSelected(int menuItemID, int topLevelMenuIndex)
         {
             waveColSelWindow = new ColourSelectorWindow("Waveform Colour", Colours::grey, DocumentWindow::allButtons);
             waveColSelWindow->addActionListener(this);
-            waveColSelWindow->setSize(300, 200);
+            waveColSelWindow->setSize(300, 500);
             waveColSelWindow->setVisible(true);
         }
     }
