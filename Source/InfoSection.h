@@ -13,7 +13,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 
 //==============================================================================
-/*
+/** A class to control the look of an info section
 */
 class TextEditorLookAndFeel : public LookAndFeel_V4
 {
@@ -22,7 +22,8 @@ private:
     void drawTextEditorOutline(Graphics& g, int width, int height, TextEditor& ) override;
 };
 
-
+/** A component class that makes up a section of the InfoBox component class. Holds two TextEditors. One holding data and the other holding a description of the data. Set the data with setData().
+*/
 class InfoSection    : public Component
 {
 public:

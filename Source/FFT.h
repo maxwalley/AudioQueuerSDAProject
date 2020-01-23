@@ -13,7 +13,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 
 //==============================================================================
-/*
+/** A component class that displays a frequency spectrum. Takes input sample by sample through the fillIInputArray() method. This will start drawing as soon as it is initilised.
 */
 class FFT    : public Component,
                public Timer
@@ -33,9 +33,6 @@ public:
      @param sample          the input sample to put into the FFT
      */
     void fillInputArray(float sample);
-    
-    /**Triggers the timer to start which starts drawing the FFT*/
-    void timerTrigger();
     
 private:
     dsp::FFT transform;

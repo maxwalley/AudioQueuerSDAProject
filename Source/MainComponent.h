@@ -18,9 +18,7 @@
 #include "ComponentWindow.h"
 
 //==============================================================================
-/*
-    This component lives inside our window, and this is where you should put all
-    your controls and content.
+/** The main component of the application. Filling all of the MainWindow. This holds every other component on the MainWindow.
 */
 class MainComponent   : public AudioAppComponent,
                         public Button::Listener,

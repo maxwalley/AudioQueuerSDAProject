@@ -13,7 +13,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 
 //==============================================================================
-/*
+/** A component class that hold GUI components to control an AudioTable class.
 */
 class QueueControls    : public Component
 {

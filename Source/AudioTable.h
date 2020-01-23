@@ -17,7 +17,7 @@
 #include "QueueControls.h"
 
 //==============================================================================
-/*
+/** A component class that displays a table made for holding audio files and a number of controls. This class also works out which item of the table should be being played and returns a pointer to the file from that item with getFileToPlay(). To initilize it to start running through the table call startQueue(). This will cause getFileToPlay() to return a pointer to the first file. After playback of a file has completed call moveIndexToPlayOn(). This will set getFileToPlay() to return a pointer to the next file to play.
 */
 class AudioTable    : public TableListBoxModel,
                       public Component,

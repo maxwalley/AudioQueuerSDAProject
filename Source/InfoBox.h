@@ -16,7 +16,7 @@
 #include "AudioWaveform.h"
 
 //==============================================================================
-/*
+/** A component class that displays a box holding data for an audio file. This will be initised to a blank display. To change the data it displays call changeData().
 */
 class InfoBox    : public Component,
                    public Button::Listener,

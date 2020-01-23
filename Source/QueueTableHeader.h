@@ -13,7 +13,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 
 //==============================================================================
-/*
+/** Class that acts as the header for the TableListBox in the AudioTable class.
 */
 class QueueTableHeader    : public TableHeaderComponent
 {

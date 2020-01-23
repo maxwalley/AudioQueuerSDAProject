@@ -13,7 +13,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 
 //==============================================================================
-/*
+/** A window that holds a component. Almost exactly the same as the DocumentWindow class however, when the close button is pressed on this class the window will close.
 */
 class ComponentWindow    : public DocumentWindow,
                            public ActionBroadcaster

@@ -246,6 +246,12 @@ void AudioTable::startQueue()
                 indexToPlay = nextIndexToPlay;
             }
         }
+        
+        else if(queueControls.getShuffleQueueButtonState() == true)
+        {
+            //Gets a random value in the range of how many items there are
+            indexToPlay = Random::getSystemRandom().nextInt(items.size());
+        }
     }
     else
     {

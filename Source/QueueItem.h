@@ -15,7 +15,7 @@
 #include "ItemDataStruct.h"
 
 //==============================================================================
-/*
+/** A class for holding data for a singular item on the table in the AudioTable class. This also holds the components for the tables component cells.
 */
 class QueueItem : public Label::Listener,
                   public Button::Listener,

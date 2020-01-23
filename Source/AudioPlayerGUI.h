@@ -14,7 +14,7 @@
 #include "PlayerGUIButton.h"
 
 //==============================================================================
-/*
+/** A component class that holds a basic GUI for an audio player. Holds a play/pause button, a skip button, a go back button, a stop button, a gain slider and a label showing a time. To receive callbacks when the buttons or slider are changed create listeners to them. Change the time shown on the label with changeTime().
 */
 
 class AudioPlayerGUI    : public Component

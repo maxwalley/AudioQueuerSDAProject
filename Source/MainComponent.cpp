@@ -13,7 +13,6 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
 {
     setSize (1100, 650);
 
-    // Some platforms require permissions to open input channels so request that here
     if (RuntimePermissions::isRequired (RuntimePermissions::recordAudio)
         && ! RuntimePermissions::isGranted (RuntimePermissions::recordAudio))
     {
@@ -22,7 +21,6 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     }
     else
     {
-        // Specify the number of input and output channels that we want to open
         setAudioChannels (0, 2);
     }
 
@@ -44,7 +42,6 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     table.addActionListener(this);
     
     addAndMakeVisible(transformImage);
-    transformImage.timerTrigger();
     
     addAndMakeVisible(infoBox);
     infoBox.addActionListener(this);

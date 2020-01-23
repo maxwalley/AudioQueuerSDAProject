@@ -12,6 +12,9 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
+/**A class the holds an audio player. To start playing a file call loadNewFile(). If a file is paused call playFromPause() rather than loadNewFile().
+ */
+
 class AudioPlayer   : public AudioSource,
                       public ActionBroadcaster
 {

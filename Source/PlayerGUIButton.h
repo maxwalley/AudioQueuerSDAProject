@@ -13,7 +13,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 
 //==============================================================================
-/*
+/** A component button class for drawing multiple types of audio player buttons. 
 */
 class PlayerGUIButton    : public Button
 {

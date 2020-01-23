@@ -13,7 +13,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 
 //==============================================================================
-/*
+/** A component button class that takes the form of a play triangle.
 */
 class PlayButton    : public Button
 {

@@ -13,7 +13,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 
 //==============================================================================
-/*
+/** A component class for displaying an audio waveform. Set the file for it to show using the set() method.
 */
 class AudioWaveform    : public Component
 {

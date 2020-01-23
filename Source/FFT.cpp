@@ -15,6 +15,8 @@
 FFT::FFT() : transform(fftOrder), inputIndex(0), arrayPushingFinished(false), spectogram(Image::RGB, 512, 512, true)
 {
     setSize(256, 256);
+    
+    Timer::startTimer(40);
 }
 
 FFT::~FFT()
@@ -82,9 +84,4 @@ void FFT::timerCallback()
         arrayPushingFinished = false;
         repaint();
     }
-}
-
-void FFT::timerTrigger()
-{
-    Timer::startTimer(40);
 }
