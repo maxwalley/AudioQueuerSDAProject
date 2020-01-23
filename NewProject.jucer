@@ -2,51 +2,57 @@
 
 <JUCERPROJECT id="mGP3HA" name="AudioQueuer" projectType="guiapp" jucerVersion="5.4.5">
   <MAINGROUP id="utjANr" name="AudioQueuer">
-    <FILE id="ZYi7yG" name="ComponentWindow.cpp" compile="1" resource="0"
-          file="Source/ComponentWindow.cpp"/>
-    <FILE id="ao2nli" name="ComponentWindow.h" compile="0" resource="0"
-          file="Source/ComponentWindow.h"/>
-    <FILE id="XnUTrO" name="AudioPlayer.cpp" compile="1" resource="0" file="Source/AudioPlayer.cpp"/>
-    <FILE id="Xip17q" name="AudioPlayer.h" compile="0" resource="0" file="Source/AudioPlayer.h"/>
-    <FILE id="PxDwuW" name="ItemDataStruct.h" compile="0" resource="0"
-          file="Source/ItemDataStruct.h"/>
-    <FILE id="W6g8Fd" name="QueueItem.cpp" compile="1" resource="0" file="Source/QueueItem.cpp"/>
-    <FILE id="PVGxyB" name="QueueItem.h" compile="0" resource="0" file="Source/QueueItem.h"/>
-    <FILE id="JaY4V0" name="PlayButton.cpp" compile="1" resource="0" file="Source/PlayButton.cpp"/>
-    <FILE id="bF7Y8h" name="PlayButton.h" compile="0" resource="0" file="Source/PlayButton.h"/>
-    <FILE id="aKtfcV" name="QueueTableHeader.cpp" compile="1" resource="0"
-          file="Source/QueueTableHeader.cpp"/>
-    <FILE id="QgTsJj" name="QueueTableHeader.h" compile="0" resource="0"
-          file="Source/QueueTableHeader.h"/>
-    <FILE id="CifwSI" name="AudioTable.cpp" compile="1" resource="0" file="Source/AudioTable.cpp"/>
-    <FILE id="x9t7jK" name="AudioTable.h" compile="0" resource="0" file="Source/AudioTable.h"/>
-    <GROUP id="{D0169949-7A6A-ECE1-224E-BDEBA828A34A}" name="GUI">
-      <FILE id="DAMxZc" name="QueueControls.cpp" compile="1" resource="0"
-            file="Source/QueueControls.cpp"/>
-      <FILE id="KADnSj" name="QueueControls.h" compile="0" resource="0" file="Source/QueueControls.h"/>
+    <GROUP id="{49777A83-665A-A214-DF8D-74FCA81C4F19}" name="AudioPlayer">
+      <FILE id="Xip17q" name="AudioPlayer.h" compile="0" resource="0" file="Source/AudioPlayer.h"/>
+      <FILE id="XnUTrO" name="AudioPlayer.cpp" compile="1" resource="0" file="Source/AudioPlayer.cpp"/>
+      <GROUP id="{D7C62FC7-7A26-52EC-332B-471DF6794EC3}" name="GUI">
+        <FILE id="tlN0B1" name="AudioPlayerGUI.h" compile="0" resource="0"
+              file="Source/AudioPlayerGUI.h"/>
+        <FILE id="zHjYdY" name="AudioPlayerGUI.cpp" compile="1" resource="0"
+              file="Source/AudioPlayerGUI.cpp"/>
+        <FILE id="hVxIjf" name="PlayerGUIButton.h" compile="0" resource="0"
+              file="Source/PlayerGUIButton.h"/>
+        <FILE id="q7l2ce" name="PlayerGUIButton.cpp" compile="1" resource="0"
+              file="Source/PlayerGUIButton.cpp"/>
+      </GROUP>
+    </GROUP>
+    <GROUP id="{A5746F42-0B10-F18F-9681-52085D6F2CD6}" name="InfoBox">
       <FILE id="HvLMAh" name="InfoSection.h" compile="0" resource="0" file="Source/InfoSection.h"/>
       <FILE id="H5RSW7" name="InfoSection.cpp" compile="1" resource="0" file="Source/InfoSection.cpp"/>
       <FILE id="cPNy6S" name="InfoBox.h" compile="0" resource="0" file="Source/InfoBox.h"/>
       <FILE id="zqFUZ8" name="InfoBox.cpp" compile="1" resource="0" file="Source/InfoBox.cpp"/>
-      <GROUP id="{725DCBBF-D78B-B684-A3EE-A47707B2AEDF}" name="Audio">
-        <FILE id="q7l2ce" name="PlayerGUIButton.cpp" compile="1" resource="0"
-              file="Source/PlayerGUIButton.cpp"/>
-        <FILE id="hVxIjf" name="PlayerGUIButton.h" compile="0" resource="0"
-              file="Source/PlayerGUIButton.h"/>
-        <FILE id="zHjYdY" name="AudioPlayerGUI.cpp" compile="1" resource="0"
-              file="Source/AudioPlayerGUI.cpp"/>
-        <FILE id="tlN0B1" name="AudioPlayerGUI.h" compile="0" resource="0"
-              file="Source/AudioPlayerGUI.h"/>
-        <FILE id="taGVW4" name="AudioWaveform.h" compile="0" resource="0" file="Source/AudioWaveform.h"/>
-        <FILE id="sueaiz" name="AudioWaveform.cpp" compile="1" resource="0"
-              file="Source/AudioWaveform.cpp"/>
-        <FILE id="JoDi8x" name="FFT.h" compile="0" resource="0" file="Source/FFT.h"/>
-        <FILE id="XvrdyH" name="FFT.cpp" compile="1" resource="0" file="Source/FFT.cpp"/>
-      </GROUP>
+    </GROUP>
+    <GROUP id="{AED4F252-014E-7DB1-FD2A-005784BD1F58}" name="Table">
+      <FILE id="x9t7jK" name="AudioTable.h" compile="0" resource="0" file="Source/AudioTable.h"/>
+      <FILE id="CifwSI" name="AudioTable.cpp" compile="1" resource="0" file="Source/AudioTable.cpp"/>
+      <FILE id="PVGxyB" name="QueueItem.h" compile="0" resource="0" file="Source/QueueItem.h"/>
+      <FILE id="W6g8Fd" name="QueueItem.cpp" compile="1" resource="0" file="Source/QueueItem.cpp"/>
+      <FILE id="bF7Y8h" name="PlayButton.h" compile="0" resource="0" file="Source/PlayButton.h"/>
+      <FILE id="JaY4V0" name="PlayButton.cpp" compile="1" resource="0" file="Source/PlayButton.cpp"/>
+      <FILE id="QgTsJj" name="QueueTableHeader.h" compile="0" resource="0"
+            file="Source/QueueTableHeader.h"/>
+      <FILE id="aKtfcV" name="QueueTableHeader.cpp" compile="1" resource="0"
+            file="Source/QueueTableHeader.cpp"/>
+      <FILE id="KADnSj" name="QueueControls.h" compile="0" resource="0" file="Source/QueueControls.h"/>
+      <FILE id="DAMxZc" name="QueueControls.cpp" compile="1" resource="0"
+            file="Source/QueueControls.cpp"/>
+    </GROUP>
+    <GROUP id="{D0169949-7A6A-ECE1-224E-BDEBA828A34A}" name="GUI">
+      <FILE id="taGVW4" name="AudioWaveform.h" compile="0" resource="0" file="Source/AudioWaveform.h"/>
+      <FILE id="sueaiz" name="AudioWaveform.cpp" compile="1" resource="0"
+            file="Source/AudioWaveform.cpp"/>
+      <FILE id="JoDi8x" name="FFT.h" compile="0" resource="0" file="Source/FFT.h"/>
+      <FILE id="XvrdyH" name="FFT.cpp" compile="1" resource="0" file="Source/FFT.cpp"/>
       <FILE id="OkJxCX" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="Dlqsce" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
+      <FILE id="ao2nli" name="ComponentWindow.h" compile="0" resource="0"
+            file="Source/ComponentWindow.h"/>
+      <FILE id="ZYi7yG" name="ComponentWindow.cpp" compile="1" resource="0"
+            file="Source/ComponentWindow.cpp"/>
     </GROUP>
+    <FILE id="PxDwuW" name="ItemDataStruct.h" compile="0" resource="0"
+          file="Source/ItemDataStruct.h"/>
     <GROUP id="{10162CB2-3966-F301-8905-0981EBF00FD2}" name="Source">
       <FILE id="cctsbC" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
     </GROUP>

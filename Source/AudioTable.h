@@ -38,6 +38,8 @@ public:
     void resized() override;
     
     QueueControls queueControls;
+    
+    /**This array holds all the items in the table*/
     OwnedArray<QueueItem, CriticalSection> items;
 
     /**Adds a new item to the array of items and displays it in the table

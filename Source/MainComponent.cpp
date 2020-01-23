@@ -44,6 +44,7 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
     table.addActionListener(this);
     
     addAndMakeVisible(transformImage);
+    transformImage.timerTrigger();
     
     addAndMakeVisible(infoBox);
     infoBox.addActionListener(this);
@@ -270,7 +271,6 @@ void MainComponent::playQueue()
     }
     if(table.isEmpty() != true)
     {
-        transformImage.timerTrigger();
         playerGUI.audioPlayed();
         Timer:startTimer(100);
     }
@@ -387,6 +387,8 @@ void MainComponent::actionListenerCallback(const String &message)
     {
         player.loadNewFile(table.getFileToPlay(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), false);
         waveform.set(new FileInputSource(*table.getFileToPlay()));
+        Timer:startTimer(100);
+        playerGUI.audioPlayed();
     }
     
     else if(message == "Stop Audio")
