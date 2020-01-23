@@ -16,6 +16,7 @@
 #include "InfoBox.h"
 #include "AudioPlayer.h"
 #include "ComponentWindow.h"
+#include "ColourSelectorWindow.h"
 
 //==============================================================================
 /** The main component of the application. Filling all of the MainWindow. This holds every other component on the MainWindow.
@@ -100,7 +101,7 @@ private:
     int timerCount;
     
     /**Implementation of the MouseListener method*/
-    void mouseDown (const MouseEvent &event) override;
+    void mouseDown(const MouseEvent &event) override;
     
     /**Changes the current position in the audio stream
      called when the AudioWaveform is clicked on
@@ -123,11 +124,12 @@ private:
     
     InfoBox infoBox;
     
-    //Menu menu;
-    
     MenuBarComponent menu;
-    Component::SafePointer<ComponentWindow> selectorWindow;
-    Component::SafePointer<AudioDeviceSelectorComponent> selector;
+    Component::SafePointer<ComponentWindow> devSelectorWindow;
+    Component::SafePointer<AudioDeviceSelectorComponent> devSelector;
+    
+    Component::SafePointer<ColourSelectorWindow> backColSelWindow;
+    Component::SafePointer<ColourSelectorWindow> waveColSelWindow;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };

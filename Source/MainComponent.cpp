@@ -55,6 +55,10 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav", tru
 
 MainComponent::~MainComponent()
 {
+    devSelectorWindow.deleteAndZero();
+    backColSelWindow.deleteAndZero();
+    waveColSelWindow.deleteAndZero();
+    
     shutdownAudio();
 }
 
@@ -110,7 +114,7 @@ void MainComponent::resized()
 StringArray MainComponent::getMenuBarNames()
 {
     //List of menu titles
-    const char* const names[] = { "File", "Audio", "Queue", 0 };
+    const char* const names[] = { "File", "Audio", "Queue", "Waveform", 0 };
     return StringArray (names);
 }
 
@@ -141,6 +145,13 @@ PopupMenu MainComponent::getMenuForIndex(int topLevelMenuIndex, const String &me
         menu.addItem(3, "Play Continuously", true, false);
     }
     
+    //Waveform tab
+    else if(topLevelMenuIndex == 3)
+    {
+        menu.addItem(1, "Change Background Colour", true, false);
+        menu.addItem(2, "Change Waveform Colour", true, false);
+    }
+    
     return menu;
 }
 
@@ -150,13 +161,13 @@ void MainComponent::menuItemSelected(int menuItemID, int topLevelMenuIndex)
     {
         if(menuItemID == 1)
         {
-            selectorWindow = new ComponentWindow("Audio Preferences", Colours::grey, DocumentWindow::allButtons);
-            selectorWindow->setSize(300, 200);
-            selector = new AudioDeviceSelectorComponent(deviceManager, 0, 0, 0, 2, false, false, true, false);
+            devSelectorWindow = new ComponentWindow("Audio Preferences", Colours::grey, DocumentWindow::allButtons);
+            devSelectorWindow->setSize(300, 200);
+            devSelector = new AudioDeviceSelectorComponent(deviceManager, 0, 0, 0, 2, false, false, true, false);
             
-            selector->setSize(selectorWindow->getWidth(), selectorWindow->getHeight());
-            selectorWindow->setContentOwned(selector, true);
-            selectorWindow->setVisible(true);
+            devSelector->setSize(devSelectorWindow->getWidth(), devSelectorWindow->getHeight());
+            devSelectorWindow->setContentOwned(devSelector, true);
+            devSelectorWindow->setVisible(true);
         }
         else if(menuItemID == 2)
         {
@@ -197,6 +208,25 @@ void MainComponent::menuItemSelected(int menuItemID, int topLevelMenuIndex)
         else if(menuItemID == 3)
         {
             table.changeQueueControlToggle(QueueControls::playContinuously);
+        }
+    }
+    
+    else if(topLevelMenuIndex == 3)
+    {
+        if(menuItemID == 1)
+        {
+            backColSelWindow = new ColourSelectorWindow("Background Colour", Colours::grey, DocumentWindow::allButtons);
+            backColSelWindow->addActionListener(this);
+            backColSelWindow->setSize(300, 200);
+            backColSelWindow->setVisible(true);
+        }
+        
+        else if(menuItemID == 2)
+        {
+            waveColSelWindow = new ColourSelectorWindow("Waveform Colour", Colours::grey, DocumentWindow::allButtons);
+            waveColSelWindow->addActionListener(this);
+            waveColSelWindow->setSize(300, 200);
+            waveColSelWindow->setVisible(true);
         }
     }
 }
@@ -306,7 +336,7 @@ void MainComponent::timerCallback()
     
     if(player.isPlaying() == true)
     {
-        waveform.moveTransportLine((player.getTransportPosition()/player.getTransportLengthInSeconds()) * 200);
+        waveform.moveTransportLine((player.getTransportPosition()/player.getTransportLengthInSeconds()) * waveform.getWidth());
     }
 }
 
@@ -391,6 +421,16 @@ void MainComponent::actionListenerCallback(const String &message)
     else if(message == "Stop Audio")
     {
         stopAudio();
+    }
+    
+    else if(message == "Mouse Released on Background Colour")
+    {
+        waveform.setBackgroundColour(backColSelWindow->getColour());
+    }
+    
+    else if(message == "Mouse Released on Waveform Colour")
+    {
+        waveform.setWaveformColour(waveColSelWindow->getColour());
     }
 }
 

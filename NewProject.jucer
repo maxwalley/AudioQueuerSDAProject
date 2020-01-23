@@ -50,6 +50,10 @@
             file="Source/ComponentWindow.h"/>
       <FILE id="ZYi7yG" name="ComponentWindow.cpp" compile="1" resource="0"
             file="Source/ComponentWindow.cpp"/>
+      <FILE id="nenOb8" name="ColourSelectorWindow.h" compile="0" resource="0"
+            file="Source/ColourSelectorWindow.h"/>
+      <FILE id="ecaFGF" name="ColourSelectorWindow.cpp" compile="1" resource="0"
+            file="Source/ColourSelectorWindow.cpp"/>
     </GROUP>
     <FILE id="PxDwuW" name="ItemDataStruct.h" compile="0" resource="0"
           file="Source/ItemDataStruct.h"/>

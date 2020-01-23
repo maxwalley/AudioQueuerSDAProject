@@ -45,12 +45,27 @@ public:
      */
     void moveTransportLine(double xPixelToMoveTo);
     
+    /**Changes the background colour of the waveform
+     
+     @param newColour           the new colour to change the background to
+     */
+    void setBackgroundColour(Colour newColour);
+    
+    /**Changes the waveform colour of the waveform
+    
+    @param newColour           the new colour to change the waveform to
+    */
+    void setWaveformColour(Colour newColour);
+    
 private:
     AudioThumbnail thumbnail;
     Rectangle<int> thumbnailArea;
     AudioThumbnailCache thumbnailCache;
     
     int transportXPos;
+    
+    Colour backgroundColour;
+    Colour waveformColour;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioWaveform)
 };

@@ -14,8 +14,10 @@
 //==============================================================================
 AudioWaveform::AudioWaveform(AudioFormatManager &formatManagerToUse) : thumbnail(512, formatManagerToUse, thumbnailCache), thumbnailArea(0, 0, 200, 150), thumbnailCache(5), transportXPos(0)
 {
-    setSize(200, 150);
     setAlwaysOnTop(true);
+    
+    backgroundColour = Colours::white;
+    waveformColour = Colours::black;
 }
 
 AudioWaveform::~AudioWaveform()
@@ -24,13 +26,14 @@ AudioWaveform::~AudioWaveform()
 
 void AudioWaveform::paint (Graphics& g)
 {
-    g.setColour(Colours::white);
+    g.setColour(backgroundColour);
     g.fillRect(thumbnailArea);
-    g.setColour(Colours::black);
+    g.setColour(waveformColour);
     thumbnail.drawChannels(g, thumbnailArea, 0, thumbnail.getTotalLength(), 1.0);
     
     if(transportXPos != 0)
     {
+        g.setColour(Colours::black);
         g.drawLine(transportXPos, 0, transportXPos, 150);
     }
 }
@@ -60,5 +63,17 @@ void AudioWaveform::clear()
 void AudioWaveform::moveTransportLine(double xPixelToMoveTo)
 {
     transportXPos = xPixelToMoveTo;
+    repaint();
+}
+
+void AudioWaveform::setBackgroundColour(Colour newColour)
+{
+    backgroundColour = newColour;
+    repaint();
+}
+
+void AudioWaveform::setWaveformColour(Colour newColour)
+{
+    waveformColour = newColour;
     repaint();
 }

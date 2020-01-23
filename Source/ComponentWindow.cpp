@@ -14,6 +14,8 @@
 //==============================================================================
 ComponentWindow::ComponentWindow(const String &name, Colour backgroundColour, int requiredButtons) : DocumentWindow(name, backgroundColour, requiredButtons)
 {
+    windowName = name;
+    
     setUsingNativeTitleBar(true);
 }
 
@@ -25,4 +27,14 @@ ComponentWindow::~ComponentWindow()
 void ComponentWindow::closeButtonPressed()
 {
     delete this;
+}
+
+void ComponentWindow::mouseDown(const MouseEvent &event)
+{
+    sendActionMessage("Mouse Clicked on " + windowName);
+}
+
+void ComponentWindow::mouseUp(const MouseEvent &event)
+{
+    sendActionMessage("Mouse Released on " + windowName);
 }
