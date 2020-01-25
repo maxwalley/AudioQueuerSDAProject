@@ -14,7 +14,7 @@
 #include "ComponentWindow.h" 
 
 //==============================================================================
-/*
+/** A ComponentWindow that holds a ColourSelector component. Sends an action message when the window is clicked or the mouse is released however to implement this the owned component must have this as a mouse listener. You can then call getColour() to find the colour the user selected
 */
 class ColourSelectorWindow    : public ComponentWindow
 {
