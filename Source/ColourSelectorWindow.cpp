@@ -14,8 +14,6 @@
 //==============================================================================
 ColourSelectorWindow::ColourSelectorWindow(const String &name, Colour backgroundColour, int requiredButtons) : ComponentWindow(name, backgroundColour, requiredButtons)
 {
-    windowName = name;
-    
     selector.setSize(getWidth(), getHeight());
     selector.addMouseListener(this, true);
     
