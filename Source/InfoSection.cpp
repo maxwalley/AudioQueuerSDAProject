@@ -77,7 +77,6 @@ void InfoSection::setData(String data)
 
 void InfoSection::clear()
 {
-    descriptorText.clear();
     dataText.clear();
 }
 

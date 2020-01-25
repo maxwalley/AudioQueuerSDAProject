@@ -29,8 +29,6 @@ AudioPlayerGUI::AudioPlayerGUI()  : playPauseButton(PlayerGUIButton::play), stop
     
     addAndMakeVisible(timeLabel);
     timeLabel.setText("", dontSendNotification);
-    
-    addAndMakeVisible(playingFileNameLabel);
 }
 
 AudioPlayerGUI::~AudioPlayerGUI()
