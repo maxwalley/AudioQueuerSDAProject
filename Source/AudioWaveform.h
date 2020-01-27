@@ -59,7 +59,6 @@ public:
     
 private:
     AudioThumbnail thumbnail;
-    Rectangle<int> thumbnailArea;
     AudioThumbnailCache thumbnailCache;
     
     int transportXPos;

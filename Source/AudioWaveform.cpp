@@ -12,7 +12,7 @@
 #include "AudioWaveform.h"
 
 //==============================================================================
-AudioWaveform::AudioWaveform(AudioFormatManager &formatManagerToUse) : thumbnail(512, formatManagerToUse, thumbnailCache), thumbnailArea(0, 0, 200, 150), thumbnailCache(5), transportXPos(0)
+AudioWaveform::AudioWaveform(AudioFormatManager &formatManagerToUse) : thumbnail(512, formatManagerToUse, thumbnailCache), thumbnailCache(5), transportXPos(0)
 {
     backgroundColour = Colours::white;
     waveformColour = Colours::black;
@@ -24,13 +24,18 @@ AudioWaveform::~AudioWaveform()
 
 void AudioWaveform::paint (Graphics& g)
 {
+    //Draws background area
     g.setColour(backgroundColour);
-    g.fillRect(thumbnailArea);
-    g.setColour(waveformColour);
-    thumbnail.drawChannels(g, thumbnailArea, 0, thumbnail.getTotalLength(), 1.0);
+    g.fillRect(0, 0, getWidth(), getHeight());
     
+    //Draws the channels in the waveform
+    g.setColour(waveformColour);
+    thumbnail.drawChannels(g, Rectangle<int>(getWidth(), getHeight()), 0, thumbnail.getTotalLength(), 1.0);
+    
+    //Checks if the transport position along is zero
     if(transportXPos != 0)
     {
+        //Draws a line representing the transport position on the waveform
         g.setColour(Colours::black);
         g.drawLine(transportXPos, 0, transportXPos, 150);
     }
@@ -40,6 +45,8 @@ void AudioWaveform::set(InputSource *newSource)
 {
     thumbnail.clear();
     thumbnail.setSource(newSource);
+    
+    //Loops until the thumbnail is fully loaded and then repaints the entire component
     while (thumbnail.isFullyLoaded() == false)
     {
     }
@@ -53,7 +60,9 @@ double AudioWaveform::getThumbnailLength() const
 
 void AudioWaveform::clear()
 {
+    //Resets the transport position on the waveform
     transportXPos = 0;
+    
     thumbnail.clear();
     repaint();
 }
