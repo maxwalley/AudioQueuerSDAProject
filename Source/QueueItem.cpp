@@ -17,6 +17,8 @@ QueueItem::QueueItem(int idNum, File* file)
     formatManager.registerBasicFormats();
     reader = formatManager.createReaderFor(*file);
     
+    
+    //Fills all the variables of the ItemInfo for this instance with data from the file
     itemData.itemIndex = idNum;
     itemData.file = *file;
     itemData.fileName = itemData.file.getFileName();
@@ -28,6 +30,7 @@ QueueItem::QueueItem(int idNum, File* file)
     
     itemData.loop = false;
     itemData.numLoops = 0;
+    
     
     playTimeLabel = new Label();
     playTimeLabel->setColour(Label::ColourIds::textColourId, Colours::black);
@@ -88,6 +91,7 @@ int64_t QueueItem::getFileSize() const
 
 void QueueItem::workOutLengthInSecs()
 {
+    //Time in seconds = number of samples / sample rate
     itemData.lengthInSecs = floor(itemData.lengthInSamples/itemData.sampleRate);
 }
 
@@ -95,12 +99,15 @@ void QueueItem::workOutTime()
 {
     workOutLengthInSecs();
     
+    //Works out the number of minutes and seconds in that many seconds
     int numMins = floor(itemData.lengthInSecs/60);
     int numSecs = (fmod(itemData.lengthInSecs, 60));
     
+    //Converts these both to strings
     std::string numMinsString = std::to_string(numMins);
     std::string numSecsString = std::to_string(numSecs);
     
+    //Adds the strings together
     itemData.lengthInTime = numMinsString + ":" + numSecsString;
 }
 
@@ -141,12 +148,14 @@ void QueueItem::labelTextChanged(Label* labelThatHasChanged)
         //Checks for anything other than a digit or ':'
         if(currentChar.compare("0") != 0 && currentChar.compare("1") != 0 && currentChar.compare("2") != 0 && currentChar.compare("3") != 0 && currentChar.compare("4") != 0 && currentChar.compare("5") != 0 && currentChar.compare("6") != 0 && currentChar.compare("7") != 0 && currentChar.compare("8") != 0 && currentChar.compare("9") != 0 && currentChar.compare(":") != 0)
         {
+            //Resets the label if it finds anything other than a digit or ':'
             labelThatHasChanged->setText("", dontSendNotification);
         }
         
         //Looks for ':'
         else if(currentChar.compare(":") == 0)
         {
+            //Sets the colon index to where it finds this
             colonIndex = i;
         }
     }
@@ -163,13 +172,16 @@ void QueueItem::labelTextChanged(Label* labelThatHasChanged)
         postColonStr += newText[i];
     }
     
+    //Adds these to their specific labelTimes struct
     if(labelThatHasChanged == playTimeLabel)
     {
+        //Converts from string to int
         playLabelTime.preColonNum = preColonStr.getIntValue();
         playLabelTime.postColonNum = postColonStr.getIntValue();
     }
     else if (labelThatHasChanged == stopTimeLabel)
     {
+        //Converts from string to int
         stopLabelTime.preColonNum = preColonStr.getIntValue();
         stopLabelTime.postColonNum = postColonStr.getIntValue();
     }
@@ -177,11 +189,10 @@ void QueueItem::labelTextChanged(Label* labelThatHasChanged)
 
 void QueueItem::buttonClicked(Button* button)
 {
-    //Checks its the play button thats been pressed
-   
-    //Puts the item index into a string
+    //Converts the item index into a string
     String indexNumString(itemData.itemIndex);
         
+    //Sends this message which holds the item index at the end
     sendActionMessage("Play button pressed on index:" + indexNumString);
 }
 
@@ -212,7 +223,6 @@ bool QueueItem::getLoop() const
 
 void QueueItem::setNumLoops(int numLoops)
 {
-    DBG("New num loops is: " << numLoops);
     itemData.numLoops = numLoops;
 }
 

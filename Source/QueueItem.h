@@ -162,7 +162,7 @@ private:
     /**Implementation of the Button::Listener method*/
     void buttonClicked(Button* button) override;
     
-    /**Works out the length of the QueueItems file in seconds*/
+    /**Works out the length of the QueueItems file in seconds. Does this by converting length in samples to length in seconds*/
     void workOutLengthInSecs();
     
     /**Works out the length of the QueueItems file and turns it into a string*/

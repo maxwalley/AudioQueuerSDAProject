@@ -30,8 +30,10 @@ AudioTable::~AudioTable()
 
 void AudioTable::paint(Graphics& g)
 {
+    //Sets header colour
     embeddedTable.getHeader().setColour(TableHeaderComponent::ColourIds::textColourId, Colours::black);
     
+    //Sets table colour
     embeddedTable.setColour(ListBox::ColourIds::backgroundColourId, Colours::lightgrey);
 }
 
@@ -43,11 +45,13 @@ void AudioTable::resized()
 
 int AudioTable::getNumRows()
 {
+    //The size of the items array
     return items.size();
 }
 
 void AudioTable::paintRowBackground(Graphics& g, int rowNumber, int width, int height, bool rowIsSelected)
 {
+    //Paints the rows a seperate colour if they are selected
     if(rowIsSelected == true)
     {
         g.setColour(Colours::grey);
@@ -64,21 +68,25 @@ void AudioTable::paintCell(Graphics &g, int rowNumber, int columnId, int width, 
 {
     String stringToDraw;
     
+    //Draws item index
     if(columnId == 1)
     {
         stringToDraw = String(items[rowNumber]->getItemIndex() + 1);
     }
     
+    //Draws file name
     else if(columnId == 2)
     {
         stringToDraw = items[rowNumber]->getFileName();
     }
     
+    //Draws file size
     else if(columnId == 3)
     {
         stringToDraw = String(items[rowNumber]->getFileSize());
     }
     
+    //Draws file length
     else if(columnId == 4)
     {
         stringToDraw = items[rowNumber]->getLengthInTime();
@@ -90,16 +98,19 @@ void AudioTable::paintCell(Graphics &g, int rowNumber, int columnId, int width, 
 
 Component* AudioTable::refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component* existingComponentToUpdate)
 {
+    //Adds in play time label
     if(columnId == 5)
     {
         return items[rowNumber]->getPlayTimeLabel();
     }
     
+    //Adds in stop time label
     else if(columnId == 6)
     {
         return items[rowNumber]->getStopTimeLabel();
     }
     
+    //Adds in play button
     else if(columnId == 7)
     {
         return items[rowNumber]->getPlayButton();
@@ -114,31 +125,53 @@ Component* AudioTable::refreshComponentForCell(int rowNumber, int columnId, bool
 
 void AudioTable::addNewItem(File* file)
 {
+    //Allocates the next available index
     int nextIndex = items.size();
     
+    //Iterates through the array making sure this index hasn't already been taken
+    for(int i = 0; i < items.size(); i++)
+    {
+        if(nextIndex == items[i]->getItemIndex())
+        {
+            nextIndex++;
+        }
+    }
+    
+    //Adds a new item to the array
     items.add(new QueueItem(nextIndex, file));
     
     //Adds this as an action listener for the new item
     items[nextIndex]->addActionListener(this);
     
+    //Updates the table
     embeddedTable.updateContent();
 }
 
 void AudioTable::deleteSelectedItem()
 {
-    //If the deleted item is the one playing or about to play
-    if(currentIndexSelected == indexToPlay)
+    //Checks if the item being deleted is the last in the array
+    if(items[currentIndexSelected]->getItemIndex() != items.size()-1)
     {
-        sendActionMessage("Stop Audio");
-        indexToPlay = -1;
+        AlertWindow::showMessageBox(AlertWindow::AlertIconType::WarningIcon, "Only the last track can be deleted", "Only the last track in the queue can be deleted. Please delete tracks in reverse order if you would like to delete this one");
     }
+    else
+    {
+        //If the deleted item is the one playing or about to play
+        if(currentIndexSelected == indexToPlay)
+        {
+            sendActionMessage("Stop Audio");
+            indexToPlay = -1;
+        }
     
-    items.remove(currentIndexSelected, true);
+        //Deletes it from the array
+        items.remove(currentIndexSelected, true);
     
-    embeddedTable.updateContent();
+        //Updates the table
+        embeddedTable.updateContent();
     
-    //Resets the selected index since nothing will be selected
-    currentIndexSelected = -1;
+        //Resets the selected index since nothing will be selected
+        currentIndexSelected = -1;
+    }
 }
 
 void AudioTable::selectedRowsChanged(int lastRowSelected)
@@ -146,7 +179,7 @@ void AudioTable::selectedRowsChanged(int lastRowSelected)
     //Sets current index selected to the selected row
     currentIndexSelected = lastRowSelected;
     
-    //Sends message to main component to trigger infoBox to change
+    //Sends message to main component
     sendActionMessage("Selected Item Changed");
 }
 
@@ -160,6 +193,7 @@ void AudioTable::moveIndexToPlayOn()
     //if current item is set to loop and the specified amount of loops have not been hit
     if(items[indexToPlay]->getLoop() == true && items[indexToPlay]->getNumLoops() > loopCounter)
     {
+        //Tracks how many loops have been performed
         loopCounter++;
     }
     else
@@ -207,8 +241,6 @@ void AudioTable::moveIndexToPlayOn()
     {
         nextIndexToPlay = -1;
     }
-    
-    DBG("Current Index = " << indexToPlay);
 }
 
 
@@ -237,6 +269,7 @@ void AudioTable::startQueue()
         //Resets the current index
         indexToPlay = 0;
             
+        //Checks to see if the continuous button is not active
         if(queueControls.getContinuousButtonState() == false)
         {
             //Checks that its not set to play nothing
@@ -247,6 +280,7 @@ void AudioTable::startQueue()
             }
         }
         
+        //Checks to see if the shuffle button is not active
         else if(queueControls.getShuffleQueueButtonState() == true)
         {
             //Gets a random value in the range of how many items there are

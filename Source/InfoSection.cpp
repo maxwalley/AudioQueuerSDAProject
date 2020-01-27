@@ -82,5 +82,5 @@ void InfoSection::clear()
 
 void TextEditorLookAndFeel::drawTextEditorOutline(Graphics& g, int width, int height, TextEditor& )
 {
-    
+    //Draws outline as nothing
 }

@@ -37,9 +37,9 @@ public:
     /**Loads and plays a new file
      
      @param fileToLoad          the file to load and play. If this is nullptr no file will be loaded.
-     @param playPoint           the point in the file to start playing from in seconds.
-     @param stopPoint           the point in the file to stop playing at in seconds.
-     @param sendNotificationAtEnd           whether to send a notification at the end of playback.
+     @param playPoint           the point in the file to start playing from in seconds. If this is blank transport will start from the start of the file.
+     @param stopPoint           the point in the file to stop playing at in seconds. If this is blank transport will end at the end of the file.
+     @param sendNotificationAtEnd           whether to send a notification in the form of an ActionMessage at the end of playback. This message is "Transport Finished".
      */
     void loadNewFile(File* fileToLoad, int playPoint, int stopPoint, bool sendNotificationAtEnd);
     

@@ -32,6 +32,7 @@ void AudioPlayer::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
         transport.getNextAudioBlock(bufferToFill);
     }
     
+    //Checks if a stop point has been reached
     stopPointReached();
 }
 
@@ -42,25 +43,31 @@ void AudioPlayer::releaseResources()
 
 void AudioPlayer::loadNewFile(File* fileToLoad, int playPoint, int stopPoint, bool sendNotificationAtEnd)
 {
-    transport.stop();
-    pausePosition = 0.0;
+    //resets the transport
+    stop();
     
-    //Resets the transport to nothing
-    transport.setSource(nullptr);
-    
+    //Checks the new file is a valid file
     if(fileToLoad != nullptr)
     {
         reader = formatManager.createReaderFor(*fileToLoad);
     
+        //Checks the manager successfully created a reader for the file
         if(reader != nullptr)
         {
+            //Creates a temp audioFormatReaderSource and sets it to the reader
             std::unique_ptr<AudioFormatReaderSource> tempAudioFormatReaderSource (new AudioFormatReaderSource (reader, true));
     
+            //Sets main audioFormatReaderSource to the temp one and wipes the temp one
             audioFormatReaderSource.reset(tempAudioFormatReaderSource.release());
         }
     
+        //Sets the transport source to the main AudioFormatReaderSource
         transport.setSource(audioFormatReaderSource.get(), 0, nullptr, reader->sampleRate, reader->numChannels);
+        
+        //Sets start position to the playpoint. (If there is no play point this will be 0)
         transport.setPosition(playPoint);
+        
+        //Starts the transport
         transport.start();
         
         fileStopPoint = stopPoint;
@@ -71,8 +78,10 @@ void AudioPlayer::loadNewFile(File* fileToLoad, int playPoint, int stopPoint, bo
 
 void AudioPlayer::stopPointReached()
 {
+    //Checks that its meant to send a notification when playback ends
     if(sendNotificationAtEndOfPlayback == true)
     {
+        //Checks if the stop point is not 0 then has transport hit it OR has the transport finished the file it was playing
         if((fileStopPoint != 0 && transport.getCurrentPosition() >= fileStopPoint) || transport.hasStreamFinished() == true)
         {
             sendActionMessage("Transport Finished");
@@ -82,6 +91,7 @@ void AudioPlayer::stopPointReached()
 
 void AudioPlayer::pause()
 {
+    //Keeps track of where the transport was paused
     pausePosition = transport.getCurrentPosition();
     transport.stop();
 }
@@ -105,8 +115,10 @@ bool AudioPlayer::isPaused() const
 
 void AudioPlayer::playFromPause()
 {
+    //Checks pause is enabled
     if(isPaused() == true)
     {
+        //Sets the transport position to the held pause position and restarts it
         transport.setPosition(pausePosition);
         transport.start();
     }
@@ -134,8 +146,11 @@ double AudioPlayer::getTransportLengthInSeconds() const
 
 void AudioPlayer::stop()
 {
+    //Stops the transport and resets pause position
     transport.stop();
     pausePosition = 0;
+    
+    //Sets the transport as having no source
     transport.setSource(nullptr);
 }
 

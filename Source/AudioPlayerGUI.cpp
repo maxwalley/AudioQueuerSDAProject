@@ -28,6 +28,7 @@ AudioPlayerGUI::AudioPlayerGUI()  : playPauseButton(PlayerGUIButton::play), stop
     addAndMakeVisible(lastButton);
     
     addAndMakeVisible(timeLabel);
+    //Sets time label as blank
     timeLabel.setText("", dontSendNotification);
 }
 
@@ -55,34 +56,44 @@ void AudioPlayerGUI::resized()
 
 void AudioPlayerGUI::audioStopped()
 {
+    //Resets the play button to play and sets label as blank
     playPauseButton.changeFunction(PlayerGUIButton::play);
     timeLabel.setText("", dontSendNotification);
 }
 
 void AudioPlayerGUI::audioPaused()
 {
+    //Sets the play button as play
     playPauseButton.changeFunction(PlayerGUIButton::play);
 }
 
 void AudioPlayerGUI::audioPlayed()
 {
     stopButton.setToggleState(false, dontSendNotification);
+    
+    //Sets the play button as pause
     playPauseButton.changeFunction(PlayerGUIButton::pause);
     
 }
 
 void AudioPlayerGUI::changeTime(double audioPosition)
 {
+    //Works out how many mins and seconds are in this number of seconds
     int64_t numMins = floor(audioPosition / 60);
     double numSecs = fmod(audioPosition, 60);
+    
+    //Converts number of seconds to an int
     double decPoint = fmod(numSecs, 1);
     int64_t numSecsInt = numSecs - decPoint;
     
+    //Converts these to strings
     std::string numMinsString = std::to_string(numMins);
     std::string numSecsString = std::to_string(numSecsInt);
     
+    //Adds the strings together
     std::string fullTime = numMinsString + ":" + numSecsString;
         
+    //Sets the label time as the converted time
     const MessageManagerLock labelLock;
     timeLabel.setText(fullTime, dontSendNotification);
 }

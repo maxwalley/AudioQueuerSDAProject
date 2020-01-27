@@ -80,8 +80,10 @@ void InfoBox::paint(Graphics& g)
 
 void InfoBox::paintOverChildren (Graphics& g)
 {
+    //Draws the outer container
     g.drawRect(0, 0, getWidth(), getHeight(), 4);
     
+    //Draws the inner parts that the info sections dont draw
     g.drawLine(0, 45, 200, 45);
     g.drawLine(100, 45, 100, 50);
     g.drawLine(100, 275, 100, 350);
@@ -113,6 +115,7 @@ void InfoBox::resized()
 
 void InfoBox::changeData(ItemInfo currentDataStruct)
 {
+    //Changes the data section for all the info sections based on whats in the struct passed to it
     fileNameSection.setData(currentDataStruct.fileName);
     filePathSection.setData(currentDataStruct.file.getFullPathName());
     fileSizeSection.setData(String(currentDataStruct.size));
@@ -120,8 +123,10 @@ void InfoBox::changeData(ItemInfo currentDataStruct)
     fileSampleRateSection.setData(String(currentDataStruct.sampleRate));
     fileNumChannelsSection.setData(String(currentDataStruct.numChannels));
     
+    //Checks if the loop option in the struct is true
     if(currentDataStruct.loop == true)
     {
+        //Changes the loop button and num loops label accordingly
         loopToggle.setToggleState(true, dontSendNotification);
         loopNumDataLabel.setEnabled(true);
         loopNumDataLabel.setVisible(true);
@@ -129,14 +134,17 @@ void InfoBox::changeData(ItemInfo currentDataStruct)
     }
     else
     {
+        //Changes the loop button and num loops label accordingly
         loopToggle.setToggleState(false, dontSendNotification);
         loopNumDataLabel.setText("0", dontSendNotification);
     }
     
     repaint();
     
+    //Resets this to keep track if a new value is entered into the numloops label
     newNumLoops = 0;
     
+    //Sets the waveform to the file in the struct
     waveform.set(new FileInputSource(currentDataStruct.file));
     
     loopToggle.setEnabled(true);
@@ -158,6 +166,7 @@ int InfoBox::getNewNumLoops() const
 
 void InfoBox::clear()
 {
+    //Clears all the infoSections
     fileNameSection.clear();
     filePathSection.clear();
     fileSizeSection.clear();
@@ -165,6 +174,7 @@ void InfoBox::clear()
     fileSampleRateSection.clear();
     fileNumChannelsSection.clear();
     
+    //Resets the loop button and the numloops label accordingly
     loopToggle.setEnabled(false);
     loopToggle.setVisible(false);
     loopNumDataLabel.setEnabled(false);
@@ -179,10 +189,12 @@ void InfoBox::clear()
 
 void InfoBox::buttonClicked(Button* button)
 {
+    //Loop button
     if(button == &loopToggle)
     {
         sendActionMessage("Loop button changed");
         
+        //Checks what its states been changed to and changes the button and the num loop labels settings accordinly
         if(getLoopButtonState() == true)
         {
             loopNumDataLabel.setEnabled(true);
@@ -196,9 +208,10 @@ void InfoBox::buttonClicked(Button* button)
         }
     }
     
+    //Delete button
     else if(button == &deleteButton)
     {
-        //Opens an alert window to make sure the user wants to delete this item
+        //Opens an alert window to make sure the user wants to delete this item. Checks what their input to this alert window is
         if(AlertWindow::showOkCancelBox(AlertWindow::AlertIconType::WarningIcon, "Delete from Queue?", "Are you sure you want to delete this item from the queue?", "Yes", "No") == true)
         {
             sendActionMessage("Delete button pressed");
@@ -208,11 +221,13 @@ void InfoBox::buttonClicked(Button* button)
 
 void InfoBox::labelTextChanged(Label* labelThatHasChanged)
 {
+    //NumLoops label
     if(labelThatHasChanged == &loopNumDataLabel)
     {
         String newText = loopNumDataLabel.getText();
         int textLength = newText.length();
         
+        //Iterates through the characters of the new text of the label
         for(int currentIndex = 0; currentIndex < textLength; currentIndex++)
         {
             String currentChar = String::charToString(newText[currentIndex]);
@@ -220,11 +235,13 @@ void InfoBox::labelTextChanged(Label* labelThatHasChanged)
             //Checks for anything other than a digit
             if(currentChar.compare("0") != 0 && currentChar.compare("1") != 0 && currentChar.compare("2") != 0 && currentChar.compare("3") != 0 && currentChar.compare("4") != 0 && currentChar.compare("5") != 0 && currentChar.compare("6") != 0 && currentChar.compare("7") != 0 && currentChar.compare("8") != 0 && currentChar.compare("9") != 0)
             {
+                //Resets the label to blank if it finds anything other than a digit
                 loopNumDataLabel.setText("", dontSendNotification);
             }
             
             else
             {
+                //Keeps track of what the new number of loops entered is
                 newNumLoops = newText.getIntValue();
                 sendActionMessage("Number of loops changed");
             }

@@ -83,6 +83,7 @@ void QueueControls::changeToggleState(int control)
     //if control is the loop button
     if(control == loopQueue)
     {
+        //If its current state is true set it to false. Visa versa
         if(loopQueueButton.getToggleState() == true)
         {
             loopQueueButton.setToggleState(false, dontSendNotification);
@@ -96,6 +97,7 @@ void QueueControls::changeToggleState(int control)
     //if control is the shuffle control
     else if(control == shuffleQueue)
     {
+        //If its current state is true set it to false. Visa versa
         if(shuffleQueueButton.getToggleState() == true)
         {
             shuffleQueueButton.setToggleState(false, dontSendNotification);
@@ -109,6 +111,7 @@ void QueueControls::changeToggleState(int control)
     //if control is the play continuous control
     else if(control == playContinuously)
     {
+        //If its current state is true set it to false. Visa versa
         if(playContinuouslyButton.getToggleState() == true)
         {
             playContinuouslyButton.setToggleState(false, dontSendNotification);
