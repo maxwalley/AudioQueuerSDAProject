@@ -31,10 +31,12 @@ void ComponentWindow::closeButtonPressed()
 
 void ComponentWindow::mouseDown(const MouseEvent &event)
 {
+    //Sends this message if the mouse is clicked on the window
     sendActionMessage("Mouse Clicked on " + windowName);
 }
 
 void ComponentWindow::mouseUp(const MouseEvent &event)
 {
+    //Sends this message if the mouse is released on the window
     sendActionMessage("Mouse Released on " + windowName);
 }

@@ -9,9 +9,11 @@
 #include "MainComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav; *.mp3; *.m4a; *.flac", true, true, nullptr), fileLoaded(false), timerCount(1), waveform(*player.getAudioFormatManager()), infoBox(*player.getAudioFormatManager()), menu(this)
+MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav; *.mp3; *.m4a; *.flac", true, true, nullptr), fileLoaded(false), waveform(*player.getAudioFormatManager()), infoBox(*player.getAudioFormatManager()), menu(this)
 {
     setSize (1100, 675);
+    
+    setAudioChannels(0, 2);
 
     playerGUI.gainSlider.addListener(this);
     playerGUI.playPauseButton.addListener(this);
@@ -21,8 +23,6 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav; *.mp
     table.queueControls.openFileButton.addListener(this);
     
     addAndMakeVisible(playerGUI);
-    playerGUI.setButtonEnabled(&playerGUI.playPauseButton, false);
-    
     
     addAndMakeVisible(waveform);
     waveform.addMouseListener(this, false);
@@ -35,8 +35,6 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav; *.mp
     addAndMakeVisible(infoBox);
     infoBox.addActionListener(this);
     
-    deviceManager.initialise(0, 2, nullptr, true);
-    
     player.addActionListener(this);
     
     addAndMakeVisible(menu);
@@ -44,6 +42,7 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav; *.mp
 
 MainComponent::~MainComponent()
 {
+    //Deletes pointers to the colour selector windows
     backColSelWindow.deleteAndZero();
     waveColSelWindow.deleteAndZero();
     
@@ -69,9 +68,13 @@ void MainComponent::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFil
     }
     
     //FFT
+    //Creates a read pointer at the start of the buffer
     auto* channelData = bufferToFill.buffer->getReadPointer (0, bufferToFill.startSample);
+    
+    //Iterates through the samples of the buffer
     for (int i = 0; i < bufferToFill.numSamples; ++i)
     {
+        //Sends audio sample to the FFT for display
         transformImage.fillInputArray(channelData[i]);
     }
 }
@@ -144,62 +147,77 @@ PopupMenu MainComponent::getMenuForIndex(int topLevelMenuIndex, const String &me
 
 void MainComponent::menuItemSelected(int menuItemID, int topLevelMenuIndex)
 {
+    //File tab
     if(topLevelMenuIndex == 0)
     {
+        //"Add File" option
         if(menuItemID == 1)
         {
             addFile();
         }
     }
     
+    //Audio tab
     else if(topLevelMenuIndex == 1)
     {
+        //"Play Queue" option
         if(menuItemID == 1)
         {
             playQueue();
         }
         
+        //"Pause Queue" option
         else if(menuItemID == 2)
         {
             pauseAudio();
         }
         
+        //"Stop Queue" option
         else if(menuItemID == 3)
         {
             stopAudio();
         }
     }
     
+    //Queue tab
     else if(topLevelMenuIndex == 2)
     {
+        //"Loop Queue" option
         if(menuItemID == 1)
         {
             table.changeQueueControlToggle(QueueControls::loopQueue);
         }
         
+        //"Shuffle Queue" option
         else if(menuItemID == 2)
         {
             table.changeQueueControlToggle(QueueControls::shuffleQueue);
         }
         
+        //"Play Continuously" option
         else if(menuItemID == 3)
         {
             table.changeQueueControlToggle(QueueControls::playContinuously);
         }
     }
     
+    //Waveform tab
     else if(topLevelMenuIndex == 3)
     {
+        //"Change Background Colour" option
         if(menuItemID == 1)
         {
+            //Opens and initilises a new ColourSelectorWindow
             backColSelWindow = new ColourSelectorWindow("Background Colour", Colours::grey, DocumentWindow::allButtons);
             backColSelWindow->addActionListener(this);
             backColSelWindow->setSize(300, 500);
             backColSelWindow->setVisible(true);
         }
         
+        //"Change Waveform Colour" option
         else if(menuItemID == 2)
         {
+            //Opens and initilises a new ColourSelectorWindow
             waveColSelWindow = new ColourSelectorWindow("Waveform Colour", Colours::grey, DocumentWindow::allButtons);
             waveColSelWindow->addActionListener(this);
             waveColSelWindow->setSize(300, 500);
@@ -211,14 +229,16 @@ void MainComponent::menuItemSelected(int menuItemID, int topLevelMenuIndex)
 
 void MainComponent::buttonClicked(Button* button)
 {
+    //Open file button
     if(button == &table.queueControls.openFileButton)
     {
         addFile();
-        playerGUI.setButtonEnabled(&playerGUI.playPauseButton, true);
     }
     
+    //Play/Pause button
     else if(button == &playerGUI.playPauseButton)
     {
+        //Checks if the player is currently playing something
         if(player.isPlaying() == false)
         {
             playQueue();
@@ -230,17 +250,20 @@ void MainComponent::buttonClicked(Button* button)
         
     }
     
+    //Stop button
     else if(button == &playerGUI.stopButton)
     {
         stopAudio();
     }
     
+    //Next button
     else if(button == &playerGUI.nextButton)
     {
         table.moveIndexToPlayOn();
         setUpPlayer();
     }
     
+    //Back button
     else if(button == &playerGUI.lastButton)
     {
         table.moveIndexToPlayBack();
@@ -251,8 +274,10 @@ void MainComponent::buttonClicked(Button* button)
 
 void MainComponent::addFile()
 {
+    //Opens the file chooser to browse for a file and checks it returned something
     if(fileChooser.browseForFileToOpen() == true)
     {
+        //Sends new file to the table to be added
         selectedFile = fileChooser.getResult();
         table.addNewItem(&selectedFile);
     }
@@ -260,22 +285,28 @@ void MainComponent::addFile()
 
 void MainComponent::playQueue()
 {
+    //Checks if player is currently paused
     if(player.isPaused() == true)
     {
         player.playFromPause();
     }
     else
     {
+        //Checks if the table is empty
         if(table.isEmpty() != true)
         {
+            //Initilises the table to begin returning files to play
             table.startQueue();
-            player.loadNewFile(table.getFileToPlay(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), true);
-            waveform.set(new FileInputSource(*table.getFileToPlay()));
+            
+            setUpPlayer();
         }
     }
     if(table.isEmpty() != true)
     {
+        //Triggers AudioPlayerGUI to change to playing state
         playerGUI.audioPlayed();
+        
+        //Triggers timers for waveform line and AudioPlayerGUI time label
         Timer:startTimer(100);
     }
 }
@@ -286,16 +317,27 @@ void MainComponent::pauseAudio()
     if(player.isPlaying() == true)
     {
         player.pause();
+        
+        //Triggers AudioPlayerGUI to change to paused state
         playerGUI.audioPaused();
     }
 }
 
 void MainComponent::stopAudio()
 {
+    //Tells the table to change indexToPlay to nothing
     table.reset();
+    
+    //Tells the AudioPlayer to stop playing
     player.stop();
+    
+    //Stops the waveform line and player GUI time label timer
     Timer::stopTimer();
+    
+    //Sets AudioPlayerGUI to a stopped state
     playerGUI.audioStopped();
+    
+    //Clears the waveform
     waveform.clear();
 }
 
@@ -303,16 +345,19 @@ void MainComponent::sliderValueChanged(Slider* slider)
 {
     if(slider == &playerGUI.gainSlider)
     {
+        //Sets the gain of the player based on the gain slider in AudioPlayerGUI
         player.setGain(playerGUI.gainSlider.getValue());
     }
 }
 
 void MainComponent::timerCallback()
 {
+    //Changes the time label in AudioPlayerGUI based on the players position in the audio file
     playerGUI.changeTime(player.getTransportPosition());
     
     if(player.isPlaying() == true)
     {
+        //Moves the transport line of the waveform to new position based on the players position in the audio file
         waveform.moveTransportLine((player.getTransportPosition()/player.getTransportLengthInSeconds()) * waveform.getWidth());
     }
 }
@@ -331,7 +376,7 @@ void MainComponent::changeAudioPosition(int xAxis)
     //Finds the percentage across the waveform component
     double percentageAcrossWaveform = (double(xAxis)/waveform.getWidth()) * 100.0;
     
-    //Finds this point in the song
+    //Finds this point in the file
     double percentageInTrack = (waveform.getThumbnailLength()/100) * percentageAcrossWaveform;
     
     //Sets the new transport position
@@ -340,7 +385,7 @@ void MainComponent::changeAudioPosition(int xAxis)
 
 void MainComponent::actionListenerCallback(const String &message)
 {
-    //Called if a new row is selected
+    //If a new row of the table is selected
     if(message == "Selected Item Changed")
     {
         //Checks if a row is selected
@@ -351,47 +396,59 @@ void MainComponent::actionListenerCallback(const String &message)
         }
         else
         {
+            //Clears the info box if a row isnt selected
             infoBox.clear();
         }
     }
     
+    //If the infobox loop button has changed
     else if(message == "Loop button changed")
     {
+        //Updates the loop option for the selected item based on the new loop button state
         table.updateSelectedItemLoopToggle(infoBox.getLoopButtonState());
     }
     
+    //If the infobox number of loops label has changed
     else if(message == "Number of loops changed")
     {
+        //Updates the numloops for the selected item based on the new number of loops selected
         table.updateSelectedItemNumLoops(infoBox.getNewNumLoops());
     }
     
+    //If the infobox delete button was pressed
     else if(message == "Delete button pressed")
     {
         table.deleteSelectedItem();
     }
     
+    //If the queue has finished playing
     else if(message == "Queue finished")
     {
         stopAudio();
     }
     
-    else if(message == "Break")
-    {
-        playerGUI.audioStopped();
-    }
-    
+    //If the player has finished the current file
     else if(message == "Transport Finished")
     {
+        //Prompts the table to select a new file to play
         table.moveIndexToPlayOn();
                
         setUpPlayer();
     }
     
+    //If an individual table items play button was played
     else if(message == "Play button on QueueItem pressed")
     {
+        //Sends the file to the player but tells it not to send a notification at the end of playback since we only want this file to play, not the whole queue
         player.loadNewFile(table.getFileToPlay(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), false);
+        
+        //Sets the waveform to the new file to play
         waveform.set(new FileInputSource(*table.getFileToPlay()));
+        
+        //Triggers the time label and waveform playhead timer
         Timer:startTimer(100);
+        
+        //Sets playerGUI to playing state
         playerGUI.audioPlayed();
     }
     
@@ -402,17 +459,20 @@ void MainComponent::actionListenerCallback(const String &message)
     
     else if(message == "Mouse Released on Background Colour")
     {
+        //Sets the background colour to the colour currently selected in the window
         waveform.setBackgroundColour(backColSelWindow->getColour());
     }
     
     else if(message == "Mouse Released on Waveform Colour")
     {
+        //Sets the waveform colour to the colour currently selected in the window
         waveform.setWaveformColour(waveColSelWindow->getColour());
     }
 }
 
 void MainComponent::setUpPlayer()
 {
+    //Checks there is a file to play
     if(table.getFileToPlay() == nullptr)
     {
         playerGUI.audioStopped();
@@ -420,7 +480,10 @@ void MainComponent::setUpPlayer()
     }
     else
     {
+        //Sends the new file to the player to play
         player.loadNewFile(table.getFileToPlay(), table.getCurrentPlayPoint(), table.getCurrentStopPoint(), true);
+        
+        //Sets the waveform to display the new file
         waveform.set(new FileInputSource(*table.getFileToPlay()));
     }
 }

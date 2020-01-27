@@ -17,6 +17,7 @@ ColourSelectorWindow::ColourSelectorWindow(const String &name, Colour background
     selector.setSize(getWidth(), getHeight());
     selector.addMouseListener(this, true);
     
+    //Sets the windows content to the ColourSelector component
     setContentOwned(&selector, true);
 }
 

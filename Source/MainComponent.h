@@ -98,7 +98,6 @@ private:
     
     /**Implementation of the Timer method*/
     void timerCallback() override;
-    int timerCount;
     
     /**Implementation of the MouseListener method*/
     void mouseDown(const MouseEvent &event) override;
