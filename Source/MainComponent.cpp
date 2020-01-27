@@ -13,17 +13,6 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav; *.mp
 {
     setSize (1100, 675);
 
-    if (RuntimePermissions::isRequired (RuntimePermissions::recordAudio)
-        && ! RuntimePermissions::isGranted (RuntimePermissions::recordAudio))
-    {
-        RuntimePermissions::request (RuntimePermissions::recordAudio,
-                                     [&] (bool granted) { if (granted)  setAudioChannels (2, 2); });
-    }
-    else
-    {
-        setAudioChannels (0, 2);
-    }
-
     playerGUI.gainSlider.addListener(this);
     playerGUI.playPauseButton.addListener(this);
     playerGUI.stopButton.addListener(this);
@@ -55,7 +44,6 @@ MainComponent::MainComponent() : fileChooser("Pick a file", File(), "*.wav; *.mp
 
 MainComponent::~MainComponent()
 {
-    devSelectorWindow.deleteAndZero();
     backColSelWindow.deleteAndZero();
     waveColSelWindow.deleteAndZero();
     
@@ -125,8 +113,7 @@ PopupMenu MainComponent::getMenuForIndex(int topLevelMenuIndex, const String &me
     //File tab
     if(topLevelMenuIndex == 0)
     {
-        menu.addItem(1, "Audio Preferences", true, false);
-        menu.addItem(2, "Add File to Queue", true, false);
+        menu.addItem(1, "Add File", true, false);
     }
     
     //Audio tab
@@ -160,16 +147,6 @@ void MainComponent::menuItemSelected(int menuItemID, int topLevelMenuIndex)
     if(topLevelMenuIndex == 0)
     {
         if(menuItemID == 1)
-        {
-            devSelectorWindow = new ComponentWindow("Audio Preferences", Colours::grey, DocumentWindow::allButtons);
-            devSelectorWindow->setSize(300, 200);
-            devSelector = new AudioDeviceSelectorComponent(deviceManager, 0, 0, 0, 2, false, false, true, false);
-            
-            devSelector->setSize(devSelectorWindow->getWidth(), devSelectorWindow->getHeight());
-            devSelectorWindow->setContentOwned(devSelector, true);
-            devSelectorWindow->setVisible(true);
-        }
-        else if(menuItemID == 2)
         {
             addFile();
         }

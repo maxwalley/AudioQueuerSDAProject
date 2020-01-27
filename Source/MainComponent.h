@@ -106,7 +106,8 @@ private:
     /**Changes the current position in the audio stream
      called when the AudioWaveform is clicked on
      
-     @param xAxis           the x axis position of the click on the waveform*/
+     @param xAxis           the x axis position of the click on the waveform
+     */
     void changeAudioPosition(int xAxis);
     
     AudioWaveform waveform;
@@ -125,8 +126,6 @@ private:
     InfoBox infoBox;
     
     MenuBarComponent menu;
-    Component::SafePointer<ComponentWindow> devSelectorWindow;
-    Component::SafePointer<AudioDeviceSelectorComponent> devSelector;
     
     Component::SafePointer<ColourSelectorWindow> backColSelWindow;
     Component::SafePointer<ColourSelectorWindow> waveColSelWindow;
