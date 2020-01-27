@@ -14,8 +14,6 @@
 //==============================================================================
 AudioWaveform::AudioWaveform(AudioFormatManager &formatManagerToUse) : thumbnail(512, formatManagerToUse, thumbnailCache), thumbnailArea(0, 0, 200, 150), thumbnailCache(5), transportXPos(0)
 {
-    setAlwaysOnTop(true);
-    
     backgroundColour = Colours::white;
     waveformColour = Colours::black;
 }

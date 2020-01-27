@@ -52,6 +52,7 @@ InfoBox::InfoBox(AudioFormatManager &manager) : fileNameSection("File Name"), fi
     deleteButton.setEnabled(false);
     
     addAndMakeVisible(waveform);
+    waveform.setAlwaysOnTop(true);
 }
 
 InfoBox::~InfoBox()
