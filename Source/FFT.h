@@ -25,7 +25,7 @@ public:
     /**Destructor*/
     ~FFT();
 
-    /**Implementation of the Component method*/
+    /**Implementation of the JUCE Component method*/
     void paint (Graphics&) override;
     
     /**Inputs data into the FFT

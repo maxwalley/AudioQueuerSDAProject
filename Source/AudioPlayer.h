@@ -25,13 +25,13 @@ public:
     /**Destructor */
     ~AudioPlayer();
     
-    /**Implementation of the AudioSource method*/
+    /**Implementation of the JUCE AudioSource method*/
     void prepareToPlay(int samplesPerBlockExpected, double sampleRate) override;
     
-    /**Implementation of the AudioSource method*/
+    /**Implementation of the JUCE AudioSource method*/
     void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill) override;
     
-    /**Implementation of the AudioSource Method*/
+    /**Implementation of the JUCE AudioSource Method*/
     void releaseResources() override;
     
     /**Loads and plays a new file

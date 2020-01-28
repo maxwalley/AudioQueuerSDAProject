@@ -21,7 +21,7 @@ public:
     AudioWaveform(AudioFormatManager &formatManagerToUse);
     ~AudioWaveform();
     
-    /**Implementation of the Component method*/
+    /**Implementation of the JUCE Component method*/
     void paint (Graphics&) override;
     
     /**Sets the waveform to show a source

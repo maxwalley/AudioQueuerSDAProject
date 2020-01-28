@@ -36,13 +36,13 @@ public:
     /**Destructor*/
     ~InfoSection();
 
-    /**Implementation of the Component method*/
+    /**Implementation of the JUCE Component method*/
     void paint(Graphics& g) override;
     
-    /**Implementation of the Component method*/
+    /**Implementation of the JUCE Component method*/
     void paintOverChildren(Graphics& g) override;
     
-    /**Implementation of the Component method*/
+    /**Implementation of the JUCE Component method*/
     void resized() override;
 
     /**Sets the text in the data TextEditor

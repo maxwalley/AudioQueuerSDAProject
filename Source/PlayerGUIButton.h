@@ -36,7 +36,7 @@ public:
     /**Destructor*/
     ~PlayerGUIButton();
 
-    /**Implementation of the Component method*/
+    /**Implementation of the JUCE Component method*/
     void paintButton (Graphics &g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override;
     
     /**Changes the function this button represents

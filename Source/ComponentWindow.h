@@ -35,13 +35,13 @@ public:
 
 private:
     
-    /**Implementation of the DocumentWindow method*/
+    /**Implementation of the JUCE DocumentWindow method*/
     void closeButtonPressed() override;
     
-    /**Implementation of the MouseListener method*/
+    /**Implementation of the JUCE MouseListener method*/
     void mouseDown(const MouseEvent &event) override;
     
-    /**Implementation of the MouseListener method*/
+    /**Implementation of the JUCE MouseListener method*/
     void mouseUp(const MouseEvent &event) override;
     
     String windowName;

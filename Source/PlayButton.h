@@ -24,7 +24,7 @@ public:
     /**Destructor*/
     ~PlayButton();
 
-    /**Implementation of the Button method*/
+    /**Implementation of the JUCE Button method*/
     void paintButton (Graphics& g, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown) override;
 
 private:

@@ -37,10 +37,10 @@ public:
     /**Destructor*/
     ~QueueControls();
 
-    /**Implementation of the Component method*/
+    /**Implementation of the JUCE Component method*/
     void paint(Graphics& g) override;
     
-    /**Implementation of the Component method*/
+    /**Implementation of the JUCE Component method*/
     void resized() override;
     
     /**Returns the state of the loop queue toggle button

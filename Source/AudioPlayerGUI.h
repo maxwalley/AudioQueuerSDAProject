@@ -26,10 +26,10 @@ public:
     /**Destructor*/
     ~AudioPlayerGUI();
 
-    /**Implementation of the Component method*/
+    /**Implementation of the JUCE Component method*/
     void paint (Graphics&) override;
     
-    /**Implementation of the Component method*/
+    /**Implementation of the JUCE Component method*/
     void resized() override;
     
     /**Changes components of this class to show a state where audio is stopped*/

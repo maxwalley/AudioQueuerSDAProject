@@ -33,13 +33,13 @@ public:
     /**Destructor*/
     ~InfoBox();
 
-    /**Implementation of the Component method*/
+    /**Implementation of the JUCE Component method*/
     void paint(Graphics& g) override;
     
-    /**Implementation of the Component method*/
+    /**Implementation of the JUCE Component method*/
     void paintOverChildren(Graphics& g) override;
     
-    /**Implementation of the Component method*/
+    /**Implementation of the JUCE Component method*/
     void resized() override;
     
     /**Changes the data that is shown in the info box
@@ -79,10 +79,10 @@ private:
     Label loopNumDescriptionLabel;
     Label loopNumDataLabel;
     
-    /**Implementation of the Button::Listener method*/
+    /**Implementation of the JUCE Button::Listener method*/
     void buttonClicked(Button* button) override;
     
-    /**Implementation of the Label::Listener method*/
+    /**Implementation of the JUCE Label::Listener method*/
     void labelTextChanged(Label* labelThatHasChanged) override;
     
     int newNumLoops;

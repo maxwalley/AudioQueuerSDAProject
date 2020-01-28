@@ -37,30 +37,30 @@ public:
     ~MainComponent();
 
     //==============================================================================
-    /**Implementation of the AudioSource method*/
+    /**Implementation of the JUCE AudioSource method*/
     void prepareToPlay (int samplesPerBlockExpected, double sampleRate) override;
     
-    /**Implementation of the AudioSource method*/
+    /**Implementation of the JUCE AudioSource method*/
     void getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill) override;
     
-    /**Implementation of the AudioSource method*/
+    /**Implementation of the JUCE AudioSource method*/
     void releaseResources() override;
 
     //==============================================================================
-    /**Implementation of the Component method*/
+    /**Implementation of the JUCE Component method*/
     void paint (Graphics& g) override;
     
-    /**Implementation of the Component method*/
+    /**Implementation of the JUCE Component method*/
     void resized() override;
     
     //==============================================================================
-    /**Implementation of the MenuBarModel method*/
+    /**Implementation of the JUCE MenuBarModel method*/
     StringArray getMenuBarNames() override;
     
-    /**Implementation of the MenuBarModel method*/
+    /**Implementation of the JUCE MenuBarModel method*/
     PopupMenu getMenuForIndex (int topLevelMenuIndex, const String& menuName) override;
     
-    /**Implementation of the MenuBarModel method*/
+    /**Implementation of the JUCE MenuBarModel method*/
     void menuItemSelected (int menuItemID, int topLevelMenuIndex) override;
     
     
@@ -75,10 +75,10 @@ private:
 
     bool fileLoaded;
     
-    /**Implementation of the Button::Listener method*/
+    /**Implementation of the JUCE Button::Listener method*/
     void buttonClicked(Button* button) override;
     
-    /**Implementation of the Slider::Listener method*/
+    /**Implementation of the JUCE Slider::Listener method*/
     void sliderValueChanged(Slider* slider) override;
     
     /**Adds a file to the queue using a FileChooser
@@ -96,10 +96,10 @@ private:
     /**Stops the queue*/
     void stopAudio();
     
-    /**Implementation of the Timer method*/
+    /**Implementation of the JUCE Timer method*/
     void timerCallback() override;
     
-    /**Implementation of the MouseListener method*/
+    /**Implementation of the JUCE MouseListener method*/
     void mouseDown(const MouseEvent &event) override;
     
     /**Changes the current position in the audio stream
@@ -116,7 +116,7 @@ private:
     
     AudioTable table;
     
-    /**Implementation of the ActionListener method*/
+    /**Implementation of the JUCE ActionListener method*/
     void actionListenerCallback(const String& message) override;
     
     /**Sets up the audio player with the next file to play from the table*/

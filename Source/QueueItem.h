@@ -154,12 +154,12 @@ private:
     Label* playTimeLabel;
     Label* stopTimeLabel;
     
-    /**Implementation of the Label::Listener method*/
+    /**Implementation of the JUCE Label::Listener method*/
     void labelTextChanged(Label* labelThatHasChanged) override;
     
     PlayButton* playButton;
     
-    /**Implementation of the Button::Listener method*/
+    /**Implementation of the JUCE Button::Listener method*/
     void buttonClicked(Button* button) override;
     
     /**Works out the length of the QueueItems file in seconds. Does this by converting length in samples to length in seconds*/

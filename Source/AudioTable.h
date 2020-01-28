@@ -31,10 +31,10 @@ public:
     /**Destructor*/
     ~AudioTable();
     
-    /**Implementation of the Component method*/
+    /**Implementation of the JUCE Component method*/
     void paint(Graphics& g) override;
     
-    /**Implementation of the Component method*/
+    /**Implementation of the JUCE Component method*/
     void resized() override;
     
     QueueControls queueControls;
@@ -135,19 +135,19 @@ public:
     
     TableListBox embeddedTable;
 
-    /**Implementation of the TableListBoxModel method*/
+    /**Implementation of the JUCE TableListBoxModel method*/
     int getNumRows() override;
     
-    /**Implementation of the TableListBoxModel method*/
+    /**Implementation of the JUCE TableListBoxModel method*/
     void paintRowBackground(Graphics& g, int rowNumber, int width, int height, bool rowIsSelected) override;
     
-    /**Implementation of the TableListBoxModel method*/
+    /**Implementation of the JUCE TableListBoxModel method*/
     void paintCell(Graphics &g, int rowNumber, int columnId, int width, int height, bool rowIsSelected) override;
     
-    /**Implementation of the TableListBoxModel method*/
+    /**Implementation of the JUCE TableListBoxModel method*/
     Component* refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component* existingComponentToUpdate) override;
     
-    /**Implementation of the TableListBoxModel method*/
+    /**Implementation of the JUCE TableListBoxModel method*/
     void selectedRowsChanged(int lastRowSelected) override;
     
     int indexToPlay;
@@ -156,7 +156,7 @@ public:
     
     int loopCounter;
     
-    /**Implementation of the ActionListener method*/
+    /**Implementation of the JUCE ActionListener method*/
     void actionListenerCallback(const String &message) override;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioTable)
