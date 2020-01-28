@@ -468,6 +468,12 @@ void MainComponent::actionListenerCallback(const String &message)
         //Sets the waveform colour to the colour currently selected in the window
         waveform.setWaveformColour(waveColSelWindow->getColour());
     }
+    
+    else if(message == "Current Stop Point Changed")
+    {
+        //Resets the stop point of the player
+        player.setStopPoint(table.getCurrentStopPoint());
+    }
 }
 
 void MainComponent::setUpPlayer()

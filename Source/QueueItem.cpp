@@ -184,6 +184,9 @@ void QueueItem::labelTextChanged(Label* labelThatHasChanged)
         //Converts from string to int
         stopLabelTime.preColonNum = preColonStr.getIntValue();
         stopLabelTime.postColonNum = postColonStr.getIntValue();
+        
+        //Sends this message which holds the item index at the end
+        sendActionMessage("Stop Point Changed on index:" + String(itemData.itemIndex));
     }
 }
 

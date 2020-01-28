@@ -321,6 +321,20 @@ void AudioTable::actionListenerCallback(const String &message)
         indexToPlay = indexNumString.getIntValue();
         sendActionMessage("Play button on QueueItem pressed");
     }
+    
+    //If the label has changed on an item
+    else if(message.startsWith("Stop Point Changed on index:") == true)
+    {
+        //Gets the item index from the message
+        String indexNumString = message.getLastCharacters(1);
+        
+        //Checks if this is the current index set to play
+        if(indexNumString.getIntValue() == indexToPlay)
+        {
+            //Sends a message
+            sendActionMessage("Current Stop Point Changed");
+        }
+    }
 }
 
 File* AudioTable::getFileToPlay() const

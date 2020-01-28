@@ -158,3 +158,8 @@ AudioFormatManager* AudioPlayer::getAudioFormatManager()
 {
     return &formatManager;
 }
+
+void AudioPlayer::setStopPoint(int newStopPoint)
+{
+    fileStopPoint = newStopPoint;
+}

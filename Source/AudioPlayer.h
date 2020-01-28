@@ -97,6 +97,12 @@ public:
      */
     AudioFormatManager* getAudioFormatManager();
     
+    /**Sets the stop point of the file playing
+     
+     @param         the new stop point to use in seconds
+     */
+    void setStopPoint(int newStopPoint);
+    
 private:
     AudioFormatManager formatManager;
     AudioFormatReader* reader;
