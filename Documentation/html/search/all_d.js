@@ -10,13 +10,14 @@ var searchData=
   ['setitemindex_148',['setItemIndex',['../class_queue_item.html#a23829f18697583834e06a1a92a71476c',1,'QueueItem']]],
   ['setloop_149',['setLoop',['../class_queue_item.html#a9b5c887bfe9e6bb20d400c87648d983a',1,'QueueItem']]],
   ['setnumloops_150',['setNumLoops',['../class_queue_item.html#a493ef75efada08439fb59b8c0c2bdcbe',1,'QueueItem']]],
-  ['settransportposition_151',['setTransportPosition',['../class_audio_player.html#a6d3963ac979948b3b8f552d98a07a42b',1,'AudioPlayer']]],
-  ['setwaveformcolour_152',['setWaveformColour',['../class_audio_waveform.html#a143aba1056bdb1b904658af336e4debb',1,'AudioWaveform']]],
-  ['shufflequeue_153',['shuffleQueue',['../class_queue_controls.html#a8803e664a7f5687d74a09be51bb4dde1a156e26330eb5931d29ad530b7664ac99',1,'QueueControls']]],
-  ['shutdown_154',['shutdown',['../class_new_project_application.html#a1fb062ca5855a6bf782b11e17a70994c',1,'NewProjectApplication']]],
-  ['size_155',['size',['../struct_item_info.html#a459fd5faac089594e0f216a487653dcc',1,'ItemInfo']]],
-  ['startqueue_156',['startQueue',['../class_audio_table.html#ac52295beb2cacf862c047cdf07a99b56',1,'AudioTable']]],
-  ['stop_157',['stop',['../class_player_g_u_i_button.html#a319fd5719bf01d61ed75f589e8ba9080a6a861f2e32934484c8b8e3e1d572f71d',1,'PlayerGUIButton::stop()'],['../class_audio_player.html#a061331787895c48a1dd321aab4fb9c10',1,'AudioPlayer::stop()']]],
-  ['stopbutton_158',['stopButton',['../class_audio_player_g_u_i.html#aef337ebce110be68e2da8590d2e04b22',1,'AudioPlayerGUI']]],
-  ['systemrequestedquit_159',['systemRequestedQuit',['../class_new_project_application.html#ae09a72f5bc2bae7470c1a740afd6d84a',1,'NewProjectApplication']]]
+  ['setstoppoint_151',['setStopPoint',['../class_audio_player.html#acba1cd11b004bd296c5b8c52e906374c',1,'AudioPlayer']]],
+  ['settransportposition_152',['setTransportPosition',['../class_audio_player.html#a6d3963ac979948b3b8f552d98a07a42b',1,'AudioPlayer']]],
+  ['setwaveformcolour_153',['setWaveformColour',['../class_audio_waveform.html#a143aba1056bdb1b904658af336e4debb',1,'AudioWaveform']]],
+  ['shufflequeue_154',['shuffleQueue',['../class_queue_controls.html#a8803e664a7f5687d74a09be51bb4dde1a156e26330eb5931d29ad530b7664ac99',1,'QueueControls']]],
+  ['shutdown_155',['shutdown',['../class_new_project_application.html#a1fb062ca5855a6bf782b11e17a70994c',1,'NewProjectApplication']]],
+  ['size_156',['size',['../struct_item_info.html#a459fd5faac089594e0f216a487653dcc',1,'ItemInfo']]],
+  ['startqueue_157',['startQueue',['../class_audio_table.html#ac52295beb2cacf862c047cdf07a99b56',1,'AudioTable']]],
+  ['stop_158',['stop',['../class_player_g_u_i_button.html#a319fd5719bf01d61ed75f589e8ba9080a6a861f2e32934484c8b8e3e1d572f71d',1,'PlayerGUIButton::stop()'],['../class_audio_player.html#a061331787895c48a1dd321aab4fb9c10',1,'AudioPlayer::stop()']]],
+  ['stopbutton_159',['stopButton',['../class_audio_player_g_u_i.html#aef337ebce110be68e2da8590d2e04b22',1,'AudioPlayerGUI']]],
+  ['systemrequestedquit_160',['systemRequestedQuit',['../class_new_project_application.html#ae09a72f5bc2bae7470c1a740afd6d84a',1,'NewProjectApplication']]]
 ];

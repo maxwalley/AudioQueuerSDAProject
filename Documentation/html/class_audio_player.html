@@ -113,6 +113,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a061331787895c48a1dd321aab4fb9c10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af87fea38293584f41e0cbb79f444dd60"><td class="memItemLeft" align="right" valign="top">AudioFormatManager *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_player.html#af87fea38293584f41e0cbb79f444dd60">getAudioFormatManager</a> ()</td></tr>
 <tr class="separator:af87fea38293584f41e0cbb79f444dd60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acba1cd11b004bd296c5b8c52e906374c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_player.html#acba1cd11b004bd296c5b8c52e906374c">setStopPoint</a> (int newStopPoint)</td></tr>
+<tr class="separator:acba1cd11b004bd296c5b8c52e906374c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class the holds an audio player. To start playing a file call <a class="el" href="class_audio_player.html#ab392c4c4f8bcd71afb431c661ff75de3">loadNewFile()</a>. If a file is paused call <a class="el" href="class_audio_player.html#ab2f033c149c33dba38bbf591bfcc802c">playFromPause()</a> rather than <a class="el" href="class_audio_player.html#ab392c4c4f8bcd71afb431c661ff75de3">loadNewFile()</a>. </p>
@@ -445,6 +447,31 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">gain</td><td>the new gain multiplier to apply to audio processed by the player </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="acba1cd11b004bd296c5b8c52e906374c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acba1cd11b004bd296c5b8c52e906374c">&#9670;&nbsp;</a></span>setStopPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AudioPlayer::setStopPoint </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>newStopPoint</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sets the stop point of the file playing</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newStopPoint</td><td>the new stop point to use in seconds </td></tr>
   </table>
   </dd>
 </dl>

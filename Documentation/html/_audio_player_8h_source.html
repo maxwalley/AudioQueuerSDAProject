@@ -121,26 +121,29 @@ $(function() {
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    </div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    AudioFormatManager* <a class="code" href="class_audio_player.html#af87fea38293584f41e0cbb79f444dd60">getAudioFormatManager</a>();</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    AudioFormatManager formatManager;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    AudioFormatReader* reader;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    std::unique_ptr&lt;AudioFormatReaderSource&gt; audioFormatReaderSource;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    AudioTransportSource transport;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">bool</span> sendNotificationAtEndOfPlayback;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">int</span> fileStopPoint;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">double</span> pausePosition;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">void</span> stopPointReached();</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;};</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_audio_player.html#acba1cd11b004bd296c5b8c52e906374c">setStopPoint</a>(<span class="keywordtype">int</span> newStopPoint);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    AudioFormatManager formatManager;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    AudioFormatReader* reader;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    std::unique_ptr&lt;AudioFormatReaderSource&gt; audioFormatReaderSource;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    AudioTransportSource transport;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">bool</span> sendNotificationAtEndOfPlayback;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">int</span> fileStopPoint;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">double</span> pausePosition;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordtype">void</span> stopPointReached();</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclass_audio_player_html_ab2f033c149c33dba38bbf591bfcc802c"><div class="ttname"><a href="class_audio_player.html#ab2f033c149c33dba38bbf591bfcc802c">AudioPlayer::playFromPause</a></div><div class="ttdeci">void playFromPause()</div><div class="ttdef"><b>Definition:</b> AudioPlayer.cpp:116</div></div>
 <div class="ttc" id="aclass_audio_player_html_a6d3963ac979948b3b8f552d98a07a42b"><div class="ttname"><a href="class_audio_player.html#a6d3963ac979948b3b8f552d98a07a42b">AudioPlayer::setTransportPosition</a></div><div class="ttdeci">void setTransportPosition(double position)</div><div class="ttdef"><b>Definition:</b> AudioPlayer.cpp:137</div></div>
 <div class="ttc" id="aclass_audio_player_html_ab392c4c4f8bcd71afb431c661ff75de3"><div class="ttname"><a href="class_audio_player.html#ab392c4c4f8bcd71afb431c661ff75de3">AudioPlayer::loadNewFile</a></div><div class="ttdeci">void loadNewFile(File *fileToLoad, int playPoint, int stopPoint, bool sendNotificationAtEnd)</div><div class="ttdef"><b>Definition:</b> AudioPlayer.cpp:44</div></div>
 <div class="ttc" id="aclass_audio_player_html_a2181b078de9846f5fb5b90e26047503a"><div class="ttname"><a href="class_audio_player.html#a2181b078de9846f5fb5b90e26047503a">AudioPlayer::prepareToPlay</a></div><div class="ttdeci">void prepareToPlay(int samplesPerBlockExpected, double sampleRate) override</div><div class="ttdef"><b>Definition:</b> AudioPlayer.cpp:23</div></div>
 <div class="ttc" id="aclass_audio_player_html_a12c746d0acb2b3a9555f789fcbef8819"><div class="ttname"><a href="class_audio_player.html#a12c746d0acb2b3a9555f789fcbef8819">AudioPlayer::getTransportLengthInSeconds</a></div><div class="ttdeci">double getTransportLengthInSeconds() const</div><div class="ttdef"><b>Definition:</b> AudioPlayer.cpp:142</div></div>
+<div class="ttc" id="aclass_audio_player_html_acba1cd11b004bd296c5b8c52e906374c"><div class="ttname"><a href="class_audio_player.html#acba1cd11b004bd296c5b8c52e906374c">AudioPlayer::setStopPoint</a></div><div class="ttdeci">void setStopPoint(int newStopPoint)</div><div class="ttdef"><b>Definition:</b> AudioPlayer.cpp:162</div></div>
 <div class="ttc" id="aclass_audio_player_html_ab932fb8009040bd80d0bb111ea62971b"><div class="ttname"><a href="class_audio_player.html#ab932fb8009040bd80d0bb111ea62971b">AudioPlayer::isPlaying</a></div><div class="ttdeci">bool isPlaying() const</div><div class="ttdef"><b>Definition:</b> AudioPlayer.cpp:99</div></div>
 <div class="ttc" id="aclass_audio_player_html_a061331787895c48a1dd321aab4fb9c10"><div class="ttname"><a href="class_audio_player.html#a061331787895c48a1dd321aab4fb9c10">AudioPlayer::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdef"><b>Definition:</b> AudioPlayer.cpp:147</div></div>
 <div class="ttc" id="aclass_audio_player_html_a4165b657ed13be6b8039f7c507800cd4"><div class="ttname"><a href="class_audio_player.html#a4165b657ed13be6b8039f7c507800cd4">AudioPlayer::getTransportPosition</a></div><div class="ttdeci">double getTransportPosition() const</div><div class="ttdef"><b>Definition:</b> AudioPlayer.cpp:127</div></div>
